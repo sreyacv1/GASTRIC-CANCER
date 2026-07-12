@@ -31,6 +31,7 @@ run () {   # run <script> <label>
 
 FAILED=()
 # Order respects dependencies: signature (07) before consumers (12/13/14).
+run analysis/20_integrated_deg.R              "integrated TCGA+GTEx DEG + enrichment"
 run analysis/09_functional_enrichment.R      "enrichment (GO/KEGG/GSEA)"
 run analysis/08_immune_deconvolution.R        "immune deconvolution"
 run analysis/07_external_validation.R         "signature + ACRG validation"
@@ -41,6 +42,7 @@ run analysis/nomogram_real_OS.R                "clinical nomogram (honest)"
 run analysis/10_microbiome_robust.R           "tissue microbiome"
 run analysis/15_scrna_validation.R            "single-cell CAF validation"
 run analysis/16_drug_repurposing.R            "drug repurposing (in-silico)"
+run analysis/21_drug_repurposing_integrated.R "drug repurposing (integrated DEG)"
 run analysis/17_external_utility_ACRG.R       "external clinical utility (ACRG)"
 run analysis/18_wgcna_power_robustness.R      "WGCNA power robustness"
 run analysis/19_nomogram_bootstrap_selection.R "nomogram selection-in-bootstrap"

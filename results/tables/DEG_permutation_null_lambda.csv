@@ -1,0 +1,2 @@
+"observed_lambda","null_mean","null_p95","null_max","B","conclusion"
+17.321,1.061,1.575,2.318,100,"biology: observed inflation reflects genome-wide tumour-vs-normal signal, not batch (null lambda ~1)"

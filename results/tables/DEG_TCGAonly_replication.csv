@@ -1,0 +1,8 @@
+"direction","top_n","n_selected","n_mapped_TCGA","pct_mapped_of_selected","n_replicated_TCGA","pct_replicated_of_selected","pct_replicated_of_mapped"
+"Up",100,100,100,100,100,100,100
+"Up",200,200,200,100,200,100,100
+"Up",500,500,500,100,493,98.6,98.6
+"Down",100,100,100,100,100,100,100
+"Down",200,200,200,100,200,100,100
+"Down",500,500,500,100,500,100,100
+"Overall_concordance_sig_in_both",NA,6952,6952,100,6920,99.5,99.5

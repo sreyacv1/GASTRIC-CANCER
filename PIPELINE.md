@@ -9,7 +9,8 @@ Every result in `PAPER.md` maps to a script under `analysis/` and an output unde
 
 | # | Script | Produces | Key inputs |
 |---|--------|----------|-----------|
-| base | `analysis/gastric_cancer_multiomics_v2_part1.R` | TCGA/GTEx/GEO processing + DEG | TCGA-STAD, GTEx, GEO |
+| base | `analysis/gastric_cancer_multiomics_v2_part1.R` | TCGA/GTEx/GEO processing + harmonisation | TCGA-STAD, GTEx, GEO |
+| 20 | `analysis/20_integrated_deg.R` | integrated TCGA+GTEx tumour-vs-normal DEG + Hallmark/GO/KEGG enrichment; GEO cohorts as validation-concordance | harmonised TCGA+GTEx matrix |
 | 09 | `analysis/09_functional_enrichment.R` | GO/KEGG/GSEA tables + plots | DEG tables |
 | 08 | `analysis/08_immune_deconvolution.R` | MCP-counter/xCell scores, validated vs measured leukocyte % | TCGA expression |
 | 07 | `analysis/07_external_validation.R` | 25-gene LASSO-Cox signature + ACRG validation | TCGA + GSE62254 |
@@ -22,7 +23,8 @@ Every result in `PAPER.md` maps to a script under `analysis/` and an output unde
 | 19 | `analysis/19_nomogram_bootstrap_selection.R` | selection-inside-bootstrap C-index + EPV | TCGA clinical |
 | 10 | `analysis/10_microbiome_robust.R` | diversity, PERMANOVA, differential abundance, co-abundance | tissue 16S (PRJDB20660) |
 | 15 | `analysis/15_scrna_validation.R` | single-cell CAF localisation | GSE134520 |
-| 16 | `analysis/16_drug_repurposing.R` | in-silico drug-repurposing candidates | DEGs + Enrichr/LINCS |
+| 16 | `analysis/16_drug_repurposing.R` | in-silico drug-repurposing (TCGA DEG) | DEGs + Enrichr/LINCS |
+| 21 | `analysis/21_drug_repurposing_integrated.R` | drug-repurposing on the integrated TCGA+GTEx DEG | integrated DEG + Enrichr/LINCS |
 | 11 | `analysis/11_real_mr.R` | two-sample Mendelian randomisation | IEU OpenGWAS |
 
 ## Mendelian-randomisation GWAS accessions (IEU OpenGWAS)

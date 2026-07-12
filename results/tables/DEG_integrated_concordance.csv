@@ -1,0 +1,5 @@
+"comparison","pearson_r","n"
+"integrated_t vs TCGA_log2FC",0.72696125437904,12899
+"integrated_t vs GSE27342_t",0.623140235114532,12899
+"integrated_t vs GSE63089_t",0.580781322151054,12899
+"GSE27342_t vs GSE63089_t",0.805629061866375,12899
