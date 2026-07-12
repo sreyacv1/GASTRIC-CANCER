@@ -1,0 +1,7 @@
+analytic_N,199
+events,64
+retained_vars,Age|Stage|Grade|TMB
+c_apparent,0.6798
+c_corrected,0.6465
+c_lo,0.5770
+c_hi,0.7157

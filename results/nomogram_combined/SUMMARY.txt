@@ -1,0 +1,40 @@
+== C-index comparison ==
+                                   model        cohort   n events C_apparent
+1             Clinical (Age+Stage+Grade)     TCGA-STAD 301    106  0.6758474
+2                       Signature (risk)     TCGA-STAD 301    106  0.7418529
+3               Combined (Clinical+risk)     TCGA-STAD 301    106  0.7859905
+4                       Signature (risk) ACRG/GSE62254 300    152  0.6078855
+5 Combined (Age+Stage+risk, transported) ACRG/GSE62254 300    152  0.6624359
+6       Combined (Age+Stage+risk, refit) ACRG/GSE62254 300    152  0.7234074
+  C_corrected      C_lo      C_hi
+1   0.6588670 0.6044623 0.7132717
+2   0.7424481 0.6925468 0.7923493
+3   0.7726458 0.7255434 0.8197482
+4   0.6078855        NA        NA
+5   0.6624359        NA        NA
+6   0.7234074        NA        NA
+
+== Added value ==
+                            statistic        value
+1 deltaC_corrected(combined-clinical) 1.137788e-01
+2                           LRT_chisq 8.045332e+01
+3                              LRT_df 1.000000e+00
+4                               LRT_p 2.976537e-19
+            metric estimate    lo    hi              method
+1           IDI@3y    0.217 0.123 0.312 survIDINRI::IDI.INF
+2 continuousNRI@3y    0.387 0.147 0.554 survIDINRI::IDI.INF
+3    medianDiff@3y    0.245 0.068 0.354 survIDINRI::IDI.INF
+
+== Time-dependent AUC ==
+      model t_years       AUC
+1  Clinical       1 0.6895378
+2  Clinical       3 0.6997745
+3  Clinical       5 0.6342651
+4 Signature       1 0.7508410
+5 Signature       3 0.7795076
+6 Signature       5 0.7758103
+7  Combined       1 0.7923874
+8  Combined       3 0.8340344
+9  Combined       5 0.8078137
+
+timeROC=FALSE survIDINRI=TRUE dcurves=TRUE survivalROC=TRUE

@@ -1,0 +1,4 @@
+"metric","estimate","lo","hi","method"
+"IDI@3y",0.217,0.123,0.312,"survIDINRI::IDI.INF"
+"continuousNRI@3y",0.387,0.147,0.554,"survIDINRI::IDI.INF"
+"medianDiff@3y",0.245,0.068,0.354,"survIDINRI::IDI.INF"

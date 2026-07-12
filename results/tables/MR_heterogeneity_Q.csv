@@ -1,0 +1,7 @@
+"id.exposure","id.outcome","outcome","exposure","method","Q","Q_df","Q_pval","exposure_id"
+"ebi-a-GCST010014","ebi-a-GCST90011877","Stomach cancer","H. pylori IgG seropositivity","Inverse variance weighted",0.897213312303447,4,0.924960274852539,"ebi-a-GCST010014"
+"ebi-a-GCST90016616","ebi-a-GCST90011877","Stomach cancer","genus Streptococcus (gut)","Inverse variance weighted",0.897213312303443,4,0.92496027485254,"ebi-a-GCST90016616"
+"ebi-a-GCST90016596","ebi-a-GCST90011877","Stomach cancer","genus Prevotella","Inverse variance weighted",0.897213312303444,4,0.92496027485254,"ebi-a-GCST90016596"
+"ebi-a-GCST90016581","ebi-a-GCST90011877","Stomach cancer","genus Veillonella","Inverse variance weighted",0.897213312303444,4,0.92496027485254,"ebi-a-GCST90016581"
+"ebi-a-GCST90016588","ebi-a-GCST90011877","Stomach cancer","genus Fusobacterium","Inverse variance weighted",0.897213312303444,4,0.92496027485254,"ebi-a-GCST90016588"
+"ebi-a-GCST90016600","ebi-a-GCST90011877","Stomach cancer","genus Lactobacillus (protective)","Inverse variance weighted",0.897213312303444,4,0.92496027485254,"ebi-a-GCST90016600"

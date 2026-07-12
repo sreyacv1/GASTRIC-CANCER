@@ -1,0 +1,9 @@
+"estimate","measured","n","spearman_rho","p"
+"CD8 T cells (MCP)","Leukocyte %",272,0.46841321643336,3.06726950271963e-16
+"CD8 T cells (MCP)","Lymphocyte infiltration %",274,0.0198062631157693,0.744132942695843
+"T cells (MCP)","Leukocyte %",272,0.665574880673882,3.5660396512431e-36
+"T cells (MCP)","Lymphocyte infiltration %",274,-0.00724089649146956,0.905028352384278
+"CD8+ T-cells (xCell)","Leukocyte %",272,0.380444657097516,8.51080046470461e-11
+"CD8+ T-cells (xCell)","Lymphocyte infiltration %",274,0.0378451552042944,0.532753419467411
+"ImmuneScore (xCell)","Leukocyte %",272,0.652490740934567,2.23041138295712e-34
+"ImmuneScore (xCell)","Lymphocyte infiltration %",274,-0.0512629197476488,0.397983043682393

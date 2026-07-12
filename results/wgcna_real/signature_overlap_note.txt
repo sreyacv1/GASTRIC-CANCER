@@ -1,0 +1,4 @@
+25 signature genes; 23 present among top-5000 network genes.
+Status module (turquoise): 3/25 signature genes -> GPC3, SLCO2A1, APOD
+Prognostic module (red): 3/25 signature genes -> SERPINE1, MATN3, POSTN
+Full signature-to-module assignment: signature_gene_modules.csv

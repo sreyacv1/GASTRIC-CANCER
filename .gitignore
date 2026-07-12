@@ -1,0 +1,27 @@
+*.RData
+*.rds
+r_env/
+r_env_old/
+.ipynb_checkpoints/
+*.log
+checkpoints/
+*.docx
+__pycache__/
+*.pyc
+
+# --- repo cleanup: large/downloadable primary data (public sources) ---
+data/host/
+data/gtex/
+data/geo/
+data/scrna/
+data/microbiome/supplementary/
+# scratch / cruft
+TOM/
+tmp/
+.remember/
+archive/
+*.pid
+test_file.txt
+results.rds
+blockwiseTOM*
+internal/

@@ -1,0 +1,7 @@
+"id.exposure","id.outcome","outcome","exposure","egger_intercept","se","pval","exposure_id"
+"ebi-a-GCST010014","ebi-a-GCST90011877","Stomach cancer","H. pylori IgG seropositivity",NA,NA,NA,"ebi-a-GCST010014"
+"ebi-a-GCST90016616","ebi-a-GCST90011877","Stomach cancer","genus Streptococcus (gut)",NA,NA,NA,"ebi-a-GCST90016616"
+"ebi-a-GCST90016596","ebi-a-GCST90011877","Stomach cancer","genus Prevotella",NA,NA,NA,"ebi-a-GCST90016596"
+"ebi-a-GCST90016581","ebi-a-GCST90011877","Stomach cancer","genus Veillonella",NA,NA,NA,"ebi-a-GCST90016581"
+"ebi-a-GCST90016588","ebi-a-GCST90011877","Stomach cancer","genus Fusobacterium",NA,NA,NA,"ebi-a-GCST90016588"
+"ebi-a-GCST90016600","ebi-a-GCST90011877","Stomach cancer","genus Lactobacillus (protective)",NA,NA,NA,"ebi-a-GCST90016600"

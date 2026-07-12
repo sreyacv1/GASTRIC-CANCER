@@ -1,0 +1,108 @@
+Loaded tcga_vst: 36152 genes x 448 samples
+Selected top 5000 genes by MAD. datExpr: 448 samples x 5000 genes
+goodSamplesGenes allOK: TRUE | dropped genes: 0 | dropped samples: 0
+
+Soft-threshold scan (signed hybrid, bicor):
+  power  1  R2=    0  slope=  0.01  meanK=   613
+  power  2  R2=0.782  slope=-1.004  meanK= 204.4
+  power  3  R2=0.877  slope=-1.179  meanK=  90.1
+  power  4  R2=0.883  slope=-1.226  meanK=  46.8
+  power  5  R2=0.881  slope=-1.224  meanK=  27.1
+  power  6  R2=0.878  slope=-1.238  meanK=  16.9
+  power  7  R2=0.886  slope=-1.251  meanK=  11.1
+  power  8  R2=0.881  slope=-1.277  meanK=   7.6
+  power  9  R2=0.879  slope=-1.297  meanK=   5.4
+  power 10  R2=0.877  slope=-1.305  meanK=   3.9
+  power 11  R2=0.865  slope=-1.316  meanK=   2.9
+  power 12  R2=0.873  slope= -1.32  meanK=   2.2
+  power 13  R2=0.848  slope=-1.375  meanK=   1.7
+  power 14  R2=0.854  slope=-1.384  meanK=   1.3
+  power 15  R2=0.856  slope=-1.402  meanK=     1
+  power 16  R2= 0.85  slope=-1.433  meanK=   0.8
+  power 17  R2=0.841  slope=-1.466  meanK=   0.7
+  power 18  R2=0.844  slope=-1.473  meanK=   0.5
+  power 19  R2=0.856  slope=-1.483  meanK=   0.4
+  power 20  R2=0.854  slope=-1.508  meanK=   0.4
+
+CHOSEN power = 3 (lowest with R2 >= 0.85); R2 = 0.877
+
+#Modules (incl grey): 11
+Module sizes:
+  turquoise      1637
+  grey           783
+  blue           541
+  brown          490
+  yellow         450
+  green          413
+  red            263
+  black          243
+  pink           83
+  magenta        59
+  purple         38
+
+Trait matrix built: 11 traits; non-NA per trait:
+  status_Tumor       n=448
+  age_years          n=432
+  stage              n=363
+  grade              n=377
+  Diffuse_vs_Intest  n=244
+  MSI_high           n=274
+  EBV_pos            n=274
+  TMB                n=270
+  Leukocyte_pct      n=272
+  CD8_MCP            n=448
+  ImmuneScore        n=448
+
+[TUMOR-STATUS] top module: MEturquoise  cor=-0.338  p=1.83e-13
+Survival samples (tumor, valid OS): 383  (events=156)
+
+[SURVIVAL] Cox on module eigengenes (OS, tumors) - top 6:
+  MEred          HR=1.307 (1.116-1.532)  p=9.30e-04
+  MEturquoise    HR=1.285 (1.103-1.498)  p=1.29e-03
+  MEgrey         HR=1.230 (1.042-1.450)  p=1.41e-02
+  MEblue         HR=1.176 (1.013-1.365)  p=3.36e-02
+  MEmagenta      HR=1.092 (0.938-1.270)  p=2.57e-01
+  MEblack        HR=1.094 (0.917-1.304)  p=3.21e-01
+[SURVIVAL] top prognostic module: MEred  HR=1.307  p=9.30e-04
+
+[HUB] module turquoise vs trait 'status_Tumor' (status module): 1637 genes, top 15 by MM:
+  PDZD4        MM= 0.927  GS=-0.359
+  RNF150       MM= 0.917  GS=-0.255
+  FHL1         MM= 0.912  GS=-0.407
+  MAPK10       MM= 0.912  GS=-0.311
+  ANK2         MM= 0.910  GS=-0.277
+  CLIP3        MM= 0.910  GS=-0.271
+  BHMT2        MM= 0.909  GS=-0.336
+  C14orf132    MM= 0.909  GS=-0.304
+  GNAO1        MM= 0.908  GS=-0.286
+  ADAM33       MM= 0.906  GS=-0.284
+  GPRASP1      MM= 0.906  GS=-0.248
+  DACT3        MM= 0.905  GS=-0.311
+  METTL24      MM= 0.904  GS=-0.337
+  ANGPTL1      MM= 0.903  GS=-0.356
+  MAP6         MM= 0.903  GS=-0.326
+
+[HUB] module red vs trait 'Leukocyte_pct' (prognostic module): 263 genes, top 15 by MM:
+  CDH11        MM= 0.925  GS= 0.419
+  COL8A1       MM= 0.914  GS= 0.361
+  COL1A2       MM= 0.913  GS= 0.323
+  FNDC1        MM= 0.912  GS= 0.331
+  ANTXR1       MM= 0.909  GS= 0.256
+  COL3A1       MM= 0.907  GS= 0.359
+  AEBP1        MM= 0.901  GS= 0.336
+  SPARC        MM= 0.896  GS= 0.322
+  LUM          MM= 0.891  GS= 0.370
+  COL6A3       MM= 0.890  GS= 0.458
+  BGN          MM= 0.886  GS= 0.337
+  FBN1         MM= 0.884  GS= 0.456
+  ISLR         MM= 0.883  GS= 0.307
+  PRRX1        MM= 0.881  GS= 0.460
+  FAP          MM= 0.881  GS= 0.311
+
+[SIGNATURE OVERLAP]
+  25 signature genes; 23 present among top-5000 network genes.
+  Status module (turquoise): 3/25 signature genes -> GPC3, SLCO2A1, APOD
+  Prognostic module (red): 3/25 signature genes -> SERPINE1, MATN3, POSTN
+  Full signature-to-module assignment: signature_gene_modules.csv
+
+DONE. Outputs in results/wgcna_real

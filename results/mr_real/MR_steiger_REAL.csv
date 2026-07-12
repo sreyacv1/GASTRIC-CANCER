@@ -1,0 +1,7 @@
+"id.exposure","id.outcome","exposure","outcome","snp_r2.exposure","snp_r2.outcome","correct_causal_direction","steiger_pval"
+"ebi-a-GCST90006910","ebi-a-GCST90018849","H. pylori IgG seropositivity","Gastric cancer || id:ebi-a-GCST90018849",0.0423707160392719,5.82726233340791e-05,TRUE,1.82588023741276e-77
+"ebi-a-GCST90017070","ebi-a-GCST90018849","Streptococcus (genus)","Gastric cancer || id:ebi-a-GCST90018849",0.0234699809457543,4.61526688546475e-05,TRUE,8.936986999376e-68
+"ebi-a-GCST90032406","ebi-a-GCST90018849","Fusobacterium","Gastric cancer || id:ebi-a-GCST90018849",0.0874023410346782,3.9596577407851e-05,TRUE,5.90843389041331e-116
+"ebi-a-GCST90017045","ebi-a-GCST90018849","Prevotella","Gastric cancer || id:ebi-a-GCST90018849",0.0219916283757889,2.61521161527227e-05,TRUE,7.92181967320131e-65
+"ebi-a-GCST90017088","ebi-a-GCST90018849","Veillonella","Gastric cancer || id:ebi-a-GCST90018849",0.011650048544687,1.18515324073374e-05,TRUE,4.14473805491799e-35
+"ebi-a-GCST90017030","ebi-a-GCST90018849","Lactobacillus","Gastric cancer || id:ebi-a-GCST90018849",0.0151362991645915,1.73537783694708e-05,TRUE,5.00353976382726e-45

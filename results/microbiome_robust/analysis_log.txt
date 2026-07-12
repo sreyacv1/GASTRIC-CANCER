@@ -1,0 +1,94 @@
+OTU cols: 944  meta rows: 944  matched: 944 
+
+== phyloseq ==
+phyloseq-class experiment-level object
+otu_table()   OTU Table:         [ 67 taxa and 944 samples ]
+sample_data() Sample Data:       [ 944 samples by 5 sample variables ]
+tax_table()   Taxonomy Table:    [ 67 taxa by 5 taxonomic ranks ]
+
+N by Status:
+
+Normal  Tumor 
+   621    323 
+
+N by Phenotype:
+
+   GCN    GCT Non-ul     Ul 
+   219    323    299    103 
+
+Status x Phenotype:
+        
+         GCN GCT Non-ul  Ul
+  Normal 219   0    299 103
+  Tumor    0 323      0   0
+
+Read depth (non_chimeric) overall:
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+     25    8302   12560   13827   17701   53308 
+
+Read depth by Status:
+$Normal
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+     25    9154   14105   15245   19664   53308 
+
+$Tumor
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    151    7285   10634   11101   14328   29815 
+
+
+== Alpha diversity summary ==
+         Metric      Comparison Group1 Median1 Group2 Median2 Wilcox_p
+Normal  Shannon Tumor_vs_Normal Normal   2.584  Tumor   2.513 7.12e-63
+Non-ul  Shannon     Ul_vs_NonUl Non-ul   2.605     Ul   0.388 8.72e-52
+Normal1 Simpson Tumor_vs_Normal Normal   0.868  Tumor   0.875 2.04e-60
+Non-ul1 Simpson     Ul_vs_NonUl Non-ul   0.875     Ul   0.150 8.72e-52
+Normal2   Chao1 Tumor_vs_Normal Normal  48.000  Tumor  44.000 5.97e-31
+Non-ul2   Chao1     Ul_vs_NonUl Non-ul  49.000     Ul  17.000 1.26e-46
+
+== PERMANOVA / PERMDISP ==
+   Distance                Term   N    R2      F PERMANOVA_p PERMDISP_p
+1      Bray              Status 944 0.153    170       0.001      0.001
+2      Bray Phenotype_UlvsNonUl 402 0.999 350000       0.001      0.001
+3 Aitchison              Status 944 0.458    797       0.001      0.001
+4 Aitchison Phenotype_UlvsNonUl 402 0.934   5630       0.001      0.001
+Ul/Non-ul Bray  mean WITHIN-group: 0.02  mean BETWEEN-group: 0.959   (PERMDISP sig => dispersion differs, interpret R2 with caution)
+
+== DA overlap ==
+Sig DESeq2 (padj<0.05): 59  Sig CLR-Wilcox: 64  Both same dir: 53 / 67 
+Direction concordance (all genera): 0.881 
+
+Key genera NOT measured in this dataset: Fusobacterium Veillonella 
+
+== SIX KEY TAXA (direction in TUMOR) ==
+         Genus DESeq2_log2FC_TvsN  DESeq2_padj     DESeq2_dir CLR_diff_TvsN
+  Helicobacter         -0.8126373 3.644523e-02 depleted_Tumor      7.812763
+ Streptococcus          0.5246041 4.068122e-06 enriched_Tumor      1.301483
+ Fusobacterium                 NA           NA   not_detected            NA
+ Lactobacillus          1.1270165 5.695802e-33 enriched_Tumor      1.183141
+    Prevotella          0.5432861 5.773327e-07 enriched_Tumor      1.229817
+   Veillonella                 NA           NA   not_detected            NA
+   Wilcox_padj        CLR_dir RelAbund_med_Normal RelAbund_med_Tumor
+  1.932416e-63 enriched_Tumor              0.0000             0.2032
+ 3.830374e-103 enriched_Tumor              0.2720             0.2146
+            NA   not_detected                  NA                 NA
+  2.050487e-58 enriched_Tumor              0.0375             0.0963
+  9.739374e-87 enriched_Tumor              0.1499             0.1263
+            NA   not_detected                  NA                 NA
+ Prev_Normal Prev_Tumor        Raw_dir
+        0.22          1 enriched_Tumor
+        0.84          1 depleted_Tumor
+          NA         NA           <NA>
+        1.00          1 enriched_Tumor
+        0.84          1 depleted_Tumor
+          NA         NA           <NA>
+
+NOTE: For Helicobacter, DESeq2 sign disagrees with CLR/raw. Prevalence
+ ( 0.22 Normal vs 1 Tumor) and relative
+ abundance settle it: Helicobacter is ENRICHED in tumor. DESeq2's
+ negative LFC is a normalization artifact and should be disregarded.
+
+== Helicobacter x Streptococcus co-abundance ==
+CoAbundance(CLR sum) median Normal: 1.717  Tumor: 12.166  Wilcox p: 2.81e-140 
+Spearman Heli~Strep  all: 0.323 p 0 | Tumor: 0.888 p 0 | Normal: -0.015 p 0.716 
+
+DONE. Outputs in results/microbiome_robust 

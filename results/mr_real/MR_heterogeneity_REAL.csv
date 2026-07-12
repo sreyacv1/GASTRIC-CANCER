@@ -1,0 +1,13 @@
+"id.exposure","id.outcome","outcome","exposure","method","Q","Q_df","Q_pval"
+"ebi-a-GCST90006910","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","H. pylori IgG seropositivity","MR Egger",27.2759591237249,15,0.0265667247682684
+"ebi-a-GCST90006910","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","H. pylori IgG seropositivity","Inverse variance weighted",27.6129489598899,16,0.0351528094209822
+"ebi-a-GCST90017070","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Streptococcus (genus)","MR Egger",20.6657301434788,13,0.0798086527326148
+"ebi-a-GCST90017070","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Streptococcus (genus)","Inverse variance weighted",20.6779228518566,14,0.110175480423281
+"ebi-a-GCST90032406","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Fusobacterium","MR Egger",14.015845447286,21,0.868917683054722
+"ebi-a-GCST90032406","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Fusobacterium","Inverse variance weighted",18.8000681224411,22,0.657639766883094
+"ebi-a-GCST90017045","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Prevotella","MR Egger",12.2651534865654,13,0.506030393275153
+"ebi-a-GCST90017045","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Prevotella","Inverse variance weighted",12.3479287683763,14,0.578383214859157
+"ebi-a-GCST90017088","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Veillonella","MR Egger",2.07262690598954,6,0.912899319775985
+"ebi-a-GCST90017088","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Veillonella","Inverse variance weighted",5.48916834104499,7,0.600490694048613
+"ebi-a-GCST90017030","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Lactobacillus","MR Egger",4.34681706912648,8,0.824555751150896
+"ebi-a-GCST90017030","ebi-a-GCST90018849","Gastric cancer || id:ebi-a-GCST90018849","Lactobacillus","Inverse variance weighted",7.82853508268693,9,0.551513995430315
