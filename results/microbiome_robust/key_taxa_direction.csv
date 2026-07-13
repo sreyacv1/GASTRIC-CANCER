@@ -1,7 +1,0 @@
-"Genus","DESeq2_log2FC_TvsN","DESeq2_padj","DESeq2_dir","CLR_diff_TvsN","Wilcox_padj","CLR_dir","RelAbund_med_Normal","RelAbund_med_Tumor","Prev_Normal","Prev_Tumor","Raw_dir"
-"Helicobacter",-0.812637265835075,0.0364452282925401,"depleted_Tumor",7.81276299143663,1.93241583385561e-63,"enriched_Tumor",0,0.2032,0.22,1,"enriched_Tumor"
-"Streptococcus",0.524604103648695,4.06812158427485e-06,"enriched_Tumor",1.30148346889594,3.83037427090636e-103,"enriched_Tumor",0.272,0.2146,0.84,1,"depleted_Tumor"
-"Fusobacterium",NA,NA,"not_detected",NA,NA,"not_detected",NA,NA,NA,NA,NA
-"Lactobacillus",1.12701648455318,5.69580184468046e-33,"enriched_Tumor",1.18314063389319,2.05048654512515e-58,"enriched_Tumor",0.0375,0.0963,1,1,"enriched_Tumor"
-"Prevotella",0.543286088186309,5.77332658347419e-07,"enriched_Tumor",1.22981711390367,9.73937375555683e-87,"enriched_Tumor",0.1499,0.1263,0.84,1,"depleted_Tumor"
-"Veillonella",NA,NA,"not_detected",NA,NA,"not_detected",NA,NA,NA,NA,NA

@@ -1,7 +1,0 @@
-"Metric","Comparison","Group1","Median1","Group2","Median2","Wilcox_p"
-"Shannon","Tumor_vs_Normal","Normal",2.584,"Tumor",2.513,7.12e-63
-"Shannon","Ul_vs_NonUl","Non-ul",2.605,"Ul",0.388,8.72e-52
-"Simpson","Tumor_vs_Normal","Normal",0.868,"Tumor",0.875,2.04e-60
-"Simpson","Ul_vs_NonUl","Non-ul",0.875,"Ul",0.15,8.72e-52
-"Chao1","Tumor_vs_Normal","Normal",48,"Tumor",44,5.97e-31
-"Chao1","Ul_vs_NonUl","Non-ul",49,"Ul",17,1.26e-46
