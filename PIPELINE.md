@@ -21,7 +21,8 @@ Every result in `PAPER.md` maps to a script under `analysis/` and an output unde
 | 18 | `analysis/18_wgcna_power_robustness.R` | module robustness across soft-powers 3–12 | TCGA expression |
 | nomo | `analysis/nomogram_real_OS.R` | clinical survival nomogram (complete-case) | TCGA clinical |
 | 19 | `analysis/19_nomogram_bootstrap_selection.R` | selection-inside-bootstrap C-index + EPV | TCGA clinical |
-| 10 | `analysis/10_microbiome_robust.R` | diversity, PERMANOVA, differential abundance, co-abundance | tissue 16S (PRJDB20660) |
+| 23 | `analysis/23_dada2_16S.R` | real ASV table from raw FASTQ (DADA2) + SILVA taxonomy | raw 16S (PRJDB20660) |
+| 24 | `analysis/24_microbiome_real.R` | diversity, PERMANOVA (batch-audited), differential abundance | real ASV table |
 | 15 | `analysis/15_scrna_validation.R` | single-cell CAF localisation | GSE134520 |
 | 16 | `analysis/16_drug_repurposing.R` | in-silico drug-repurposing (TCGA DEG) | DEGs + Enrichr/LINCS |
 | 21 | `analysis/21_drug_repurposing_integrated.R` | drug-repurposing on the integrated TCGA+GTEx DEG | integrated DEG + Enrichr/LINCS |
