@@ -1,0 +1,168 @@
+barcode,assay,sample_type,tumor_normal
+TCGA-B7-5816-01A,WGS,Primary Tumor,tumor
+TCGA-B7-5818-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4183-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4183-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4184-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4184-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4187-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4187-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4188-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4188-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4191-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4191-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4201-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4201-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4253-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4253-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4255-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4255-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4256-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4256-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4257-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4257-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4267-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4267-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4279-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4279-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4280-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4280-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4292-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4292-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4294-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4294-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4357-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4357-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4363-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4363-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4366-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4366-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4367-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4367-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4368-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4368-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4369-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4369-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-4370-01A,WGS,Primary Tumor,tumor
+TCGA-BR-4370-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-6452-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6453-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6453-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-6454-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6454-11A,WGS,Solid Tissue Normal,normal
+TCGA-BR-6455-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6456-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6457-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6458-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6564-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6565-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6566-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6705-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6706-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6707-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6710-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6801-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6802-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6803-01A,WGS,Primary Tumor,tumor
+TCGA-BR-6852-01A,WGS,Primary Tumor,tumor
+TCGA-BR-7722-01A,WGS,Primary Tumor,tumor
+TCGA-BR-8373-01A,WGS,Primary Tumor,tumor
+TCGA-BR-8381-01A,WGS,Primary Tumor,tumor
+TCGA-BR-8486-01A,WGS,Primary Tumor,tumor
+TCGA-BR-8682-01A,WGS,Primary Tumor,tumor
+TCGA-BR-8690-01A,WGS,Primary Tumor,tumor
+TCGA-BR-A4J4-01A,WGS,Primary Tumor,tumor
+TCGA-CD-5798-01A,WGS,Primary Tumor,tumor
+TCGA-CD-5799-01A,WGS,Primary Tumor,tumor
+TCGA-CD-5800-01A,WGS,Primary Tumor,tumor
+TCGA-CD-5801-01A,WGS,Primary Tumor,tumor
+TCGA-CD-5802-01A,WGS,Primary Tumor,tumor
+TCGA-CD-5803-01A,WGS,Primary Tumor,tumor
+TCGA-CD-5813-01A,WGS,Primary Tumor,tumor
+TCGA-CD-8529-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4300-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4301-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4304-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4305-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4306-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4436-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4437-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4440-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4441-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4442-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4443-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4444-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4449-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4455-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4460-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4462-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4465-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4466-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4469-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4472-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4474-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4475-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4476-01A,WGS,Primary Tumor,tumor
+TCGA-CG-4477-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5717-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5718-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5719-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5720-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5720-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5721-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5721-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5722-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5722-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5723-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5723-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5724-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5724-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5725-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5725-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5726-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5726-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5727-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5727-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5728-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5728-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5730-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5730-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5732-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5732-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5733-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5733-11A,WGS,Solid Tissue Normal,normal
+TCGA-CG-5734-01A,WGS,Primary Tumor,tumor
+TCGA-CG-5734-11A,WGS,Solid Tissue Normal,normal
+TCGA-D7-5577-01A,WGS,Primary Tumor,tumor
+TCGA-D7-5578-01A,WGS,Primary Tumor,tumor
+TCGA-D7-5579-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6518-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6519-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6520-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6521-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6522-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6524-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6525-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6526-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6527-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6528-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6815-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6817-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6818-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6820-01A,WGS,Primary Tumor,tumor
+TCGA-D7-6822-01A,WGS,Primary Tumor,tumor
+TCGA-D7-8570-01A,WGS,Primary Tumor,tumor
+TCGA-D7-A4YX-01A,WGS,Primary Tumor,tumor
+TCGA-EQ-5647-01A,WGS,Primary Tumor,tumor
+TCGA-F1-6177-01A,WGS,Primary Tumor,tumor
+TCGA-F1-6874-01A,WGS,Primary Tumor,tumor
+TCGA-F1-6875-01A,WGS,Primary Tumor,tumor
+TCGA-F1-6875-11A,WGS,Solid Tissue Normal,normal
+TCGA-FP-7998-01A,WGS,Primary Tumor,tumor
+TCGA-HF-7136-01A,WGS,Primary Tumor,tumor
+TCGA-HU-8245-01A,WGS,Primary Tumor,tumor
+TCGA-HU-8608-01A,WGS,Primary Tumor,tumor
+TCGA-HU-A4G6-01A,WGS,Primary Tumor,tumor
+TCGA-HU-A4H0-01A,WGS,Primary Tumor,tumor
+TCGA-HU-A4H0-11A,WGS,Solid Tissue Normal,normal
+TCGA-IN-7806-01A,WGS,Primary Tumor,tumor

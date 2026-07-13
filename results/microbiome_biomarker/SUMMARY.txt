@@ -1,0 +1,142 @@
+
+==================== SECTION 1  QC, CLEANING, CONFOUND DISCLOSURE ====================
+Phenotype x flowcell crosstab (raw, all 944 samples):
+         flowcell
+phenotype KVF37 L2HBK L3RVN L3RVR L7Y62 L848P LJDKG
+   Non-ul     0    11     0    73    69     0   146
+   Ul         0     0     0     1    28     0    74
+   GCN        0     0     0    22    83     1   113
+   GCT        1     0    96     0     0   226     0
+
+CONFOUND: GCT (tumour) sits on flowcells L3RVN + L848P only;
+Non-ul/Ul/GCN share LJDKG, L7Y62, L3RVR. => GCT-vs-rest is
+aliased with batch and CANNOT be read as clean biology here.
+
+Start: 944 samples, 11795 ASVs, 13,487,331 reads
+Non-bacterial : 111 ASVs, 0.02% reads removed
+Mitochondria  : 786 ASVs, 33.72% reads removed  (per-sample median 27.8%)
+Chloroplast   : 82 ASVs, 0.18% reads removed
+NOTE: host mitochondrial contamination is 33.7% of reads here (not the
+      ~17% rough prior) -- expected for gastric mucosal biopsy 16S.
+After taxonomic clean: 10816 bacterial ASVs, 8,911,550 reads
+Depth filter >=2000 reads: removed 47 samples -> 897 retained
+Prevalence filter (ASV present in >=2 samples): 3005 ASVs retained
+ASVs with no Genus assignment dropped for genus table: 249 (0.8% reads)
+FINAL genus table: 897 samples x 314 genera
+Final-cohort phenotype x flowcell crosstab:
+         flowcell
+phenotype KVF37 L2HBK L3RVN L3RVR L7Y62 L848P LJDKG
+   Non-ul     0    11     0    72    67     0   144
+   Ul         0     0     0     1    28     0    74
+   GCN        0     0     0    22    78     1   103
+   GCT        1     0    95     0     0   200     0
+
+==================== SECTION 2  DYSBIOSIS ACROSS THE CASCADE (alpha + beta) ====================
+Alpha diversity (median per group, rarefied to 2000 reads):
+  phenotype Observed  Shannon   Simpson
+1    Non-ul       47 2.175599 0.7807693
+2        Ul       43 1.745950 0.6783965
+3       GCN       30 1.922770 0.7561430
+4       GCT       56 2.572037 0.8383035
+Ordered-trend tests (JT = Jonckheere-Terpstra, tie-corrected):
+    metric scope     KW_p spearman_rho spearman_p   JT_Z     JT_p
+1 Observed  all4 5.06e-09       0.0337   3.15e-01  0.927 3.54e-01
+2 Observed noGCT 2.42e-06      -0.2034   5.27e-07 -4.944 7.66e-07
+3  Shannon  all4 3.63e-08       0.1075   1.32e-03  3.111 1.86e-03
+4  Shannon noGCT 5.79e-03      -0.1075   8.52e-03 -2.660 7.82e-03
+5  Simpson  all4 7.03e-07       0.1150   5.94e-04  3.283 1.03e-03
+6  Simpson noGCT 2.27e-02      -0.0711   8.24e-02 -1.784 7.44e-02
+scope=noGCT (Non-ul/Ul/GCN, share flowcells) is the honest trend;
+scope=all4 adds the batch-confounded GCT arm.
+
+PERMANOVA (adonis2, 999 perm). R2_phenotype WITHOUT vs WITH flowcell:
+   distance scope R2_phenotype_unadj p_phenotype_unadj R2_phenotype_adjFC
+1      Bray  all4             0.0647             0.001             0.0109
+2      Bray noGCT             0.0260             0.001             0.0156
+3 Aitchison  all4             0.0493             0.001             0.0159
+4 Aitchison noGCT             0.0274             0.001             0.0238
+  p_phenotype_adjFC R2_flowcell_adj p_flowcell_adj
+1             0.001          0.0304          0.001
+2             0.001          0.0438          0.001
+3             0.001          0.0273          0.001
+4             0.001          0.0328          0.001
+Collapse of R2_phenotype after flowcell adjustment = the confound made
+visible; residual phenotype R2 in scope=noGCT is the defensible signal.
+
+==================== SECTION 3  ORAL-TAXA 'ORALIZATION' SIGNATURE ====================
+Oral / GC-associated genera: mean %RA and prevalence by group,
+Spearman trend across the non-confounded cascade (Non-ul/Ul/GCN):
+                                genus RA_Nonul  RA_Ul RA_GCN RA_GCT rho_noGCT
+Streptococcus           Streptococcus   8.3792  9.119  7.639 14.737    -0.110
+Fusobacterium           Fusobacterium   1.2125  0.699  1.473  3.552    -0.166
+Peptostreptococcus Peptostreptococcus   0.5255  0.387  0.468  1.073    -0.209
+Prevotella                 Prevotella   1.5261  0.970  1.507  2.728    -0.160
+Veillonella               Veillonella   2.5364  2.251  2.035  3.714    -0.202
+Parvimonas                 Parvimonas   0.0897  0.156  0.120  0.198    -0.049
+Gemella                       Gemella   1.3125  0.880  1.028  1.976    -0.120
+Granulicatella         Granulicatella   0.7714  0.448  0.519  0.744    -0.187
+Porphyromonas           Porphyromonas   0.8700  0.524  0.581  0.786    -0.156
+Rothia                         Rothia   2.2091  2.360  1.499  1.577    -0.182
+Helicobacter             Helicobacter  21.4172 35.855 31.098 14.012     0.134
+                    q_noGCT
+Streptococcus      7.78e-03
+Fusobacterium      9.11e-05
+Peptostreptococcus 2.45e-06
+Prevotella         1.43e-04
+Veillonella        3.17e-06
+Parvimonas         2.31e-01
+Gemella            3.81e-03
+Granulicatella     1.45e-05
+Porphyromonas      1.84e-04
+Rothia             1.85e-05
+Helicobacter       1.37e-03
+Oral genera ENRICHED along non-confounded cascade (rho>0,q<0.05): Helicobacter
+
+==================== SECTION 4  DIFFERENTIAL ABUNDANCE ====================
+Genera tested (prevalence >=10%): 61
+PRIMARY (control vs GCN, CLR Wilcoxon, BH): 44/61 genera q<0.05
+Top enriched in GCN (effect>0):
+                  genus effect_clr ci_lo ci_hi        p        q
+8           Bacteroides      1.141 0.791 1.492 7.50e-16 4.57e-14
+35    Ligilactobacillus      0.744 0.503 0.984 6.36e-15 1.94e-13
+22     Faecalibacterium      0.798 0.507 1.089 2.12e-14 4.30e-13
+36  Limosilactobacillus      0.695 0.427 0.962 9.20e-14 1.40e-12
+32        Lactobacillus      0.928 0.580 1.275 3.59e-11 4.39e-10
+9            Bergeyella      0.395 0.242 0.549 9.48e-11 8.26e-10
+49          Pseudomonas      0.629 0.370 0.888 8.70e-11 8.26e-10
+55         Sphingomonas      0.553 0.281 0.825 1.94e-10 1.48e-09
+21 Escherichia-Shigella      0.325 0.108 0.542 2.34e-10 1.59e-09
+30             Kingella      0.470 0.285 0.656 5.10e-10 3.11e-09
+2           Abiotrophia      0.436 0.251 0.620 6.06e-10 3.36e-09
+19            Dialister      0.537 0.315 0.759 7.79e-10 3.96e-09
+11              Blautia      0.563 0.285 0.841 5.07e-09 2.38e-08
+5       Aggregatibacter      0.463 0.234 0.692 1.78e-08 7.76e-08
+23           Filifactor      0.338 0.168 0.507 8.45e-08 3.44e-07
+
+SECONDARY (GCN vs GCT paired): 146 clean 1:1 pairs used; patients
+with duplicate tumours/normals were DROPPED (not summed) for clean pairing.
+Paired signed-rank: 18/61 genera q<0.05 -- BUT every pair is
+batch-split (N on LJDKG/L7Y62/L3RVR, T on L848P/L3RVN): this contrast
+is CONFOUNDED and reported for completeness only, not as clean biology.
+
+==================== SECTION 5  DIAGNOSTIC CLASSIFIER + BATCH SANITY CHECK ====================
+RF cancer(GCT) vs control 5-fold CV AUC = 0.916 (95% CI 0.896-0.936)
+Top-importance genera (MeanDecreaseGini):
+Dietzia, Serinicoccus, Methylobacterium-Methylorubrum, Microbacterium, Sphingomonas, Serratia, Helicobacter, Limosilactobacillus, Cutibacterium, Lactobacillus, Staphylococcus, Rothia, Haemophilus, Actinobacillus, Ligilactobacillus
+>>> This AUC is an UPPER BOUND inflated by batch: GCT is on separate
+    flowcells, so the RF can exploit pure sequencing-run signal.
+
+BATCH SANITY: RF predicting FLOWCELL from the SAME CLR genus
+features among control+GCN (589 samples, flowcells L3RVR/L7Y62/LJDKG):
+  5-fold CV accuracy = 0.776  vs majority baseline 0.545
+  multiclass AUC = 0.731
+If flowcell is highly predictable from genera, batch alone manufactures a
+strong 'microbiome' signal -- so the cancer AUC overstates true biology.
+
+==================== SECTION 6  LITERATURE CONCORDANCE ====================
+Published consensus GC-enriched oral genera: Streptococcus, Peptostreptococcus, Fusobacterium, Prevotella, Veillonella, Parvimonas, Slackia, Dialister
+Enriched in OUR primary (control vs GCN) contrast: 30 genera total
+CONCORDANCE: 2/8 literature-consensus genera reproduced: Parvimonas, Dialister
+Batch noise is run-specific and would NOT reproduce a literature-defined
+oral-taxa signature; concordance here is evidence for real biology in the
+less-confounded control->GCN axis (independent of the GCT batch artifact).

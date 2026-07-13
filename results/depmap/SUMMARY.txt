@@ -1,0 +1,35 @@
+DepMap 24Q4 Public CRISPR (Chronos) dependency for drug-repurposing targets
+=========================================================================
+Gastric/stomach cell lines: n=35 (Oncotree subtype ~ 'Stomach')
+Esophagus/Stomach lineage: n=69 | pan-cancer lines: n=1178
+
+Chronos gene effect: more negative = more essential; < -0.5 ~ dependent;
+~ -1.0 = median common-essential gene.
+
+Per-target (gastric mean vs pan-cancer mean):
+     gene target_class gastric_mean pancancer_mean gastric_frac_dep_lt_neg0.5
+   <char>       <char>        <num>          <num>                      <num>
+1: PIK3CA    PI3K/mTOR       -0.742         -0.486                      0.571
+2:   MTOR    PI3K/mTOR       -1.184         -1.172                      1.000
+3: PIK3CB    PI3K/mTOR       -0.189         -0.195                      0.057
+4:   CDK4       CDK4/6       -0.825         -0.765                      0.657
+5:   CDK6       CDK4/6       -0.548         -0.588                      0.514
+6:  FGFR1         FGFR       -0.037         -0.123                      0.029
+7:  FGFR2         FGFR       -0.220         -0.031                      0.114
+8:  FGFR3         FGFR        0.062          0.064                      0.000
+9:  FGFR4         FGFR        0.058          0.032                      0.029
+   dependent selective
+      <lgcl>    <lgcl>
+1:      TRUE      TRUE
+2:      TRUE     FALSE
+3:     FALSE     FALSE
+4:      TRUE     FALSE
+5:      TRUE     FALSE
+6:     FALSE     FALSE
+7:     FALSE     FALSE
+8:     FALSE     FALSE
+9:     FALSE     FALSE
+
+== VERDICT ==
+Gastric lines meet the dependency threshold (mean < -0.5) for: PIK3CA, MTOR, CDK4, CDK6 
+SELECTIVE gastric dependency (dependent AND more essential than pan-cancer): PIK3CA 

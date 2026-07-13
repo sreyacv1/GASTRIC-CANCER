@@ -1,0 +1,8 @@
+"comparison","rho","p","n"
+"sig_score vs ABSOLUTE.purity",-0.199579044098572,0.000893742739339705,274
+"sig_score vs xCell.StromaScore",0.390872763339402,1.72443883174483e-16,412
+"sig_score vs xCell.ImmuneScore",0.0145908185927452,0.76768721286504,412
+"caf_score vs ABSOLUTE.purity",-0.317799745085719,7.59484773553978e-08,274
+"caf_score vs xCell.StromaScore",0.660761479880356,4.9027026532225e-53,412
+"caf_score vs sig_score",0.390568860554411,0,412
+"xCell.Stroma vs ABSOLUTE.purity",-0.39694074427648,8.92474568506973e-12,274

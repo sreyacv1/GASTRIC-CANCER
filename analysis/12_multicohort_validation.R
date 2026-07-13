@@ -155,12 +155,43 @@ r2$platform <- annotation(es2); results[["GSE15459"]] <- r2
 ## ---------------------------------------------------------------------------
 ## Combined summary table (+ existing ACRG reference)
 ## ---------------------------------------------------------------------------
-# ACRG reference (from analysis/07_external_validation.R; univariable HR of
-# high-vs-low group unavailable there, so report multivariable-adjusted HR=1.76)
-acrg <- data.frame(cohort = "ACRG/GSE62254", platform = "GPL570", n = 300,
-                   events = 152, genes_mapped = length(coefs), C_index = 0.608,
-                   logrank_p = 8.63204e-05, HR = 1.76, HR_low = 1.27,
-                   HR_high = 2.44, HR_p = 7.396e-04, stringsAsFactors = FALSE)
+# ACRG reference. Reviewer fix: the previous hardcoded HR=1.76 was the
+# MULTIVARIABLE-adjusted risk-group HR, not comparable to the UNIVARIABLE
+# high-vs-low HRs of the other cohorts. Recompute ACRG's univariable HR by
+# re-scoring GSE62254 with the same 25-gene signature and median-splitting,
+# exactly as analysis/07_external_validation.R loads/scores it. The adjusted
+# HR remains available in results/validation/multivariable_cox_ACRG.csv.
+load("data/geo/GSE62254.rda")                 # GSE62254.expr, GSE62254.subtype
+st <- GSE62254.subtype
+acrg_time <- st$OS.m; acrg_event <- st$Death
+keepA <- !is.na(acrg_time) & acrg_time > 0 & !is.na(acrg_event)
+Z_acrg <- zscore_rows(GSE62254.expr)[names(coefs), keepA, drop = FALSE]
+acrg_time <- acrg_time[keepA]; acrg_event <- acrg_event[keepA]
+rs_acrg <- as.numeric(coefs[names(coefs)] %*% Z_acrg)
+grp_acrg <- factor(ifelse(rs_acrg > median(rs_acrg), "High", "Low"),
+                   levels = c("Low", "High"))
+dfa <- data.frame(time = acrg_time, event = acrg_event,
+                  risk = rs_acrg, group = grp_acrg)
+cidxA <- summary(coxph(Surv(time, event) ~ risk, data = dfa))$concordance["C"]
+lrA   <- survdiff(Surv(time, event) ~ group, data = dfa)
+p_lrA <- 1 - pchisq(lrA$chisq, df = length(lrA$n) - 1)
+cxgA  <- summary(coxph(Surv(time, event) ~ group, data = dfa))
+cat(sprintf("\n[ACRG/GSE62254] univariable high-vs-low: N=%d events=%d ",
+            nrow(dfa), sum(dfa$event)),
+    sprintf("C-index=%.3f logrank p=%.3e HR=%.2f (%.2f-%.2f) p=%.3e\n",
+            cidxA, p_lrA, cxgA$conf.int["groupHigh", "exp(coef)"],
+            cxgA$conf.int["groupHigh", "lower .95"],
+            cxgA$conf.int["groupHigh", "upper .95"],
+            cxgA$coefficients["groupHigh", "Pr(>|z|)"]))
+acrg <- data.frame(cohort = "ACRG/GSE62254", platform = "GPL570",
+                   n = nrow(dfa), events = sum(dfa$event),
+                   genes_mapped = length(coefs), C_index = as.numeric(cidxA),
+                   logrank_p = p_lrA,
+                   HR = cxgA$conf.int["groupHigh", "exp(coef)"],
+                   HR_low = cxgA$conf.int["groupHigh", "lower .95"],
+                   HR_high = cxgA$conf.int["groupHigh", "upper .95"],
+                   HR_p = cxgA$coefficients["groupHigh", "Pr(>|z|)"],
+                   stringsAsFactors = FALSE)
 summary_tab <- do.call(rbind, c(results, list(ACRG = acrg)))
 summary_tab <- summary_tab[order(-summary_tab$n), ]
 write.csv(summary_tab, file.path(outdir, "cindex_HR_summary.csv"),

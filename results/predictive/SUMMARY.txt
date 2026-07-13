@@ -1,0 +1,32 @@
+PROGNOSTIC -> PREDICTIVE test of the 25-gene stromal/CAF signature
+Cohort: ACRG / GSE62254 (independent). n=300, events=152
+Signature: genes+coefs FIXED from TCGA; genes z-scored within ACRG;
+risk z-scored across whole cohort (HR reported per 1 SD of risk).
+
+== Interaction tests (LRT of interaction term) ==
+                                 interaction       test LRT_chisq df    p_value
+1 risk x molecular_subtype (4 ACRG subtypes)  LRT (Cox)  6.396152  3 0.09384924
+2              risk x stage (I-II vs III-IV)  LRT (Cox)  4.040299  1 0.04442594
+3               risk x adjuvant_chemotherapy not tested        NA NA         NA
+                                                                              note
+1                                                                                 
+2                                                                                 
+3 adjuvant-chemo status not deposited in GSE62254 GEO characteristics; unavailable
+
+== Per-subgroup signature HRs (per SD) ==
+   grouping  subgroup   n events HR_per_SD    CI_low  CI_high      p_value
+1   overall       ALL 300    152  1.331897 1.1340956 1.564197 0.0004757506
+2   subtype       MSI  68     23  1.709690 1.1326893 2.580619 0.0106771165
+3   subtype MSS/TP53+  79     38  1.253171 0.9244104 1.698854 0.1460360951
+4   subtype MSS/TP53- 107     58  1.002875 0.7740379 1.299364 0.9826704502
+5   subtype   MSS/EMT  46     33  1.873802 1.0579909 3.318680 0.0312983814
+6 stage_bin      I-II 127     36  1.010647 0.7491880 1.363353 0.9447184144
+7 stage_bin    III-IV 173    116  1.473296 1.1810287 1.837890 0.0005929896
+
+== VERDICT ==
+PREDICTIVE signal detected: at least one interaction is significant.
+ - risk x stage:   LRT p=0.0444 (SIGNIFICANT)
+
+Hypothesis check (CAF signature strongest in MSS/EMT):
+ MSS/EMT subgroup: n=46, events=33, HR/SD=1.87 (95% CI 1.06-3.32), p=0.0313
+ risk x subtype interaction p=0.0938 -> no evidence effect differs by subtype

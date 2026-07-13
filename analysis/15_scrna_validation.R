@@ -16,7 +16,7 @@ suppressPackageStartupMessages({
 })
 set.seed(42)
 
-root   <- "/nfsshare/users/P126156127/workspace/gastric_cancer"
+root   <- Sys.getenv("GC_ROOT", getwd())
 datdir <- file.path(root, "data/scrna/GSE134520")
 outdir <- file.path(root, "results/scrna")
 dir.create(outdir, showWarnings = FALSE, recursive = TRUE)

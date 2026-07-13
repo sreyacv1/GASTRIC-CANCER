@@ -1,0 +1,14 @@
+"metric","value"
+"bootstraps_B",200
+"candidate_pool_size",1038
+"median_model_size",49
+"min_model_size",24
+"max_model_size",80
+"signature_genes_total",25
+"signature_in_candidate_pool",25
+"signature_selected_gt50pct",13
+"signature_selected_gt80pct",0
+"median_selection_freq_of_25",0.505
+"SERPINE1_freq",0.7
+"POSTN_freq",0.375
+"MATN3_freq",0.22

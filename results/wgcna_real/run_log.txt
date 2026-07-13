@@ -64,6 +64,7 @@ Survival samples (tumor, valid OS): 383  (events=156)
   MEmagenta      HR=1.092 (0.938-1.270)  p=2.57e-01
   MEblack        HR=1.094 (0.917-1.304)  p=3.21e-01
 [SURVIVAL] top prognostic module: MEred  HR=1.307  p=9.30e-04
+[SURVIVAL-ADJ] MEred eigengene, adjusted for age+stage+leukocyte+Lauren: HR(perSD)=1.347 (0.954-1.901) p=9.05e-02  N=183 events=57
 
 [HUB] module turquoise vs trait 'status_Tumor' (status module): 1637 genes, top 15 by MM:
   PDZD4        MM= 0.927  GS=-0.359

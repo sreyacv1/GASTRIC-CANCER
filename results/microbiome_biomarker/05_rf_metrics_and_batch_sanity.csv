@@ -1,0 +1,7 @@
+"metric","value"
+"cancer_vs_control_AUC",0.916119204847165
+"cancer_AUC_CI_lo",0.896049560435972
+"cancer_AUC_CI_hi",0.936188849258357
+"flowcell_pred_accuracy",0.775891341256367
+"flowcell_majority_baseline",0.544991511035654
+"flowcell_multiclass_AUC",0.730586175882145

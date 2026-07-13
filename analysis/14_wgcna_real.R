@@ -221,6 +221,39 @@ say(sprintf("[SURVIVAL] top prognostic module: %s  HR=%.3f  p=%.2e",
             prognMod, coxRes$HR_perSD[coxRes$module==prognMod],
             coxRes$p[coxRes$module==prognMod]))
 
+# --------------------------------------------- 5c. ADJUSTED Cox (confounders)
+# The unadjusted module HR above may be confounded: this eigengene correlates
+# with stage, diffuse histology and leukocyte %. Refit the top prognostic
+# module eigengene (per 1-SD, from MEz) adjusting for age, stage, leukocyte %
+# and Lauren histology. traitMat is already aligned to rownames(datExpr)/MEs.
+adjDF <- data.frame(
+  ME_prognMod_perSD = MEz[survOK, prognMod],
+  age_years         = traitMat$age_years[survOK],
+  stage             = traitMat$stage[survOK],
+  Leukocyte_pct     = traitMat$Leukocyte_pct[survOK],
+  Diffuse_vs_Intest = traitMat$Diffuse_vs_Intest[survOK])
+adjOK      <- complete.cases(adjDF)                  # NA-handling across frame
+adjN       <- sum(adjOK)
+adjEvents  <- sum(os_event[survOK][adjOK])
+adjFit <- coxph(surv[adjOK] ~ ME_prognMod_perSD + age_years + stage +
+                  Leukocyte_pct + Diffuse_vs_Intest, data = adjDF[adjOK, ])
+sadj <- summary(adjFit)
+adjTab <- data.frame(
+  term  = rownames(sadj$conf.int),
+  HR    = sadj$conf.int[, 1],
+  HR_lo = sadj$conf.int[, 3],
+  HR_hi = sadj$conf.int[, 4],
+  z     = sadj$coefficients[, "z"],
+  p     = sadj$coefficients[, "Pr(>|z|)"],
+  N     = adjN, events = adjEvents, row.names = NULL)
+adjTab[, 2:6] <- signif(adjTab[, 2:6], 4)
+write.csv(adjTab, file.path(OUT, "ME_survival_cox_adjusted.csv"),
+          row.names = FALSE)
+mrow <- adjTab[adjTab$term == "ME_prognMod_perSD", ]
+say(sprintf(paste0("[SURVIVAL-ADJ] %s eigengene, adjusted for age+stage+",
+            "leukocyte+Lauren: HR(perSD)=%.3f (%.3f-%.3f) p=%.2e  N=%d events=%d"),
+            prognMod, mrow$HR, mrow$HR_lo, mrow$HR_hi, mrow$p, adjN, adjEvents))
+
 # --------------------------------------------- 6. hub genes (MM + GS)
 hub_for <- function(modME_name, trait, tag) {
   modcol <- sub("^ME", "", modME_name)

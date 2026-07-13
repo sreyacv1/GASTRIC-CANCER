@@ -1,0 +1,8 @@
+"metric","estimate","ci_low","ci_high","method"
+"Harrell_C_ensemble",0.611206182721502,0.562005558316377,0.658949834203633,"ensemble OOF LP, 2000x subject bootstrap"
+"Uno_C_ensemble",0.572721605951917,0.524631543273303,0.6276954846705,"ensemble OOF LP, IPCW (timewt=n/G2), 2000x bootstrap"
+"Harrell_C_perRepeat",0.598149293627528,0.570920376917513,0.624900634833011,"mean +/- 2.5-97.5 pctile over 20 repeats"
+"Uno_C_perRepeat",0.5669420617267,0.541110313927179,0.585745332094467,"mean +/- pctile over 20 repeats"
+"IntegratedBrierScore",0.178891967480168,0.173186367936443,0.184703322324393,"IPCW IBS to 5y, mean +/- pctile over repeats"
+"Harrell_C_lambda1se_ensemble",0.59744623655914,NA,NA,"lambda.1se sensitivity, ensemble OOF LP"
+"Harrell_C_lambda1se_perRepeat",0.59744623655914,0.59744623655914,0.59744623655914,"lambda.1se sensitivity, mean +/- pctile"

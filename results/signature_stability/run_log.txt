@@ -1,0 +1,46 @@
+TCGA tumors with usable OS: 383 (events=156)
+Candidate transferable genes (TCGA n GSE62254): 1038
+
+Full-data LASSO selected 23 genes.
+Published 25-gene signature; 23/25 reproduced in this full-data pass.
+  bootstrap 25/200 done (model size=39)
+  bootstrap 50/200 done (model size=30)
+  bootstrap 75/200 done (model size=58)
+  bootstrap 100/200 done (model size=62)
+  bootstrap 125/200 done (model size=45)
+  bootstrap 150/200 done (model size=37)
+  bootstrap 175/200 done (model size=45)
+  bootstrap 200/200 done (model size=56)
+
+Model size across 200 bootstraps: median=49 [min=24, max=80]
+Of the 25 signature genes: 25 in candidate pool; 13 selected in >50%; 0 in >80%.
+Stromal anchors: SERPINE1=0.7  POSTN=0.375  MATN3=0.22
+
+Per-signature-gene selection frequency:
+  NETO2      coef=+0.138  freq=0.765
+  EGF        coef=+0.112  freq=0.750
+  SRMS       coef=-0.095  freq=0.725
+  SERPINE1   coef=+0.127  freq=0.700  <-stromal
+  PRSS21     coef=+0.128  freq=0.690
+  NT5E       coef=+0.083  freq=0.655
+  POU1F1     coef=+0.069  freq=0.620
+  RASAL1     coef=-0.126  freq=0.605
+  GPC3       coef=+0.069  freq=0.580
+  SP6        coef=-0.106  freq=0.565
+  AATK       coef=-0.066  freq=0.560
+  RNF43      coef=-0.064  freq=0.530
+  PEX5       coef=-0.014  freq=0.505
+  AADAC      coef=+0.090  freq=0.435
+  SLC5A1     coef=-0.036  freq=0.425
+  APOD       coef=+0.075  freq=0.390
+  POSTN      coef=+0.039  freq=0.375  <-stromal
+  CDA        coef=+0.038  freq=0.370
+  TRIM31     coef=-0.005  freq=0.315
+  CIDEC      coef=+0.022  freq=0.310
+  HBB        coef=+0.027  freq=0.305
+  PROC       coef=+0.041  freq=0.290
+  BATF2      coef=-0.041  freq=0.280
+  SLCO2A1    coef=+0.002  freq=0.275
+  MATN3      coef=+0.041  freq=0.220  <-stromal
+
+DONE. Outputs in results/signature_stability

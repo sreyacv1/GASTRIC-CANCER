@@ -1,0 +1,4 @@
+"model","month","HR","CI_low","CI_high"
+"tt log-time (age-adj, Stage-stratified)",12,1.4879954871018,1.2270218411405,1.80447527126112
+"tt log-time (age-adj, Stage-stratified)",36,1.0294523350129,0.823720937385272,1.28656692086464
+"tt log-time (age-adj, Stage-stratified)",60,0.867386447156669,0.638905397261889,1.17757535299498

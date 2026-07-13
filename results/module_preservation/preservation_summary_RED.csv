@@ -1,0 +1,4 @@
+"cohort","platform","moduleSize","red_genes_in_common","Zsummary.pres","medianRank.pres","strength"
+"ACRG_GSE62254","GPL570 (ACRG curated)",77,77,15.853,2,"STRONG (Z>10)"
+"GSE15459","GPL570",233,233,16.797,3,"STRONG (Z>10)"
+"GSE84437","GPL6947",233,233,17.083,5,"STRONG (Z>10)"

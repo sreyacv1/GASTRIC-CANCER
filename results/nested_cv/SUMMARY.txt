@@ -1,0 +1,46 @@
+NESTED CROSS-VALIDATION of the 25-gene prognostic signature
+TCGA-STAD tumours: n=383 events=156; candidate genes=1038
+Design: 20 repeats x 5-fold outer CV; ALL steps (z-scoring, univariable
+Cox screen p<0.05, inner 5-fold cv.glmnet Cox LASSO) re-run inside each
+outer training fold; performance from untouched out-of-fold predictions.
+
+== Honest (nested) discrimination ==
+Harrell C = 0.611 (95% CI 0.562-0.659)
+Uno C     = 0.573 (95% CI 0.525-0.628)
+Per-repeat Harrell C: mean=0.598 (range 0.569-0.627 over 20 repeats)
+Integrated Brier Score (to 5y) = 0.1789
+
+== Time-dependent AUC (mean over repeats) ==
+  t_years  AUC_mean    AUC_lo    AUC_hi Brier_mean
+1       1 0.6047928 0.5594493 0.6440988  0.1790268
+2       3 0.6126932 0.5697144 0.6543463  0.2447648
+3       5 0.6273063 0.5845711 0.6632319  0.2524007
+
+== lambda.1se sensitivity ==
+Harrell C (1se) = 0.597 (per-repeat mean 0.597)
+
+== Model size distribution (lambda.min, 96 fold-models) ==
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   4.00   21.00   24.00   23.02   27.00   35.00 
+median genes selected = 24 (IQR 21-27)
+
+== Top 15 genes by selection frequency ==
+     gene selection_frequency times_selected n_models
+ SERPINE1           0.9687500             93       96
+     SRMS           0.8958333             86       96
+      EGF           0.8645833             83       96
+    NETO2           0.8645833             83       96
+     GPC3           0.8541667             82       96
+   RASAL1           0.8437500             81       96
+      SP6           0.8333333             80       96
+     NT5E           0.7812500             75       96
+   POU1F1           0.7083333             68       96
+    RNF43           0.6979167             67       96
+     APOD           0.6875000             66       96
+   PRSS21           0.6770833             65       96
+   SLC5A1           0.6562500             63       96
+    AADAC           0.5520833             53       96
+    CIDEC           0.5416667             52       96
+
+CONTEXT: the published apparent/optimism-corrected C was ~0.72. The
+nested C above is the honest, un-inflated discrimination.

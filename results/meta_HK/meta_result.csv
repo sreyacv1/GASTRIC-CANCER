@@ -1,0 +1,2 @@
+"method","k","pooled_HR","CI_low","CI_high","p_value","I2","tau2","PI_low","PI_high","significant"
+"REML + Hartung-Knapp (metafor rma, test=knha)",3,1.18753342310594,0.961644701310421,1.46648302545835,0.0726386463991891,19.2299065884098,0.00171823901821468,0.900871567426485,1.56541252047982,"NO (CI crosses 1)"

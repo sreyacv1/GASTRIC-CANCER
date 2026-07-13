@@ -1,0 +1,31 @@
+TIME-VARYING Cox for the non-proportional ACRG signature effect
+ACRG/GSE62254: n=300 events=152 (time in months)
+
+== Proportional-hazards test (cox.zph) ==
+Signature-only model: risk PH p = 0.0018; GLOBAL p = 0.0018
+Adjusted model:       risk PH p = 0.0031; GLOBAL p = 0.0161
+
+== HR_risk(t) from tt() log-time model (per 1-SD, age-adj, Stage-strat) ==
+                                   model month        HR    CI_low  CI_high
+ tt log-time (age-adj, Stage-stratified)    12 1.4879955 1.2270218 1.804475
+ tt log-time (age-adj, Stage-stratified)    36 1.0294523 0.8237209 1.286567
+ tt log-time (age-adj, Stage-stratified)    60 0.8673864 0.6389054 1.177575
+
+== Step-function robustness ==
+                                      model interval       HR    CI_low
+ survSplit step (age-adj, Stage-stratified)  [0,12)m 1.985848 1.4500659
+ survSplit step (age-adj, Stage-stratified) [12,36)m 1.099252 0.8623576
+ survSplit step (age-adj, Stage-stratified) [36,60)m 1.064462 0.7072024
+ survSplit step (age-adj, Stage-stratified)   [60+)m 0.943646 0.4345186
+  CI_high            p
+ 2.719595 1.899622e-05
+ 1.401223 4.447679e-01
+ 1.602198 7.646113e-01
+ 2.049320 8.834496e-01
+
+Effect attenuates over follow-up: YES
+HR(12mo)=1.49 -> HR(36mo)=1.03 -> HR(60mo)=0.87
+
+WORDING GUIDANCE: the signature is associated with EARLIER mortality,
+with the hazard ratio ATTENUATING over follow-up (strong early, weaker
+late); report HR(t) rather than a single proportional-hazards HR.

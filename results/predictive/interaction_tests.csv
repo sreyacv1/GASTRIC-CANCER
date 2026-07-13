@@ -1,0 +1,4 @@
+"interaction","test","LRT_chisq","df","p_value","note"
+"risk x molecular_subtype (4 ACRG subtypes)","LRT (Cox)",6.39615163293638,3,0.0938492384140933,""
+"risk x stage (I-II vs III-IV)","LRT (Cox)",4.04029920473727,1,0.0444259445275465,""
+"risk x adjuvant_chemotherapy","not tested",NA,NA,NA,"adjuvant-chemo status not deposited in GSE62254 GEO characteristics; unavailable"

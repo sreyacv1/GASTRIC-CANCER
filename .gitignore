@@ -25,3 +25,16 @@ test_file.txt
 results.rds
 blockwiseTOM*
 internal/
+
+# --- large raw sequencing data (public, downloadable; never commit) ---
+data/microbiome/raw/
+data/microbiome/validation_IT/raw/
+data/microbiome/validation_PT/raw/
+data/microbiome/dada2/filtered/
+data/microbiome/ref/
+data/microbiome/tcma/raw/
+*.fastq.gz
+*.fastq.bz2
+*.fq.gz
+Rplots.pdf
+scratch/

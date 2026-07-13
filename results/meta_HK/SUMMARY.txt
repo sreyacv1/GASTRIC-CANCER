@@ -1,0 +1,29 @@
+HARTUNG-KNAPP REML meta-analysis of the CONTINUOUS per-1-SD signature
+effect (age + stage adjusted), replacing the DerSimonian-Laird pooled
+HR (1.50) built on median-dichotomised effects.
+
+== Per-cohort inputs (per-1-SD adjusted HR) ==
+        cohort   n events genes_mapped
+ ACRG/GSE62254 300    152           25
+      GSE15459 191     95           25
+      GSE84437 431    207           25
+                                         adjustment       HR    HR_low  HR_high
+                                    age + TNM stage 1.301160 1.1003525 1.538614
+                                    age + TNM stage 1.199627 0.9735836 1.478153
+ age + T-stage (no TNM stage in GEO; T-stage proxy) 1.109570 0.9726370 1.265781
+           p
+ 0.002082685
+ 0.087511179
+ 0.121826470
+
+== Pooled (REML + Hartung-Knapp) ==
+Pooled HR = 1.19 (95% CI 0.96-1.47), p = 0.073
+I2 = 19.2%   tau2 = 0.0017   (k = 3 studies)
+95% prediction interval: 0.90 - 1.57
+
+Pooled effect significant at alpha=0.05: NO -- the CI CROSSES the null (HR=1)
+
+INTERPRETATION: with only k=3 heterogeneous cohorts, the Hartung-Knapp
+small-sample correction widens the CI relative to DerSimonian-Laird.
+Report the pooled HR WITH its prediction interval and state the
+significance honestly.

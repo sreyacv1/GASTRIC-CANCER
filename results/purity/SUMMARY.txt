@@ -1,0 +1,49 @@
+PURITY-CONFOUND STRESS TEST — TCGA-STAD stromal/CAF signature
+=============================================================
+
+PURITY PROXY: paper_ABSOLUTE.Purity (DNA/SNP-based ABSOLUTE tumour
+  purity from TCGA STAD marker paper). Expression-INDEPENDENT, so it is
+  the correct instrument to break the stroma<->expression circularity.
+  Secondary expression proxy: xCell StromaScore (deconvolution_scores.csv).
+
+Cohort: 412 primary tumours; OS analysis n=250 (events=92);
+  purity-adjusted subset n=250 (events=92).
+
+--- CORRELATIONS (Spearman) ---
+  sig_score vs ABSOLUTE.purity       rho=-0.200  p=8.94e-04  n=274
+  sig_score vs xCell.StromaScore     rho=+0.391  p=1.72e-16  n=412
+  sig_score vs xCell.ImmuneScore     rho=+0.015  p=7.68e-01  n=412
+  caf_score vs ABSOLUTE.purity       rho=-0.318  p=7.59e-08  n=274
+  caf_score vs xCell.StromaScore     rho=+0.661  p=4.90e-53  n=412
+  caf_score vs sig_score             rho=+0.391  p=0.00e+00  n=412
+  xCell.Stroma vs ABSOLUTE.purity    rho=-0.397  p=8.92e-12  n=274
+
+--- SIGNATURE risk score, Cox OS (HR per 1 SD) ---
+  unadjusted (purity subset):
+  sig_score                        HR=2.933 (2.249-3.825) p=2.03e-15
+  + ABSOLUTE.purity:
+  sig_score                        HR=2.965 (2.276-3.862) p=7.59e-16
+  + purity+stage+age:
+  sig_score                        HR=3.580 (2.584-4.961) p=1.79e-14
+  purity coef (full model):
+  purity                           HR=1.009 (0.999-1.020) p=7.19e-02
+
+  >> SIGNATURE VERDICT: (a) INDEPENDENT of purity
+
+--- CAF/red-module score, Cox OS (HR per 1 SD) ---
+  unadjusted (purity subset):
+  caf_score                        HR=1.333 (1.058-1.678) p=1.46e-02
+  + ABSOLUTE.purity:
+  caf_score                        HR=1.342 (1.052-1.712) p=1.78e-02
+
+  >> CAF-MODULE VERDICT: (a) INDEPENDENT of purity
+
+--- MOLECULAR SUBTYPE (Kruskal-Wallis, mean z per subtype) ---
+  sig_score     p=1.83e-07  EBV=-0.77 MSI=-0.44 GS=+0.36 CIN=+0.20  -> top=GS
+  caf_score     p=6.49e-05  EBV=-0.30 MSI=+0.13 GS=+0.67 CIN=+0.07  -> top=GS
+  xCell.Stroma  p=2.00e-14  EBV=+0.07 MSI=+0.04 GS=+0.20 CIN=+0.06  -> top=GS
+
+  Lauren (Intestinal/Mixed/Diffuse):
+  sig_score     p=1.47e-05  Int=-0.18 Mix=+0.36 Diff=+0.43
+  caf_score     p=1.85e-08  Int=-0.04 Mix=+0.40 Diff=+0.72
+  xCell.Stroma  p=7.65e-16  Int=+0.05 Mix=+0.07 Diff=+0.20

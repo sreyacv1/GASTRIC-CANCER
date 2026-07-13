@@ -1,0 +1,35 @@
+Loaded tcga_vst: 36152 genes x 448 samples
+Reference datExpr: 448 samples x 5000 genes
+
+#Modules (incl grey): 11
+  turquoise      1637
+  grey           783
+  blue           541
+  brown          490
+  yellow         450
+  green          413
+  red            263
+  black          243
+  pink           83
+  magenta        59
+  purple         38
+
+Red module: 263 genes; CAF anchors in red: 12/12 -> CDH11, COL8A1, COL1A2, FNDC1, SPARC, LUM, BGN, FAP, POSTN, COL1A1, COL3A1, DCN
+
+[ACRG_GSE62254] genes in cohort=1042  common(clean) with ref=994  red-in-common=77
+[ACRG_GSE62254] RED: size(common)=77  Zsummary.pres=15.85  medianRank.pres=2
+
+[GSE15459] genes in cohort=21755  common(clean) with ref=4000  red-in-common=233
+[GSE15459] RED: size(common)=233  Zsummary.pres=16.80  medianRank.pres=3
+
+[GSE84437] genes in cohort=19609  common(clean) with ref=3876  red-in-common=233
+[GSE84437] RED: size(common)=233  Zsummary.pres=17.08  medianRank.pres=5
+
+=== RED module preservation summary ===
+[ACRG_GSE62254] red eigengene Cox: HR/SD=1.274 (1.091-1.487) p=0.00215  (n=300 ev=152, 77 genes, PVE=0.51)
+[GSE15459] red eigengene Cox: HR/SD=1.548 (1.248-1.919) p=6.81e-05  (n=191 ev=95, 233 genes, PVE=0.33)
+[GSE84437] red eigengene Cox: HR/SD=1.237 (1.080-1.416) p=0.00211  (n=431 ev=207, 233 genes, PVE=0.27)
+
+=== External red-module eigengene Cox ===
+
+DONE. Outputs in results/module_preservation

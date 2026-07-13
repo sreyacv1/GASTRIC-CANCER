@@ -1,0 +1,24 @@
+IMMUNE-EXCLUSION / ICI-RESISTANCE SUMMARY (TCGA-STAD primary tumors)
+N tumors = 412
+Stromal/CAF score vs MCP CD8 T cells:   rho=0.061 p=0.215
+Stromal/CAF score vs xCell CD8 T-cells: rho=0.041 p=0.403
+Stromal/CAF score vs IFN-gamma/T-inflamed: rho=0.180 p=0.000246
+Stromal/CAF score vs TGF-beta/EMT:      rho=0.782 p=0
+Wilcoxon IFN-gamma high-vs-low stromal p=0.00929
+Wilcoxon CD8 high-vs-low stromal p=0.557
+
+IMMUNE-EXCLUDED PATTERN (low CD8, low IFN-gamma, high TGF-beta): does NOT hold as specified
+
+Honest interpretation (bulk TCGA-STAD):
+- The stromal/CAF score is very strongly coupled to a TGF-beta/EMT program
+  (rho=0.78, p<1e-16) - a robust CAF/mesenchymal activation signal.
+- It is NOT negatively correlated with CD8 T cells (rho~0, NS) and is if
+  anything weakly POSITIVELY correlated with the IFN-gamma/T-inflamed score.
+- In bulk RNA, stroma-rich tumors co-enrich for immune infiltrate, so a
+  simple negative CD8/IFN correlation is not expected and is not observed.
+- Therefore a classic 'immune-excluded' (T-cell-desert) phenotype is NOT
+  demonstrable from these bulk correlations alone. What IS supported is a
+  TGF-beta/EMT-high stromal program - the pathway mechanistically tied to
+  anti-PD-1 resistance (Mariathasan 2018) - which motivates, but does not
+  by itself prove, an ICI-resistance link. Spatial/single-cell data would
+  be required to establish T-cell exclusion.
