@@ -310,6 +310,14 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 
 **Supplementary Figure S17. Clinical nomogram, calibration and external decision-curve analysis.** (A) Combined clinical+signature nomogram for 1/3/5-year overall survival. (B) Calibration at 1/3/5 years (in-sample). (C) External decision-curve analysis in ACRG: the clinical and combined curves are essentially superimposed across the 5–40% threshold range, i.e. the signature confers no net clinical benefit over standard staging out-of-sample (§3.7). The nomogram is presented as an illustrative research tool, not a validated decision instrument. Files: `results/nomogram_combined/`, `results/external_utility_ACRG/DCA_external.png`.
 
+![Supplementary Figure S18]({{artifact:art_b4c836fc-1d79-43f6-b8aa-7c623dfad168}})
+
+**Supplementary Figure S18. Mendelian-randomisation SNP-effect scatter — all six exposures.** SNP–exposure versus SNP–outcome effects with the five MR method slopes (IVW, MR-Egger, weighted median, weighted mode, simple mode) for each exposure (European gastric-cancer outcome). Across all six exposures the fitted slopes are flat and straddle the null, visualising the null IVW estimates reported in §3.9 (Table). The corresponding H. pylori panel is also shown enlarged in Supplementary Figure S12. Files: `results/mr_real/scatter_*.png`.
+
+![Supplementary Figure S19]({{artifact:art_b909fc47-3582-4db3-8818-7435656f2e82}})
+
+**Supplementary Figure S19. Mendelian-randomisation leave-one-out — all six exposures.** Leave-one-out IVW estimates for each exposure: removing any single SNP leaves every pooled estimate straddling the null, confirming that no individual instrument drives any result and that the null is not an outlier artefact (§3.9). Files: `results/mr_real/loo_*.png`.
+
 ## Supplementary Materials
 
 - **Supplementary Table S1 — Per-exposure MR instruments.** Threshold, pre-clump and harmonised-used SNP counts, mean/min per-SNP F, IVW OR/CI/p, and MR-PRESSO global p for all six exposures. File: `results/mr_real/MR_per_exposure_instruments_REAL.csv`.
