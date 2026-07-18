@@ -298,6 +298,18 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 
 **Supplementary Figure S14. Tissue-microbiome compositional differential abundance.** Centred-log-ratio (CLR) effect sizes for the two discovery-cohort contrasts (Wilcoxon, Benjamini–Hochberg): (left) control vs cancer-adjacent mucosa (44/61 genera q<0.05) and (right) paired cancer-adjacent vs tumour (18/61 genera q<0.05). Bars coloured by direction where q<0.05 (red enriched, blue depleted, grey n.s.); the twelve most enriched and depleted genera are shown per panel. These genus-level shifts are reported for completeness but, as detailed in §3.8, are confounded with sequencing batch in the tumour contrast and do not replicate in the independent batch-clean cohort, so they are not proposed as biomarkers. Files: `results/microbiome_biomarker/04a_DA_control_vs_GCN.csv`, `04b_DA_GCN_vs_GCT_paired.csv`.
 
+![Supplementary Figure S15]({{artifact:art_767626fc-0eb8-4504-8e09-98b917478a07}})
+
+**Supplementary Figure S15. Immune infiltration, deconvolution validated against pathology.** (A) Deconvolution T-cell score versus the measured histological leukocyte fraction (Spearman ρ=0.67, p=3.6×10⁻³⁶), establishing that the expression-based estimates track true tissue composition. (B) Immune compartments, tumour versus normal — enrichment is dominated by the macrophage/monocyte lineage, with no net CD8⁺ gain. (C) Infiltration by molecular subtype (EBV/MSI most infiltrated, Kruskal–Wallis p<10⁻⁶). (D) CD8⁺ score versus overall survival — not prognostic in this cohort (Cox HR 1.04, p=0.41), reported as observed (§3.3). Files: `results/plots/Immune_*.png`.
+
+![Supplementary Figure S16]({{artifact:art_0e851c17-b98a-4a31-af57-975dd87637ca}})
+
+**Supplementary Figure S16. Signature Kaplan–Meier stratification across all four cohorts.** High- versus low-risk overall survival by the 25-gene signature (median split within each cohort): (A) TCGA training cohort; (B) ACRG/GSE62254 (HR 1.90, p=8.6×10⁻⁵); (C) GSE15459 (HR 1.68, p=0.014); (D) GSE84437 — the null cohort (HR 1.11, p=0.46), shown transparently rather than omitted (§3.4). Files: `results/validation/KM_*.png`, `results/validation_multi/KM_*.png`.
+
+![Supplementary Figure S17]({{artifact:art_870f82c6-e8f4-4553-8c79-91924db70687}})
+
+**Supplementary Figure S17. Clinical nomogram, calibration and external decision-curve analysis.** (A) Combined clinical+signature nomogram for 1/3/5-year overall survival. (B) Calibration at 1/3/5 years (in-sample). (C) External decision-curve analysis in ACRG: the clinical and combined curves are essentially superimposed across the 5–40% threshold range, i.e. the signature confers no net clinical benefit over standard staging out-of-sample (§3.7). The nomogram is presented as an illustrative research tool, not a validated decision instrument. Files: `results/nomogram_combined/`, `results/external_utility_ACRG/DCA_external.png`.
+
 ## Supplementary Materials
 
 - **Supplementary Table S1 — Per-exposure MR instruments.** Threshold, pre-clump and harmonised-used SNP counts, mean/min per-SNP F, IVW OR/CI/p, and MR-PRESSO global p for all six exposures. File: `results/mr_real/MR_per_exposure_instruments_REAL.csv`.
