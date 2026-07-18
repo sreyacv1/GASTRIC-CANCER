@@ -1,7 +1,7 @@
 # Analysis pipeline
 
 Every result in `PAPER.md` maps to a script under `analysis/` and an output under
-`results/`. Run the whole pipeline with `bash run_real_pipeline.sh` (R 4.3.x; see
+`results/`. Run the whole pipeline with `bash run_real_pipeline.sh` (R 4.3.3; see
 `package_versions.csv`). The Mendelian-randomisation stage needs an OpenGWAS token
 (`export OPENGWAS_JWT=<token>`).
 
@@ -39,6 +39,14 @@ sensitivity `ebi-a-GCST90018629`.
 
 ## Reproducibility
 
-- R 4.3.3; package versions pinned in `package_versions.csv`.
+- R 4.3.3 (a full `sessionInfo()` dump is committed as `sessionInfo.txt`); package versions pinned in `package_versions.csv`.
 - The MR token is read from `OPENGWAS_JWT` and is never stored in the repo.
 - Large primary data are public and not committed; see `data/README.md`.
+- The harmonised MR instrument tables and the `gwasinfo()` accession-verification output are committed under `results/mr_real/`, so the exact SNP sets are recoverable even if upstream OpenGWAS entries are later reprocessed.
+
+## Orphan / exploratory outputs (not used in the manuscript)
+
+- `results/MaAsLin2_gene_vs_microbiome/` — an exploratory MaAsLin2 gene-vs-microbiome
+  association run that produced no significant results and only a log plus an empty
+  `fits/` directory. It is **not referenced in the manuscript** and forms no part of any
+  reported result; it is retained only for provenance and may be deleted before archival.

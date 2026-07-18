@@ -38,3 +38,7 @@ data/microbiome/tcma/raw/
 *.fq.gz
 Rplots.pdf
 scratch/
+*.Rtmp
+Rtmp*/
+handoff/
+docs/claude_code_history/

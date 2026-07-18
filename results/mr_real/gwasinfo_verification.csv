@@ -1,0 +1,8 @@
+"id","trait","population","ncase","ncontrol","sample_size","nsnp","author","year"
+"ebi-a-GCST90006910","Anti-helicobacter pylori IgG seropositivity","European",NA,NA,8735,9170312,"Butler-Laporte G",2020
+"ebi-a-GCST90017070","Gut microbiota abundance (genus Streptococcus id.1853)","European",NA,NA,14306,5643866,"Kurilshikov A",2021
+"ebi-a-GCST90032406","Fusobacterium A abundance in stool","European",NA,NA,5959,7937635,"Qin Y",2022
+"ebi-a-GCST90017045","Gut microbiota abundance (genus Prevotella9 id.11183)","European",NA,NA,14306,5535200,"Kurilshikov A",2021
+"ebi-a-GCST90017088","Gut microbiota abundance (genus Veillonella id.2198)","European",NA,NA,14306,5486191,"Kurilshikov A",2021
+"ebi-a-GCST90017030","Gut microbiota abundance (genus Lactobacillus id.1837)","European",NA,NA,14306,5398287,"Kurilshikov A",2021
+"ebi-a-GCST90018849","Gastric cancer","European",1029,475087,476116,24188662,"Sakaue S",2021

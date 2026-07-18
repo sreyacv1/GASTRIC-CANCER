@@ -1,0 +1,7 @@
+"stage","pearson_r","n_samples_matched"
+"pooled_all_stages",0.983285623752915,932
+"input",1,932
+"filtered",0.967813798463849,932
+"denoised",0.96834176212774,932
+"merged",0.969151542962039,932
+"nonchim",0.968235001545087,932
