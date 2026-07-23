@@ -5,7 +5,7 @@ supplementary figures (S15–S19) are montages assembled from the individual pip
 PNGs listed below — no panel is redrawn or synthetic; each source panel and each numeric
 value can be opened and verified independently. Every headline number traces to a source CSV.*
 
-> **Verification.** All 39 individual source panels and 5 composite figures listed below were confirmed present and git-tracked (`git ls-files`) in this repository — 44 files, 0 missing. Each cited numeric value was traced to its source CSV (also tracked). This is a complete check, not a spot-check.
+> **Verification.** Every source panel and every composite display image listed below was confirmed present and git-tracked (`git ls-files`, verified 2026-07-23) — 0 missing, 0 untracked. The five composite supplementary figures are stored as committed images under `results/composite_figures/` and are the exact files embedded in `PAPER.md`. Headline numeric values are independently re-read against their source CSVs in `RESULTS_COMPENDIUM.md` / `RESULTS_REVIEW.md`.
 
 ## Main figures
 | Fig | Source image(s) | Source data (numbers) |
@@ -32,11 +32,11 @@ value can be opened and verified independently. Every headline number traces to 
 | **S12** MR scatter (H. pylori) | `results/mr_real/scatter_H__pylori_IgG_seropositivity.png` | `results/mr_real/MR_results_all_methods_REAL.csv` |
 | **S13** MR leave-one-out (H. pylori) | `results/mr_real/loo_H__pylori_IgG_seropositivity.png` | same |
 | **S14** microbiome CLR DA | `results/microbiome_biomarker/da_clr_barplot.png` | `.../04a_DA_control_vs_GCN.csv`, `04b_DA_GCN_vs_GCT_paired.csv` |
-| **S15** immune (composite) | `results/plots/Immune_validation_scatter.png` + `Immune_tumor_vs_normal.png` + `Immune_by_subtype.png` + `Immune_CD8_survival_KM.png` | `results/immune/validation_vs_measured.csv`; `CD8_survival_summary.csv` (HR 1.04, p=0.41) |
-| **S16** four-cohort KM (composite) | `results/validation/KM_TCGA.png` + `KM_ACRG.png` + `results/validation_multi/KM_GSE15459.png` + `KM_GSE84437.png` | `results/validation/multivariable_cox_ACRG.csv` (median-split HR 1.76) |
-| **S17** nomogram/calib/DCA (composite) | `results/nomogram_combined/combined_nomogram.png` + `calibration_combined.png` + `results/external_utility_ACRG/DCA_external.png` | `results/external_utility_ACRG/added_value_external.csv` (ΔC +0.005) |
-| **S18** MR scatter ×6 (composite) | `results/mr_real/scatter_{H_pylori,Streptococcus,Fusobacterium,Prevotella,Veillonella,Lactobacillus}.png` | `results/mr_real/MR_per_exposure_instruments_REAL.csv` |
-| **S19** MR leave-one-out ×6 (composite) | `results/mr_real/loo_{...}.png` (same six) | same |
+| **S15** immune (composite → `results/composite_figures/s15_immune.png`) | `results/plots/Immune_validation_scatter.png` + `Immune_tumor_vs_normal.png` + `Immune_by_subtype.png` + `Immune_CD8_survival_KM.png` | `results/immune/validation_vs_measured.csv`; `CD8_survival_summary.csv` (HR 1.04, p=0.41) |
+| **S16** four-cohort KM (composite → `results/composite_figures/s16_km.png`) | `results/validation/KM_TCGA.png` + `results/validation/KM_ACRG.png` + `results/validation_multi/KM_GSE15459.png` + `results/validation_multi/KM_GSE84437.png` | `results/validation/multivariable_cox_ACRG.csv` (median-split HR 1.76) |
+| **S17** nomogram/calib/DCA (composite → `results/composite_figures/s17_nomogram.png`) | `results/nomogram_combined/combined_nomogram.png` + `results/nomogram_combined/calibration_combined.png` + `results/external_utility_ACRG/DCA_external.png` | `results/external_utility_ACRG/added_value_external.csv` (ΔC +0.005) |
+| **S18** MR scatter ×6 (composite → `results/composite_figures/s18_mr_scatter_all.png`) | `results/mr_real/scatter_{H__pylori_IgG_seropositivity,Streptococcus__genus_,Fusobacterium,Prevotella,Veillonella,Lactobacillus}.png` | `results/mr_real/MR_per_exposure_instruments_REAL.csv` |
+| **S19** MR leave-one-out ×6 (composite → `results/composite_figures/s19_mr_loo_all.png`) | `results/mr_real/loo_{H__pylori_IgG_seropositivity,Streptococcus__genus_,Fusobacterium,Prevotella,Veillonella,Lactobacillus}.png` | same |
 
 ## How to verify (for reviewers)
 1. Open any source PNG listed above directly in the repo — the composite figure is that exact image.

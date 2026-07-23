@@ -46,7 +46,7 @@ anonymized read headers for every SRA/ENA-hosted candidate (see
 ## RANKED SHORTLIST (pass criteria 1-4)
 
 ### #1  PRJNA641258 — Italy (Bologna/Rimini)
-- Study: Palmieri et al., IJMS 2020, "Gastric Adenocarcinomas and
+- Study: Ravegnini et al., IJMS 2020, "Gastric Adenocarcinomas and
   Signet-Ring Cell Carcinoma..." (PMC7766162).
 - Tissue: gastric biopsy — `env_medium = Gastric Biopsy [NCIT:C51685]`,
   `env_broad_scale = stomach [UBERON:0000945]`. CONFIRMED gastric.
