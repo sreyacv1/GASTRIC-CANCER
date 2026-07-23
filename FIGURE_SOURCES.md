@@ -5,7 +5,7 @@ supplementary figures (S15–S19) are montages assembled from the individual pip
 PNGs listed below — no panel is redrawn or synthetic; each source panel and each numeric
 value can be opened and verified independently. Every headline number traces to a source CSV.*
 
-> **Verification.** All 34 individual source panels and 5 composites listed below were confirmed present and git-tracked (`git ls-files`) in this repository — 0 missing. Each cited numeric value was traced to its source CSV (also tracked). This is a complete check, not a spot-check.
+> **Verification.** All 39 individual source panels and 5 composite figures listed below were confirmed present and git-tracked (`git ls-files`) in this repository — 44 files, 0 missing. Each cited numeric value was traced to its source CSV (also tracked). This is a complete check, not a spot-check.
 
 ## Main figures
 | Fig | Source image(s) | Source data (numbers) |
