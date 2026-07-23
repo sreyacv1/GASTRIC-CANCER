@@ -256,19 +256,19 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 
 ![Supplementary Figure S4](results/wgcna_real/wgcna_dendrogram.png)
 
-**Supplementary Figure S4. WGCNA gene dendrogram and module assignment.** Hierarchical clustering of the 5,000 most variable genes (signed-hybrid network, biweight midcorrelation, soft power β=3) with dynamic-tree-cut module colours beneath. The prognostic red module is one of the resulting co-expression modules subsequently tested against survival (§3.6). File: `results/wgcna_real/dendrogram.pdf`.
+**Supplementary Figure S4. WGCNA gene dendrogram and module assignment.** Hierarchical clustering of the 5,000 most variable genes (signed-hybrid network, biweight midcorrelation, soft power β=3) with dynamic-tree-cut module colours beneath. The prognostic red module is one of the resulting co-expression modules subsequently tested against survival (§3.6). File: `results/wgcna_real/wgcna_dendrogram.png` (rendered from the vector source `results/wgcna_real/dendrogram.pdf`).
 
 ![Supplementary Figure S5](results/wgcna_real/wgcna_module_trait.png)
 
-**Supplementary Figure S5. Module–trait relationships.** Correlation heatmap of module eigengenes against clinical/phenotypic traits (survival, stage, Lauren class, leukocyte fraction). The red and turquoise modules show the strongest associations with outcome, motivating the survival modelling in §3.6. File: `results/wgcna_real/module_trait_heatmap.pdf`.
+**Supplementary Figure S5. Module–trait relationships.** Correlation heatmap of module eigengenes against clinical/phenotypic traits (survival, stage, Lauren class, leukocyte fraction). The red and turquoise modules show the strongest associations with outcome, motivating the survival modelling in §3.6. File: `results/wgcna_real/wgcna_module_trait.png` (rendered from the vector source `results/wgcna_real/module_trait_heatmap.pdf`).
 
 ![Supplementary Figure S6](results/wgcna_real/wgcna_power.png)
 
-**Supplementary Figure S6. Soft-threshold power robustness.** Scale-free-topology fit R² and mean connectivity across candidate soft powers, and the invariance of the prognostic module across β=3–12 (scale-free R² 0.865–0.886, no clear elbow). Confirms the finding does not depend on the power choice (§3.6). File: `results/wgcna_real/power_robustness.pdf`.
+**Supplementary Figure S6. Soft-threshold power robustness.** Scale-free-topology fit R² and mean connectivity across candidate soft powers, and the invariance of the prognostic module across β=3–12 (scale-free R² 0.865–0.886, no clear elbow). Confirms the finding does not depend on the power choice (§3.6). File: `results/wgcna_real/wgcna_power.png` (rendered from the vector source `results/wgcna_real/power_robustness.pdf`).
 
 ![Supplementary Figure S7](results/plots/transcriptome/deg_volcano.png)
 
-**Supplementary Figure S7. TCGA-only differential expression (volcano).** Tumour-vs-normal differential expression computed **within TCGA alone** (limma; 2,134 up / 2,362 down of 21,446 genes at |log₂FC|>1, adjusted p<0.05). This is the platform-matched, non-inflated contrast used to confirm that the integrated TCGA+GTEx ranking (which carries genomic inflation λ=17.3; §3.1) reflects tumour biology rather than a GTEx-normal artefact — its top up/down genes replicate the integrated ranking at 100% for the top 100–200 and ≥98.6% at the top 500 (99.5% overall concordance among genes significant in both; §3.1). Not to be conflated with the integrated DE counts. File: `results/plots/transcriptome/TCGA_volcano.pdf`.
+**Supplementary Figure S7. TCGA-only differential expression (volcano).** Tumour-vs-normal differential expression computed **within TCGA alone** (limma; 2,134 up / 2,362 down of 21,446 genes at |log₂FC|>1, adjusted p<0.05). This is the platform-matched, non-inflated contrast used to confirm that the integrated TCGA+GTEx ranking (which carries genomic inflation λ=17.3; §3.1) reflects tumour biology rather than a GTEx-normal artefact — its top up/down genes replicate the integrated ranking at 100% for the top 100–200 and ≥98.6% at the top 500 (99.5% overall concordance among genes significant in both; §3.1). Not to be conflated with the integrated DE counts. File: `results/plots/transcriptome/deg_volcano.png` (rendered from the vector source `results/plots/transcriptome/TCGA_volcano.pdf`).
 
 ![Supplementary Figure S8](results/plots/transcriptome/deg_heatmap_top30_clean.png)
 
