@@ -68,7 +68,7 @@ A public gastric single-cell RNA-seq dataset (GSE134520; premalignant-to-early-g
 Top up/down differentially expressed genes were queried (Enrichr) against LINCS L1000 and GEO drug-perturbation libraries to nominate compounds whose perturbation signature reverses the tumour signature. Results are hypothesis-generating and not experimentally validated.
 
 ### 2.12 Software and reproducibility
-All analyses ran in R 4.3.3 (a full `sessionInfo()` dump is provided with the code). Every reported result derives from the public datasets described above and is reproducible from the scripts provided under `analysis/`, with outputs under `results/` and pinned package versions in `package_versions.csv`. Complete-case analysis was used throughout; no missing values were imputed.
+All analyses ran in R 4.3.3 (a full `sessionInfo()` dump is provided with the code). Every reported result derives from the public datasets described above and is reproducible from the scripts provided under `analysis/`, with outputs under `results/` and pinned package versions in `package_versions.csv`. Complete-case analysis was used throughout; no missing values were imputed. Full figure provenance — mapping every main and supplementary figure to its source image file(s) and the source data table behind each reported number — is provided in `FIGURE_SOURCES.md`; the composite supplementary figures (S15–S19) are montages of the individual pipeline-output panels listed there, with no panel redrawn or synthesised.
 
 ## 3. Results
 
