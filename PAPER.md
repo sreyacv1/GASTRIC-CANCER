@@ -182,6 +182,8 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 
 **Code availability.** All analysis scripts (`analysis/`), result tables and figures (`results/`), the pipeline description (`PIPELINE.md`), the pinned package versions (`package_versions.csv`) and an R `sessionInfo()` dump (`sessionInfo.txt`) are provided in the project repository, archived at a version-tagged snapshot with a persistent DOI: ⟦PLACEHOLDER — REPOSITORY URL + Zenodo (or equivalent) DOI to be minted at submission⟧. Every reported result maps to a named script and output file (see `PIPELINE.md`).
 
+**Funding.** ⟦PLACEHOLDER — funding sources and grant numbers, or: "This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors."⟧
+
 **Competing interests.** The authors declare no competing interests.
 
 **Authors' contributions.** ⟦PLACEHOLDER — assign per author, e.g. Conceptualisation: …; Data curation & analysis: …; Software/pipeline: …; Writing — original draft: …; Writing — review & editing: …; Supervision: … All authors read and approved the final manuscript.⟧
