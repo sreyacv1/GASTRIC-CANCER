@@ -785,7 +785,7 @@ Six exposures (anti-*H. pylori* IgG, *Streptococcus*, *Fusobacterium*, *Prevotel
 *Veillonella*, *Lactobacillus*) against gastric cancer (1,029 cases / 475,087 controls):
 
 **All six IVW estimates non-significant; the smallest p = 0.348.** MR-PRESSO global
-tests non-significant for five of six. Replicated in an East-Asian outcome cohort.
+tests non-significant for **all six** (p = 0.052–0.676). Replicated in an East-Asian outcome cohort.
 
 **Interpretation — be precise here.** This is **not** "microbes definitely don't cause
 gastric cancer." With 1,029 cases and modest instrument strength, power is limited.
@@ -833,7 +833,7 @@ Your gastric lines (n = 35), from `gastric_dependency.csv`:
 | **MTOR** | −1.184 | 100% | dependent (common-essential) |
 | **CDK4** | −0.825 | 66% | dependent |
 | **CDK6** | −0.548 | 51% | dependent |
-| FGFR1–4 | −0.04 to −0.22 | ≤11% | **not** dependent |
+| FGFR1–4 | −0.220 to **+0.062** | ≤11% | **not** dependent |
 
 **PI3K/mTOR and CDK4/6 are genuine gastric dependencies; FGFR is not.** This upgrades
 the drug section from pure in-silico speculation to experimentally-anchored — and the

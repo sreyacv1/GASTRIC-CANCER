@@ -684,7 +684,8 @@ fibroblasts. That convergence is what makes the finding credible.
 - **Full sensitivity suite:** IVW, MR-Egger, weighted median, weighted mode, **MR-PRESSO**,
   leave-one-out, Cochran's Q.
 - **Result: all six IVW null; smallest p = 0.348** (*Streptococcus*). MR-PRESSO global
-  non-significant for five of six (*H. pylori* p = 0.052).
+  non-significant for **all six** (p = 0.052–0.676; *H. pylori* is the closest at 0.052,
+  still above the 0.05 threshold).
 - **Correct interpretation:** at this instrument and outcome power, **no evidence of a
   causal effect** — not evidence of no effect. Disclosed tension: *H. pylori* is an
   established cause epidemiologically, but the instrument proxies **antibody response**,
@@ -701,7 +702,7 @@ fibroblasts. That convergence is what makes the finding credible.
    anti-proliferative rather than gastric-specific, and unvalidated experimentally.
 2. **DepMap (`26_`)** — 35 gastric lines, CRISPR gene-effect:
    **PIK3CA −0.742 (dependent AND selective)**, MTOR −1.184 (common-essential),
-   CDK4 −0.825, CDK6 −0.548 dependent; **FGFR1–4 not dependent** (−0.04 to −0.22).
+   CDK4 −0.825, CDK6 −0.548 dependent; **FGFR1–4 not dependent** (gene effect −0.220 to +0.062; FGFR3 and FGFR4 are slightly positive, i.e. no dependency at all).
    This converts speculation into experimentally-anchored targets — and the FGFR negative
    shows the result was reported, not the hoped-for answer.
 3. **Benchmark (`30_`)** — a previously published 5-gene gastric signature, same data,
