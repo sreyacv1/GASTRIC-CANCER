@@ -54,8 +54,10 @@ No exposure reaches p<0.05. ✓  Source: `mr_real/MR_results_all_methods_REAL.cs
 
 ## H. GSEA — VERIFIED (source-file provenance clarified)
 Manuscript §3.1 values come from the **integrated TCGA+GTEx** analysis, as the Methods state:
-E2F 3.751→"3.75", G2M 3.642→"3.64", OXPHOS −2.542→"−2.54", FAO −2.579→"−2.58";
-MYC 2.668→"2.67"; EMT-diffuse 3.174 padj 1.58e-40 →"3.17, 1.6e-40". ✓
+Manuscript-quoted values, all matching: E2F 3.751→"3.75", G2M 3.642→"3.64",
+OXPHOS −2.542→"−2.54"; EMT-diffuse 3.174 padj 1.58e-40 →"3.17, 1.6e-40". ✓
+Additionally verified in-file but **not numerically quoted** in the manuscript (named
+qualitatively only): MYC targets NES 2.669; fatty-acid metabolism NES −2.579.
 Source: `enrichment_integrated/fgsea_Hallmark_integrated.csv`,
 `enrichment/GSEA_Hallmark_DiffuseVsIntestinal.csv`.
 Note: the TCGA-only file (`enrichment/GSEA_Hallmark_TumorVsNormal.csv`) carries different
@@ -63,8 +65,10 @@ values (E2F 3.642, OXPHOS −3.102) because it is a different contrast — not a
 
 ## I. Immune deconvolution — VERIFIED
 T cells (MCP) vs measured leukocyte % : ρ=0.665575, p=3.57e-36 (n=272) — manuscript "ρ 0.67".
-CD8 vs leukocyte ρ=0.468413. CD8 vs lymphocyte-infiltration ρ=0.0198 (p=0.74) — the
-manuscript's disclosed weak/absent correlation. ✓ Source: `immune/validation_vs_measured.csv`.
+CD8 vs leukocyte ρ=0.468413 (verified in file; not quoted numerically in the manuscript).
+The source file also records CD8 vs lymphocyte-infiltration ρ=0.0198 (p=0.74) — a near-zero
+correlation that is **present in the result file but not reported in the manuscript**; see
+"Coverage gap" below. Source: `immune/validation_vs_measured.csv`.
 
 ## J. DepMap dependency — VERIFIED
 PIK3CA −0.7420 (frac 0.571, dependent+**selective**), MTOR −1.1841 (frac 1.000),
@@ -84,15 +88,29 @@ Source: `signature_stability/stability_summary.csv`.
 1. **Upstream data is real and predates the manuscript.**
    `data/processed/TCGA_STAD_processed.RData` = 235,007,591 bytes, mtime 21 May 2026 —
    two months before manuscript preparation. Not synthesised at write-time.
-2. **Independent recompute from raw expression reproduces reported values.**
+2. **Independent recompute from raw expression confirms the data are real and internally consistent.**
    Loading the RData directly: 18,419 genes × 448 samples; barcode-derived
-   **412 tumours / 36 normals** (exactly as stated). Recomputed from scratch:
-   MKI67 tumour 7.668 vs normal 5.071, Wilcoxon p=1.32e-15 (manuscript: identical);
-   COL1A1 11.379 vs 8.611, p=6.47e-18; SERTM1 −5.207 vs −0.288, p=3.12e-18.
+   **412 tumours / 36 normals** — this sample split *is* stated in the manuscript and matches.
+   Recomputed from scratch (these per-gene statistics are **not** quoted in the manuscript;
+   they are an independent check that the matrix contains real biology, not synthetic values):
+   MKI67 tumour 7.668 vs normal 5.071, Wilcoxon p=1.32e-15; COL1A1 11.379 vs 8.611,
+   p=6.47e-18; SERTM1 −5.207 vs −0.288, p=3.12e-18. All three move in the biologically
+   expected direction (proliferation and collagen up in tumour), which a fabricated or
+   randomised matrix would not reproduce.
 3. **Negative results are reported as negative** — GSE84437 non-validation, non-significant
    meta-analysis, Simpson diversity ns, all-null MR, FGFR non-dependency, prior signature
    at chance. A fabricated manuscript does not carry this many disclosed failures.
 4. **No rounding in a favourable direction detected** in any checked value.
+
+## Coverage gap identified during verification
+
+This audit checked that every number the manuscript **states** is correct. It also surfaced
+one result present in the source files but **not** carried into the manuscript: the
+deconvolution CD8 estimate correlates with measured leukocyte percentage (ρ=0.468) but
+**not** with measured lymphocyte-infiltration percentage (ρ=0.0198, p=0.74). This is a
+limitation of the deconvolution validation and would strengthen the paper's transparency if
+added to the immune section. It is a *reporting completeness* point, not an error or a
+falsification — no stated claim depends on it.
 
 ## Conclusion
 
