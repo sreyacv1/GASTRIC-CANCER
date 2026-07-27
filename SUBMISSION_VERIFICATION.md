@@ -67,8 +67,8 @@ values (E2F 3.642, OXPHOS −3.102) because it is a different contrast — not a
 T cells (MCP) vs measured leukocyte % : ρ=0.665575, p=3.57e-36 (n=272) — manuscript "ρ 0.67".
 CD8 vs leukocyte ρ=0.468413 (verified in file; not quoted numerically in the manuscript).
 The source file also records CD8 vs lymphocyte-infiltration ρ=0.0198 (p=0.74) — a near-zero
-correlation that is **present in the result file but not reported in the manuscript**; see
-"Coverage gap" below. Source: `immune/validation_vs_measured.csv`.
+correlation that was **absent from the manuscript when this audit began and has since been
+added** to §3.3 (commit f1e8f26); see "Coverage gap" below. Source: `immune/validation_vs_measured.csv`.
 
 ## J. DepMap dependency — VERIFIED
 PIK3CA −0.7420 (frac 0.571, dependent+**selective**), MTOR −1.1841 (frac 1.000),
@@ -105,12 +105,14 @@ Source: `signature_stability/stability_summary.csv`.
 ## Coverage gap identified during verification
 
 This audit checked that every number the manuscript **states** is correct. It also surfaced
-one result present in the source files but **not** carried into the manuscript: the
+one result that was present in the source files but **not** carried into the manuscript: the
 deconvolution CD8 estimate correlates with measured leukocyte percentage (ρ=0.468) but
-**not** with measured lymphocyte-infiltration percentage (ρ=0.0198, p=0.74). This is a
-limitation of the deconvolution validation and would strengthen the paper's transparency if
-added to the immune section. It is a *reporting completeness* point, not an error or a
-falsification — no stated claim depends on it.
+**not** with measured lymphocyte-infiltration percentage (ρ=0.0198, p=0.74).
+
+**Status: CLOSED.** This limitation has been added to §3.3 of the manuscript (commit
+f1e8f26), which now states that the deconvolution captures overall immune burden rather
+than lymphocyte subset composition. It was a *reporting completeness* point, not an error
+or a falsification — no stated claim depended on it.
 
 ## Conclusion
 
