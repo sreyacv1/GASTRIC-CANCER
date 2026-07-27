@@ -256,7 +256,7 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 
 ![Figure 7](results/figures/Fig7.png)
 
-**Figure 7. The 25-gene prognostic signature in detail.** (A) Standardised LASSO–Cox coefficients (log-hazard per SD) for the 25 signature genes; the three genes also in the prognostic WGCNA red module (SERPINE1, POSTN, MATN3) are highlighted. (B) Per-cohort external-validation forest plot (per-SD continuous HR): ACRG/GSE62254 1.90 (1.37–2.62), GSE15459 1.68 (1.11–2.53), GSE84437 1.11 (null). (C) Kaplan–Meier stratification (median split) across all four cohorts with log-rank tests, including the GSE84437 null shown transparently. Source: `results/validation/`, `results/validation_multi/`.
+**Figure 7. The 25-gene prognostic signature in detail.** (A) Standardised LASSO–Cox coefficients (log-hazard per SD) for the 25 signature genes; the three genes also in the prognostic WGCNA red module (SERPINE1, POSTN, MATN3) are highlighted. (B) Per-cohort external-validation forest plot (high-vs-low hazard ratios, median split, unadjusted): ACRG/GSE62254 1.90 (1.37–2.62), GSE15459 1.68 (1.11–2.53), GSE84437 1.11 (null). The corresponding age/stage-adjusted per-SD estimates — the values pooled in the meta-analysis — are 1.30 (1.10–1.54), 1.20 (0.97–1.48) and 1.11 (0.97–1.27) respectively. (C) Kaplan–Meier stratification (median split) across all four cohorts with log-rank tests, including the GSE84437 null shown transparently. Source: `results/validation/`, `results/validation_multi/`.
 
 ![Figure 8](results/figures/Fig8.png)
 

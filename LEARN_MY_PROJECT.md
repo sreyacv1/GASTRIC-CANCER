@@ -404,11 +404,22 @@ the hazard as a baseline multiplied by predictor effects, giving a **hazard rati
 For continuous scores we report **HR per standard deviation (HR/SD)** so the number
 means "risk change for a typical 1-SD increase in score."
 
-Your ACRG result: **HR = 1.8965 (95% CI 1.3704–2.6245), p = 1.13×10⁻⁴**. A 1-SD
-higher risk score nearly doubles the hazard, and the CI excludes 1 — significant.
+**Two different HRs appear in your paper — do not confuse them:**
+
+| Measure | ACRG value | What it means |
+|---|---|---|
+| **Median-split, high-vs-low** (unadjusted) | **1.8965 (1.3704–2.6245)**, p=1.13×10⁻⁴ | Patients above the median risk score have ~1.9× the hazard of those below |
+| **Per SD, age/stage-adjusted** | **1.3012 (1.1004–1.5386)**, p=0.0021 | Each 1-SD rise in score raises hazard ~30%, after adjusting for age and stage |
+
+The median-split number is larger because dichotomising contrasts the extremes of the
+distribution; the per-SD adjusted number is the more conservative and more meaningful
+estimate, and it is the one carried into the meta-analysis. In both cases the CI excludes
+1, so the ACRG result is significant. (A third figure, **1.76**, is the age/stage-adjusted
+*median-split* HR — same split, with adjustment.)
 
 **The proportional-hazards assumption:** Cox assumes the HR is constant over time.
-You tested it (`cox.zph`, p = 0.0018) and found it **violated** — so you fitted a
+You tested it (`cox.zph`) and found it **violated** — p = 0.0018 for the signature alone,
+p = 0.003 for the age/stage-adjusted model (the manuscript quotes the adjusted figure) — so you fitted a
 time-varying model, which showed the signature is strongly prognostic early
 (**HR 1.49 at 12 months**) and fades to nothing later (**1.03 at 36 months, 0.87 at
 60 months**). Rather than hide an assumption violation, you characterised it and
@@ -419,8 +430,10 @@ rigour reviewers respect.
 
 A marker is only useful if it adds information **beyond what clinicians already have**.
 So you adjust for **age** and **stage**: fit a Cox model containing all three and ask
-whether the signature retains an independent effect. Your reported HRs are age- and
-stage-adjusted — a much stronger claim than an unadjusted one.
+whether the signature retains an independent effect. Your paper reports **both** the
+unadjusted median-split HRs and the age/stage-adjusted per-SD HRs (Table 1), and it is the
+*adjusted* ones that are pooled — a much stronger claim than an unadjusted one. When you
+quote an HR, always say which of the two you mean.
 
 ## 5.5 The C-index — how to judge a prognostic model
 
@@ -508,11 +521,11 @@ comparable — and crucially, no information crosses between cohorts.
 
 Your results (`cindex_HR_summary.csv`):
 
-| Cohort | n | Events | C-index | HR (95% CI) | Verdict |
-|---|---|---|---|---|---|
-| ACRG/GSE62254 | 300 | 152 | 0.6079 | 1.8965 (1.3704–2.6245) | **validated** |
-| GSE15459 | 191 | 95 | 0.5752 | 1.6757 (1.1067–2.5373) | **validated** |
-| GSE84437 | 431 | 207 | 0.5297 | 1.1087 (0.8440–1.4565) | **failed** |
+| Cohort | n | Events | C-index | HR high-vs-low, median split (95% CI) | HR per SD, age/stage-adj (95% CI) | Verdict |
+|---|---|---|---|---|---|---|
+| ACRG/GSE62254 | 300 | 152 | 0.6079 | 1.8965 (1.3704–2.6245) | 1.3012 (1.1004–1.5386) | **validated** |
+| GSE15459 | 191 | 95 | 0.5752 | 1.6757 (1.1067–2.5373) | 1.1996 (0.9736–1.4782) | **validated** (median split) |
+| GSE84437 | 431 | 207 | 0.5297 | 1.1087 (0.8440–1.4565) | 1.1096 (0.9726–1.2658) | **failed** |
 
 **Two of three validated.** You report the failure, and you investigated it: GSE84437
 is 89% pT3–T4 (advanced disease), so the cohort has little of the early-stage
