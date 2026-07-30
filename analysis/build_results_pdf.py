@@ -131,10 +131,22 @@ p("<b>Finding.</b> A classifier separates cancer from control at AUC 0.916 — b
   "inseparable. The apparent dysbiosis is substantially a <b>batch artefact</b>.")
 sub("10.4 Differential abundance (paired: tumour vs same patient's adjacent normal)")
 add(tbl(rd("results/microbiome_biomarker/04b_DA_GCN_vs_GCT_paired.csv"), maxr=15))
-p("Top discriminating genera are dominated by environmental and skin contaminants "
-  "(Dietzia, Serinicoccus, Methylobacterium, Microbacterium, Sphingomonas, Serratia, "
-  "Cutibacterium) rather than gastric flora — the expected signature of reagent/batch "
-  "contamination rather than tumour biology.")
+p("<b>Finding.</b> Of 61 genera tested, 18 were significant at q &lt; 0.05. The largest "
+  "effects are a <b>mixture</b> of two kinds of taxon. Two are environmental/actinobacterial "
+  "organisms consistent with the batch artefact identified in §10.3 (Serinicoccus −2.73, "
+  "q = 5.2×10⁻⁹; Dietzia −1.93, q = 2.2×10⁻⁷). The remainder, however, are genuine "
+  "gastric, gut and oral flora: <b>Helicobacter</b> is strongly depleted in tumour tissue "
+  "(−1.45, q = 3.2×10⁻⁵), alongside Bacteroides (−0.73), Faecalibacterium (−0.48), "
+  "Pseudomonas (−0.41) and Blautia (−0.37), while Fusobacterium (+0.52), Streptococcus "
+  "(+0.49) and Gemella (+0.43) are enriched.")
+p("<b>Interpretation.</b> The Helicobacter depletion with oral-taxon enrichment is the "
+  "pattern predicted by the Correa cascade: as atrophic gastritis destroys acid-producing "
+  "parietal cells, the stomach becomes hospitable to oral and gut organisms that could not "
+  "previously survive there. This paired analysis therefore contains real biology <b>as well "
+  "as</b> batch signal — which is precisely why the flowcell audit in §10.3 is necessary: "
+  "the two cannot be separated in this cohort, so neither can be claimed cleanly. Note that "
+  "the contaminant genera driving the classifier in §10.3 are not the same set as the top "
+  "paired-DA hits (Serratia q = 0.69 and Cutibacterium q = 0.92 are both non-significant here).")
 
 # ---------- 11 MR ----------
 sec("11. Mendelian randomisation — causal assessment")
