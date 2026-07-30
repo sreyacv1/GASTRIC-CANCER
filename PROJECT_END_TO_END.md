@@ -185,6 +185,8 @@ Your evidence that this matters:
   Microbacterium, Sphingomonas, Serratia, Cutibacterium** — environmental and skin
   contaminants, not gastric flora. Real gastric biology would be led by gut organisms.
 
+**An important nuance — do not over-read this.** The contaminant list above comes from the *random-forest classifier*, which is dominated by batch signal. A separate **paired** differential-abundance analysis (tumour vs the same patient's adjacent normal, `04b_DA_GCN_vs_GCT_paired.csv`) tells a partly different story: of 61 genera, 18 are significant, and while Serinicoccus (−2.73) and Dietzia (−1.93) again top the list, the other large effects are **genuine gastric/gut/oral flora** — Helicobacter strongly depleted in tumour (−1.45, q = 3.2×10⁻⁵), with Bacteroides, Faecalibacterium and Blautia also down, and Fusobacterium (+0.52), Streptococcus (+0.49) and Gemella (+0.43) up. That Helicobacter-down / oral-taxa-up pattern is exactly what the Correa cascade predicts. So the dataset contains **real biology as well as batch signal** — and because the two are confounded in this cohort, neither can be claimed cleanly. That is the honest conclusion, and it is why the external replication cohorts matter.
+
 **The lesson, and it is the most valuable methodological content in your paper:** a paired
 design controls the confounder it was built to control, and nothing else. Always audit
 batch structure explicitly. Most published tissue-microbiome studies do not run the

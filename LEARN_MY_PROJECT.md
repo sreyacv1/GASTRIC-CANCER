@@ -729,6 +729,8 @@ Cutibacterium** — classic **environmental and skin contaminants**, not gastric
 A real biological signal would be led by gut organisms; a reagent/batch artefact looks
 exactly like this.
 
+**An important nuance — do not over-read this.** The contaminant list above comes from the *random-forest classifier*, which is dominated by batch signal. A separate **paired** differential-abundance analysis (tumour vs the same patient's adjacent normal, `04b_DA_GCN_vs_GCT_paired.csv`) tells a partly different story: of 61 genera, 18 are significant, and while Serinicoccus (−2.73) and Dietzia (−1.93) again top the list, the other large effects are **genuine gastric/gut/oral flora** — Helicobacter strongly depleted in tumour (−1.45, q = 3.2×10⁻⁵), with Bacteroides, Faecalibacterium and Blautia also down, and Fusobacterium (+0.52), Streptococcus (+0.49) and Gemella (+0.43) up. That Helicobacter-down / oral-taxa-up pattern is exactly what the Correa cascade predicts. So the dataset contains **real biology as well as batch signal** — and because the two are confounded in this cohort, neither can be claimed cleanly. That is the honest conclusion, and it is why the external replication cohorts matter.
+
 **Replication attempt:** in an independent Italian cohort — null (Bray R² 0.018,
 p = 0.80). In a Portuguese cohort — reduced diversity replicated (Shannon p = 0.0044;
 Bray R² 0.145, p = 0.001). So the diversity finding has some external support, while
