@@ -29,7 +29,7 @@ body { font-family:'DejaVu Sans',Helvetica,sans-serif; color:#111; }
 """
 today = datetime.date.today().strftime("%d %B %Y")
 H=[f"""<div class='cover'><h1>Gastric Cancer Multi-Omics</h1>
-<div class='s'>Complete figure set &mdash; every image standalone, one per page</div>
+<div class='s'>Complete figure set &mdash; every panel separated — one single-panel image per page</div>
 <div class='n'>{len(figs)} figures &middot; generated {today}<br>each reproduced from its committed source file</div></div>"""]
 for f in figs:
     lab, rest = split_cap(f['caption'])
