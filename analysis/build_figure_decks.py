@@ -5,14 +5,13 @@ os.chdir(ROOT)
 figs = json.load(open("/tmp/figs_flat.json"))
 
 def key(f):
-    m = re.match(r'Supplementary Figure S(\d+)([A-Z]?)', f['label'])
-    if m: return (1, int(m.group(1)), m.group(2) or "")
+    m = re.match(r'Supplementary Figure S(\d+)', f['label'])
+    if m: return (1, int(m.group(1)), "")
     return (0, int(re.search(r'(\d+)', f['label']).group(1)), "")
 figs.sort(key=key)
 
 def split_cap(c):
-    m = re.match(r'((?:Supplementary )?Figure S?\d+\.)\s*(.*)', c, re.S)
-    return (m.group(1), m.group(2).strip()) if m else ("", c)
+    return ("", c.strip())
 
 # ---------------- PDF (one image per page, no panelling) ----------------
 CSS = """
