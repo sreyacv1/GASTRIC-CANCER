@@ -62,8 +62,11 @@ used for the graphical abstract because Times New Roman is not installed on the 
 
 **Known cosmetic limitation (not a data defect).** The 12 MR **scatter** plots (`scatter_*.png`, six under `results/mr_real/` and six under
 `results/mr_real_eas/`) have their legend touching the bottom canvas edge. The 12
-leave-one-out plots (`loo_*.png`) in the same directories were checked and are **clean**
-(zero border ink); the width patch applies to both families but only the scatters are affected. `analysis/11_real_mr.R` was patched (width 6 -> 7.5 in) but regenerating them
+leave-one-out plots (`loo_*.png`) in the same directories were each measured with the same
+metric: 11 of 12 score exactly 0, and `results/mr_real_eas/loo_Fusobacterium.png` scores 0.0018
+on the **right** edge (4 dark pixels) — a different and far smaller defect than the scatters'
+bottom-edge legend, and not visible at normal viewing size. The width patch applies to both
+families; only the scatters are materially affected. `analysis/11_real_mr.R` was patched (width 6 -> 7.5 in) but regenerating them
 requires a live OpenGWAS API token (`OPENGWAS_JWT`) plus network access to re-extract the
 harmonised SNP data, which is not cached locally. The plotted values are correct and are
 independently tabulated in `results/mr_real/MR_results_all_methods_REAL.csv`; the figures
