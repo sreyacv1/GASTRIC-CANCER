@@ -92,3 +92,28 @@ ht <- Heatmap(z, name = "z-scored\nexpression",
 draw(ht, merge_legend = TRUE)
 dev.off()
 message("wrote 3 clean panels -> ", OUT)
+
+## ---- (Fig8 a-f) MR scatters: strip the clipped per-panel y-title -----------
+## Each of the six TwoSampleMR scatters carries the SAME 53-character rotated
+## y-axis title ("SNP effect on Gastric cancer || id:ebi-a-GCST90018849"), which
+## overruns the 750 px canvas and is clipped at the bottom on every panel.
+## The harmonised SNP data is not cached locally (11_real_mr.R persists only
+## plots + summary CSVs; re-extraction needs a live OPENGWAS_JWT), so the panels
+## cannot be re-plotted. Instead the title strip is cropped off here and a single
+## shared y-axis label is drawn once by 24_main_figures_5to8.R. Column 32 is the
+## measured whitespace gap between the rotated title (cols 10-26) and the tick
+## labels; no data ink lies left of it.
+suppressPackageStartupMessages(library(magick))
+MRDIR <- "results/figures/clean/mr"; dir.create(MRDIR, showWarnings = FALSE, recursive = TRUE)
+for (f in list.files("results/mr_real", "^scatter_.*\\.png$", full.names = TRUE)) {
+  im <- image_read(f); w <- image_info(im)$width; h <- image_info(im)$height
+  gap <- 34
+  ## Assert the discarded strip is title-only: cols 34-38 must be blank (the
+  ## measured whitespace before the first tick label at col 39). If a future
+  ## re-render moves the axis, this fails loudly rather than silently cutting data.
+  guard <- image_crop(im, sprintf("%dx%d+%d+0", 5, h, gap))
+  stopifnot(min(as.numeric(image_data(guard, "gray"))) > 0.90)
+  image_write(image_crop(im, sprintf("%dx%d+%d+0", w - gap, h, gap)),
+              file.path(MRDIR, basename(f)))
+}
+message("cropped ", length(list.files(MRDIR)), " MR scatters -> ", MRDIR)

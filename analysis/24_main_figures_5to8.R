@@ -19,6 +19,11 @@ ROOT <- Sys.getenv("GC_ROOT", "/nfsshare/users/P126156127/workspace/bioinf/gastr
 setwd(ROOT)
 TIFDIR <- "submission_package/figures_tiff"; dir.create(TIFDIR, showWarnings = FALSE, recursive = TRUE)
 
+## Fig8's six panels shared one identical y-axis title that overran the source
+## canvas and was clipped at the bottom. 26_fig6_fig7_panels_clean.R crops it
+## off; it is drawn once here for the whole composed figure.
+YLAB_FIG8 <- "SNP effect on gastric cancer (ebi-a-GCST90018849)"
+
 TAG_PT <- 14   # measured to match plot.tag size = 14 of Figs 1-4 at 300 dpi
 panel_of <- function(path, tag) {
   stopifnot(file.exists(path))
@@ -56,12 +61,12 @@ FIGS <- list(
              ncol = 2, mm = 190, design = "AB\nCD\nEF", aspect = 1.0),
   ## Built from the six per-exposure scatters rather than the pre-composited
   ## s18_mr_scatter_all.png, which carried a baked-in overall title.
-  `8` = list(p = c("results/mr_real/scatter_H__pylori_IgG_seropositivity.png" = "a",
-                   "results/mr_real/scatter_Streptococcus__genus_.png"        = "b",
-                   "results/mr_real/scatter_Fusobacterium.png"                = "c",
-                   "results/mr_real/scatter_Prevotella.png"                   = "d",
-                   "results/mr_real/scatter_Veillonella.png"                  = "e",
-                   "results/mr_real/scatter_Lactobacillus.png"                = "f"),
+  `8` = list(p = c("results/figures/clean/mr/scatter_H__pylori_IgG_seropositivity.png" = "a",
+                   "results/figures/clean/mr/scatter_Streptococcus__genus_.png"        = "b",
+                   "results/figures/clean/mr/scatter_Fusobacterium.png"                = "c",
+                   "results/figures/clean/mr/scatter_Prevotella.png"                   = "d",
+                   "results/figures/clean/mr/scatter_Veillonella.png"                  = "e",
+                   "results/figures/clean/mr/scatter_Lactobacillus.png"                = "f"),
              ncol = 3, mm = 190, design = "ABC\nDEF", aspect = 0.68)
 )
 for (nm in names(FIGS)) {
@@ -74,6 +79,14 @@ for (nm in names(FIGS)) {
   pl <- Map(panel_of, names(f$p), unname(f$p))
   comb <- if (!is.null(f$design)) wrap_plots(pl, design = f$design)
           else wrap_plots(pl, ncol = f$ncol)
+  ## Fig8: the identical per-panel y-title was cropped off upstream (it was
+  ## clipped by the source canvas); draw it once for the whole figure instead.
+  if (nm == "8") {
+    comb <- wrap_elements(comb) +
+      labs(tag = YLAB_FIG8) +
+      theme(plot.tag = element_text(size = 9, angle = 90, vjust = 1),
+            plot.tag.position = "left")
+  }
   w_in <- f$mm / 25.4
   if (!is.null(f$aspect)) {
     h_in <- w_in * f$aspect
