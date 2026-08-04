@@ -174,8 +174,30 @@ log("Lauren ranked genes: %d", length(lranks))
 
 hall_lr <- run_fgsea(H_list, lranks,
                      file.path(outdir, "GSEA_Hallmark_DiffuseVsIntestinal.csv"))
-nes_barplot(hall_lr, "Hallmark GSEA — Diffuse vs Intestinal\n(NES > 0 = up in diffuse)",
-            file.path(outdir, "GSEA_Hallmark_NES_barplot_DiffuseVsIntestinal.png"))
+## Lauren barplot: built inline (not via nes_barplot) so the title/subtitle and
+## canvas match the shipped figure. nes_barplot's 9x8 canvas clipped the long title.
+{
+  hl <- hall_lr[hall_lr$padj < 0.05, ]
+  hl <- hl[order(hl$NES), ]
+  hl$pathway <- factor(gsub("^HALLMARK_", "", hl$pathway),
+                       levels = gsub("^HALLMARK_", "", hl$pathway))
+  p_lr <- ggplot2::ggplot(hl, ggplot2::aes(NES, pathway, fill = NES > 0)) +
+    ggplot2::geom_col(width = 0.72) +
+    ggplot2::scale_fill_manual(values = c("TRUE" = "#c0392b", "FALSE" = "#2471a3"),
+                               guide = "none") +
+    ggplot2::labs(title = "Hallmark GSEA: diffuse vs intestinal gastric cancer",
+                  subtitle = "NES > 0 = enriched in diffuse tumours; only pathways with adj. p < 0.05 shown",
+                  x = "Normalised enrichment score (NES)", y = NULL) +
+    ggplot2::theme_bw(base_size = 9) +
+    ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
+                   axis.text.y = ggplot2::element_text(size = 7),
+                   plot.title = ggplot2::element_text(face = "bold", size = 10.5),
+                   plot.subtitle = ggplot2::element_text(size = 8, colour = "grey30"))
+  ggplot2::ggsave(file.path(outdir, "GSEA_Hallmark_NES_barplot_DiffuseVsIntestinal.png"),
+                  p_lr, width = 8.6, height = 6.2, dpi = 300, bg = "white")
+  log("  plot %s (%d significant pathways)",
+      file.path(outdir, "GSEA_Hallmark_NES_barplot_DiffuseVsIntestinal.png"), nrow(hl))
+}
 sigL <- hall_lr[hall_lr$padj < 0.05, ]
 sigL <- sigL[order(-abs(sigL$NES)), ]
 topL <- head(sigL$pathway, 4)

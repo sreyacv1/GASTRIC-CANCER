@@ -117,14 +117,29 @@ print(val_res)
 # scatter: MCP CD8 vs measured leukocyte %
 vdf <- data.frame(cd8 = grab(mcp,"CD8 T cells"), leuk = leuk,
                   imm = grab(xc,"ImmuneScore"))[is_tumor, ]
-p_val <- ggplot(vdf, aes(leuk, cd8)) +
-  geom_point(alpha = 0.6) + geom_smooth(method = "lm", se = TRUE) +
-  stat_cor(method = "spearman") +
-  labs(title = "MCP-counter CD8 T cells vs measured leukocyte % (tumors)",
-       x = "Measured leukocyte fraction (TCGA pathology)",
-       y = "MCP-counter CD8 T-cell score") + theme_bw()
+## rho/p/n are annotated explicitly (not via stat_cor) so the printed statistic is
+## the same value written to validation_vs_measured.csv; asserted below.
+vok  <- is.finite(vdf$cd8) & is.finite(vdf$leuk)
+vrho <- cor(vdf$cd8[vok], vdf$leuk[vok], method = "spearman")
+vp   <- suppressWarnings(cor.test(vdf$cd8[vok], vdf$leuk[vok], method = "spearman")$p.value)
+stopifnot(abs(vrho - val_res$spearman_rho[val_res$estimate == "CD8 T cells (MCP)" &
+                                          val_res$measured == "Leukocyte %"]) < 1e-6)
+p_val <- ggplot(vdf[vok, ], aes(leuk, cd8)) +
+  geom_point(size = 1, alpha = 0.55, colour = "grey25") +
+  geom_smooth(method = "lm", formula = y ~ x, colour = "#2471a3", fill = "grey80") +
+  annotate("label", x = -Inf, y = Inf, hjust = -0.06, vjust = 1.3,
+           fill = scales::alpha("white", 0.8), size = 3.1,
+           label = sprintf("Spearman rho = %.2f, p = %.1e, n = %d", vrho, vp, sum(vok))) +
+  labs(title = "MCP-counter CD8 T cells vs measured leukocyte percentage",
+       subtitle = "TCGA-STAD tumours; measured value from TCGA pathology review",
+       x = "Measured leukocyte percentage (TCGA pathology)",
+       y = "MCP-counter CD8 T-cell score") +
+  theme_bw(base_size = 9) +
+  theme(panel.grid.minor = element_blank(),
+        plot.title = element_text(face = "bold", size = 10.5),
+        plot.subtitle = element_text(size = 8, colour = "grey30"))
 ggsave(file.path(plotdir, "Immune_validation_scatter.png"), p_val,
-       width = 7.5, height = 5, dpi = 150)
+       width = 7.5, height = 5, dpi = 300, bg = "white")
 
 ## ---- 4. Immune scores by Lauren & Molecular subtype -------------------
 subt_scores <- list(

@@ -54,13 +54,16 @@ used for the graphical abstract because Times New Roman is not installed on the 
 | `results/figures/deg_concordance_panel.png` | `analysis/23_deg_concordance_panel.R` | Was an orphan (no build script). Script asserts all three r values against `results/tables/DEG_integrated_concordance.csv`. **Panel 1 is internal consistency, not replication** — TCGA supplies the integrated contrast's own 412 tumours. |
 | `results/plots/transcriptome/deg_volcano.png` | R block in session log; data `res_tcga_df` in `data/processed/TCGA_STAD_processed.RData` | Labels moved outside the point cloud; subtitle now gives the biotype breakdown (16,164 protein-coding of 21,446 features). |
 | `results/plots/transcriptome/Lauren_volcano.png` | regenerated from `res_lauren_df` | Original PDF was an empty plot device (3,611 B, zero drawing ops). |
+| `results/enrichment/GSEA_Hallmark_NES_barplot_DiffuseVsIntestinal.png` | `analysis/09_functional_enrichment.R` (inline Lauren block) | Title was clipped by `nes_barplot`'s 9x8 canvas; replaced with a self-contained 8.6x6.2 block. Verified byte-identical to the shipped PNG. |
+| `results/plots/Immune_validation_scatter.png` | `analysis/08_immune_deconvolution.R` L118-135 | `stat_cor()` replaced with an explicit annotation asserted against `validation_vs_measured.csv` (rho 0.4684, n=272). Verified byte-identical to the shipped PNG. |
 | `results/figures/panels/Fig4A.png` | `make_figures.R` §4A | Title shortened to fit canvas. |
 | `results/figures/panels/Fig4C.png` | `make_figures.R` §4C | Title "(honest)" removed — editorialising, not a data label. |
 | `results/deg_diagnostics/batch_sensitivity_TSS.csv` | R block, session log | TSS batch-adjustment sensitivity: 92.7% of DEGs retained, logFC r = 0.974. |
 
-**Known cosmetic limitation (not a data defect).** The 12 MR scatter/leave-one-out plots
-under `results/mr_real/` and `results/mr_real_eas/` have their legend touching the bottom
-canvas edge. `analysis/11_real_mr.R` was patched (width 6 -> 7.5 in) but regenerating them
+**Known cosmetic limitation (not a data defect).** The 12 MR **scatter** plots (`scatter_*.png`, six under `results/mr_real/` and six under
+`results/mr_real_eas/`) have their legend touching the bottom canvas edge. The 12
+leave-one-out plots (`loo_*.png`) in the same directories were checked and are **clean**
+(zero border ink); the width patch applies to both families but only the scatters are affected. `analysis/11_real_mr.R` was patched (width 6 -> 7.5 in) but regenerating them
 requires a live OpenGWAS API token (`OPENGWAS_JWT`) plus network access to re-extract the
 harmonised SNP data, which is not cached locally. The plotted values are correct and are
 independently tabulated in `results/mr_real/MR_results_all_methods_REAL.csv`; the figures
