@@ -84,8 +84,8 @@ fig1b <- gsea_panel(file.path(ROOT, "results/enrichment/GSEA_Hallmark_DiffuseVsI
   "Hallmark GSEA: diffuse vs intestinal", "Lauren histology contrast",
   "Enriched in diffuse", "Enriched in intestinal")
 
-fig1 <- (fig1a / fig1b) + plot_annotation(tag_levels = "A")
-save_fig(fig1, "Fig1", 8.5, 9)
+fig1 <- (fig1a / fig1b) + plot_annotation(tag_levels = "a")
+save_fig(fig1, "Fig1", 8.5, 7.4)
 
 # ===========================================================================
 # FIGURE 2 — The 25-gene signature (honest)
@@ -117,11 +117,10 @@ km_plot <- tryCatch({
   gg$plot +
     annotate("text", x = 4, y = 0.06, hjust = 0, size = 3,
              label = sprintf("%s\nn = %d, events = %d", plab, nrow(df), sum(df$event))) +
-    labs(title = "25-gene risk score, TCGA-STAD",
-         subtitle = "median split of z-scored signature") +
+    labs(title = NULL, subtitle = NULL) +
     base_theme + theme(legend.position = c(0.72, 0.9))
 }, error = function(err) { message("2A failed: ", conditionMessage(err))
-  ggplot() + labs(title = "2A KM unavailable") + base_theme })
+  ggplot() + labs(title = NULL, subtitle = NULL) + base_theme })
 
 ## ---- 2B: forest of per-cohort HR + Hartung-Knapp pooled ----
 mi <- read_csv(file.path(ROOT, "results/meta_HK/meta_inputs.csv"), show_col_types = FALSE)
@@ -142,9 +141,7 @@ fig2b <- ggplot(fdf, aes(HR, cohort, colour = kind)) +
   scale_colour_manual(values = c(Cohort = "grey25", Pooled = UP), guide = "none") +
   scale_shape_manual(values = c(Cohort = 16, Pooled = 18), guide = "none") +
   scale_size_manual(values = c(Cohort = 2.4, Pooled = 4), guide = "none") +
-  labs(title = "Per-cohort signature HR (adj.) + pooled",
-       subtitle = sprintf("REML+HK: HR %.2f (%.2f-%.2f); PI %.2f-%.2f; I2=%.0f%%",
-                          mr$pooled_HR, mr$CI_low, mr$CI_high, mr$PI_low, mr$PI_high, mr$I2),
+  labs(title = NULL, subtitle = NULL,
        x = "Hazard ratio per SD (log scale)", y = NULL)
 
 ## ---- 2C: nested-CV discrimination vs published apparent + time-AUC ----
@@ -168,8 +165,7 @@ fig2c <- ggplot(cdf, aes(est, fct_rev(lab), colour = grp)) +
   scale_colour_manual(values = c("C-index" = UP, "Time-AUC" = "#1B7837", "Reference" = "grey45"),
                      name = NULL) +
   coord_cartesian(xlim = c(0.5, 0.78)) +
-  labs(title = "Discrimination under 20x5 nested cross-validation",
-       subtitle = "dashed = chance; published apparent C shown for contrast",
+  labs(title = NULL, subtitle = NULL,
        x = "Concordance / time-dependent AUC", y = NULL) +
   theme(legend.position = c(0.82, 0.25))
 
@@ -182,11 +178,10 @@ fig2d <- ggplot(hrt, aes(month, HR)) +
   geom_pointrange(aes(ymin = CI_low, ymax = CI_high), colour = UP, size = 0.5) +
   geom_text(aes(label = sprintf("%.2f", HR)), vjust = -1.1, hjust = 0.5, size = 2.7) +
   scale_x_continuous(breaks = c(12, 36, 60), expand = expansion(mult = 0.08)) +
-  labs(title = "Time-varying signature HR, ACRG",
-       subtitle = "tt log-time Cox (age-adj, stage-stratified); early effect attenuates",
+  labs(title = NULL, subtitle = NULL,
        x = "Months since surgery", y = "Hazard ratio (t)")
 
-fig2 <- (km_plot | fig2b) / (fig2c | fig2d) + plot_annotation(tag_levels = "A")
+fig2 <- (km_plot | fig2b) / (fig2c | fig2d) + plot_annotation(tag_levels = "a")
 save_fig(fig2, "Fig2", 11, 9)
 
 # ===========================================================================
@@ -199,7 +194,7 @@ fig3a <- ggplot(pres, aes(fct_reorder(cohort, Zsummary.pres), Zsummary.pres)) +
   geom_hline(yintercept = 10, linetype = 2, colour = "grey30") +
   annotate("text", x = 0.7, y = 10.6, label = "strong (Z=10)", hjust = 0, size = 2.8, colour = "grey30") +
   geom_text(aes(label = sprintf("%.1f", Zsummary.pres)), vjust = -0.4, size = 3) +
-  labs(title = "RED module preservation", subtitle = "WGCNA Zsummary in external cohorts",
+  labs(title = NULL, subtitle = NULL,
        x = NULL, y = "Zsummary preservation") +
   theme(axis.text.x = element_text(angle = 20, hjust = 1))
 
@@ -211,7 +206,7 @@ fig3b <- ggplot(ecox, aes(HR_perSD, fct_reorder(cohort, HR_perSD))) +
   geom_point(size = 2.8, colour = UP) +
   geom_text(aes(label = sprintf("HR %.2f\np=%.1e", HR_perSD, p)), hjust = -0.15, size = 2.5) +
   scale_x_log10() + coord_cartesian(xlim = c(0.95, 2.2)) +
-  labs(title = "Eigengene prognostic HR (external)", subtitle = "Cox HR per SD of module PC1",
+  labs(title = NULL, subtitle = NULL,
        x = "HR per SD (log scale)", y = NULL)
 
 sc <- read_csv(file.path(ROOT, "results/scrna/gene_dominant_celltype.csv"), show_col_types = FALSE) |>
@@ -221,15 +216,14 @@ fig3c <- ggplot(sc, aes(frac_in_dominant, gene, fill = dominant_cell_type)) +
   geom_col(width = 0.72) +
   scale_x_continuous(labels = percent, limits = c(0, 1)) +
   scale_fill_brewer(palette = "Set2", name = "Dominant\ncell type") +
-  labs(title = "scRNA localisation of stromal-hub genes",
-       subtitle = "expression fraction in dominant cell type",
+  labs(title = NULL, subtitle = NULL,
        x = "Fraction in dominant cell type", y = NULL) +
   theme(axis.text.y = element_text(size = 6.5), legend.position = "right",
         legend.key.size = unit(3.5, "mm"))
 
 fig3 <- (fig3a | fig3b) / fig3c + plot_layout(heights = c(1, 1.4)) +
-  plot_annotation(tag_levels = "A")
-save_fig(fig3, "Fig3", 9.5, 10)
+  plot_annotation(tag_levels = "a")
+save_fig(fig3, "Fig3", 9.5, 8.4)
 
 # ===========================================================================
 # FIGURE 4 — Immune microenvironment + microbiome (secondary)
@@ -246,8 +240,7 @@ fig4a <- ggplot(vm, aes(spearman_rho, pair, colour = sig)) +
   geom_segment(aes(x = 0, xend = spearman_rho, yend = pair), linewidth = 0.5) +
   geom_point(size = 2.6) +
   scale_colour_manual(values = c("p<0.05" = UP, "n.s." = "grey60"), name = NULL) +
-  labs(title = "Deconvolution vs measured immune infiltration",
-       subtitle = "Spearman correlation against pathologist-scored values (n = 272-274)",
+  labs(title = NULL, subtitle = NULL,
        x = expression(Spearman~rho), y = NULL) +
   theme(axis.text.y = element_text(size = 7.5),
         plot.title = element_text(size = 10.5),
@@ -258,13 +251,13 @@ fig4a <- ggplot(vm, aes(spearman_rho, pair, colour = sig)) +
 bs <- read_csv(file.path(ROOT, "results/immune/immune_by_MolecularSubtype.csv"), show_col_types = FALSE)
 bl <- bs |> tidyr::pivot_longer(c(EBV, MSI, GS, CIN), names_to = "subtype", values_to = "val") |>
   mutate(subtype = factor(subtype, levels = c("EBV", "MSI", "GS", "CIN")),
-         score = sub(" \\(.*", "", score))
+         score = factor(sub(" \\(.*", "", score),
+                        levels = c("T cells", "CD8 T cells", "ImmuneScore")))
 fig4b <- ggplot(bl, aes(subtype, val, fill = subtype)) +
   geom_col(width = 0.7) +
   facet_wrap(~ score, scales = "free_y", nrow = 1) +
   scale_fill_brewer(palette = "Dark2", guide = "none") +
-  labs(title = "Immune scores by molecular subtype",
-       subtitle = "all Kruskal-Wallis p_adj < 1e-6 (EBV highest, CIN lowest)",
+  labs(title = NULL, subtitle = NULL,
        x = NULL, y = "Score") +
   theme(strip.text = element_text(size = 8, face = "bold"),
         axis.text.x = element_text(size = 7))
@@ -285,13 +278,12 @@ fig4c <- ggplot(mic, aes(cohort, R2, fill = sig)) +
             vjust = -0.25, size = 2.5, lineheight = 0.9) +
   scale_fill_manual(values = c("p<0.05" = UP, "n.s." = "grey60"), name = NULL) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.28))) +
-  labs(title = "Tissue microbiome: tumour-vs-control separation across three cohorts",
-       subtitle = expression("Bray-Curtis PERMANOVA "*R^2*"; Japan cohort shown before and after flowcell adjustment"),
+  labs(title = NULL, subtitle = NULL,
        x = NULL, y = expression(PERMANOVA~R^2)) +
   theme(legend.position = c(0.15, 0.85), axis.text.x = element_text(size = 7.5))
 
-fig4 <- (fig4a | fig4b) / (fig4c | plot_spacer()) +
-  plot_layout(heights = c(1, 1)) + plot_annotation(tag_levels = "A")
+fig4 <- (fig4a | fig4b) / fig4c +
+  plot_layout(heights = c(1, 0.95)) + plot_annotation(tag_levels = "a")
 save_fig(fig4, "Fig4", 11, 9)
 
 message("ALL FIGURES DONE -> ", FIGDIR)
