@@ -87,11 +87,11 @@ for (i in seq_len(nrow(exposures))) {
   tryCatch({
     p1 <- mr_scatter_plot(res, harm)
     ggplot2::ggsave(file.path(OUT, sprintf("scatter_%s.png", gsub("[^A-Za-z0-9]","_",elab))),
-                    p1[[1]], width=6, height=5, dpi=150)
+                    p1[[1]], width=7.5, height=5.5, dpi=150)
     loo <- mr_leaveoneout(harm)
     p2 <- mr_leaveoneout_plot(loo)
     ggplot2::ggsave(file.path(OUT, sprintf("loo_%s.png", gsub("[^A-Za-z0-9]","_",elab))),
-                    p2[[1]], width=6, height=5, dpi=150)
+                    p2[[1]], width=7.5, height=5.5, dpi=150)
   }, error = function(e) message("  plot err: ", e$message))
 
   # MR-PRESSO if enough SNPs and package available

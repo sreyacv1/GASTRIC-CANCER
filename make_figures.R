@@ -232,8 +232,8 @@ fig4a <- ggplot(vm, aes(spearman_rho, pair, colour = sig)) +
   geom_segment(aes(x = 0, xend = spearman_rho, yend = pair), linewidth = 0.5) +
   geom_point(size = 2.6) +
   scale_colour_manual(values = c("p<0.05" = UP, "n.s." = "grey60"), name = NULL) +
-  labs(title = "Deconvolution estimates vs pathologist-measured infiltration",
-       subtitle = "Spearman correlation of each deconvolution score against measured values (n = 272-274)",
+  labs(title = "Deconvolution vs measured immune infiltration",
+       subtitle = "Spearman correlation against pathologist-scored values (n = 272-274)",
        x = expression(Spearman~rho), y = NULL) +
   theme(axis.text.y = element_text(size = 7.5),
         plot.title = element_text(size = 10.5),

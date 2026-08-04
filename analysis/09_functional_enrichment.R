@@ -174,7 +174,7 @@ log("Lauren ranked genes: %d", length(lranks))
 
 hall_lr <- run_fgsea(H_list, lranks,
                      file.path(outdir, "GSEA_Hallmark_DiffuseVsIntestinal.csv"))
-nes_barplot(hall_lr, "Hallmark GSEA — Diffuse vs Intestinal (NES>0 = up in Diffuse)",
+nes_barplot(hall_lr, "Hallmark GSEA — Diffuse vs Intestinal\n(NES > 0 = up in diffuse)",
             file.path(outdir, "GSEA_Hallmark_NES_barplot_DiffuseVsIntestinal.png"))
 sigL <- hall_lr[hall_lr$padj < 0.05, ]
 sigL <- sigL[order(-abs(sigL$NES)), ]

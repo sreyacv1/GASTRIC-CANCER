@@ -124,7 +124,7 @@ p_val <- ggplot(vdf, aes(leuk, cd8)) +
        x = "Measured leukocyte fraction (TCGA pathology)",
        y = "MCP-counter CD8 T-cell score") + theme_bw()
 ggsave(file.path(plotdir, "Immune_validation_scatter.png"), p_val,
-       width = 6, height = 5, dpi = 150)
+       width = 7.5, height = 5, dpi = 150)
 
 ## ---- 4. Immune scores by Lauren & Molecular subtype -------------------
 subt_scores <- list(
