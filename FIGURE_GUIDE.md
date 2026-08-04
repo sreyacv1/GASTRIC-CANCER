@@ -89,14 +89,16 @@ single HR would misrepresent it.
 
 ---
 
-## Figure 3 — WGCNA stromal module *(the paper's centre)*
-**Script:** `make_figures.R` · **Source:** `results/wgcna_real/`
+## Figure 3 — Stromal module: preservation, prognosis, localisation *(the paper's centre)*
+**Script:** `make_figures.R` (lines 195-232) · **Source:** `results/module_preservation/preservation_summary_RED.csv`, `results/module_preservation/module_eigengene_cox_external.csv`, `results/scrna/gene_dominant_celltype.csv`
+
+**Panels:** (a) preservation Zsummary bars, (b) eigengene Cox forest, (c) single-cell localisation of hub genes. The WGCNA network *construction* (dendrogram, module-trait heatmap, soft-power selection) is Figure 5; Figure 3 shows what the module *does*.
 
 **Why.** A 25-gene list is fragile. A **module** — a whole co-expressed
 programme — is more robust, because losing any one gene barely moves the
 eigengene.
 
-**How.** `blockwiseModules(networkType = "signed hybrid", TOMType = "signed",
+**How (network built once, shown in Figure 5).** `blockwiseModules(networkType = "signed hybrid", TOMType = "signed",
 corType = "bicor", maxPOutliers = 0.1, deepSplit = 2, minModuleSize = 30,
 mergeCutHeight = 0.25, maxBlockSize = 6000, randomSeed = 1105)`.
 
