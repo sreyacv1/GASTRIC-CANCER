@@ -71,8 +71,14 @@ ggsave(file.path(OUT, "fig7a_coefficients_clean.png"), pc, width = 4.6, height =
 e <- new.env(); load("results/rdata/tcga_processed.RData", envir = e)
 vst <- e$tcga_vst; cd <- e$col_data
 sel <- res %>% filter(sig != "NS", !is.na(hgnc_symbol), hgnc_symbol != "") %>%
-  group_by(sig) %>% slice_min(padj, n = 15) %>% ungroup()
+  ## slice_min keeps ties (a padj tie in the Down group returned 16 rows and
+  ## made the panel 31 genes against a caption saying 30); with_ties = FALSE
+  ## plus an explicit ordering makes the 15/15 selection deterministic.
+  group_by(sig) %>% arrange(padj, desc(abs(log2FoldChange)), hgnc_symbol, .by_group = TRUE) %>%
+  slice_head(n = 15) %>% ungroup()
 ## tcga_vst is keyed by HGNC symbol (not Ensembl id) -- match on symbol.
+## Assert the panel matches the caption: exactly 15 up + 15 down.
+stopifnot(nrow(sel) == 30L, sum(sel$sig == "Up") == 15L, sum(sel$sig == "Down") == 15L)
 idx <- match(sel$hgnc_symbol, rownames(vst))
 keep <- !is.na(idx)
 mat <- vst[idx[keep], , drop = FALSE]

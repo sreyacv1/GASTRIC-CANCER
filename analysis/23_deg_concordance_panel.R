@@ -67,7 +67,9 @@ panel <- function(P, tag, show_legend = FALSE) {
     annotate("label", x = -Inf, y = Inf, hjust = -0.08, vjust = 1.2,
              label = sprintf("r = %.2f", P$r), size = 3.1, fontface = "bold",
              label.size = 0, fill = alpha("white", 0.75)) +
-    labs(subtitle = tag, x = P$xlab, y = "Integrated TCGA+GTEx moderated t") +
+    ## No in-panel subtitle: which panel is internal-consistency vs independent
+    ## replication is stated in the figure caption, per journal convention.
+    labs(subtitle = NULL, x = P$xlab, y = "Integrated TCGA+GTEx moderated t") +
     theme_bw(base_size = 9) +
     theme(panel.grid.minor = element_blank(), legend.position = "bottom",
           plot.subtitle = element_text(size = 8, face = "bold", colour = "grey20"),

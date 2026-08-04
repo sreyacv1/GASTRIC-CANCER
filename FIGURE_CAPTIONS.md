@@ -42,7 +42,7 @@ Figure 6. Differential expression between gastric tumours and normal mucosa and 
 
 (a) Volcano plot showing differentially expressed genes in TCGA-STAD. The x-axis represents log2 fold change (log2FC) and the y-axis represents −log10(adjusted P value). Red points indicate significantly upregulated genes, blue points indicate significantly downregulated genes, and grey points represent genes not meeting the significance thresholds of |log2FC| > 1 and adjusted P < 0.05 (2,134 upregulated and 2,362 downregulated of 21,446 tested features).
 
-(b) Heatmap of the 30 most significantly differentially expressed genes, comprising the 15 most upregulated and 15 most downregulated. Rows represent genes and columns represent samples. Values are z-scores of expression, so the colour scale ranges from low relative expression (blue) to high relative expression (red).
+(b) Heatmap of the 30 most significantly differentially expressed genes, comprising the 15 most upregulated and 15 most downregulated (ranked by adjusted p value, ties broken by absolute log2 fold change then gene symbol). Rows represent genes and columns represent samples. Values are z-scores of expression, so the colour scale ranges from low relative expression (blue) to high relative expression (red).
 
 (c) Scatter plots comparing the integrated tumour-versus-normal ranking with three reference rankings. Each point represents one of 12,899 shared genes and the black line denotes a linear fit. The left panel compares against TCGA alone and therefore re-uses the discovery tumours, so it assesses internal consistency rather than replication (r = 0.73); the middle and right panels compare against the independent cohorts GSE27342 (r = 0.62) and GSE63089 (r = 0.58).
 
@@ -50,7 +50,7 @@ Figure 7. Prognostic signature coefficients and external validation.
 
 (a) Bar plot showing the LASSO–Cox regression coefficients of the 25 retained genes. A positive coefficient indicates that higher expression is associated with shorter survival and a negative coefficient indicates the opposite.
 
-(b) Forest plot showing hazard ratios per standard deviation of signature score across validation cohorts, with squares denoting point estimates and horizontal lines denoting 95% confidence intervals.
+(b) Forest plot showing hazard ratios for high- versus low-risk groups (median split of the signature score) across validation cohorts, with squares denoting point estimates and horizontal lines denoting 95% confidence intervals: ACRG/GSE62254 1.90 (1.37-2.62), GSE15459 1.68 (1.11-2.54), GSE84437 1.11 (0.84-1.46). Values are from `results/validation_multi/cindex_HR_summary.csv`; the corresponding Kaplan-Meier curves are panels (c)-(f).
 
 (c) Kaplan-Meier curves for high-risk and low-risk groups in the TCGA-STAD training cohort, defined by a median split of the signature score, with the P value from the log-rank test.
 
