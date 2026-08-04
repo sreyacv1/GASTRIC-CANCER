@@ -367,9 +367,13 @@ genuinely ambiguous on observational data**: altered flora could contribute to
 carcinogenesis, or simply reflect the acid-free environment the disease created. This
 biological ambiguity is the entire motivation for your Mendelian-randomisation arm.
 
-Your diversity findings are consistent with the cascade: richness falls from a median of
+Your diversity findings are consistent with the cascade: across the three flowcell-sharing
+groups (non-ulcer → ulcer → cancer-**adjacent** mucosa), richness falls from a median of
 **47 → 30** taxa (Cliff's δ = −0.27, p = 3.3×10⁻⁷), Shannon declines modestly
 (2.176 → 1.923, p = 0.021), and **Simpson does not change significantly** (p = 0.172).
+Note the depleted group is cancer-*adjacent* tissue, not tumour: tumour tissue (GCT) shows the
+**highest** median richness of the four groups (56 taxa), an inversion driven by its separate
+flowcells rather than by biology — which is precisely why GCT is excluded from this cascade.
 The honest biological reading: **rare taxa are lost while the dominant community
 structure is largely preserved** — consistent with a niche becoming more restrictive,
 not with a wholesale community replacement.

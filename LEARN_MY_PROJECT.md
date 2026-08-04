@@ -705,7 +705,7 @@ compositionally-aware methods is a mark of a careful microbiome analysis.
 
 Your findings (`02_alpha_effectsizes_cascade.csv`):
 
-| Metric | Median (non-ulcer → cancer) | Cliff's δ | p |
+| Metric | Median (non-ulcer → cancer-**adjacent**) | Cliff's δ | p |
 |---|---|---|---|
 | Observed richness | 47 → 30 | −0.27 | 3.3×10⁻⁷ |
 | Shannon | 2.176 → 1.923 | −0.122 | 0.0211 |
@@ -714,6 +714,8 @@ Your findings (`02_alpha_effectsizes_cascade.csv`):
 Richness clearly falls; Shannon modestly; **Simpson is not significant**. You report
 this discordance rather than citing only the significant metrics — the honest reading
 is that **rare taxa are lost while dominant-taxon structure is largely preserved**.
+
+**Read the group labels carefully — this is a subtle point.** The cascade above runs non-ulcer → ulcer → cancer-**adjacent** mucosa (GCN), the three groups that share sequencing flowcells. The depleted group is cancer-adjacent tissue, *not* the tumour itself. Tumour tissue (GCT) actually has the **highest** median richness of all four groups (56 taxa, versus 47 non-ulcer, 43 ulcer, 30 cancer-adjacent). That inversion is not biology — GCT sat on separate flowcells, so its apparent richness is exactly the batch effect the arm exposes. It is also why the cascade analysis deliberately excludes GCT: the only interpretable comparison is between groups that shared a run.
 
 ## 9.5 The batch-effect discovery
 
