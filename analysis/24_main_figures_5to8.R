@@ -19,32 +19,50 @@ ROOT <- Sys.getenv("GC_ROOT", "/nfsshare/users/P126156127/workspace/bioinf/gastr
 setwd(ROOT)
 TIFDIR <- "submission_package/figures_tiff"; dir.create(TIFDIR, showWarnings = FALSE, recursive = TRUE)
 
+TAG_PT <- 14   # measured to match plot.tag size = 14 of Figs 1-4 at 300 dpi
 panel_of <- function(path, tag) {
   stopifnot(file.exists(path))
   ggdraw() +
     draw_image(path) +
+    ## TAG_PT is tuned so the rendered tag height matches the patchwork
+    ## plot.tag of Figs 1-4 exactly (both files render at 300 dpi).
     draw_label(tag, x = 0.012, y = 0.985, hjust = 0, vjust = 1,
-               fontface = "bold", size = 13)
+               fontface = "bold", size = TAG_PT)
 }
 # figure -> list(panels = c(file = tag), width_mm, aspect)
 FIGS <- list(
-  `5` = list(p = c("results/wgcna_real/wgcna_dendrogram.png"   = "(a)",
-                   "results/wgcna_real/wgcna_module_trait.png"      = "(b)",
-                   "results/wgcna_real/wgcna_power.png"         = "(c)"),
-             ncol = 2, mm = 190),
+  ## Panels re-rendered title-free by analysis/25_fig5_panels_clean.R:
+  ## the journal convention puts descriptive text in the caption, not on the plot.
+  `5` = list(p = c("results/wgcna_real/clean/dendrogram_clean.png"   = "a",
+                   "results/wgcna_real/clean/module_trait_clean.png" = "b",
+                   "results/wgcna_real/clean/power_clean.png"        = "c"),
+             ncol = 2, mm = 190, design = "AB\nCC", aspect = 0.72),
   ## Fig6 uses an explicit layout: (a) and (b) share the top row, (c) is a wide
   ## strip beneath. A 1-column stack gives aspect 1.96, far outside the
   ## reference range (0.34-1.00) and unreadable at 190 mm.
-  `6` = list(p = c("results/plots/transcriptome/deg_volcano.png"       = "(a)",
-                   "results/plots/transcriptome/deg_heatmap_top30_clean.png" = "(b)",
-                   "results/figures/deg_concordance_panel.png"         = "(c)"),
+  `6` = list(p = c("results/plots/transcriptome/deg_volcano.png"       = "a",
+                   "results/plots/transcriptome/deg_heatmap_top30_clean.png" = "b",
+                   "results/figures/deg_concordance_panel.png"         = "c"),
              ncol = 2, mm = 190, design = "AB\nCC", aspect = 0.62),
-  `7` = list(p = c("results/validation/signature_coefficients_clean.png" = "(a)",
-                   "results/validation_multi/forest_HR.png"               = "(b)",
-                   "results/composite_figures/s16_km.png"           = "(c)"),
-             ncol = 2, mm = 190),
-  `8` = list(p = c("results/composite_figures/s18_mr_scatter_all.png" = ""),
-             ncol = 1, mm = 190)
+  ## (c)-(f): the four cohort KM curves are used INDIVIDUALLY. The old
+  ## s16_km.png was a pre-composited montage carrying its own nested (A)-(D)
+  ## labels, which collided with this figure's panel tags.
+  `7` = list(p = c("results/validation/signature_coefficients_clean.png" = "a",
+                   "results/validation_multi/forest_HR.png"              = "b",
+                   "results/validation/KM_TCGA.png"                      = "c",
+                   "results/validation/KM_ACRG.png"                      = "d",
+                   "results/validation_multi/KM_GSE15459.png"            = "e",
+                   "results/validation_multi/KM_GSE84437.png"            = "f"),
+             ncol = 2, mm = 190, design = "AB\nCD\nEF", aspect = 1.0),
+  ## Built from the six per-exposure scatters rather than the pre-composited
+  ## s18_mr_scatter_all.png, which carried a baked-in overall title.
+  `8` = list(p = c("results/mr_real/scatter_H__pylori_IgG_seropositivity.png" = "a",
+                   "results/mr_real/scatter_Streptococcus__genus_.png"        = "b",
+                   "results/mr_real/scatter_Fusobacterium.png"                = "c",
+                   "results/mr_real/scatter_Prevotella.png"                   = "d",
+                   "results/mr_real/scatter_Veillonella.png"                  = "e",
+                   "results/mr_real/scatter_Lactobacillus.png"                = "f"),
+             ncol = 3, mm = 190, design = "ABC\nDEF", aspect = 0.68)
 )
 for (nm in names(FIGS)) {
   f <- FIGS[[nm]]

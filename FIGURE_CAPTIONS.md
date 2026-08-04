@@ -52,11 +52,31 @@ Figure 7. Prognostic signature coefficients and external validation.
 
 (b) Forest plot showing hazard ratios per standard deviation of signature score across validation cohorts, with squares denoting point estimates and horizontal lines denoting 95% confidence intervals.
 
-(c) Kaplan–Meier curves for high-risk and low-risk groups defined by the median signature score in each external cohort, with P values from the log-rank test.
+(c) Kaplan-Meier curves for high-risk and low-risk groups in the TCGA-STAD training cohort, defined by a median split of the signature score, with the P value from the log-rank test.
+
+(d) Kaplan-Meier curves for the same median-split groups in the Asian Cancer Research Group cohort (GSE62254, n = 300).
+
+(e) Kaplan-Meier curves for the same median-split groups in GSE15459 (n = 191).
+
+(f) Kaplan-Meier curves for the same median-split groups in GSE84437 (n = 431), in which the signature did not separate the two risk groups. This negative result is reported as observed.
 
 Figure 8. Two-sample Mendelian randomisation of microbial exposures on gastric-cancer risk.
 
-Scatter plots showing the association between single-nucleotide-polymorphism effects on each microbial exposure (x-axis) and the corresponding effects on gastric-cancer risk (y-axis). Each point represents one genetic instrument, with horizontal and vertical bars denoting standard errors. Fitted lines represent the inverse-variance-weighted, MR-Egger, weighted-median, simple-mode and weighted-mode estimators. No exposure shows evidence of a causal effect, with the smallest inverse-variance-weighted P value being 0.35. These results should be interpreted as exploratory because the number of genetic instruments per exposure is limited (8 to 23), which reduces statistical power and destabilises the MR-Egger estimate.
+Each panel shows the association between single-nucleotide-polymorphism effects on one microbial exposure (x-axis) and the corresponding effects on gastric-cancer risk (y-axis) in a European-ancestry outcome dataset. Each point represents one genetic instrument, with horizontal and vertical bars denoting standard errors. Fitted lines represent the inverse-variance-weighted, MR-Egger, weighted-median, simple-mode and weighted-mode estimators.
+
+(a) Anti-Helicobacter pylori immunoglobulin G seropositivity (17 instruments).
+
+(b) Streptococcus, genus level (15 instruments).
+
+(c) Fusobacterium (23 instruments).
+
+(d) Prevotella (15 instruments).
+
+(e) Veillonella (8 instruments).
+
+(f) Lactobacillus (10 instruments).
+
+No exposure shows evidence of a causal effect, with the smallest inverse-variance-weighted P value being 0.35. These results should be interpreted as exploratory because the number of genetic instruments per exposure is limited (8 to 23), which reduces statistical power and destabilises the MR-Egger estimate.
 
 ## Supplementary Figure Captions
 
