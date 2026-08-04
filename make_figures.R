@@ -154,7 +154,7 @@ fig2c <- ggplot(cdf, aes(est, fct_rev(lab), colour = grp)) +
   scale_colour_manual(values = c("C-index" = UP, "Time-AUC" = "#1B7837", "Reference" = "grey45"),
                      name = NULL) +
   coord_cartesian(xlim = c(0.5, 0.78)) +
-  labs(title = "Honest discrimination (20x5 nested CV)",
+  labs(title = "Discrimination under 20x5 nested cross-validation",
        subtitle = "dashed = chance; published apparent C shown for contrast",
        x = "Concordance / time-dependent AUC", y = NULL) +
   theme(legend.position = c(0.82, 0.25))
@@ -232,10 +232,13 @@ fig4a <- ggplot(vm, aes(spearman_rho, pair, colour = sig)) +
   geom_segment(aes(x = 0, xend = spearman_rho, yend = pair), linewidth = 0.5) +
   geom_point(size = 2.6) +
   scale_colour_manual(values = c("p<0.05" = UP, "n.s." = "grey60"), name = NULL) +
-  labs(title = "Deconvolution vs measured infiltration",
-       subtitle = "Spearman rho, estimate vs histology/leukocyte %",
+  labs(title = "Deconvolution estimates vs pathologist-measured infiltration",
+       subtitle = "Spearman correlation of each deconvolution score against measured values (n = 272-274)",
        x = expression(Spearman~rho), y = NULL) +
-  theme(axis.text.y = element_text(size = 6.5), legend.position = c(0.85, 0.2))
+  theme(axis.text.y = element_text(size = 7.5),
+        plot.title = element_text(size = 10.5),
+        plot.subtitle = element_text(size = 8),
+        legend.position = "bottom", legend.direction = "horizontal")
 
 ## ---- 4B: immune scores by molecular subtype ----
 bs <- read_csv(file.path(ROOT, "results/immune/immune_by_MolecularSubtype.csv"), show_col_types = FALSE)
@@ -268,8 +271,8 @@ fig4c <- ggplot(mic, aes(cohort, R2, fill = sig)) +
             vjust = -0.25, size = 2.5, lineheight = 0.9) +
   scale_fill_manual(values = c("p<0.05" = UP, "n.s." = "grey60"), name = NULL) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.28))) +
-  labs(title = "Microbiome, 3 cohorts (honest)",
-       subtitle = "tumour-vs-control Bray-Curtis PERMANOVA R2",
+  labs(title = "Tissue microbiome: tumour-vs-control separation across three cohorts",
+       subtitle = expression("Bray-Curtis PERMANOVA "*R^2*"; Japan cohort shown before and after flowcell adjustment"),
        x = NULL, y = expression(PERMANOVA~R^2)) +
   theme(legend.position = c(0.15, 0.85), axis.text.x = element_text(size = 7.5))
 
