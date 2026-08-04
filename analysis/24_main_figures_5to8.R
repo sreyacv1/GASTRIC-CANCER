@@ -40,14 +40,14 @@ FIGS <- list(
   ## Fig6 uses an explicit layout: (a) and (b) share the top row, (c) is a wide
   ## strip beneath. A 1-column stack gives aspect 1.96, far outside the
   ## reference range (0.34-1.00) and unreadable at 190 mm.
-  `6` = list(p = c("results/plots/transcriptome/deg_volcano.png"       = "a",
-                   "results/plots/transcriptome/deg_heatmap_top30_clean.png" = "b",
+  `6` = list(p = c("results/figures/clean/fig6a_volcano_clean.png"     = "a",
+                   "results/figures/clean/fig6b_heatmap_clean.png"           = "b",
                    "results/figures/deg_concordance_panel.png"         = "c"),
              ncol = 2, mm = 190, design = "AB\nCC", aspect = 0.62),
   ## (c)-(f): the four cohort KM curves are used INDIVIDUALLY. The old
   ## s16_km.png was a pre-composited montage carrying its own nested (A)-(D)
   ## labels, which collided with this figure's panel tags.
-  `7` = list(p = c("results/validation/signature_coefficients_clean.png" = "a",
+  `7` = list(p = c("results/figures/clean/fig7a_coefficients_clean.png"  = "a",
                    "results/validation_multi/forest_HR.png"              = "b",
                    "results/validation/KM_TCGA.png"                      = "c",
                    "results/validation/KM_ACRG.png"                      = "d",

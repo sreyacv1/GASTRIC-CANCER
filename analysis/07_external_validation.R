@@ -107,7 +107,7 @@ cat(sprintf("TCGA: C-index=%.3f  log-rank p=%.3e\n", cidx_tcga, p_tcga))
 km_tcga <- survfit(Surv(time, event) ~ group, data = df_tcga)
 p1 <- ggsurvplot(km_tcga, data = df_tcga, pval = TRUE, risk.table = TRUE,
                  palette = c("#377EB8", "#E41A1C"), legend.labs = c("Low", "High"),
-                 xlab = "OS time (days)", title = "TCGA-STAD (training)",
+                 xlab = "OS time (days)", title = NULL,
                  conf.int = FALSE)
 ggsave(file.path(outdir, "KM_TCGA.png"), plot = p1$plot,
        width = 6, height = 5, dpi = 150)
@@ -143,7 +143,7 @@ cat(sprintf("ACRG: C-index=%.3f  log-rank p=%.3e\n", cidx_acrg, p_acrg))
 km_acrg <- survfit(Surv(time, event) ~ group, data = df_acrg)
 p2 <- ggsurvplot(km_acrg, data = df_acrg, pval = TRUE, risk.table = TRUE,
                  palette = c("#377EB8", "#E41A1C"), legend.labs = c("Low", "High"),
-                 xlab = "OS time (months)", title = "ACRG / GSE62254 (validation)",
+                 xlab = "OS time (months)", title = NULL,
                  conf.int = FALSE)
 ggsave(file.path(outdir, "KM_ACRG.png"), plot = p2$plot,
        width = 6, height = 5, dpi = 150)

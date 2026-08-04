@@ -348,7 +348,7 @@ if (!checkpoint_done("step02_tcga")) {
     geom_vline(xintercept = c(-1, 1), linetype = "dashed", colour = "black", linewidth = 0.3) +
     geom_hline(yintercept = -log10(0.05), linetype = "dashed", colour = "black", linewidth = 0.3) +
     scale_x_continuous(limits = c(-8, 8), oob = scales::squish) +
-    labs(title    = "TCGA-STAD: Tumor vs Normal",
+    labs(title    = NULL,
          subtitle = sprintf("n = %d genes tested | limma-voom with eBayes moderated t-test", nrow(res_tcga_df)),
          x        = expression(log[2]~Fold~Change),
          y        = expression(-log[10]~(adj.~p)),

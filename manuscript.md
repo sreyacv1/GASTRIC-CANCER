@@ -270,7 +270,7 @@ Figure 5. Construction and quality assessment of the gene co-expression network.
 
 (b) Heatmap of correlations between module eigengenes and clinical traits. Rows represent modules and columns represent traits; the colour scale ranges from negative (blue) to positive (red) correlation.
 
-(c) Line plots showing selection of the soft-thresholding power. The left panel plots the scale-free topology model fit (signed R²) against candidate powers and the right panel plots mean connectivity. The soft-thresholding power raises correlations to a power so that strong correlations are emphasised and weak ones suppressed, approximating the scale-free topology observed in biological networks; the chosen power is the lowest value at which the model fit plateaus.
+(c) Sensitivity of the prognostic module to the soft-thresholding power, shown as three line plots over the candidate powers 3, 6, 9 and 12. The soft-thresholding power raises correlations to a power so that strong correlations are emphasised and weak ones suppressed, approximating the scale-free topology observed in biological networks; because this choice is made by the analyst, its influence on the result is reported here. The left panel plots the hazard ratio per standard deviation of the module eigengene, with vertical bars denoting 95% confidence intervals and the dashed line marking a hazard ratio of one. The middle panel plots the negative base-ten logarithm of the Cox P value, with the dashed line marking P = 0.05. The right panel plots the fraction of the eight module hub genes that remain co-clustered. Across all four powers the hazard ratio stays between 1.28 and 1.31, the Cox P value stays below 0.05 (maximum 0.0024) and hub co-membership stays at or above 0.875, so the prognostic result does not depend on the particular power chosen. Values are given in Supplementary Table S8.
 
 Figure 6. Differential expression between gastric tumours and normal mucosa and its reproducibility.
 
@@ -286,11 +286,31 @@ Figure 7. Prognostic signature coefficients and external validation.
 
 (b) Forest plot showing hazard ratios per standard deviation of signature score across validation cohorts, with squares denoting point estimates and horizontal lines denoting 95% confidence intervals.
 
-(c) Kaplan–Meier curves for high-risk and low-risk groups defined by the median signature score in each external cohort, with P values from the log-rank test.
+(c) Kaplan-Meier curves for high-risk and low-risk groups in the TCGA-STAD training cohort, defined by a median split of the signature score, with the P value from the log-rank test.
+
+(d) Kaplan-Meier curves for the same median-split groups in the Asian Cancer Research Group cohort (GSE62254, n = 300).
+
+(e) Kaplan-Meier curves for the same median-split groups in GSE15459 (n = 191).
+
+(f) Kaplan-Meier curves for the same median-split groups in GSE84437 (n = 431), in which the signature did not separate the two risk groups. This negative result is reported as observed.
 
 Figure 8. Two-sample Mendelian randomisation of microbial exposures on gastric-cancer risk.
 
-Scatter plots showing the association between single-nucleotide-polymorphism effects on each microbial exposure (x-axis) and the corresponding effects on gastric-cancer risk (y-axis). Each point represents one genetic instrument, with horizontal and vertical bars denoting standard errors. Fitted lines represent the inverse-variance-weighted, MR-Egger, weighted-median, simple-mode and weighted-mode estimators. No exposure shows evidence of a causal effect, with the smallest inverse-variance-weighted P value being 0.35. These results should be interpreted as exploratory because the number of genetic instruments per exposure is limited (8 to 23), which reduces statistical power and destabilises the MR-Egger estimate.
+Each panel shows the association between single-nucleotide-polymorphism effects on one microbial exposure (x-axis) and the corresponding effects on gastric-cancer risk (y-axis) in a European-ancestry outcome dataset. Each point represents one genetic instrument, with horizontal and vertical bars denoting standard errors. Fitted lines represent the inverse-variance-weighted, MR-Egger, weighted-median, simple-mode and weighted-mode estimators.
+
+(a) Anti-Helicobacter pylori immunoglobulin G seropositivity (17 instruments).
+
+(b) Streptococcus, genus level (15 instruments).
+
+(c) Fusobacterium (23 instruments).
+
+(d) Prevotella (15 instruments).
+
+(e) Veillonella (8 instruments).
+
+(f) Lactobacillus (10 instruments).
+
+No exposure shows evidence of a causal effect, with the smallest inverse-variance-weighted P value being 0.35. These results should be interpreted as exploratory because the number of genetic instruments per exposure is limited (8 to 23), which reduces statistical power and destabilises the MR-Egger estimate.
 
 ## Supplementary Figures
 

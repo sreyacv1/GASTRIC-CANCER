@@ -78,7 +78,7 @@ fig <- (panel(p1, "Internal consistency (same TCGA tumours)") |
         panel(p3, "Independent cohort", TRUE) + labs(y = NULL)) +
   plot_layout(guides = "collect") +
   plot_annotation(
-    title = "Integrated tumour-versus-normal ranking: internal consistency and replication in two independent cohorts",
+    title = NULL,
     subtitle = sprintf(paste0("Each point is one of %s shared genes. Panel 1 re-uses the discovery tumours (TCGA), so it tests consistency, not replication;\n",
                               "GSE27342 (80T/80N) and GSE63089 (45T/45N) are independent. Black line: linear fit."),
                        format(p1$n, big.mark = ",")),

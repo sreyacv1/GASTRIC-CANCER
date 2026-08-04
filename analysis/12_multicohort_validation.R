@@ -73,7 +73,7 @@ validate_cohort <- function(name, expr, time, event, time_unit,
                    palette = c("#377EB8", "#E41A1C"),
                    legend.labs = c("Low", "High"),
                    xlab = sprintf("OS time (%s)", time_unit),
-                   title = sprintf("%s (validation)", name), conf.int = FALSE)
+                   title = NULL, conf.int = FALSE)
   ggsave(file.path(outdir, sprintf("KM_%s.png", name)), plot = pl$plot,
          width = 6, height = 5, dpi = 150)
 
@@ -211,7 +211,7 @@ if (nrow(fp) > 0) {
   xr <- range(c(fp$HR_low, fp$HR_high, 1), na.rm = TRUE)
   plot(fp$HR, fp$y, xlim = xr, ylim = c(0.5, nrow(fp) + 0.5), pch = 15,
        cex = 1.6, col = "#E41A1C", yaxt = "n", xlab = "Hazard ratio (High vs Low risk)",
-       ylab = "", main = "Signature high-risk HR across validation cohorts",
+       ylab = "", main = "",
        log = "x")
   segments(fp$HR_low, fp$y, fp$HR_high, fp$y, lwd = 2, col = "#E41A1C")
   abline(v = 1, lty = 2, col = "grey40")

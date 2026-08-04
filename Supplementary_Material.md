@@ -83,6 +83,10 @@
 
 **Supplementary Table S7. Data-acquisition & reproducibility checklist.** Accessions, tools, versions, script-to-result mapping (see manuscript Appendix and PIPELINE file).
 
+**Supplementary Table S8. WGCNA soft-thresholding power sensitivity.** Scale-free fit, mean connectivity, module count, CAF-module eigengene hazard ratio (95% CI) and Cox P, and hub-gene co-membership fraction at powers 3, 6, 9 and 12. Supports Figure 5(c).
+
+File: `results/wgcna_real/power_robustness_summary.csv`.
+
 ## Supplementary Figures
 
 ![Supplementary Figure S1](results/scrna/UMAP_celltypes.png)
