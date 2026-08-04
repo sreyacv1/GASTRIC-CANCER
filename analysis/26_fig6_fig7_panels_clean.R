@@ -86,7 +86,9 @@ rownames(mat) <- sel$hgnc_symbol[keep]
 grp <- factor(ifelse(cd$status == "Tumor", "Tumour", "Normal"), levels = c("Normal","Tumour"))
 z   <- t(scale(t(mat)))
 z[z >  2] <-  2; z[z < -2] <- -2
-png(file.path(OUT, "fig6b_heatmap_clean.png"), width = 2100, height = 1750, res = 260)
+## Width raised from 2100: at 2100 the "z-scored expression" legend title was
+## clipped to "expressior" at the right canvas edge.
+png(file.path(OUT, "fig6b_heatmap_clean.png"), width = 2320, height = 1750, res = 260)
 ht <- Heatmap(z, name = "z-scored\nexpression",
   col = colorRamp2(c(-2,0,2), c("#2166AC","white","#B2182B")),
   column_split = grp, cluster_column_slices = FALSE,
@@ -95,7 +97,7 @@ ht <- Heatmap(z, name = "z-scored\nexpression",
   row_split = factor(ifelse(sel$sig[keep] == "Up", "tumour-up", "tumour-down"),
                      levels = c("tumour-up","tumour-down")),
   row_title_gp = gpar(fontsize = 8), heatmap_legend_param = list(labels_gp = gpar(fontsize = 7)))
-draw(ht, merge_legend = TRUE)
+draw(ht, merge_legend = TRUE, padding = unit(c(2, 2, 2, 6), "mm"))
 dev.off()
 message("wrote 3 clean panels -> ", OUT)
 

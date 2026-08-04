@@ -192,7 +192,8 @@ pres <- read_csv(file.path(ROOT, "results/module_preservation/preservation_summa
 fig3a <- ggplot(pres, aes(fct_reorder(cohort, Zsummary.pres), Zsummary.pres)) +
   geom_col(fill = UP, width = 0.62) +
   geom_hline(yintercept = 10, linetype = 2, colour = "grey30") +
-  annotate("text", x = 0.7, y = 10.6, label = "strong (Z=10)", hjust = 0, size = 2.8, colour = "grey30") +
+  ## Placed at the right-hand end: at x=0.7 this label sat underneath the first bar.
+  annotate("text", x = 3.45, y = 10.6, label = "strong (Z=10)", hjust = 1, size = 2.8, colour = "grey30") +
   geom_text(aes(label = sprintf("%.1f", Zsummary.pres)), vjust = -0.4, size = 3) +
   labs(title = NULL, subtitle = NULL,
        x = NULL, y = "Zsummary preservation") +
