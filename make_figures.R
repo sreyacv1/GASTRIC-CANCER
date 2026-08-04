@@ -264,7 +264,7 @@ fig4b <- ggplot(bl, aes(subtype, val, fill = subtype)) +
   facet_wrap(~ score, scales = "free_y", nrow = 1) +
   scale_fill_brewer(palette = "Dark2", guide = "none") +
   labs(title = "Immune scores by molecular subtype",
-       subtitle = "all Kruskal-Wallis p_adj < 1e-6 (EBV/MSI immune-hot)",
+       subtitle = "all Kruskal-Wallis p_adj < 1e-6 (EBV highest, CIN lowest)",
        x = NULL, y = "Score") +
   theme(strip.text = element_text(size = 8, face = "bold"),
         axis.text.x = element_text(size = 7))

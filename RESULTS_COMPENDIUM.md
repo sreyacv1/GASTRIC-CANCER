@@ -55,7 +55,7 @@ stromal/CAF story (below) concentrates in diffuse tumours.
 **Result.** Deconvolution (MCP-counter/xCell) validated against **measured** histological
 leukocyte fraction: T-cell score vs leukocyte % Spearman **ρ=0.67 (p=3.6×10⁻³⁶)**. Tumours
 are enriched for the **macrophage/monocyte** compartment (p=2.5×10⁻⁴), not CD8 T-cells.
-EBV/MSI molecular subtypes are the most immune-infiltrated (KW p<10⁻⁶). *Source:
+EBV tumours are the most immune-infiltrated on all three scores and CIN the least (KW p<10⁻⁶); MSI and GS are intermediate. *Source:
 `results/immune/`.*
 
 **What it means.** You can estimate immune-cell content from bulk expression, but it must be

@@ -115,7 +115,7 @@
 
 ![Supplementary Figure S8](results/composite_figures/s15_immune.png)
 
-**Supplementary Figure S8. Immune infiltration, deconvolution validated against pathology.** (A) Deconvolution T-cell score versus the measured histological leukocyte fraction (Spearman ρ=0.67, p=3.6×10⁻³⁶), establishing that the expression-based estimates track true tissue composition. (B) Immune compartments, tumour versus normal — enrichment is dominated by the macrophage/monocyte lineage, with no net CD8⁺ gain. (C) Infiltration by molecular subtype (EBV/MSI most infiltrated, Kruskal–Wallis p<10⁻⁶). (D) CD8⁺ score versus overall survival — not prognostic in this cohort (Cox HR 1.04, p=0.41), reported as observed (§3.3). Files: `results/plots/Immune_*.png`.
+**Supplementary Figure S8. Immune infiltration, deconvolution validated against pathology.** (A) Deconvolution T-cell score versus the measured histological leukocyte fraction (Spearman ρ=0.67, p=3.6×10⁻³⁶), establishing that the expression-based estimates track true tissue composition. (B) Immune compartments, tumour versus normal — enrichment is dominated by the macrophage/monocyte lineage, with no net CD8⁺ gain. (C) Infiltration by molecular subtype (EBV most infiltrated, CIN least; Kruskal–Wallis p<10⁻⁶). (D) CD8⁺ score versus overall survival — not prognostic in this cohort (Cox HR 1.04, p=0.41), reported as observed (§3.3). Files: `results/plots/Immune_*.png`.
 
 ![Supplementary Figure S9](results/composite_figures/s17_nomogram.png)
 
