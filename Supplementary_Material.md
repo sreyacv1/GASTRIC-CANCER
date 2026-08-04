@@ -1,5 +1,7 @@
 # Supplementary Material
 
+*Note: Supplementary Tables S3 (TRIPOD checklist) and S7 (data-acquisition & reproducibility checklist) are provided as separate files; their legends appear here for completeness. Supplementary Tables S1, S2, S4, S5 and S6 are tabulated below.*
+
 ## Supplementary Tables
 
 

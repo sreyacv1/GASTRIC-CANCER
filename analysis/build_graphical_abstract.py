@@ -4,7 +4,13 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Ellipse, Rectangle
 
 BLUE, ORANGE, GREEN, GREENL = "#2E86C1", "#E8721C", "#4B9B3F", "#D9EDCB"
-TNR = "DejaVu Sans"
+
+# Times New Roman is not installed here; Tinos is metric-compatible with it.
+from matplotlib import font_manager as fm
+import glob
+for _f in glob.glob("assets/fonts/Tinos-*.ttf"):
+    fm.fontManager.addfont(_f)
+TNR = "Tinos"
 
 fig, ax = plt.subplots(figsize=(13.0, 7.6), dpi=300)
 ax.set_xlim(0, 100); ax.set_ylim(0, 100); ax.axis("off")

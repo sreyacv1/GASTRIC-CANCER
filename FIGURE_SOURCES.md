@@ -43,3 +43,6 @@ value can be opened and verified independently. Every headline number traces to 
 2. Open the source CSV — every number in the caption/text appears there.
 3. Re-run the pipeline: `PIPELINE.md` lists the exact scripts (`analysis/*.R`) and versions; `sessionInfo.txt` / `package_versions.csv` pin the environment.
 4. Nothing in this manuscript is hand-entered: `RESULTS_COMPENDIUM.md` and `RESULTS_REVIEW.md` document an independent re-read of every headline number against these files.
+
+assets/fonts/ contains Tinos (Apache-2.0), metric-compatible with Times New Roman,
+used for the graphical abstract because Times New Roman is not installed on the build host.
