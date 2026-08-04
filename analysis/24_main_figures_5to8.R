@@ -25,14 +25,14 @@ TIFDIR <- "submission_package/figures_tiff"; dir.create(TIFDIR, showWarnings = F
 YLAB_FIG8 <- "SNP effect on gastric cancer (ebi-a-GCST90018849)"
 
 TAG_PT <- 14   # measured to match plot.tag size = 14 of Figs 1-4 at 300 dpi
-panel_of <- function(path, tag) {
+panel_of <- function(path, tag, pt = TAG_PT) {
   stopifnot(file.exists(path))
   ggdraw() +
     draw_image(path) +
     ## TAG_PT is tuned so the rendered tag height matches the patchwork
     ## plot.tag of Figs 1-4 exactly (both files render at 300 dpi).
     draw_label(tag, x = 0.012, y = 0.985, hjust = 0, vjust = 1,
-               fontface = "bold", size = TAG_PT)
+               fontface = "bold", size = pt)
 }
 # figure -> list(panels = c(file = tag), width_mm, aspect)
 FIGS <- list(
@@ -76,7 +76,8 @@ for (nm in names(FIGS)) {
     message("Fig", nm, ": MISSING -> ", paste(names(f$p)[!present], collapse = ", "))
     next
   }
-  pl <- Map(panel_of, names(f$p), unname(f$p))
+  tag_pt <- if (!is.null(f$tag_pt)) f$tag_pt else TAG_PT
+  pl <- Map(function(p,t) panel_of(p,t,tag_pt), names(f$p), unname(f$p))
   comb <- if (!is.null(f$design)) wrap_plots(pl, design = f$design)
           else wrap_plots(pl, ncol = f$ncol)
   ## Fig8: the identical per-panel y-title was cropped off upstream (it was
