@@ -64,8 +64,11 @@ used for the graphical abstract because Times New Roman is not installed on the 
 `results/mr_real_eas/`) have their legend touching the bottom canvas edge. The 12
 leave-one-out plots (`loo_*.png`) in the same directories were each measured with the same
 metric: 11 of 12 score exactly 0, and `results/mr_real_eas/loo_Fusobacterium.png` scores 0.0018
-on the **right** edge (4 dark pixels) — a different and far smaller defect than the scatters'
-bottom-edge legend, and not visible at normal viewing size. The width patch applies to both
+on the **right** edge: exactly 4 dark pixels, in the outermost column only, at rows 690-693 of
+750 (92% down the canvas). Both EAS and European canvases are 900x750, so this is not a
+size difference; it is a single confidence-interval whisker of the last leave-one-out row
+reaching the plot boundary. A different and far smaller defect than the scatters' bottom-edge
+legend, and not visible at normal viewing size. The width patch applies to both
 families; only the scatters are materially affected. `analysis/11_real_mr.R` was patched (width 6 -> 7.5 in) but regenerating them
 requires a live OpenGWAS API token (`OPENGWAS_JWT`) plus network access to re-extract the
 harmonised SNP data, which is not cached locally. The plotted values are correct and are
