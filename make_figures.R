@@ -193,7 +193,9 @@ fig3a <- ggplot(pres, aes(fct_reorder(cohort, Zsummary.pres), Zsummary.pres)) +
   geom_col(fill = UP, width = 0.62) +
   geom_hline(yintercept = 10, linetype = 2, colour = "grey30") +
   ## Placed at the right-hand end: at x=0.7 this label sat underneath the first bar.
-  annotate("text", x = 3.45, y = 10.0, label = "strong (Z=10)", hjust = 1, vjust = -0.7, size = 2.8, colour = "grey30") +
+  ## No in-panel threshold label: the bars span the full panel width, so the text
+  ## unavoidably collided with a bar or the dashed line. The caption states
+  ## "the dashed line marks Z = 10, the conventional threshold for strong preservation".
   geom_text(aes(label = sprintf("%.1f", Zsummary.pres)), vjust = -0.4, size = 3) +
   labs(title = NULL, subtitle = NULL,
        x = NULL, y = "Zsummary preservation") +
