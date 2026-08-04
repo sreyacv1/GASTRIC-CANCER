@@ -9,7 +9,7 @@ suppressPackageStartupMessages({
   library(forcats); library(patchwork); library(survival); library(survminer)
 })
 
-ROOT <- "/nfsshare/users/P126156127/workspace/gastric_cancer"
+ROOT <- Sys.getenv("GC_ROOT", "/nfsshare/users/P126156127/workspace/bioinf/gastric_cancer")
 FIGDIR <- file.path(ROOT, "results", "figures")
 dir.create(FIGDIR, showWarnings = FALSE, recursive = TRUE)
 
@@ -36,10 +36,24 @@ pretty_hallmark <- function(x)
     gsub("E2f", "E2F", x = _) |> gsub("G2m", "G2M", x = _) |>
     gsub("Dna", "DNA", x = _) |> gsub("Mtorc1", "mTORC1", x = _)
 
+## Journal figure export.
+## Reference deliverables (Elsevier) are LZW-compressed TIFF at 600 dpi.
+## Column widths: single 90 mm, 1.5-column 140 mm, double 190 mm.
+## The TIFF is RENDERED at the target physical width rather than upscaled from
+## the PNG, so no pixels are interpolated.
+TIFDIR <- file.path(ROOT, "submission_package", "figures_tiff")
+dir.create(TIFDIR, showWarnings = FALSE, recursive = TRUE)
+col_width_in <- function(w_in) {
+  mm <- if (w_in >= 11) 190 else if (w_in >= 7.5) 140 else 90
+  mm / 25.4
+}
 save_fig <- function(p, name, w, h) {
   ggsave(file.path(FIGDIR, paste0(name, ".pdf")), p, width = w, height = h, device = cairo_pdf)
   ggsave(file.path(FIGDIR, paste0(name, ".png")), p, width = w, height = h, dpi = 300, bg = "white")
-  message("wrote ", name, ".{pdf,png}")
+  tw <- col_width_in(w); th <- tw * (h / w)
+  ggsave(file.path(TIFDIR, paste0(name, ".tiff")), p, width = tw, height = th,
+         dpi = 600, bg = "white", compression = "lzw")
+  message("wrote ", name, ".{pdf,png,tiff}  tiff=", round(tw*25.4), "mm @600dpi")
 }
 
 # ===========================================================================
