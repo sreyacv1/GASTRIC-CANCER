@@ -73,7 +73,7 @@ gsea_panel <- function(csv, title, sub, poslab, neglab, ntop = 8) {
     geom_vline(xintercept = 0, colour = "grey40", linewidth = 0.3) +
     scale_fill_viridis_c(option = "C", name = expression(-log[10]~italic(p)[adj]),
                          direction = -1) +
-    labs(title = title, subtitle = sub, x = "Normalised enrichment score (NES)", y = NULL) +
+    labs(title = NULL, subtitle = NULL, x = "Normalised enrichment score (NES)", y = NULL) +
     theme(legend.position = "right", legend.key.width = unit(3, "mm"))
 }
 
