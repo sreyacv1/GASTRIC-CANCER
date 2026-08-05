@@ -104,3 +104,23 @@ for (nm in names(FIGS)) {
          dpi = 300, bg = "white", limitsize = FALSE)
   message("wrote Fig", nm, " (", f$mm, "mm, ", length(pl), " panels)")
 }
+
+## ---------------------------------------------------------------------------
+## Standalone Supplementary Figure S5 (representative MR scatter).
+## The raw ggplot PNG in results/mr_real/ has its rotated y-axis title clipped
+## at the bottom canvas edge (8 dark pixels in the final 3 rows). The harmonised
+## SNP data was never persisted, so the panel cannot be re-plotted; as for Fig8
+## we reuse the title-cropped panel (columns 0-33 removed, which hold only the
+## clipped title -- tick numerals start at column 39) and draw a clean label.
+## ---------------------------------------------------------------------------
+s5_src <- "results/figures/clean/mr/scatter_H__pylori_IgG_seropositivity.png"
+stopifnot(file.exists(s5_src))
+p_s5 <- panel_of(s5_src, tag = NULL) +
+  labs(tag = YLAB_FIG8) +
+  theme(plot.tag = element_text(size = 9, angle = 90, hjust = 0.5),
+        plot.tag.position = "left",
+        ## 4 mm left margin: without it the rotated label sits on the canvas edge.
+        plot.margin = margin(2, 2, 2, 4, "mm"))
+ggsave("results/figures/clean/s5_mr_scatter_hpylori.png", p_s5,
+       width = 6.0, height = 5.0, dpi = 300, bg = "white")
+message("wrote standalone S5 -> results/figures/clean/s5_mr_scatter_hpylori.png")
