@@ -1,4 +1,22 @@
-## Supplementary Figures
+Supplementary Tables
+
+
+- **Supplementary Table S1 — Per-exposure MR instruments.** Threshold, pre-clump and harmonized-used SNP counts, mean/min per-SNP F, IVW OR/CI/p, and MR-PRESSO global p for all six exposures. File: `results/mr_real/MR_per_exposure_instruments_REAL.csv`.
+- **Supplementary Table S2 — MR-PRESSO global tests.** RSSobs and global-test p per exposure. File: `results/mr_real/MR_PRESSO_global_REAL.csv`.
+- **Supplementary Table S3 — TRIPOD checklist.** Item-by-item reporting map for the prognostic model. File: `TRIPOD_checklist.md`.
+- **Supplementary Table S4 — Alpha-diversity effect sizes.** Median differences and Cliff's δ (Observed / Shannon / Simpson) across the non-confounded gastritis-to-cancer cascade. File: `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`.
+- **Supplementary Table S5 — Non-circular single-cell localization.** Dominant cell type and fraction for the 23 hub genes not used to annotate the fibroblast cluster. File: `results/scrna/gene_dominant_celltype_noncircular.csv`.
+- **Supplementary Table S6 — GSE84437 pT-stage-stratified validation.** Harrell C-index and per-SD hazard ratios for the 25-gene signature within pT-stage strata (all / early pT1–T3 / pT4 / pT2–T3), showing discrimination is not recovered by stratification (C<0.5 throughout). File: `results/validation_multi/GSE84437_Tstage_stratified.csv`.
+- **Supplementary Table S7 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
+- **Supplementary Table S8 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 5(c). File: `results/wgcna_real/power_robustness_summary.csv`.
+
+All other result tables and figures are provided in the project repository under `results/`, with each mapped to its generating script in `PIPELINE.md`.
+
+
+
+
+Supplementary Figures
+
 
 ![Supplementary Figure S1](results/scrna/UMAP_celltypes.png)
 
@@ -82,15 +100,3 @@ Supplementary Figure S9. Evidence that the tumor-microbiome classifier reflects 
 
 Files: `results/microbiome_biomarker/05_rf_importance.csv`, `05_rf_metrics_and_batch_sanity.csv`.
 
-## Supplementary Materials
-
-- **Supplementary Table S1 — Per-exposure MR instruments.** Threshold, pre-clump and harmonized-used SNP counts, mean/min per-SNP F, IVW OR/CI/p, and MR-PRESSO global p for all six exposures. File: `results/mr_real/MR_per_exposure_instruments_REAL.csv`.
-- **Supplementary Table S2 — MR-PRESSO global tests.** RSSobs and global-test p per exposure. File: `results/mr_real/MR_PRESSO_global_REAL.csv`.
-- **Supplementary Table S3 — TRIPOD checklist.** Item-by-item reporting map for the prognostic model. File: `TRIPOD_checklist.md`.
-- **Supplementary Table S4 — Alpha-diversity effect sizes.** Median differences and Cliff's δ (Observed / Shannon / Simpson) across the non-confounded gastritis-to-cancer cascade. File: `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`.
-- **Supplementary Table S5 — Non-circular single-cell localization.** Dominant cell type and fraction for the 23 hub genes not used to annotate the fibroblast cluster. File: `results/scrna/gene_dominant_celltype_noncircular.csv`.
-- **Supplementary Table S6 — GSE84437 pT-stage-stratified validation.** Harrell C-index and per-SD hazard ratios for the 25-gene signature within pT-stage strata (all / early pT1–T3 / pT4 / pT2–T3), showing discrimination is not recovered by stratification (C<0.5 throughout). File: `results/validation_multi/GSE84437_Tstage_stratified.csv`.
-- **Supplementary Table S7 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
-- **Supplementary Table S8 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 5(c). File: `results/wgcna_real/power_robustness_summary.csv`.
-
-All other result tables and figures are provided in the project repository under `results/`, with each mapped to its generating script in `PIPELINE.md`.

@@ -1,26 +1,26 @@
-# A multi-omics analysis of gastric cancer identifies an externally-validated stromal/fibroblast prognostic program, with cautionary tumor-microbiome and Mendelian-randomization assessments
+A multi-omics analysis of gastric cancer identifies an externally-validated stromal/fibroblast prognostic program, with cautionary tumor-microbiome and Mendelian-randomization assessments
 
-**Authors:** ⟦PLACEHOLDER — AUTHOR NAMES + ORCIDs⟧ (e.g. Given-name Family-name¹ [ORCID 0000-0000-0000-0000], …) — Team BBIN6_XX, School of Chemical and Biotechnology, SASTRA Deemed to be University, Thanjavur, India
-**Corresponding author:** ⟦PLACEHOLDER — CORRESPONDING AUTHOR name; institutional email; postal address⟧
-**Running title:** A stromal/fibroblast prognostic program in gastric cancer
+Abstract
 
----
+**Background:** Prognostic stratification of gastric cancer beyond tumor stage remains limited, and claims of a causal tumor microbiome are frequently made without genetic evidence. This study aimed to identify and externally validate the transcriptional biology underlying gastric-cancer prognosis, and to test — rather than assume — whether microbial exposures causally influence disease risk.
 
-## Abstract
+**Methods:** A multi-omics design was used, spanning bulk and single-cell transcriptomes, tissue 16S ribosomal microbiome sequencing, and germline-genetic causal inference. Differential expression integrated The Cancer Genome Atlas and Genotype-Tissue Expression cohorts (412 tumors versus 443 normal references), and a penalized Cox prognostic signature was trained on The Cancer Genome Atlas and validated in three independent cohorts (GSE62254, GSE15459 and GSE84437; 922 patients). Weighted gene co-expression network analysis with external module-preservation testing, immune deconvolution validated against measured leukocyte fraction, single-cell localization, and two-sample Mendelian randomization of anti-*Helicobacter pylori* seropositivity and five gut genera were performed.
 
-Prognostic stratification of gastric cancer beyond tumor stage remains limited, and claims of a causal tumor microbiome are frequently made without genetic evidence. This study aimed to identify and externally validate the transcriptional biology underlying gastric-cancer prognosis, and to test — rather than assume — whether microbial exposures causally influence disease risk. A multi-omics design was used, spanning bulk and single-cell transcriptomes, tissue 16S ribosomal microbiome sequencing, and germline-genetic causal inference. Differential expression integrated The Cancer Genome Atlas and Genotype-Tissue Expression cohorts (412 tumors versus 443 normal references), and a penalized Cox prognostic signature was trained on The Cancer Genome Atlas and validated in three independent cohorts (GSE62254, GSE15459 and GSE84437; 922 patients). Weighted gene co-expression network analysis with external module-preservation testing, immune deconvolution validated against measured leukocyte fraction, single-cell localization, and two-sample Mendelian randomization of anti-*Helicobacter pylori* seropositivity and five gut genera were performed. The resulting twenty-five-gene signature achieved a leakage-free cross-validated concordance of 0.61 and validated in two of three external cohorts, although a conservative meta-analysis was not statistically significant (pooled hazard ratio 1.19, 95 percent confidence interval 0.96 to 1.47). The prognostic signal converged on a stromal cancer-associated-fibroblast program that localized to fibroblasts at single-cell resolution and was strongly preserved across three external cohorts, establishing it as externally replicated rather than a single-cohort observation. Adding the signature to stage conferred negligible decision value. The secondary microbiome arm found reduced diversity along the gastritis-to-carcinoma sequence, but tumor-versus-normal differences were confounded with sequencing batch and did not replicate in an independent cohort, and genetic causal testing detected no microbial effect on risk. It was concluded that gastric-cancer prognosis reflects an externally-replicated stromal program that nonetheless adds little value beyond stage, and that the microbiome associations were observational, not causal.
+**Results:** The resulting twenty-five-gene signature achieved a leakage-free cross-validated concordance of 0.61 and validated in two of three external cohorts, although a conservative meta-analysis was not statistically significant (pooled hazard ratio 1.19, 95 percent confidence interval 0.96 to 1.47). The prognostic signal converged on a stromal cancer-associated-fibroblast program that localized to fibroblasts at single-cell resolution and was strongly preserved across three external cohorts, establishing it as externally replicated rather than a single-cohort observation. Adding the signature to stage conferred negligible decision value. The secondary microbiome arm found reduced diversity along the gastritis-to-carcinoma sequence, but tumor-versus-normal differences were confounded with sequencing batch and did not replicate in an independent cohort, and genetic causal testing detected no microbial effect on risk.
+
+**Conclusion:** It was concluded that gastric-cancer prognosis reflects an externally-replicated stromal program that nonetheless adds little value beyond stage, and that the microbiome associations were observational, not causal.
 
 **Keywords:** gastric cancer; multi-omics; cancer-associated fibroblasts; prognostic signature; Mendelian randomization; external validation
 
----
+Introduction
 
-## 1. Introduction
 
 Gastric cancer (GC) remains the fifth most common malignancy and a leading cause of cancer mortality worldwide, with marked histological and molecular heterogeneity (Lauren intestinal/diffuse classes; TCGA EBV/MSI/GS/CIN subtypes) (1,20). Two biological axes dominate current mechanistic thinking: (i) host transcriptomic reprogramming driving proliferation, epithelial–mesenchymal transition (EMT) and immune evasion, and (ii) dysbiosis of the gastric and gut microbiome, classically initiated by *Helicobacter pylori* (3,4). A recurring weakness in the microbiome-cancer literature is the conflation of **association** with **causation**: taxa that differ between tumor and normal tissue are frequently described as drivers without formal causal testing.
 
 This study is organized around a **single primary question — what transcriptomic biology underlies GC prognosis** — with the microbiome and causal analyses as a clearly-secondary, exploratory arm. In the **primary** analysis, converging bulk co-expression, an externally-validated prognostic signature and single-cell localization identify a **stromal / cancer-associated-fibroblast program** as the biology underlying prognosis, while we show candidly that the derived gene signature, though independently prognostic, adds little decision value beyond stage; we also characterize the tumor immune microenvironment using deconvolution **validated against measured histological leukocyte fraction**. **Secondarily and exploratorily**, we characterize the tumor-tissue microbiome with **compositionally-aware** statistics and formally test microbial causality by two-sample **Mendelian randomization** (22) — addressing the field's recurrent conflation of association with causation — reporting a **null** result transparently. Throughout we distinguish findings from the limits of the data and scope every claim to the evidence that supports it.
 
-## 2. Methods
+Materials And Methods
+
 
 ### 2.1 Data sources
 - **TCGA-STAD** (host transcriptome): 448 samples (412 primary tumor, 36 solid-tissue normal); STAR gene counts, GENCODE v36; full clinical/molecular annotation (Lauren class, AJCC stage, grade, TCGA molecular subtype, driver mutations, tumor mutational burden [TMB], measured leukocyte/lymphocyte percentage, overall survival).
@@ -64,7 +64,8 @@ Top up/down differentially expressed genes were queried (Enrichr) against LINCS 
 ### 2.12 Software and reproducibility
 All analyses ran in R 4.3.3 (a full `sessionInfo()` dump is provided with the code). Every reported result derives from the public datasets described above and is reproducible from the scripts provided under `analysis/`, with outputs under `results/` and pinned package versions in `package_versions.csv`. Complete-case analysis was used throughout; no missing values were imputed. Full figure provenance — mapping every main and supplementary figure to its source image file(s) and the source data table behind each reported number — is provided in `FIGURE_SOURCES.md`; the composite supplementary figures (S6, S7 and S8) are montages of the individual pipeline-output panels listed there, with no panel redrawn or synthesised.
 
-## 3. Results
+Results
+
 
 ### 3.1 A reproducible tumor-versus-normal transcriptional program
 The integrated TCGA+GTEx tumor-versus-normal analysis (412 tumor vs 443 normal) revealed a coherent proliferation-dominated program. Ranked by tumor-vs-normal moderated t, the top up-regulated genes were mitotic/cell-cycle regulators (KIF14, ECT2, CENPF, TPX2, ASPM, HELLS, CST1, ESM1) together with stromal/EMT markers (COL10A1, WNT2, INHBA), while the top down-regulated genes were differentiated gastric and metabolic genes (parietal-cell ATP4A/ATP4B, GPX3, AQP4, ADH7). GSEA on the integrated ranking showed strong up-regulation of **E2F targets (NES 3.75), G2M checkpoint (NES 3.64) and MYC targets**, with coordinated loss of **oxidative phosphorylation (NES −2.54)** and fatty-acid/bile-acid metabolism (Figure 1A); KEGG/GO over-representation highlighted cell cycle, DNA replication/repair and ribosome biogenesis (up) versus gastric acid secretion and fatty-acid degradation (down). At adjusted p<0.05 a large fraction of genes reached significance (3,722 up / 4,025 down of 12,899); on the scale-standardized harmonized matrix this gate is permissive, so the moderated-t ranking and the enrichment above — not the raw count — are the interpretable outputs. The TCGA-only volcano and the top-gene expression heatmap are shown in Figure 6, and the GO:BP/KEGG over-representation dot plots in Supplementary Figure S4.
@@ -235,7 +236,8 @@ To resolve the cellular origin of the prognostic red module, we analyzed a publi
 ### 3.11 In-silico drug-repurposing (hypothesis-generating)
 Querying the integrated tumor signature (top 150 up / 150 down genes by tumor-vs-normal t) against LINCS L1000 and GEO drug-perturbation libraries (Enrichr) for compounds whose perturbation profile **reverses** the tumor signature nominated a robust set of candidates that reverse it on **both arms** (repressing tumor-up genes *and* inducing tumor-down genes). Targeted kinase inhibitors were prominent among the leading candidates — the FGFR inhibitor PD-173074 (rank 2), the CDK4/6 inhibitor palbociclib (4), the FGFR/multikinase inhibitor dovitinib (5) and the PI3K/mTOR inhibitor NVP-BEZ235 (6), with further PI3K/mTOR agents close behind (PI-103 10, GDC-0941 11, torin-2 12, GDC-0980 16) and foretinib at 14 — all concordant with the proliferation-dominated program. They do not, however, dominate the ranking: the top-ranked hit is the polyphenol resveratrol, and calcitriol (3), vemurafenib (7) and mitoxantrone (8) also outrank most of the kinase inhibitors. These are broadly bioactive compounds that recur across LINCS signature-reversal analyses irrespective of tumor type, and are treated here as non-specific rather than as gastric-cancer leads. The CDK/HDAC/multikinase compounds nominated from the TCGA-only signature remain significant reversers under the integrated signature but fall well outside its leading candidates (dasatinib rank 30, belinostat 180, roscovitine 230 of 435 both-arm hits), so the two signatures agree on broad anti-proliferative direction rather than on a specific compound list. These predictions remain **in-silico and hypothesis-generating only**, with no experimental validation; and because the up-signature is proliferation-dominated, the nominated classes are broadly anti-proliferative rather than gastric-cancer-specific, and are offered as candidate directions, not conclusions. To ask whether these nominated targets are genuine cancer vulnerabilities rather than mere expression correlates, we cross-referenced them against **DepMap (24Q4) CRISPR–Chronos** dependency data in 35 gastric cell lines: the PI3K/mTOR and CDK4/6 nodes met the dependency threshold (mean gene-effect < −0.5) — **PIK3CA** (−0.74; dependent in 57% of lines and *selectively* more essential in gastric than pan-cancer lines), **MTOR** (−1.18; common-essential), **CDK4** (−0.83) and **CDK6** (−0.55) — whereas the FGFR-family targets did not, indicating that the anti-proliferative repurposing signal points at experimentally-supported gastric dependencies (PI3K/mTOR and CDK4/6) rather than at FGFR (`results/depmap/`); the top-ranked candidate compounds are shown in Supplementary Figure S3.
 
-## 4. Discussion
+Discussion
+
 
 This study provides a rigorously-scoped, **primarily transcriptomic** account of gastric-cancer prognosis, with a **secondary, exploratory** microbiome and causal arm. The central finding — a **stromal/cancer-associated-fibroblast biology underlying prognosis** — is robust and triangulated across bulk co-expression, an externally-validated signature and single-cell localization; the accompanying proliferation/DNA-repair transcriptional program (with diffuse-restricted EMT) and macrophage-weighted immune microenvironment are internally consistent and externally anchored (deconvolution validated against measured leukocyte fraction). In the secondary arm we characterize tumor-microbiome dysbiosis observationally and, rather than assuming causality, test it directly: the MR analysis does not license a causal claim for any tested microbe. A distinct methodological contribution across both arms is therefore to **separate association from causation** rather than conflate them, as is common in this literature.
 
@@ -250,12 +252,14 @@ The in-silico drug-repurposing arm (§3.11) connects back to this biology rather
 ### 4.1 Limitations
 (1) Transcriptomic cohorts span RNA-seq and microarray platforms; batch and platform effects are mitigated by within-cohort standardization but not eliminated. (2) The 25-gene signature is only modestly and transiently prognostic — leakage-free nested-CV C=0.61 (not the apparent 0.72), a conservative Hartung–Knapp meta-analysis of the three external cohorts is non-significant (pooled HR 1.19, 95% CI 0.96–1.47), the ACRG effect is non-proportional (strong early, null by 3–5 yr), and it adds no decision-analytic value over staging. Bootstrap stability selection (B=200) retained no signature gene at high stability: 13 of the 25 genes were selected in >50% of resamples but **none exceeded 80%** (median selection frequency 0.505; the most stable were NETO2 0.77, EGF 0.75, SRMS 0.73 and SERPINE1 0.70, while the stromal-module members POSTN and MATN3 were selected only 38% and 22% of the time), so individual members should not be over-interpreted; the robust prognostic finding is the externally-preserved co-expression module, not the gene list. (3) The clinical nomogram is single-cohort with modest discrimination (selection-inclusive corrected C≈0.64, EPV≈8) and no external validation; it also requires TMB (an NGS-derived covariate not routinely available), a real-world deployability barrier beyond the statistical ones. (4) In the tumor-tissue microbiome, the discovery cohort has tumor/normal confounded with sequencing batch, and across three cohorts the oral-taxa signal is comparator-dependent and does not generalise (only reduced α-diversity replicates); the arm is therefore exploratory/cautionary rather than a validated biomarker, at genus-level resolution. (5) MR used European instruments and a modestly-powered European outcome; the null results are power-limited, and the microbiome-GWAS/tissue-16S populations differ (gut vs gastric, European vs Japanese). (6) No experimental validation was performed; all inference is computational.
 
-## 5. Conclusion
+Conclusion
+
 This study establishes an **externally validated stromal/cancer-associated-fibroblast (CAF) program** as the reproducible transcriptomic biology underlying gastric-cancer prognosis. The program is not a single-cohort artefact: its co-expression module is strongly preserved in three independent transcriptomic cohorts (module-preservation Zsummary 15.9–17.1) and remains independently prognostic in each (external eigengene HR/SD 1.24–1.55, all *p*<0.005), and single-cell data localize it unambiguously to the fibroblast compartment. Around this positive finding we draw the boundaries of what the data support with equal rigor. The 25-gene operationalisation of the program is genuinely but modestly prognostic — its leakage-free discrimination (nested-CV Harrell C 0.61) is well below its apparent performance (C 0.72), its early hazard separation attenuates over time, and it adds little decision-analytic value beyond stage; it is therefore a biological readout, not a stand-alone clinical test.
 
 The two secondary arms are, by design, cautionary rather than confirmatory. The apparent tumor-tissue microbial dysbiosis proved comparator-dependent and confounded by sequencing batch, replicating only where a batch-clean external cohort permits — a concrete illustration of how readily tissue-microbiome signals can be manufactured by design artefacts. The Mendelian-randomization analysis, with a full sensitivity suite, returned a consistent null across all six exposures and both ancestries: at current instrument and outcome power, the data provide no support for a causal microbial effect on gastric-cancer risk. Taken together, the work delivers one robust, replicated prognostic biology and an explicit, honestly-bounded account of the observational-versus-causal distinction that is too often blurred in this literature — a distinction we regard as central to the study's contribution.
 
-## Declarations
+Declarations
+
 
 **Ethics approval and consent to participate.** This study used only publicly available, de-identified secondary data from established repositories (TCGA, GTEx, GEO, DDBJ/PRJDB20660, IEU OpenGWAS). No new human participants, human material, or animal work was involved; each source dataset was collected under its own ethics approval and consent. Institutional ethics approval was therefore not required for this secondary analysis of publicly available, de-identified data.
 
@@ -272,9 +276,9 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 
 **Acknowledgements.** The results shown here are based in part upon data generated by the TCGA Research Network, the GTEx Consortium, the contributing GEO/DDBJ studies, and the IEU OpenGWAS project; we thank these consortia and the original data generators.
 
----
 
-## References
+References
+
 
 *Formatted in Vancouver style.*
 
@@ -316,190 +320,4 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 36. Collins GS, Reitsma JB, Altman DG, Moons KGM. Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis (TRIPOD): the TRIPOD statement. *BMJ* 2015;350:g7594. PMID 25569120.
 37. Stuart T, et al. Comprehensive integration of single-cell data (Seurat). *Cell* 2019;177:1888–1902. PMID 31178118.
 
----
 
-## Supplementary Figures
-
-![Supplementary Figure S1](results/scrna/UMAP_celltypes.png)
-
-Supplementary Figure S1. Single-cell reference atlas of the gastric premalignant-to-early-cancer cascade.
-
-Uniform manifold approximation and projection (UMAP) of 43,992 cells from the public dataset GSE134520, colored by the eight annotated major cell types. UMAP is a non-linear dimensionality-reduction method in which each point represents one cell and proximity reflects transcriptional similarity; the axes carry no independent units. Cell-type proportions are epithelial 68.6%, endothelial 7.6%, myeloid 6.4%, plasma 5.8%, T cell 5.8%, fibroblast 4.2%, mast 1.0% and B cell 0.6%. This atlas provides the cellular reference used for the module-localization analysis in Figure 3(c).
-
-File: `results/scrna/UMAP_celltypes.png`.
-
-![Supplementary Figure S2](results/scrna/DotPlot_stromal_module_hub.png)
-
-Supplementary Figure S2. Expression of stromal-module hub genes across cell types.
-
-Dot plot of the prognostic co-expression module hub genes across the eight annotated cell types. Dot size represents the fraction of cells in which the gene is detected and dot color represents scaled mean expression. Hub-gene expression is confined to the fibroblast compartment. Because the genes used to annotate the fibroblast cluster could bias this result, the analysis was repeated after removing them; all twenty-three remaining hub genes stayed fibroblast-dominant.
-
-File: `results/scrna/DotPlot_stromal_module_hub.png`.
-
-![Supplementary Figure S3](results/drug_repurposing_integrated/top_candidate_drugs.png)
-
-Supplementary Figure S3. Candidate compounds from in-silico drug repurposing.
-
-Bar plot of the eight highest-ranked compounds whose transcriptional perturbation signature reverses the tumor program, from Enrichr queried against the LINCS L1000 and Gene Expression Omnibus drug-perturbation libraries. Bar length is −log10 of the best Benjamini–Hochberg-adjusted enrichment p value across contributing signatures, which is also the ordering criterion. Every compound shown reverses the program on both arms — repressing tumor-up genes and inducing tumor-down genes — so no arm legend is displayed. Four of the eight are targeted kinase inhibitors concordant with a proliferation-dominated program: the fibroblast growth factor receptor (FGFR) inhibitor PD-173074, the cyclin-dependent kinase 4/6 (CDK4/6) inhibitor palbociclib, the FGFR/multikinase inhibitor dovitinib and the phosphoinositide 3-kinase (PI3K)/mechanistic target of rapamycin (mTOR) inhibitor NVP-BEZ235. The remaining four are not kinase inhibitors and include the highest-ranked hit, resveratrol, together with calcitriol, vemurafenib and mitoxantrone; broadly bioactive compounds of this kind recur across LINCS reversal analyses irrespective of tumor type and should be treated as non-specific. These predictions are computational and hypothesis-generating only; no compound was experimentally validated, and because the tumor-up program is proliferation-dominated the nominated agents are broadly anti-proliferative rather than specific to gastric cancer.
-
-File: `results/drug_repurposing_integrated/top_candidate_drugs.png`.
-
-![Supplementary Figure S4](results/enrichment/path_ORA_GO_KEGG.png)
-
-Supplementary Figure S4. Over-representation analysis of tumor-up-regulated genes.
-
-Dot plots of Gene Ontology biological-process and Kyoto Encyclopedia of Genes and Genomes (KEGG) over-representation analysis for the tumor-up gene set. Dot size represents the number of genes in each term and color represents the adjusted P value. Cell-cycle and nuclear-division terms, together with extracellular-matrix-receptor and cytokine terms, dominate. Over-representation analysis depends on an arbitrary significance threshold and is sensitive to gene-family size; the prominent olfactory and sensory-perception terms reflect the large olfactory-receptor gene family rather than tumor biology. The threshold-free gene-set enrichment analysis in Figure 1 is therefore the primary enrichment result, with this panel provided for completeness.
-
-Files: `results/enrichment/dotplot_GO_BP_UP.png`, `results/enrichment/dotplot_KEGG_UP.png`.
-
-File: `results/mr_real/loo_H__pylori_IgG_seropositivity.png`.
-
-![Supplementary Figure S5](results/microbiome_biomarker/da_clr_barplot.png)
-
-Supplementary Figure S5. Compositional differential abundance of tissue microbiota.
-
-Bar plots of centered-log-ratio effect sizes for the two discovery-cohort contrasts, tested by Wilcoxon rank-sum with Benjamini-Hochberg correction. The centered-log-ratio transform is used because sequencing yields relative rather than absolute abundances, so raw proportions are not independent. The left panel shows control versus cancer-adjacent mucosa (44 of 61 genera at q < 0.05) and the right panel the paired cancer-adjacent versus tumor contrast (18 of 61 genera at q < 0.05). Bars are colored by direction where q < 0.05, with red indicating enrichment and blue depletion, and the twelve most enriched and depleted genera are shown per panel. These genus-level shifts are reported for completeness only; as detailed in the Results, the tumor contrast is confounded with sequencing batch and does not replicate in an independent batch-clean cohort, so these taxa are not proposed as biomarkers.
-
-Files: `results/microbiome_biomarker/04a_DA_control_vs_GCN.csv`, `04b_DA_GCN_vs_GCT_paired.csv`.
-
-![Supplementary Figure S6](results/composite_figures/s15_immune.png)
-
-Supplementary Figure S6. Immune-compartment shifts and CD8 T-cell survival association.
-
-(a) Comparison of immune compartments between tumor and normal tissue. Enrichment is dominated by the macrophage and monocyte lineage, with no net gain in CD8-positive T cells.
-
-(b) Association between CD8-positive T-cell score and overall survival. The score is not prognostic in this cohort (Cox hazard ratio 1.04, P = 0.41); this null result is reported as observed.
-
-Files: `results/plots/Immune_*.png`.
-
-![Supplementary Figure S7](results/composite_figures/s17_nomogram.png)
-
-Supplementary Figure S7. Clinical nomogram, calibration, and external decision-curve analysis.
-
-(a) Nomogram combining clinical covariates with the signature score for prediction of 1-, 3- and 5-year overall survival. A nomogram converts each predictor into points on a common scale whose total maps to a predicted survival probability.
-
-(b) Calibration plots at 1, 3 and 5 years, computed in the development cohort. Calibration compares predicted against observed survival; the diagonal represents perfect agreement.
-
-(c) Decision-curve analysis performed out-of-sample in the Asian Cancer Research Group cohort. Decision-curve analysis plots net benefit against the threshold probability at which a clinician would act. Both the clinical model and the combined model carry net benefit relative to treat-all and treat-none strategies, but their curves are essentially superimposed across the 5-40% threshold range, indicating that adding the signature confers no incremental net benefit over standard staging. The nomogram is presented as an illustrative research tool, not as a validated decision instrument.
-
-Files: `results/nomogram_combined/`, `results/external_utility_ACRG/DCA_external.png`.
-
-![Supplementary Figure S8](results/composite_figures/s19_mr_loo_all.png)
-
-Supplementary Figure S8. Mendelian-randomization leave-one-out analysis for all six exposures.
-
-Leave-one-out inverse-variance-weighted estimates for each of the six microbial exposures. Removing any single instrument leaves every pooled estimate straddling the null, confirming that no individual instrument drives any result and that the overall null is not an outlier artefact.
-
-Files: `results/mr_real/loo_*.png`.
-
-![Supplementary Figure S9](results/microbiome_biomarker/rf_batch_classifier.png)
-
-Supplementary Figure S9. Evidence that the tumor-microbiome classifier reflects sequencing batch.
-
-(a) Bar plot of the fifteen genera ranked highest by mean decrease in Gini importance in the cancer-versus-control random-forest classifier. Genera shown in red italic type are recognized environmental or reagent contaminants (Dietzia, Serinicoccus, Methylobacterium-Methylorubrum, Microbacterium, Sphingomonas and Serratia) rather than gastric or oral commensals, and they dominate the classifier.
-
-(b) Comparison of the classifier's apparent discrimination with its ability to predict sequencing batch. The cancer-versus-control area under the receiver operating characteristic curve is 0.92 (95% confidence interval 0.90-0.94), but the same feature space predicts the sequencing flowcell among biologically similar samples at 78% accuracy against a 55% majority-class baseline (dotted line). The apparent tumor signal therefore tracks sequencing batch rather than tumor biology.
-
-Files: `results/microbiome_biomarker/05_rf_importance.csv`, `05_rf_metrics_and_batch_sanity.csv`.
-
-## Supplementary Materials
-
-- **Supplementary Table S1 — Per-exposure MR instruments.** Threshold, pre-clump and harmonized-used SNP counts, mean/min per-SNP F, IVW OR/CI/p, and MR-PRESSO global p for all six exposures. File: `results/mr_real/MR_per_exposure_instruments_REAL.csv`.
-- **Supplementary Table S2 — MR-PRESSO global tests.** RSSobs and global-test p per exposure. File: `results/mr_real/MR_PRESSO_global_REAL.csv`.
-- **Supplementary Table S3 — TRIPOD checklist.** Item-by-item reporting map for the prognostic model. File: `TRIPOD_checklist.md`.
-- **Supplementary Table S4 — Alpha-diversity effect sizes.** Median differences and Cliff's δ (Observed / Shannon / Simpson) across the non-confounded gastritis-to-cancer cascade. File: `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`.
-- **Supplementary Table S5 — Non-circular single-cell localization.** Dominant cell type and fraction for the 23 hub genes not used to annotate the fibroblast cluster. File: `results/scrna/gene_dominant_celltype_noncircular.csv`.
-- **Supplementary Table S6 — GSE84437 pT-stage-stratified validation.** Harrell C-index and per-SD hazard ratios for the 25-gene signature within pT-stage strata (all / early pT1–T3 / pT4 / pT2–T3), showing discrimination is not recovered by stratification (C<0.5 throughout). File: `results/validation_multi/GSE84437_Tstage_stratified.csv`.
-- **Supplementary Table S7 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
-- **Supplementary Table S8 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 5(c). File: `results/wgcna_real/power_robustness_summary.csv`.
-
-All other result tables and figures are provided in the project repository under `results/`, with each mapped to its generating script in `PIPELINE.md`.
-
-
----
-
-## Appendix: Data-Acquisition & Reproducibility Checklist
-
-*Gastric-cancer multi-omics study. Every dataset used, its accession, access route,
-version/build, the raw→processed entry point, and the pipeline script that consumes it.
-Datasets are listed in the order the pipeline uses them. This lets a reader reacquire
-every input from its primary repository and re-enter the pipeline at the correct stage.*
-
-## A. Host transcriptome (differential expression, WGCNA, signature, immune, drug-repurposing)
-
-- [ ] **TCGA-STAD** — primary tumor + solid-tissue normal RNA-seq.
-  - Accession/portal: GDC / UCSC Xena (project TCGA-STAD).
-  - Build: STAR gene counts, GENCODE v36; 448 samples (412 tumor, 36 normal).
-  - Clinical: Lauren class, AJCC stage, grade, TCGA molecular subtype, driver mutations,
-    TMB, measured leukocyte/lymphocyte %, overall survival.
-  - Raw→processed entry point: count matrix → `results/rdata/tcga_processed.RData`.
-  - Consuming scripts: DEG (`analysis/…DEG…`), WGCNA (`analysis/…wgcna…`),
-    immune deconvolution (`08_immune_deconvolution.R`), enrichment,
-    microbe-response GSEA (`31_microbe_response_enrichment.R`).
-- [ ] **GTEx v10** — normal stomach reference (DE denominator).
-  - Portal: gtexportal.org. Combined with TCGA normals for the integrated tumor-vs-normal contrast.
-
-## B. External survival / DE validation cohorts (transcriptome)
-
-- [ ] **GSE62254 (ACRG)** — 300 patients; Affymetrix. Primary external validation of the signature.
-  - Access: GEO. Local: `data/geo/GSE62254.rda`. Consumer: `12_multicohort_validation.R`, `32_nested_cv_signature.R`.
-- [ ] **GSE15459** — 191 patients. Access: GEO. Local: `data/geo/GSE15459_es.rds` + `GSE15459_outcome.xls`.
-- [ ] **GSE84437** — 431 patients. Access: GEO. Local: `data/geo/GSE84437_es.rds`. (Reported negative — retained transparently.)
-- [ ] **GSE27342, GSE63089** — independent DE-concordance cohorts. Access: GEO.
-  Consumer: DEG cross-cohort concordance (`results/tables/DEG_GEO_*.csv`).
-
-## C. Single-cell transcriptome (module localization)
-
-- [ ] **GSE134520** — premalignant-to-early gastric-cancer scRNA-seq.
-  - Access: GEO. Processing: Seurat v4 (QC 200–6,000 genes, MT<20% → 43,992 cells;
-    LogNormalize; 2,000 HVGs; PCA 30; SNN res 0.5; UMAP). 8 cell types by canonical markers.
-  - Consumer: scRNA localization → `results/scrna/`.
-
-## D. Tissue microbiome (16S)
-
-- [ ] **PRJDB20660 (Japan, discovery)** — 944 libraries, 16S V3–V4.
-  - Access: DDBJ, **raw FASTQ**. Processing: DADA2 from raw → ASV table
-    (897 samples × 314 genera after host/off-target removal).
-  - Read-tracking validation: per-sample counts vs published Supplementary Table 3, Pearson r=0.98
-    (`results/microbiome_biomarker/00_readtracking_concordance.csv`).
-  - Consumer: `23_dada2_16S.R` → `24_microbiome_real.R`; reference DB `silva_nr99_v138.1`.
-- [ ] **PRJNA641258 (Italy, validation)** — paired tumor/non-tumor, V3–V4. Access: NCBI/ENA. (Ravegnini 2020, PMC7766162.)
-- [ ] **PRJNA413125 (Portugal, validation)** — gastritis vs carcinoma, V5–V6. Access: NCBI/ENA. (Ferreira 2018.)
-  - **Batch caveat:** the discovery tumor/normal split is confounded with sequencing flowcell (§3.8);
-    validation cohorts are the batch-clean test.
-
-## E. GWAS summary statistics (Mendelian randomization)
-
-*All accessions independently verified against GWAS-Catalog records; raw `gwasinfo()`/lookup output
-archived at `results/mr_real/gwas_catalog_verification.json`.*
-
-- [ ] **Exposures (IEU OpenGWAS):**
-  - `ebi-a-GCST90006910` — anti-*H. pylori* IgG seropositivity (Butler-Laporte 2020; European, PMID 33204752).
-  - `ebi-a-GCST90017070` — genus *Streptococcus* (id.1853; MiBioGen/Kurilshikov 2021; European, PMID 33462485).
-  - `ebi-a-GCST90017045` — genus *Prevotella 9* (id.11183; MiBioGen; European, PMID 33462485).
-  - `ebi-a-GCST90017088` — genus *Veillonella* (id.2198; MiBioGen; European, PMID 33462485).
-  - `ebi-a-GCST90017030` — genus *Lactobacillus* (id.1837; MiBioGen; European, PMID 33462485).
-  - `ebi-a-GCST90032406` — *Fusobacterium* A abundance in stool (Qin 2022; European/Finland, PMID 35115689).
-- [ ] **Outcomes:**
-  - `ebi-a-GCST90018849` — gastric cancer, European, 1,029 cases (Sakaue 2021, PMID 34594039). **Primary.**
-  - `ebi-a-GCST90018629` — gastric cancer, East-Asian, 7,921 cases (Sakaue 2021). Cross-ancestry power sensitivity only.
-  - Access token: OpenGWAS JWT via `OPENGWAS_JWT` env var. Consumer: `11_real_mr.R`.
-  - Harmonized per-SNP instrument tables archived (`results/mr_real/`) so exact SNP sets survive upstream reprocessing.
-
-## F. Environment & reproducibility
-
-- [ ] R 4.3.3; pinned package versions in `package_versions.csv`; full `sessionInfo()` with the code.
-- [ ] Complete-case analysis throughout; no imputation.
-- [ ] Bundled `r_env/` has a build-time hardcoded path — after relocation use the `R_HOME`-override
-      invocation or a system R (documented in `PIPELINE.md`).
-- [ ] Every `results/` output maps to its generating script in `PIPELINE.md`;
-      figure→source mapping in `FIGURE_SOURCES.md`.
-
-## G. Analyses NOT performed (stated to prevent over-reading)
-
-- [ ] **No genuinely paired per-patient tissue-microbiome + host-transcriptome cohort exists** in this
-      study (16S and transcriptome are from different, unpaired cohorts). A per-genus host-gene MaAsLin2
-      association was run in a superseded pipeline on a bridged, non-verifiable sample set; its outputs are
-      not reproducible from retained files, so it is excluded and no host-gene↔genus claim is made. The
-      microbe-response result (§3.9) is a pathway-level GSEA on the TCGA tumor-vs-normal ranking only —
-      hypothesis-generating context, not a host–microbiome axis.
