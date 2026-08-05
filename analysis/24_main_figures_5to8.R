@@ -85,7 +85,7 @@ for (nm in names(FIGS)) {
   if (nm == "8") {
     comb <- wrap_elements(comb) +
       labs(tag = YLAB_FIG8) +
-      theme(plot.tag = element_text(size = 9, angle = 90, vjust = 1),
+      theme(plot.tag = element_text(size = 9, angle = 90, vjust = 1, face = "plain"),
             plot.tag.position = "left")
   }
   w_in <- f$mm / 25.4
@@ -117,7 +117,7 @@ s5_src <- "results/figures/clean/mr/scatter_H__pylori_IgG_seropositivity.png"
 stopifnot(file.exists(s5_src))
 p_s5 <- panel_of(s5_src, tag = NULL) +
   labs(tag = YLAB_FIG8) +
-  theme(plot.tag = element_text(size = 9, angle = 90, hjust = 0.5),
+  theme(plot.tag = element_text(size = 11, angle = 90, hjust = 0.5, face = "plain"),
         plot.tag.position = "left",
         ## 4 mm left margin: without it the rotated label sits on the canvas edge.
         plot.margin = margin(2, 2, 2, 4, "mm"))
