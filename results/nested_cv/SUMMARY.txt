@@ -1,5 +1,5 @@
 NESTED CROSS-VALIDATION of the 25-gene prognostic signature
-TCGA-STAD tumours: n=383 events=156; candidate genes=1038
+TCGA-STAD tumors: n=383 events=156; candidate genes=1038
 Design: 20 repeats x 5-fold outer CV; ALL steps (z-scoring, univariable
 Cox screen p<0.05, inner 5-fold cv.glmnet Cox LASSO) re-run inside each
 outer training fold; performance from untouched out-of-fold predictions.
