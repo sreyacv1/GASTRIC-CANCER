@@ -104,10 +104,14 @@ ctcols <- setNames(scales::hue_pal()(length(unique(merged$cell_type))),
                    sort(unique(merged$cell_type)))
 ## No in-panel title: the dataset and colouring are stated in the caption
 ## (reference-journal convention, as for all main figures). 300 dpi to match.
+## set.seed: repel = TRUE places labels via ggrepel, whose nudging is stochastic;
+## seeding keeps this figure byte-reproducible (see analysis/27_rerender_scrna_umap.R).
+set.seed(42)
 p_umap <- DimPlot(merged, group.by = "cell_type", label = TRUE, repel = TRUE,
                   cols = ctcols) +
   ggtitle(NULL)
-ggsave(file.path(outdir, "UMAP_celltypes.png"), p_umap, width = 8, height = 6, dpi = 300)
+ggsave(file.path(outdir, "UMAP_celltypes.png"), p_umap, width = 8, height = 6, dpi = 300,
+       bg = "white")
 
 p_umap_stage <- DimPlot(merged, group.by = "stage") +
   ggtitle("GSE134520 — disease stage")
