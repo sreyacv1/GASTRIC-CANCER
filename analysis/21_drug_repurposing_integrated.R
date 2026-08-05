@@ -118,10 +118,11 @@ p <- ggplot(top, aes(label, -log10(min_adj_p), fill = arms)) +
                     labels = c("UP" = "represses tumour-UP genes",
                                "DOWN" = "induces tumour-DOWN genes",
                                "DOWN+UP" = "both arms")) +
-  labs(title = "Candidate GC-signature-reversing compounds (integrated TCGA+GTEx DEG)",
-       subtitle = "In-silico, hypothesis-generating; no experimental validation",
+  ## Title/subtitle removed: both are stated in the caption, which also carries
+  ## the hypothesis-generating caveat (reference-journal convention).
+  labs(title = NULL, subtitle = NULL,
        x = NULL, y = expression(-log[10]~"(best adjusted p)")) +
   theme_bw(base_size = 11)
-ggsave(file.path(OUT, "top_candidate_drugs.png"), p, width = 9, height = 6, dpi = 150)
+ggsave(file.path(OUT, "top_candidate_drugs.png"), p, width = 9, height = 6, dpi = 300)
 
 cat("\nOutputs written to", OUT, "\n")

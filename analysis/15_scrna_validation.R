@@ -102,10 +102,12 @@ merged$cell_type <- unname(celltype_by_cluster[as.character(merged$seurat_cluste
 # ---- outputs: UMAP ---------------------------------------------------------
 ctcols <- setNames(scales::hue_pal()(length(unique(merged$cell_type))),
                    sort(unique(merged$cell_type)))
+## No in-panel title: the dataset and colouring are stated in the caption
+## (reference-journal convention, as for all main figures). 300 dpi to match.
 p_umap <- DimPlot(merged, group.by = "cell_type", label = TRUE, repel = TRUE,
                   cols = ctcols) +
-  ggtitle("GSE134520 gastric mucosa scRNA-seq — cell types")
-ggsave(file.path(outdir, "UMAP_celltypes.png"), p_umap, width = 8, height = 6, dpi = 150)
+  ggtitle(NULL)
+ggsave(file.path(outdir, "UMAP_celltypes.png"), p_umap, width = 8, height = 6, dpi = 300)
 
 p_umap_stage <- DimPlot(merged, group.by = "stage") +
   ggtitle("GSE134520 — disease stage")
