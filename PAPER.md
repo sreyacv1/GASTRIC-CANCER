@@ -352,8 +352,6 @@ Dot plots of Gene Ontology biological-process and Kyoto Encyclopedia of Genes an
 
 Files: `results/enrichment/dotplot_GO_BP_UP.png`, `results/enrichment/dotplot_KEGG_UP.png`.
 
-File: `results/mr_real/loo_H__pylori_IgG_seropositivity.png`.
-
 ![Supplementary Figure S5](results/microbiome_biomarker/da_clr_barplot.png)
 
 Supplementary Figure S5. Compositional differential abundance of tissue microbiota.
