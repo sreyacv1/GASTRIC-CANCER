@@ -151,11 +151,16 @@ ggsave("results/composite_figures/s15_immune.png",
 ## the calibration and DCA tick text below the legibility screen's reference
 ## value. The nomogram is wide and short, so it takes the full width and the two
 ## square panels sit below at ~3.5 in each.
+## Row heights follow the content aspects, not patchwork's equal default: the
+## nomogram is 2400x1500 (h/w 0.62) so at 9 in wide it needs ~5.6 in, while the
+## lower row holds two ~0.8-aspect panels at 4.5 in wide each, needing ~3.6 in.
+## Equal rows stretched the nomogram's canvas and left a large empty band under it.
 ggsave("results/composite_figures/s17_nomogram.png",
        tag(pan(ci("results/nomogram_combined/combined_nomogram.png")) /
            (pan(cit("results/nomogram_combined/calibration_combined.png", 0.078)) |
-            pan(cit("results/external_utility_ACRG/DCA_external.png", 0.050)))),
-       width = 9, height = 7.4, dpi = 300, bg = "white")
+            pan(cit("results/external_utility_ACRG/DCA_external.png", 0.050))) +
+           plot_layout(heights = c(0.62 * 9, 3.6))),
+       width = 9, height = 9.4, dpi = 300, bg = "white")
 
 ## ---- S10: all six MR leave-one-out panels -------------------------------
 loo <- sort(Sys.glob(file.path(ROOT, "results/mr_real/loo_*.png")))
