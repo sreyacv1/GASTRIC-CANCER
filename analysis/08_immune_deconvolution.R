@@ -85,7 +85,7 @@ p_tn <- ggplot(tn_long, aes(group, score, fill = group)) +
   geom_boxplot(outlier.size = 0.5) +
   facet_wrap(~population, scales = "free_y", ncol = 4) +
   stat_compare_means(method = "wilcox.test", label = "p.format", size = 2.6) +
-  labs(title = "Immune populations: Tumor vs Normal (TCGA-STAD)",
+  labs(title = NULL,
        x = NULL, y = "Deconvolution score") +
   theme_bw() + theme(legend.position = "none")
 ggsave(file.path(plotdir, "Immune_tumor_vs_normal.png"), p_tn,
@@ -130,8 +130,8 @@ p_val <- ggplot(vdf[vok, ], aes(leuk, cd8)) +
   annotate("label", x = -Inf, y = Inf, hjust = -0.06, vjust = 1.3,
            fill = scales::alpha("white", 0.8), size = 3.1,
            label = sprintf("Spearman rho = %.2f, p = %.1e, n = %d", vrho, vp, sum(vok))) +
-  labs(title = "MCP-counter CD8 T cells vs measured leukocyte percentage",
-       subtitle = "TCGA-STAD tumours; measured value from TCGA pathology review",
+  ## Titles removed: stated in the caption (reference-journal convention).
+  labs(title = NULL, subtitle = NULL,
        x = "Measured leukocyte percentage (TCGA pathology)",
        y = "MCP-counter CD8 T-cell score") +
   theme_bw(base_size = 9) +
@@ -186,7 +186,7 @@ sdf <- data.frame(sub = factor(sub[sub_keep], levels=c("EBV","MSI","GS","CIN")),
 p_sub <- ggplot(sdf, aes(sub, imm, fill = sub)) +
   geom_boxplot(outlier.size = 0.5) +
   stat_compare_means(method = "kruskal.test", label = "p.format", size = 3) +
-  labs(title = "xCell ImmuneScore by molecular subtype (TCGA-STAD)",
+  labs(title = NULL,
        x = NULL, y = "xCell ImmuneScore") +
   theme_bw() + theme(legend.position = "none")
 ggsave(file.path(plotdir, "Immune_by_subtype.png"), p_sub,
@@ -232,7 +232,7 @@ km <- ggsurvplot(fit, data = sdat, pval = TRUE, risk.table = TRUE,
                  palette = c("#377EB8","#E41A1C"),
                  legend.labs = c("CD8-low","CD8-high"),
                  xlab = "Days", ylab = "Overall survival",
-                 title = "OS by MCP-counter CD8 T-cell score (median split)")
+                 title = NULL)
 # ggsurvplot returns a list of grobs (plot + risk.table); render via device.
 png(file.path(plotdir, "Immune_CD8_survival_KM.png"),
     width = 7, height = 7, units = "in", res = 150)

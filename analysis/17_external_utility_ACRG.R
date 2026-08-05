@@ -173,7 +173,7 @@ dsum <- as.data.frame(d$dca)
 write.csv(dsum, file.path(outdir, "DCA_netbenefit_external.csv"), row.names = FALSE)
 png(file.path(outdir, "DCA_external.png"), width = 1600, height = 1200, res = 200)
 print(plot(d, smooth = TRUE) +
-        ggplot2::labs(title = "External DCA @3y (ACRG/GSE62254)"))
+        ggplot2::labs(title = NULL))
 dev.off()
 
 # Does Combined dominate Clinical out-of-sample? Compare net benefit over a

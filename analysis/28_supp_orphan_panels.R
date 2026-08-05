@@ -29,6 +29,20 @@ pan <- function(img) ggplot() +
 tag <- function(p) p + plot_annotation(tag_levels = "a") &
   theme(plot.tag = element_text(size = 14, face = "bold"))
 
+## Some component panels were written by scripts whose deconvolution step needs
+## MCPcounter (GitHub-only, not installable here), so their in-panel titles are
+## removed at source in analysis/08_immune_deconvolution.R and
+## analysis/17_external_utility_ACRG.R for future runs, and cropped here so the
+## current montages already follow the no-in-panel-title convention. The crop
+## fraction is measured per file: the title occupies a clean ink band ending
+## ~4-5% down the canvas, above a whitespace gap.
+crop_title <- function(img, frac) {
+  inf <- image_info(img)
+  off <- round(inf$height * frac)
+  image_crop(img, sprintf("%dx%d+0+%d", inf$width, inf$height - off, off))
+}
+cit <- function(p, frac, dens = 300) crop_title(ci(p, dens), frac)
+
 ## ---- S4: ORA montage, GO:BP UP | KEGG UP ---------------------------------
 ggsave("results/enrichment/path_ORA_GO_KEGG.png",
        tag(pan(ci("results/enrichment/dotplot_GO_BP_UP.png")) |
@@ -67,17 +81,17 @@ ggsave("results/microbiome_biomarker/da_clr_barplot.png",
 ## ---- S8: four-panel immune montage --------------------------------------
 ## (a) validation scatter (b) tumour vs normal (c) by subtype (d) CD8 KM
 ggsave("results/composite_figures/s15_immune.png",
-       tag((pan(ci("results/plots/Immune_validation_scatter.png")) |
-            pan(ci("results/plots/Immune_tumor_vs_normal.png"))) /
-           (pan(ci("results/plots/Immune_by_subtype.png")) |
-            pan(ci("results/plots/Immune_CD8_survival_KM.png")))),
+       tag((pan(cit("results/plots/Immune_validation_scatter.png", 0.048)) |
+            pan(cit("results/plots/Immune_tumor_vs_normal.png",     0.050))) /
+           (pan(cit("results/plots/Immune_by_subtype.png",          0.058)) |
+            pan(cit("results/plots/Immune_CD8_survival_KM.png",     0.050)))),
        width = 9, height = 7.1, dpi = 300, bg = "white")
 
 ## ---- S9: three-panel nomogram / calibration / external DCA --------------
 ggsave("results/composite_figures/s17_nomogram.png",
        tag(pan(ci("results/nomogram_combined/combined_nomogram.png")) |
            pan(ci("results/nomogram_combined/calibration_combined.png")) |
-           pan(ci("results/external_utility_ACRG/DCA_external.png"))),
+           pan(cit("results/external_utility_ACRG/DCA_external.png", 0.050))),
        width = 12, height = 3.7, dpi = 300, bg = "white")
 
 ## ---- S10: all six MR leave-one-out panels -------------------------------
