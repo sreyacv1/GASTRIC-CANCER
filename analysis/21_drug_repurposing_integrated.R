@@ -117,7 +117,11 @@ p <- ggplot(top, aes(label, -log10(min_adj_p), fill = arms)) +
                     name = "Reverser arm",
                     labels = c("UP" = "represses tumour-UP genes",
                                "DOWN" = "induces tumour-DOWN genes",
-                               "DOWN+UP" = "both arms")) +
+                               "DOWN+UP" = "both arms"),
+                    ## Drop the legend when every displayed compound falls in one
+                    ## arm category (currently all 8 are DOWN+UP): a single-level
+                    ## legend carries no information. The caption states the arm.
+                    guide = if (length(unique(top$arms)) > 1) "legend" else "none") +
   ## Title/subtitle removed: both are stated in the caption, which also carries
   ## the hypothesis-generating caveat (reference-journal convention).
   labs(title = NULL, subtitle = NULL,
