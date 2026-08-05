@@ -115,8 +115,8 @@ p <- ggplot(top, aes(label, -log10(min_adj_p), fill = arms)) +
   scale_fill_manual(values = c("UP" = "#4C72B0", "DOWN" = "#DD8452",
                                "DOWN+UP" = "#55A868"),
                     name = "Reverser arm",
-                    labels = c("UP" = "represses tumour-UP genes",
-                               "DOWN" = "induces tumour-DOWN genes",
+                    labels = c("UP" = "represses tumor-UP genes",
+                               "DOWN" = "induces tumor-DOWN genes",
                                "DOWN+UP" = "both arms"),
                     ## Drop the legend when every displayed compound falls in one
                     ## arm category (currently all 8 are DOWN+UP): a single-level

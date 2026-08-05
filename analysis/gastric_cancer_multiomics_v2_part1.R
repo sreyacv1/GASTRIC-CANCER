@@ -375,7 +375,7 @@ if (!checkpoint_done("step02_tcga")) {
     stat_ellipse(level = 0.95, linetype = "dashed", linewidth = 0.5) +
     scale_colour_manual(values = COL_STATUS) +
     labs(title    = "TCGA-STAD PCA",
-         subtitle = "Coloured by sample type",
+         subtitle = "Colored by sample type",
          x = sprintf("PC1 (%.1f%%)", var_exp[1]),
          y = sprintf("PC2 (%.1f%%)", var_exp[2]),
          colour = NULL) +

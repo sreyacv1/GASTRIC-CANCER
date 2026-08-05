@@ -159,7 +159,7 @@ null_p95  <- as.numeric(quantile(null_lambda, 0.95))
 null_max  <- max(null_lambda)
 
 conclusion <- if (observed_lambda > 5 && null_p95 < 2) {
-  "biology: observed inflation reflects genome-wide tumour-vs-normal signal, not batch (null lambda ~1)"
+  "biology: observed inflation reflects genome-wide tumor-vs-normal signal, not batch (null lambda ~1)"
 } else if (null_p95 >= 2) {
   "batch/design: null lambda is also inflated, indicating residual structure"
 } else {

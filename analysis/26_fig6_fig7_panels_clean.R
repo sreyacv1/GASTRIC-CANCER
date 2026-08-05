@@ -33,8 +33,8 @@ stopifnot(nrow(res) == 21446)
 nu <- sum(res$sig == "Up"); nd <- sum(res$sig == "Down")
 stopifnot(nu == 2134, nd == 2362)          # assert against reported counts
 res$lab <- factor(res$sig, levels = c("Up","Down","NS"),
-                  labels = c(sprintf("Up in tumour (%s)", format(nu, big.mark=",")),
-                             sprintf("Down in tumour (%s)", format(nd, big.mark=",")),
+                  labels = c(sprintf("Up in tumor (%s)", format(nu, big.mark=",")),
+                             sprintf("Down in tumor (%s)", format(nd, big.mark=",")),
                              "Not significant"))
 top <- res %>% filter(sig != "NS", !is.na(hgnc_symbol), hgnc_symbol != "") %>%
   group_by(sig) %>% slice_min(padj, n = 10) %>% ungroup()
@@ -46,7 +46,7 @@ pv <- ggplot(res, aes(log2FoldChange, -log10(padj), colour = lab)) +
                            fontface = "italic", max.overlaps = Inf, box.padding = 0.32,
                            segment.size = 0.25, show.legend = FALSE) +
   scale_colour_manual(values = setNames(c("#c0392b","#2471a3","grey78"), levels(res$lab))) +
-  labs(x = expression(log[2]~"fold change (tumour/normal)"),
+  labs(x = expression(log[2]~"fold change (tumor/normal)"),
        y = expression(-log[10]~"(adjusted"~italic(P)*")")) + th
 ggsave(file.path(OUT, "fig6a_volcano_clean.png"), pv, width = 6.2, height = 5.0,
        dpi = 300, bg = "white")
@@ -83,7 +83,7 @@ idx <- match(sel$hgnc_symbol, rownames(vst))
 keep <- !is.na(idx)
 mat <- vst[idx[keep], , drop = FALSE]
 rownames(mat) <- sel$hgnc_symbol[keep]
-grp <- factor(ifelse(cd$status == "Tumor", "Tumour", "Normal"), levels = c("Normal","Tumour"))
+grp <- factor(ifelse(cd$status == "Tumor", "Tumor", "Normal"), levels = c("Normal","Tumor"))
 z   <- t(scale(t(mat)))
 z[z >  2] <-  2; z[z < -2] <- -2
 ## Width raised from 2100: at 2100 the "z-scored expression" legend title was
@@ -94,8 +94,8 @@ ht <- Heatmap(z, name = "z-scored\nexpression",
   column_split = grp, cluster_column_slices = FALSE,
   show_column_names = FALSE, row_names_gp = gpar(fontsize = 7, fontface = "italic"),
   column_title_gp = gpar(fontsize = 9, fontface = "bold"),
-  row_split = factor(ifelse(sel$sig[keep] == "Up", "tumour-up", "tumour-down"),
-                     levels = c("tumour-up","tumour-down")),
+  row_split = factor(ifelse(sel$sig[keep] == "Up", "tumor-up", "tumor-down"),
+                     levels = c("tumor-up","tumor-down")),
   row_title_gp = gpar(fontsize = 8), heatmap_legend_param = list(labels_gp = gpar(fontsize = 7)))
 draw(ht, merge_legend = TRUE, padding = unit(c(2, 2, 2, 6), "mm"))
 dev.off()

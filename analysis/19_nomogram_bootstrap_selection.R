@@ -72,7 +72,7 @@ df_c <- df_c[df_c$OS_years > 0 & !is.na(df_c$OS_years), ]
 
 N       <- nrow(df_c)
 n_event <- sum(df_c$OS_status)
-cat(sprintf("  Tumour samples: %d | Complete-case analytic N = %d | Events = %d (%.1f%%)\n",
+cat(sprintf("  Tumor samples: %d | Complete-case analytic N = %d | Events = %d (%.1f%%)\n",
             sum(is_tumor), N, n_event, 100*mean(df_c$OS_status)))
 if (N < 50) stop("Too few complete cases.")
 

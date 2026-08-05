@@ -53,7 +53,7 @@ ggsave("results/enrichment/path_ORA_GO_KEGG.png",
 
 ## ---- S7: two-panel CLR differential abundance ----------------------------
 ## Caption: left = control vs cancer-adjacent (44/61 at q<0.05); right = paired
-## cancer-adjacent vs tumour (18/61); 12 most enriched + 12 most depleted shown.
+## cancer-adjacent vs tumor (18/61); 12 most enriched + 12 most depleted shown.
 da_a <- rd("results/microbiome_biomarker/04a_DA_control_vs_GCN.csv")
 da_b <- rd("results/microbiome_biomarker/04b_DA_GCN_vs_GCT_paired.csv")
 stopifnot(sum(da_a$q < 0.05) == 44L, sum(da_b$q < 0.05) == 18L,
@@ -76,7 +76,7 @@ da_panel <- function(d, eff, ttl) {
 }
 ggsave("results/microbiome_biomarker/da_clr_barplot.png",
        (da_panel(da_a, "effect_clr", "CLR effect: control vs cancer-adjacent") |
-        da_panel(da_b, "effect_clr_paired", "CLR effect: cancer-adjacent vs tumour (paired)")) +
+        da_panel(da_b, "effect_clr_paired", "CLR effect: cancer-adjacent vs tumor (paired)")) +
          plot_layout(guides = "collect") & theme(legend.position = "bottom"),
        width = 12, height = 6.8, dpi = 300, bg = "white")
 
@@ -103,13 +103,13 @@ ggsave("results/microbiome_biomarker/da_clr_barplot.png",
 sc <- rd("results/immune/deconvolution_scores.csv")
 st <- rd("results/immune/tumor_vs_normal_stats.csv")
 rownames(sc) <- sc$feature; sc$feature <- NULL
-## TCGA barcode position 14-15: "01"-"09" tumour, "10"-"19" normal.
+## TCGA barcode position 14-15: "01"-"09" tumor, "10"-"19" normal.
 tcode <- substr(sub("^([^-]+-[^-]+-[^-]+)-.*$", "\\4", colnames(sc)), 1, 2)
 tcode <- substr(sapply(strsplit(colnames(sc), "-"), `[`, 4), 1, 2)
-grp <- ifelse(as.integer(tcode) <= 9, "Tumour", "Normal")
-stopifnot(sum(grp == "Tumour") > 300, sum(grp == "Normal") > 20)
-cat(sprintf("S8b: %d tumour / %d normal samples\n",
-            sum(grp == "Tumour"), sum(grp == "Normal")))
+grp <- ifelse(as.integer(tcode) <= 9, "Tumor", "Normal")
+stopifnot(sum(grp == "Tumor") > 300, sum(grp == "Normal") > 20)
+cat(sprintf("S8b: %d tumor / %d normal samples\n",
+            sum(grp == "Tumor"), sum(grp == "Normal")))
 ## Map the seven populations in the stats table to their score rows.
 pop_map <- c("CD8 T cells (MCP)"          = "MCP_CD8 T cells",
              "T cells (MCP)"              = "MCP_T cells",
@@ -128,7 +128,7 @@ long$facet <- factor(lab[long$population], levels = lab[names(pop_map)])
 p8b <- ggplot(long, aes(group, score, fill = group)) +
   geom_boxplot(outlier.size = 0.35, linewidth = 0.3) +
   facet_wrap(~ facet, nrow = 2, scales = "free_y") +
-  scale_fill_manual(values = c(Normal = "#4C72B0", Tumour = "#C44E52")) +
+  scale_fill_manual(values = c(Normal = "#4C72B0", Tumor = "#C44E52")) +
   labs(x = NULL, y = "Deconvolution score") +
   theme_bw(base_size = 9) +
   theme(legend.position = "none",
@@ -138,7 +138,7 @@ ggsave("results/plots/Immune_tumor_vs_normal_clean.png", p8b,
        width = 8.2, height = 4.2, dpi = 300, bg = "white")
 
 ## ---- S8: four-panel immune montage --------------------------------------
-## (a) validation scatter (b) tumour vs normal (c) by subtype (d) CD8 KM
+## (a) validation scatter (b) tumor vs normal (c) by subtype (d) CD8 KM
 ggsave("results/composite_figures/s15_immune.png",
        tag((pan(cit("results/plots/Immune_validation_scatter.png", 0.080)) |
             pan(ci("results/plots/Immune_tumor_vs_normal_clean.png"))) /

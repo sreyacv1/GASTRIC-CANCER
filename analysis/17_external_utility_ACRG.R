@@ -200,7 +200,7 @@ sink(file.path(outdir, "SUMMARY.txt"))
 cat("EXTERNAL clinical-utility validation in ACRG/GSE62254 (n=",
     nrow(acrg), ", events=", sum(acrg$event), ")\n\n", sep = "")
 cat("Signature: 25 genes + coefs FIXED from TCGA; risk z-scored within ACRG.\n")
-cat("Cox models fit in ACRG; ACRG has no tumour grade (Grade excluded).\n\n")
+cat("Cox models fit in ACRG; ACRG has no tumor grade (Grade excluded).\n\n")
 cat("== C-index (optimism-corrected Harrell, B=300) ==\n"); print(cindex_tab)
 cat("\n== Added value: Combined vs Clinical ==\n"); print(added)
 cat("\n== Time-dependent AUC (1/3/5y) ==\n"); print(auc_tab)

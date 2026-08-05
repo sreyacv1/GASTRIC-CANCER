@@ -7,9 +7,9 @@ every input from its primary repository and re-enter the pipeline at the correct
 
 ## A. Host transcriptome (differential expression, WGCNA, signature, immune, drug-repurposing)
 
-- [ ] **TCGA-STAD** — primary tumour + solid-tissue normal RNA-seq.
+- [ ] **TCGA-STAD** — primary tumor + solid-tissue normal RNA-seq.
   - Accession/portal: GDC / UCSC Xena (project TCGA-STAD).
-  - Build: STAR gene counts, GENCODE v36; 448 samples (412 tumour, 36 normal).
+  - Build: STAR gene counts, GENCODE v36; 448 samples (412 tumor, 36 normal).
   - Clinical: Lauren class, AJCC stage, grade, TCGA molecular subtype, driver mutations,
     TMB, measured leukocyte/lymphocyte %, overall survival.
   - Raw→processed entry point: count matrix → `results/rdata/tcga_processed.RData`.
@@ -17,7 +17,7 @@ every input from its primary repository and re-enter the pipeline at the correct
     immune deconvolution (`08_immune_deconvolution.R`), enrichment,
     microbe-response GSEA (`31_microbe_response_enrichment.R`).
 - [ ] **GTEx v10** — normal stomach reference (DE denominator).
-  - Portal: gtexportal.org. Combined with TCGA normals for the integrated tumour-vs-normal contrast.
+  - Portal: gtexportal.org. Combined with TCGA normals for the integrated tumor-vs-normal contrast.
 
 ## B. External survival / DE validation cohorts (transcriptome)
 
@@ -28,12 +28,12 @@ every input from its primary repository and re-enter the pipeline at the correct
 - [ ] **GSE27342, GSE63089** — independent DE-concordance cohorts. Access: GEO.
   Consumer: DEG cross-cohort concordance (`results/tables/DEG_GEO_*.csv`).
 
-## C. Single-cell transcriptome (module localisation)
+## C. Single-cell transcriptome (module localization)
 
 - [ ] **GSE134520** — premalignant-to-early gastric-cancer scRNA-seq.
   - Access: GEO. Processing: Seurat v4 (QC 200–6,000 genes, MT<20% → 43,992 cells;
     LogNormalize; 2,000 HVGs; PCA 30; SNN res 0.5; UMAP). 8 cell types by canonical markers.
-  - Consumer: scRNA localisation → `results/scrna/`.
+  - Consumer: scRNA localization → `results/scrna/`.
 
 ## D. Tissue microbiome (16S)
 
@@ -43,12 +43,12 @@ every input from its primary repository and re-enter the pipeline at the correct
   - Read-tracking validation: per-sample counts vs published Supplementary Table 3, Pearson r=0.98
     (`results/microbiome_biomarker/00_readtracking_concordance.csv`).
   - Consumer: `23_dada2_16S.R` → `24_microbiome_real.R`; reference DB `silva_nr99_v138.1`.
-- [ ] **PRJNA641258 (Italy, validation)** — paired tumour/non-tumour, V3–V4. Access: NCBI/ENA. (Ravegnini 2020, PMC7766162.)
+- [ ] **PRJNA641258 (Italy, validation)** — paired tumor/non-tumor, V3–V4. Access: NCBI/ENA. (Ravegnini 2020, PMC7766162.)
 - [ ] **PRJNA413125 (Portugal, validation)** — gastritis vs carcinoma, V5–V6. Access: NCBI/ENA. (Ferreira 2018.)
-  - **Batch caveat:** the discovery tumour/normal split is confounded with sequencing flowcell (§3.8);
+  - **Batch caveat:** the discovery tumor/normal split is confounded with sequencing flowcell (§3.8);
     validation cohorts are the batch-clean test.
 
-## E. GWAS summary statistics (Mendelian randomisation)
+## E. GWAS summary statistics (Mendelian randomization)
 
 *All accessions independently verified against GWAS-Catalog records; raw `gwasinfo()`/lookup output
 archived at `results/mr_real/gwas_catalog_verification.json`.*
@@ -64,7 +64,7 @@ archived at `results/mr_real/gwas_catalog_verification.json`.*
   - `ebi-a-GCST90018849` — gastric cancer, European, 1,029 cases (Sakaue 2021, PMID 34594039). **Primary.**
   - `ebi-a-GCST90018629` — gastric cancer, East-Asian, 7,921 cases (Sakaue 2021). Cross-ancestry power sensitivity only.
   - Access token: OpenGWAS JWT via `OPENGWAS_JWT` env var. Consumer: `11_real_mr.R`.
-  - Harmonised per-SNP instrument tables archived (`results/mr_real/`) so exact SNP sets survive upstream reprocessing.
+  - Harmonized per-SNP instrument tables archived (`results/mr_real/`) so exact SNP sets survive upstream reprocessing.
 
 ## F. Environment & reproducibility
 
@@ -81,5 +81,5 @@ archived at `results/mr_real/gwas_catalog_verification.json`.*
       study (16S and transcriptome are from different, unpaired cohorts). A per-genus host-gene MaAsLin2
       association was run in a superseded pipeline on a bridged, non-verifiable sample set; its outputs are
       not reproducible from retained files, so it is excluded and no host-gene↔genus claim is made. The
-      microbe-response result (§3.9) is a pathway-level GSEA on the TCGA tumour-vs-normal ranking only —
+      microbe-response result (§3.9) is a pathway-level GSEA on the TCGA tumor-vs-normal ranking only —
       hypothesis-generating context, not a host–microbiome axis.

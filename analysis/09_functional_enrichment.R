@@ -186,8 +186,8 @@ hall_lr <- run_fgsea(H_list, lranks,
     ggplot2::scale_fill_manual(values = c("TRUE" = "#c0392b", "FALSE" = "#2471a3"),
                                guide = "none") +
     ggplot2::labs(title = "Hallmark GSEA: diffuse vs intestinal gastric cancer",
-                  subtitle = "NES > 0 = enriched in diffuse tumours; only pathways with adj. p < 0.05 shown",
-                  x = "Normalised enrichment score (NES)", y = NULL) +
+                  subtitle = "NES > 0 = enriched in diffuse tumors; only pathways with adj. p < 0.05 shown",
+                  x = "Normalized enrichment score (NES)", y = NULL) +
     ggplot2::theme_bw(base_size = 9) +
     ggplot2::theme(panel.grid.minor = ggplot2::element_blank(),
                    axis.text.y = ggplot2::element_text(size = 7),

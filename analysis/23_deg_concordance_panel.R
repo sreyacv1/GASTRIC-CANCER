@@ -38,7 +38,7 @@ tcga <- tcga[!duplicated(tcga$gene), ]          # match() semantics
 mk <- function(other, xlab) {
   d <- inner_join(int[, c("gene","t")], other, by = "gene") |> na.omit()
   names(d)[3] <- "xval"
-  d$cls <- ifelse(d$t > 2, "Up in tumour", ifelse(d$t < -2, "Down in tumour", "|t| < 2"))
+  d$cls <- ifelse(d$t > 2, "Up in tumor", ifelse(d$t < -2, "Down in tumor", "|t| < 2"))
   list(d = d, r = cor(d$xval, d$t), n = nrow(d), xlab = xlab)
 }
 p1 <- mk(tcga,                                 "TCGA-only log2 fold change")
@@ -52,7 +52,7 @@ stopifnot(abs(p1$r - getr("integrated_t vs TCGA_log2FC")) < 0.002,
 cat(sprintf("r: TCGA %.3f | GSE27342 %.3f | GSE63089 %.3f (match committed table)\n",
             p1$r, p2$r, p3$r))
 
-pal <- c("Up in tumour" = "#c0392b", "Down in tumour" = "#2471a3", "|t| < 2" = "grey78")
+pal <- c("Up in tumor" = "#c0392b", "Down in tumor" = "#2471a3", "|t| < 2" = "grey78")
 yr  <- range(c(p1$d$t, p2$d$t, p3$d$t))
 
 panel <- function(P, tag, show_legend = FALSE) {
@@ -75,7 +75,7 @@ panel <- function(P, tag, show_legend = FALSE) {
           plot.subtitle = element_text(size = 8, face = "bold", colour = "grey20"),
           axis.title = element_text(size = 8.5))
 }
-fig <- (panel(p1, "Internal consistency (same TCGA tumours)") |
+fig <- (panel(p1, "Internal consistency (same TCGA tumors)") |
         panel(p2, "Independent cohort") + labs(y = NULL) |
         panel(p3, "Independent cohort", TRUE) + labs(y = NULL)) +
   plot_layout(guides = "collect") +

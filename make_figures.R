@@ -73,13 +73,13 @@ gsea_panel <- function(csv, title, sub, poslab, neglab, ntop = 8) {
     geom_vline(xintercept = 0, colour = "grey40", linewidth = 0.3) +
     scale_fill_viridis_c(option = "C", name = expression(-log[10]~italic(p)[adj]),
                          direction = -1) +
-    labs(title = NULL, subtitle = NULL, x = "Normalised enrichment score (NES)", y = NULL) +
+    labs(title = NULL, subtitle = NULL, x = "Normalized enrichment score (NES)", y = NULL) +
     theme(legend.position = "right", legend.key.width = unit(3, "mm"))
 }
 
 fig1a <- gsea_panel(file.path(ROOT, "results/enrichment/GSEA_Hallmark_TumorVsNormal.csv"),
-  "Hallmark GSEA: tumour vs normal", "TCGA+GTEx STAD",
-  "Up in tumour", "Down in tumour")
+  "Hallmark GSEA: tumor vs normal", "TCGA+GTEx STAD",
+  "Up in tumor", "Down in tumor")
 fig1b <- gsea_panel(file.path(ROOT, "results/enrichment/GSEA_Hallmark_DiffuseVsIntestinal.csv"),
   "Hallmark GSEA: diffuse vs intestinal", "Lauren histology contrast",
   "Enriched in diffuse", "Enriched in intestinal")

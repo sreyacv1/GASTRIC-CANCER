@@ -64,7 +64,7 @@ m <- meta[disc, ]
 sample_type <- factor(m$sample_type_simple, levels = c("Normal", "Tumor"))
 dataset     <- factor(m$dataset)
 
-cat(sprintf("\nIntegrated discovery (TCGA+GTEx): %d tumour / %d normal | %d genes\n",
+cat(sprintf("\nIntegrated discovery (TCGA+GTEx): %d tumor / %d normal | %d genes\n",
             sum(sample_type=="Tumor"), sum(sample_type=="Normal"), nrow(e)))
 cat("Discovery datasets:\n"); print(table(m$dataset, m$sample_type_simple))
 
@@ -161,7 +161,7 @@ fg_out$leadingEdge <- vapply(fg_out$leadingEdge, function(x) paste(head(x,20),co
 write.csv(fg_out, file.path(ENR,"fgsea_Hallmark_integrated.csv"), row.names=FALSE)
 cat(sprintf("\nfgsea Hallmark: %d/%d pathways at padj<0.05\n",
             sum(fg$padj<0.05, na.rm=TRUE), nrow(fg)))
-cat("Top 15 Hallmark by padj (NES sign = up in tumour if +):\n")
+cat("Top 15 Hallmark by padj (NES sign = up in tumor if +):\n")
 print(head(fg_out[,c("pathway","NES","pval","padj","size")],15), row.names=FALSE)
 
 # ---- (b) ORA: GO-BP + KEGG on up / down sets ----
@@ -201,9 +201,9 @@ cat("results/tables/DEG_GEO_GSE63089.csv           [VALIDATION only]\n")
 cat("results/tables/DEG_integrated_concordance.csv\n")
 cat("results/enrichment_integrated/fgsea_Hallmark_integrated.csv\n")
 cat("results/enrichment_integrated/ORA_{GO_BP,KEGG}_{UP,DOWN}.csv\n")
-cat("\nCAVEAT: discovery integrates TCGA + GTEx only. All tumours are TCGA and\n")
+cat("\nCAVEAT: discovery integrates TCGA + GTEx only. All tumors are TCGA and\n")
 cat("all GTEx samples are normal, so batch and biology are partially confounded.\n")
-cat("~ sample_type + dataset identifies the tumour effect from TCGA's own\n")
-cat("within-cohort tumour-vs-normal (36 TCGA normals present), with GTEx\n")
+cat("~ sample_type + dataset identifies the tumor effect from TCGA's own\n")
+cat("within-cohort tumor-vs-normal (36 TCGA normals present), with GTEx\n")
 cat("augmenting the normal baseline; this mitigates but does not eliminate the\n")
 cat("confound. GEO cohorts (GSE27342, GSE63089) are external VALIDATION only.\n")

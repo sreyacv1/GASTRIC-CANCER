@@ -19,7 +19,7 @@ os_evt  <- as.integer(cd$vital_status=="Dead")
 ok <- tum & is.finite(os_time) & os_time>0 & !is.na(os_evt)
 X <- t(tcga_vst[genes, ok, drop=FALSE])
 df <- data.frame(time=os_time[ok]/30.44, event=os_evt[ok], X)   # months
-cat(sprintf("[REPL] TCGA-STAD tumours with OS: n=%d, events=%d\n", nrow(df), sum(df$event)))
+cat(sprintf("[REPL] TCGA-STAD tumors with OS: n=%d, events=%d\n", nrow(df), sum(df$event)))
 
 # --- per-gene univariable Cox ------------------------------------------------
 uni <- do.call(rbind, lapply(genes, function(g){

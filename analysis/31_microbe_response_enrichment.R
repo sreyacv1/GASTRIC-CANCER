@@ -28,7 +28,7 @@ micro_kegg <- kres[grepl("Helicobacter|bacter|NF-kappa|Toll|NOD|IL-17|TNF|Cytoki
                          kres$Description, ignore.case=TRUE),
                    c("ID","Description","setSize","NES","pvalue","p.adjust")]
 write.csv(micro_kegg, file.path(OUT,"microbe_response_KEGG.csv"), row.names=FALSE)
-cat("\n[KEGG] microbe/inflammation pathways (tumour-vs-normal GSEA):\n")
+cat("\n[KEGG] microbe/inflammation pathways (tumor-vs-normal GSEA):\n")
 print(micro_kegg[order(-micro_kegg$NES),], row.names=FALSE)
 hp <- kres[kres$ID=="hsa05120",]
 if(nrow(hp)) cat(sprintf("\n>>> KEGG 'Epithelial cell signaling in H. pylori infection' (hsa05120): NES=%.2f, p.adj=%.2g\n", hp$NES, hp$p.adjust))

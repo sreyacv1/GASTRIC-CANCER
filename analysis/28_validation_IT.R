@@ -19,7 +19,7 @@ RAW <- "data/microbiome/validation_IT/raw"
 OUT <- "results/microbiome_biomarker/validation_IT"; dir.create(OUT, recursive=TRUE, showWarnings=FALSE)
 FILT<- "data/microbiome/validation_IT/filtered"; dir.create(FILT, showWarnings=FALSE)
 man <- read.csv("data/microbiome/validation_IT/manifest.csv", stringsAsFactors=FALSE)
-man$group <- ifelse(grepl("CTRL", man$disease), "Control", "Tumour")
+man$group <- ifelse(grepl("CTRL", man$disease), "Control", "Tumor")
 THREADS <- 16
 
 fnFs <- file.path(RAW, paste0(man$run, "_1.fastq.gz"))
@@ -71,10 +71,10 @@ al <- estimate_richness(psR, measures=c("Observed","Shannon","Simpson")); al$gro
 adf <- data.frame(metric=c("Observed","Shannon","Simpson"),
   Tumour=NA, Control=NA, wilcox_p=NA)
 for (i in seq_len(3)) { m<-adf$metric[i]
-  adf$Tumour[i]<-median(al[al$group=="Tumour",m]); adf$Control[i]<-median(al[al$group=="Control",m])
+  adf$Tumour[i]<-median(al[al$group=="Tumor",m]); adf$Control[i]<-median(al[al$group=="Control",m])
   adf$wilcox_p[i]<-suppressWarnings(wilcox.test(al[[m]]~al$group)$p.value) }
-write.csv(adf, file.path(OUT,"alpha_tumour_vs_control.csv"), row.names=FALSE)
-cat("\n[ALPHA] Tumour vs Control:\n"); print(adf)
+write.csv(adf, file.path(OUT,"alpha_tumor_vs_control.csv"), row.names=FALSE)
+cat("\n[ALPHA] Tumor vs Control:\n"); print(adf)
 
 ## --- 2. beta (PERMANOVA, no batch needed - paired same-run) -------------------
 otuG <- as(otu_table(psG),"matrix"); if (taxa_are_rows(psG)) otuG<-t(otuG)
@@ -92,21 +92,21 @@ oral <- intersect(c("Streptococcus","Fusobacterium","Prevotella","Veillonella",
    "Rothia","Dialister","Helicobacter"), colnames(rel))
 ot <- data.frame(genus=oral, mean_Tumour=NA, mean_Control=NA, log2FC=NA, wilcox_p=NA)
 for (i in seq_along(oral)){ g<-oral[i]
-  t<-rel[grp=="Tumour",g]; c<-rel[grp=="Control",g]
+  t<-rel[grp=="Tumor",g]; c<-rel[grp=="Control",g]
   ot$mean_Tumour[i]<-mean(t); ot$mean_Control[i]<-mean(c)
   ot$log2FC[i]<-log2((mean(t)+1e-6)/(mean(c)+1e-6))
   ot$wilcox_p[i]<-suppressWarnings(wilcox.test(t,c)$p.value) }
 ot$padj <- p.adjust(ot$wilcox_p,"BH"); ot<-ot[order(-ot$log2FC),]
-write.csv(ot, file.path(OUT,"oral_taxa_tumour_vs_control.csv"), row.names=FALSE)
-cat("\n[ORALIZATION] genus enrichment Tumour vs Control:\n"); print(ot)
+write.csv(ot, file.path(OUT,"oral_taxa_tumor_vs_control.csv"), row.names=FALSE)
+cat("\n[ORALIZATION] genus enrichment Tumor vs Control:\n"); print(ot)
 
 ## --- 4. full genus differential abundance (CLR Wilcoxon) ----------------------
 clrG <- clr(otuG)
-da <- data.frame(genus=colnames(clrG), mean_T=colMeans(clrG[grp=="Tumour",,drop=FALSE]),
+da <- data.frame(genus=colnames(clrG), mean_T=colMeans(clrG[grp=="Tumor",,drop=FALSE]),
   mean_C=colMeans(clrG[grp=="Control",,drop=FALSE]), p=NA)
-for (j in seq_len(ncol(clrG))) da$p[j]<-suppressWarnings(wilcox.test(clrG[grp=="Tumour",j],clrG[grp=="Control",j])$p.value)
+for (j in seq_len(ncol(clrG))) da$p[j]<-suppressWarnings(wilcox.test(clrG[grp=="Tumor",j],clrG[grp=="Control",j])$p.value)
 da$diff<-da$mean_T-da$mean_C; da$padj<-p.adjust(da$p,"BH"); da<-da[order(da$padj),]
-write.csv(da, file.path(OUT,"DA_genus_tumour_vs_control.csv"), row.names=FALSE)
+write.csv(da, file.path(OUT,"DA_genus_tumor_vs_control.csv"), row.names=FALSE)
 cat(sprintf("\n[DA] genera q<0.05: %d/%d\n", sum(da$padj<0.05,na.rm=TRUE), nrow(da)))
 print(head(da,15))
 saveRDS(psG, file.path(OUT,"phyloseq_genus_IT.rds"))

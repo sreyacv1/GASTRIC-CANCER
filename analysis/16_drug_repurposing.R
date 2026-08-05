@@ -124,8 +124,8 @@ p <- ggplot(top, aes(label, -log10(min_adj_p), fill = arms)) +
   geom_col() + coord_flip() +
   scale_fill_manual(values = c("UP" = "#4C72B0", "DOWN" = "#DD8452"),
                     name = "Reverser arm",
-                    labels = c("UP" = "represses tumour-UP genes",
-                               "DOWN" = "induces tumour-DOWN genes")) +
+                    labels = c("UP" = "represses tumor-UP genes",
+                               "DOWN" = "induces tumor-DOWN genes")) +
   labs(title = "Candidate GC-signature-reversing compounds (Enrichr)",
        subtitle = "In-silico, hypothesis-generating; no experimental validation",
        x = NULL, y = expression(-log[10]~"(best adjusted p)")) +

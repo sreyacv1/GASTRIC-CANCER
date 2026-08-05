@@ -59,7 +59,7 @@ load("data/geo/GSE62254.rda")                    # GSE62254.expr (names only)
 candidates <- intersect(rownames(expr), rownames(GSE62254.expr))
 expr <- expr[candidates, , drop = FALSE]
 n <- ncol(expr)
-cat(sprintf("TCGA tumours usable OS: n=%d events=%d; candidate genes=%d\n",
+cat(sprintf("TCGA tumors usable OS: n=%d events=%d; candidate genes=%d\n",
             n, sum(OS_event), length(candidates)))
 
 surv_all <- Surv(OS_time, OS_event)
@@ -290,7 +290,7 @@ write.csv(sel_freq, file.path(outdir, "gene_selection_frequency.csv"),
 
 sink(file.path(outdir, "SUMMARY.txt"))
 cat("NESTED CROSS-VALIDATION of the 25-gene prognostic signature\n")
-cat("TCGA-STAD tumours: n=", n, " events=", sum(OS_event),
+cat("TCGA-STAD tumors: n=", n, " events=", sum(OS_event),
     "; candidate genes=", length(candidates), "\n", sep = "")
 cat("Design: 20 repeats x 5-fold outer CV; ALL steps (z-scoring, univariable\n")
 cat("Cox screen p<0.05, inner 5-fold cv.glmnet Cox LASSO) re-run inside each\n")
