@@ -80,6 +80,19 @@ ggsave("results/microbiome_biomarker/da_clr_barplot.png",
          plot_layout(guides = "collect") & theme(legend.position = "bottom"),
        width = 12, height = 6.8, dpi = 300, bg = "white")
 
+## LEGIBILITY, THE ONE RULE THAT MATTERS FOR MONTAGES
+## A montage shrinks every component to its slot, so text that reads fine in the
+## standalone PNG can become unreadable in the figure. Two failures were shipped
+## before this note existed: a 7-facet panel whose strip and tick text vanished at
+## montage scale, and an x-tick clipped mid-word to "Norma" because its facet was
+## narrower than the label. Neither is detectable from the montage raster (see the
+## note in analysis/check_paper_integrity.py), so it is enforced here:
+##   1. Author each component at close to its FINAL printed size - a panel destined
+##      for a half-width slot should be ~4-4.5 in wide, not 6-8 in shrunk down.
+##   2. Keep facets per panel low (<=4). Seven facets in one quadrant cannot work.
+##   3. After any change, VIEW the montage at full size and read every tick label.
+##      Edge-ink and aspect-ratio checks pass on an illegible figure.
+
 ## ---- S8 panel (b): rebuilt from the committed score table ---------------
 ## The original results/plots/Immune_tumor_vs_normal.png packed 7 facets into a
 ## 1800x900 canvas; at montage scale its strip/tick text became illegible and the

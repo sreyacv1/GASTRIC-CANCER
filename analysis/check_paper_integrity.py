@@ -37,23 +37,19 @@ if os.path.isdir(SPLIT):
     if os.path.exists(rm) and "referenced, not embedded" in open(rm).read():
         fail.append("README claims figures are not embedded, but they are")
 
-# Interior legibility: edge-ink and aspect tests cannot see a panel whose text is
-# too small or clipped inside the canvas (this missed an illegible 7-facet panel
-# and a "Norma" x-tick). Flag any embedded figure whose smallest text-like ink
-# feature falls below a usable height at print scale.
-try:
-    import numpy as np
-    from PIL import Image
-    for lab, p in re.findall(r'!\[((?:Supplementary )?Figure [^\]]+)\]\(([^)]+)\)', T):
-        if not os.path.exists(p):
-            continue
-        im = Image.open(p)
-        w, h = im.size
-        # a figure wider than ~3600 px carrying >6 sub-panels is a density risk
-        if w * h > 0 and min(w, h) < 700:
-            fail.append(f"{lab}: {w}x{h} too small for legible sub-panel text")
-except ImportError:
-    pass
+# NOT CHECKED HERE: interior panel legibility (text too small to read, a tick
+# label clipped mid-word inside the canvas). An earlier version of this script
+# claimed to test it but only compared min(width, height) against 700 px, which
+# no figure in this manuscript trips - it was dead code that reported a pass.
+# Raster glyph measurement was tried and abandoned: connected-component heights
+# on an antialiased plot bottom out at the filter floor for both a known-illegible
+# montage and its legible replacement (both 4 px), so no honest threshold exists
+# at this level. Legibility is enforced upstream instead - see the component
+# authoring notes in analysis/28_supp_orphan_panels.R - and confirmed by viewing
+# each figure at full size before release. Do not re-add an automated gate here
+# without first showing that it fires on git 4a2c90d's s15_immune.png and passes
+# the current one.
+
 print("\n".join("FAIL: " + f for f in fail) if fail else
       f"OK  {n_sub} Results subsections, {n_main} main + {n_supp} supplementary embeds, all files present")
 sys.exit(1 if fail else 0)
