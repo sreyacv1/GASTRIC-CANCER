@@ -14,7 +14,7 @@ if n_sub != 11: fail.append(f"Results subsections: {n_sub}, expected 11")
 n_main = len(re.findall(r'!\[Figure [1-8]\]', T))
 if n_main != 8: fail.append(f"main figure embeds: {n_main}, expected 8")
 n_supp = len(re.findall(r'!\[Supplementary Figure S\d+\]', T))
-if n_supp != 11: fail.append(f"supplementary embeds: {n_supp}, expected 11")
+if n_supp != 9: fail.append(f"supplementary embeds: {n_supp}, expected 9")
 for lab, p in re.findall(r'!\[((?:Supplementary )?Figure [^\]]+)\]\(([^)]+)\)', T):
     if not os.path.exists(p): fail.append(f"{lab}: missing file {p}")
 for n in range(1, 38):

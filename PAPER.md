@@ -46,7 +46,7 @@ Candidate genes were restricted to those measured across the validation cohorts.
 Weighted gene co-expression network analysis used the 5,000 most variable genes (signed-hybrid network, biweight midcorrelation). The soft-thresholding power was chosen as the lowest value achieving scale-free topology fit R²≥0.85 (no forced fallback). Modules were detected with blockwiseModules (28) (minModuleSize 30, deepSplit 2, mergeCutHeight 0.25); module preservation in the external cohorts was quantified with the permutation-based Zsummary statistic (29); module eigengenes were correlated with clinical and immune traits, and each was tested against overall survival (Cox). For the survival-associated module, hub genes were ranked by module membership (MM) and gene significance (GS), and overlap with the prognostic signature was assessed. Robustness of this module to the soft-power choice was tested by rebuilding the network across powers 3–12 and confirming that the hub genes remained co-clustered in a single, survival-associated module.
 
 ### 2.7 Survival modeling and nomogram
-A clinical Cox model for overall survival was built on **complete cases** (no imputation) using real covariates (Age, AJCC Stage, Grade, TMB, plus hub-gene expression), with backward-AIC selection and a nomogram (calibration and external decision-curve analysis in Supplementary Figure S9). Discrimination used the **Harrell optimism-corrected** bootstrap C-index (B=500), with the backward-AIC selection repeated inside each bootstrap replicate to penalize selection instability; events-per-variable is reported. For the combined clinical+signature model, added value (ΔC-index, likelihood-ratio test, IDI, NRI; IDI/NRI computed at 3 years with survIDINRI and bootstrap p-values), time-dependent AUC and decision-curve analysis were computed both in TCGA (in-sample) and, to avoid training-set circularity, **out-of-sample in ACRG** (§3.7). The prognostic-model development and validation are reported in accordance with the **TRIPOD** (36) (Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis) guideline; a completed TRIPOD checklist is provided as Supplementary Table S3.
+A clinical Cox model for overall survival was built on **complete cases** (no imputation) using real covariates (Age, AJCC Stage, Grade, TMB, plus hub-gene expression), with backward-AIC selection and a nomogram (calibration and external decision-curve analysis in Supplementary Figure S7). Discrimination used the **Harrell optimism-corrected** bootstrap C-index (B=500), with the backward-AIC selection repeated inside each bootstrap replicate to penalize selection instability; events-per-variable is reported. For the combined clinical+signature model, added value (ΔC-index, likelihood-ratio test, IDI, NRI; IDI/NRI computed at 3 years with survIDINRI and bootstrap p-values), time-dependent AUC and decision-curve analysis were computed both in TCGA (in-sample) and, to avoid training-set circularity, **out-of-sample in ACRG** (§3.7). The prognostic-model development and validation are reported in accordance with the **TRIPOD** (36) (Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis) guideline; a completed TRIPOD checklist is provided as Supplementary Table S3.
 
 ### 2.8 Tissue-microbiome analysis
 Raw FASTQ (944 libraries) were denoised with DADA2 (primer trimming, `truncLen` 260/220, error learning, ASV inference, chimera removal, SILVA v138.1 (26) taxonomy); denoising fidelity was confirmed against the study's published read-tracking (Pearson r=0.98). Host mitochondrial (~34% of reads), chloroplast and non-bacterial ASVs were removed and features agglomerated to genus (897 samples × 314 genera). Crucially, each library's **sequencing flowcell** was recorded, and phenotype was cross-tabulated against flowcell to assess batch confounding. Analyses comprised α-diversity (Observed/Shannon/Simpson; ordered **Jonckheere–Terpstra** across the cascade), β-diversity (Bray–Curtis and Aitchison/CLR; PERMANOVA (27) **with and without adjustment for flowcell**), CLR+Wilcoxon+BH differential abundance, and a cancer-vs-control random-forest classifier accompanied by a **flowcell-prediction batch sanity check**. The tumor signal was then tested for replication in the **independent batch-clean validation cohort** (PRJNA641258, processed identically) across the same contrasts.
@@ -62,7 +62,7 @@ A public gastric single-cell RNA-seq dataset (GSE134520; premalignant-to-early-g
 Top up/down differentially expressed genes were queried (Enrichr) against LINCS L1000 and GEO drug-perturbation libraries to nominate compounds whose perturbation signature reverses the tumor signature. Results are hypothesis-generating and not experimentally validated.
 
 ### 2.12 Software and reproducibility
-All analyses ran in R 4.3.3 (a full `sessionInfo()` dump is provided with the code). Every reported result derives from the public datasets described above and is reproducible from the scripts provided under `analysis/`, with outputs under `results/` and pinned package versions in `package_versions.csv`. Complete-case analysis was used throughout; no missing values were imputed. Full figure provenance — mapping every main and supplementary figure to its source image file(s) and the source data table behind each reported number — is provided in `FIGURE_SOURCES.md`; the composite supplementary figures (S8, S9 and S10) are montages of the individual pipeline-output panels listed there, with no panel redrawn or synthesised.
+All analyses ran in R 4.3.3 (a full `sessionInfo()` dump is provided with the code). Every reported result derives from the public datasets described above and is reproducible from the scripts provided under `analysis/`, with outputs under `results/` and pinned package versions in `package_versions.csv`. Complete-case analysis was used throughout; no missing values were imputed. Full figure provenance — mapping every main and supplementary figure to its source image file(s) and the source data table behind each reported number — is provided in `FIGURE_SOURCES.md`; the composite supplementary figures (S6, S7 and S8) are montages of the individual pipeline-output panels listed there, with no panel redrawn or synthesised.
 
 ## 3. Results
 
@@ -185,7 +185,7 @@ We therefore repeated the entire utility analysis **out-of-sample in ACRG** (n=3
 ### 3.8 Tumor-tissue microbial dysbiosis
 We reprocessed the tissue 16S data **from raw sequencing** (944 DDBJ PRJDB20660 libraries) through DADA2, rather than relying on transcribed group-level tables, yielding a genuine ASV table (11,795 ASVs; after removing host mitochondrial reads — ~34% of reads — plus off-target and rare features, 897 samples × 314 genera). Per-sample read counts reproduced the published read-tracking table (Pearson r=0.98), confirming faithful denoising. The multi-cohort microbiome comparison is summarized in Figure 4C.
 
-A technical finding governs all interpretation of the tumor contrast: **tumor and non-tumor libraries were sequenced on separate flowcells** — of 216 tumor/adjacent-normal pairs, only 1 shares a flowcell — so tumor status is **confounded with sequencing batch** and cannot be disentangled by patient blocking or batch covariates. We therefore report this arm as exploratory, disclose the confound throughout, and emphasize the flowcell-sharing groups. On the less-confounded axis (non-ulcer → ulcer → cancer-adjacent, which share flowcells), microbial **richness declined** along the gastritis-to-cancer sequence (observed-richness ordered Jonckheere–Terpstra Z=−4.94, p=7.7×10⁻⁷; Shannon Z=−2.66, p=0.008) and *Helicobacter* rose monotonically toward cancer-adjacent tissue — both literature-consistent. Because n≈900 renders p-values near-inevitable, we report effect sizes: from non-ulcer to cancer-adjacent tissue, observed richness falls with Cliff's δ=−0.27 (median 47→30) and Shannon with δ=−0.12 (2.18→1.92), but **Simpson (evenness-weighted) diversity does not significantly decline** (δ=−0.07, p=0.17; trend-test p=0.074; Supplementary Table S4, `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`). The consistently replicated signal is therefore **reduced richness**, not a uniform diversity collapse — the Shannon/Simpson discordance we flag explicitly, in the same spirit as the DEG-inflation and PERMDISP caveats. But β-diversity separation by phenotype **collapsed once flowcell was modelled** (Bray R² 0.065→0.011), and a cancer-versus-control classifier that appeared strong (cross-validated AUC 0.916) was shown to be **batch-driven**: its top features were environmental/skin contaminants, and the same features predicted the sequencing flowcell among biologically-similar samples at 78% accuracy (vs 55% baseline; Supplementary Figure S11). The apparent tumor "oralization" signal thus largely reflects batch, not biology. Compositional (CLR) differential abundance is shown for completeness (Supplementary Figure S7): 44/61 genera differed between controls and cancer-adjacent mucosa and 18/61 in the paired cancer-adjacent-versus-tumor contrast, but — consistent with the batch caveat above — these genus-level shifts are not carried forward as biomarkers, as they do not survive the independent-cohort test below.
+A technical finding governs all interpretation of the tumor contrast: **tumor and non-tumor libraries were sequenced on separate flowcells** — of 216 tumor/adjacent-normal pairs, only 1 shares a flowcell — so tumor status is **confounded with sequencing batch** and cannot be disentangled by patient blocking or batch covariates. We therefore report this arm as exploratory, disclose the confound throughout, and emphasize the flowcell-sharing groups. On the less-confounded axis (non-ulcer → ulcer → cancer-adjacent, which share flowcells), microbial **richness declined** along the gastritis-to-cancer sequence (observed-richness ordered Jonckheere–Terpstra Z=−4.94, p=7.7×10⁻⁷; Shannon Z=−2.66, p=0.008) and *Helicobacter* rose monotonically toward cancer-adjacent tissue — both literature-consistent. Because n≈900 renders p-values near-inevitable, we report effect sizes: from non-ulcer to cancer-adjacent tissue, observed richness falls with Cliff's δ=−0.27 (median 47→30) and Shannon with δ=−0.12 (2.18→1.92), but **Simpson (evenness-weighted) diversity does not significantly decline** (δ=−0.07, p=0.17; trend-test p=0.074; Supplementary Table S4, `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`). The consistently replicated signal is therefore **reduced richness**, not a uniform diversity collapse — the Shannon/Simpson discordance we flag explicitly, in the same spirit as the DEG-inflation and PERMDISP caveats. But β-diversity separation by phenotype **collapsed once flowcell was modelled** (Bray R² 0.065→0.011), and a cancer-versus-control classifier that appeared strong (cross-validated AUC 0.916) was shown to be **batch-driven**: its top features were environmental/skin contaminants, and the same features predicted the sequencing flowcell among biologically-similar samples at 78% accuracy (vs 55% baseline; Supplementary Figure S9). The apparent tumor "oralization" signal thus largely reflects batch, not biology. Compositional (CLR) differential abundance is shown for completeness (Supplementary Figure S5): 44/61 genera differed between controls and cancer-adjacent mucosa and 18/61 in the paired cancer-adjacent-versus-tumor contrast, but — consistent with the batch caveat above — these genus-level shifts are not carried forward as biomarkers, as they do not survive the independent-cohort test below.
 
 Decisively, we tested whether the dysbiosis signal replicates in an **independent, batch-clean cohort** (PRJNA641258; 20 gastric-cancer vs 20 matched controls, V3–V4, tumor and control sequenced *together* on shared runs so that phenotype is not confounded with batch). It **did not**: there was no diversity difference (Shannon p=0.25), no compositional difference (Bray-Curtis PERMANOVA R²=0.018, **p=0.80**), the canonical oral taxa trended in the *opposite* direction, and **no genus was significant** after multiple-testing correction (0/344). Because random per-run batch effects do not transfer across independent cohorts, this clean non-replication indicates that the tumor-associated microbiome signal in the primary cohort was a **batch artefact rather than a generalisable biomarker**.
 
@@ -352,47 +352,29 @@ Dot plots of Gene Ontology biological-process and Kyoto Encyclopedia of Genes an
 
 Files: `results/enrichment/dotplot_GO_BP_UP.png`, `results/enrichment/dotplot_KEGG_UP.png`.
 
-![Supplementary Figure S5](results/figures/clean/s5_mr_scatter_hpylori.png)
-
-Supplementary Figure S5. Mendelian-randomization scatter plot for a representative exposure.
-
-Scatter plot of single-nucleotide-polymorphism (SNP) effects on the exposure, anti-Helicobacter pylori immunoglobulin G seropositivity, against their effects on gastric-cancer risk. Each point represents one genetic instrument and error bars represent standard errors on both axes. The five overlaid lines are the slopes estimated by inverse-variance weighting (IVW), MR-Egger, weighted median, weighted mode and simple mode. All slopes are flat and statistically indistinguishable from zero (IVW odds ratio 0.96, 95% confidence interval 0.71-1.30). Equivalent plots for all six exposures in both ancestries are provided in the repository.
-
-File: `results/figures/clean/s5_mr_scatter_hpylori.png` (source panel `results/mr_real/scatter_H__pylori_IgG_seropositivity.png`).
-
-![Supplementary Figure S6](results/mr_real/loo_H__pylori_IgG_seropositivity.png)
-
-Supplementary Figure S6. Mendelian-randomization leave-one-out analysis for a representative exposure.
-
-Leave-one-out inverse-variance-weighted estimates for anti-Helicobacter pylori immunoglobulin G seropositivity. Each row shows the pooled causal estimate recomputed with one instrument removed; points represent the estimate and horizontal bars the 95% confidence interval. Every estimate straddles the null, confirming that no individual instrument drives the result.
-
 File: `results/mr_real/loo_H__pylori_IgG_seropositivity.png`.
 
-![Supplementary Figure S7](results/microbiome_biomarker/da_clr_barplot.png)
+![Supplementary Figure S5](results/microbiome_biomarker/da_clr_barplot.png)
 
-Supplementary Figure S7. Compositional differential abundance of tissue microbiota.
+Supplementary Figure S5. Compositional differential abundance of tissue microbiota.
 
 Bar plots of centered-log-ratio effect sizes for the two discovery-cohort contrasts, tested by Wilcoxon rank-sum with Benjamini-Hochberg correction. The centered-log-ratio transform is used because sequencing yields relative rather than absolute abundances, so raw proportions are not independent. The left panel shows control versus cancer-adjacent mucosa (44 of 61 genera at q < 0.05) and the right panel the paired cancer-adjacent versus tumor contrast (18 of 61 genera at q < 0.05). Bars are colored by direction where q < 0.05, with red indicating enrichment and blue depletion, and the twelve most enriched and depleted genera are shown per panel. These genus-level shifts are reported for completeness only; as detailed in the Results, the tumor contrast is confounded with sequencing batch and does not replicate in an independent batch-clean cohort, so these taxa are not proposed as biomarkers.
 
 Files: `results/microbiome_biomarker/04a_DA_control_vs_GCN.csv`, `04b_DA_GCN_vs_GCT_paired.csv`.
 
-![Supplementary Figure S8](results/composite_figures/s15_immune.png)
+![Supplementary Figure S6](results/composite_figures/s15_immune.png)
 
-Supplementary Figure S8. Immune infiltration with deconvolution validated against pathology.
+Supplementary Figure S6. Immune-compartment shifts and CD8 T-cell survival association.
 
-(a) Scatter plot of the deconvolution-derived CD8 T-cell score (MCP-counter) against the measured histological leukocyte percentage scored by a pathologist (Spearman rho = 0.47, P = 3.1 x 10-16, n = 272), establishing that the expression-based estimates track true tissue composition. The overall T-cell and ImmuneScore estimates correlate more strongly with the same measurement (rho = 0.67 and 0.65 respectively; Results section 3.3), consistent with the deconvolution capturing total immune burden better than a single lymphocyte subset.
+(a) Comparison of immune compartments between tumor and normal tissue. Enrichment is dominated by the macrophage and monocyte lineage, with no net gain in CD8-positive T cells.
 
-(b) Comparison of immune compartments between tumor and normal tissue. Enrichment is dominated by the macrophage and monocyte lineage, with no net gain in CD8-positive T cells.
-
-(c) Immune infiltration across the four molecular subtypes defined by The Cancer Genome Atlas. Epstein-Barr virus-positive tumors are the most infiltrated and chromosomal-instability tumors the least (Kruskal-Wallis P < 1 x 10-6).
-
-(d) Association between CD8-positive T-cell score and overall survival. The score is not prognostic in this cohort (Cox hazard ratio 1.04, P = 0.41); this null result is reported as observed.
+(b) Association between CD8-positive T-cell score and overall survival. The score is not prognostic in this cohort (Cox hazard ratio 1.04, P = 0.41); this null result is reported as observed.
 
 Files: `results/plots/Immune_*.png`.
 
-![Supplementary Figure S9](results/composite_figures/s17_nomogram.png)
+![Supplementary Figure S7](results/composite_figures/s17_nomogram.png)
 
-Supplementary Figure S9. Clinical nomogram, calibration, and external decision-curve analysis.
+Supplementary Figure S7. Clinical nomogram, calibration, and external decision-curve analysis.
 
 (a) Nomogram combining clinical covariates with the signature score for prediction of 1-, 3- and 5-year overall survival. A nomogram converts each predictor into points on a common scale whose total maps to a predicted survival probability.
 
@@ -402,17 +384,17 @@ Supplementary Figure S9. Clinical nomogram, calibration, and external decision-c
 
 Files: `results/nomogram_combined/`, `results/external_utility_ACRG/DCA_external.png`.
 
-![Supplementary Figure S10](results/composite_figures/s19_mr_loo_all.png)
+![Supplementary Figure S8](results/composite_figures/s19_mr_loo_all.png)
 
-Supplementary Figure S10. Mendelian-randomization leave-one-out analysis for all six exposures.
+Supplementary Figure S8. Mendelian-randomization leave-one-out analysis for all six exposures.
 
 Leave-one-out inverse-variance-weighted estimates for each of the six microbial exposures. Removing any single instrument leaves every pooled estimate straddling the null, confirming that no individual instrument drives any result and that the overall null is not an outlier artefact.
 
 Files: `results/mr_real/loo_*.png`.
 
-![Supplementary Figure S11](results/microbiome_biomarker/rf_batch_classifier.png)
+![Supplementary Figure S9](results/microbiome_biomarker/rf_batch_classifier.png)
 
-Supplementary Figure S11. Evidence that the tumor-microbiome classifier reflects sequencing batch.
+Supplementary Figure S9. Evidence that the tumor-microbiome classifier reflects sequencing batch.
 
 (a) Bar plot of the fifteen genera ranked highest by mean decrease in Gini importance in the cancer-versus-control random-forest classifier. Genera shown in red italic type are recognized environmental or reagent contaminants (Dietzia, Serinicoccus, Methylobacterium-Methylorubrum, Microbacterium, Sphingomonas and Serratia) rather than gastric or oral commensals, and they dominate the classifier.
 
@@ -428,8 +410,8 @@ Files: `results/microbiome_biomarker/05_rf_importance.csv`, `05_rf_metrics_and_b
 - **Supplementary Table S4 — Alpha-diversity effect sizes.** Median differences and Cliff's δ (Observed / Shannon / Simpson) across the non-confounded gastritis-to-cancer cascade. File: `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`.
 - **Supplementary Table S5 — Non-circular single-cell localization.** Dominant cell type and fraction for the 23 hub genes not used to annotate the fibroblast cluster. File: `results/scrna/gene_dominant_celltype_noncircular.csv`.
 - **Supplementary Table S6 — GSE84437 pT-stage-stratified validation.** Harrell C-index and per-SD hazard ratios for the 25-gene signature within pT-stage strata (all / early pT1–T3 / pT4 / pT2–T3), showing discrimination is not recovered by stratification (C<0.5 throughout). File: `results/validation_multi/GSE84437_Tstage_stratified.csv`.
-- **Supplementary Table S7 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
-- **Supplementary Table S8 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 5(c). File: `results/wgcna_real/power_robustness_summary.csv`.
+- **Supplementary Table S5 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
+- **Supplementary Table S6 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 5(c). File: `results/wgcna_real/power_robustness_summary.csv`.
 
 All other result tables and figures are provided in the project repository under `results/`, with each mapped to its generating script in `PIPELINE.md`.
 

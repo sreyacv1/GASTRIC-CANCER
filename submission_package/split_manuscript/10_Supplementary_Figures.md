@@ -32,47 +32,29 @@ Dot plots of Gene Ontology biological-process and Kyoto Encyclopedia of Genes an
 
 Files: `results/enrichment/dotplot_GO_BP_UP.png`, `results/enrichment/dotplot_KEGG_UP.png`.
 
-![Supplementary Figure S5](results/figures/clean/s5_mr_scatter_hpylori.png)
-
-Supplementary Figure S5. Mendelian-randomization scatter plot for a representative exposure.
-
-Scatter plot of single-nucleotide-polymorphism (SNP) effects on the exposure, anti-Helicobacter pylori immunoglobulin G seropositivity, against their effects on gastric-cancer risk. Each point represents one genetic instrument and error bars represent standard errors on both axes. The five overlaid lines are the slopes estimated by inverse-variance weighting (IVW), MR-Egger, weighted median, weighted mode and simple mode. All slopes are flat and statistically indistinguishable from zero (IVW odds ratio 0.96, 95% confidence interval 0.71-1.30). Equivalent plots for all six exposures in both ancestries are provided in the repository.
-
-File: `results/figures/clean/s5_mr_scatter_hpylori.png` (source panel `results/mr_real/scatter_H__pylori_IgG_seropositivity.png`).
-
-![Supplementary Figure S6](results/mr_real/loo_H__pylori_IgG_seropositivity.png)
-
-Supplementary Figure S6. Mendelian-randomization leave-one-out analysis for a representative exposure.
-
-Leave-one-out inverse-variance-weighted estimates for anti-Helicobacter pylori immunoglobulin G seropositivity. Each row shows the pooled causal estimate recomputed with one instrument removed; points represent the estimate and horizontal bars the 95% confidence interval. Every estimate straddles the null, confirming that no individual instrument drives the result.
-
 File: `results/mr_real/loo_H__pylori_IgG_seropositivity.png`.
 
-![Supplementary Figure S7](results/microbiome_biomarker/da_clr_barplot.png)
+![Supplementary Figure S5](results/microbiome_biomarker/da_clr_barplot.png)
 
-Supplementary Figure S7. Compositional differential abundance of tissue microbiota.
+Supplementary Figure S5. Compositional differential abundance of tissue microbiota.
 
 Bar plots of centered-log-ratio effect sizes for the two discovery-cohort contrasts, tested by Wilcoxon rank-sum with Benjamini-Hochberg correction. The centered-log-ratio transform is used because sequencing yields relative rather than absolute abundances, so raw proportions are not independent. The left panel shows control versus cancer-adjacent mucosa (44 of 61 genera at q < 0.05) and the right panel the paired cancer-adjacent versus tumor contrast (18 of 61 genera at q < 0.05). Bars are colored by direction where q < 0.05, with red indicating enrichment and blue depletion, and the twelve most enriched and depleted genera are shown per panel. These genus-level shifts are reported for completeness only; as detailed in the Results, the tumor contrast is confounded with sequencing batch and does not replicate in an independent batch-clean cohort, so these taxa are not proposed as biomarkers.
 
 Files: `results/microbiome_biomarker/04a_DA_control_vs_GCN.csv`, `04b_DA_GCN_vs_GCT_paired.csv`.
 
-![Supplementary Figure S8](results/composite_figures/s15_immune.png)
+![Supplementary Figure S6](results/composite_figures/s15_immune.png)
 
-Supplementary Figure S8. Immune infiltration with deconvolution validated against pathology.
+Supplementary Figure S6. Immune-compartment shifts and CD8 T-cell survival association.
 
-(a) Scatter plot of the deconvolution-derived CD8 T-cell score (MCP-counter) against the measured histological leukocyte percentage scored by a pathologist (Spearman rho = 0.47, P = 3.1 x 10-16, n = 272), establishing that the expression-based estimates track true tissue composition. The overall T-cell and ImmuneScore estimates correlate more strongly with the same measurement (rho = 0.67 and 0.65 respectively; Results section 3.3), consistent with the deconvolution capturing total immune burden better than a single lymphocyte subset.
+(a) Comparison of immune compartments between tumor and normal tissue. Enrichment is dominated by the macrophage and monocyte lineage, with no net gain in CD8-positive T cells.
 
-(b) Comparison of immune compartments between tumor and normal tissue. Enrichment is dominated by the macrophage and monocyte lineage, with no net gain in CD8-positive T cells.
-
-(c) Immune infiltration across the four molecular subtypes defined by The Cancer Genome Atlas. Epstein-Barr virus-positive tumors are the most infiltrated and chromosomal-instability tumors the least (Kruskal-Wallis P < 1 x 10-6).
-
-(d) Association between CD8-positive T-cell score and overall survival. The score is not prognostic in this cohort (Cox hazard ratio 1.04, P = 0.41); this null result is reported as observed.
+(b) Association between CD8-positive T-cell score and overall survival. The score is not prognostic in this cohort (Cox hazard ratio 1.04, P = 0.41); this null result is reported as observed.
 
 Files: `results/plots/Immune_*.png`.
 
-![Supplementary Figure S9](results/composite_figures/s17_nomogram.png)
+![Supplementary Figure S7](results/composite_figures/s17_nomogram.png)
 
-Supplementary Figure S9. Clinical nomogram, calibration, and external decision-curve analysis.
+Supplementary Figure S7. Clinical nomogram, calibration, and external decision-curve analysis.
 
 (a) Nomogram combining clinical covariates with the signature score for prediction of 1-, 3- and 5-year overall survival. A nomogram converts each predictor into points on a common scale whose total maps to a predicted survival probability.
 
@@ -82,17 +64,17 @@ Supplementary Figure S9. Clinical nomogram, calibration, and external decision-c
 
 Files: `results/nomogram_combined/`, `results/external_utility_ACRG/DCA_external.png`.
 
-![Supplementary Figure S10](results/composite_figures/s19_mr_loo_all.png)
+![Supplementary Figure S8](results/composite_figures/s19_mr_loo_all.png)
 
-Supplementary Figure S10. Mendelian-randomization leave-one-out analysis for all six exposures.
+Supplementary Figure S8. Mendelian-randomization leave-one-out analysis for all six exposures.
 
 Leave-one-out inverse-variance-weighted estimates for each of the six microbial exposures. Removing any single instrument leaves every pooled estimate straddling the null, confirming that no individual instrument drives any result and that the overall null is not an outlier artefact.
 
 Files: `results/mr_real/loo_*.png`.
 
-![Supplementary Figure S11](results/microbiome_biomarker/rf_batch_classifier.png)
+![Supplementary Figure S9](results/microbiome_biomarker/rf_batch_classifier.png)
 
-Supplementary Figure S11. Evidence that the tumor-microbiome classifier reflects sequencing batch.
+Supplementary Figure S9. Evidence that the tumor-microbiome classifier reflects sequencing batch.
 
 (a) Bar plot of the fifteen genera ranked highest by mean decrease in Gini importance in the cancer-versus-control random-forest classifier. Genera shown in red italic type are recognized environmental or reagent contaminants (Dietzia, Serinicoccus, Methylobacterium-Methylorubrum, Microbacterium, Sphingomonas and Serratia) rather than gastric or oral commensals, and they dominate the classifier.
 
@@ -108,7 +90,7 @@ Files: `results/microbiome_biomarker/05_rf_importance.csv`, `05_rf_metrics_and_b
 - **Supplementary Table S4 — Alpha-diversity effect sizes.** Median differences and Cliff's δ (Observed / Shannon / Simpson) across the non-confounded gastritis-to-cancer cascade. File: `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`.
 - **Supplementary Table S5 — Non-circular single-cell localization.** Dominant cell type and fraction for the 23 hub genes not used to annotate the fibroblast cluster. File: `results/scrna/gene_dominant_celltype_noncircular.csv`.
 - **Supplementary Table S6 — GSE84437 pT-stage-stratified validation.** Harrell C-index and per-SD hazard ratios for the 25-gene signature within pT-stage strata (all / early pT1–T3 / pT4 / pT2–T3), showing discrimination is not recovered by stratification (C<0.5 throughout). File: `results/validation_multi/GSE84437_Tstage_stratified.csv`.
-- **Supplementary Table S7 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
-- **Supplementary Table S8 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 5(c). File: `results/wgcna_real/power_robustness_summary.csv`.
+- **Supplementary Table S5 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
+- **Supplementary Table S6 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 5(c). File: `results/wgcna_real/power_robustness_summary.csv`.
 
 All other result tables and figures are provided in the project repository under `results/`, with each mapped to its generating script in `PIPELINE.md`.

@@ -137,24 +137,20 @@ p8b <- ggplot(long, aes(group, score, fill = group)) +
 ggsave("results/plots/Immune_tumor_vs_normal_clean.png", p8b,
        width = 8.2, height = 4.2, dpi = 300, bg = "white")
 
-## ---- S8: four-panel immune montage --------------------------------------
-## (a) validation scatter (b) tumor vs normal (c) by subtype (d) CD8 KM
+## ---- S6: immune panels NOT shown in a main figure ----------------------
+## Trimmed from four panels to two. The dropped panels duplicated Figure 4 from
+## the same source tables: the CD8-vs-leukocyte scatter is one of the four rho
+## values already plotted in Fig 4(a) (results/immune/validation_vs_measured.csv),
+## and the ImmuneScore-by-subtype boxplot restates Fig 4(b)
+## (results/immune/immune_by_MolecularSubtype.csv). What remains appears nowhere
+## else: the tumor-vs-normal contrast across all seven deconvolution populations,
+## and the CD8 survival analysis.
 ggsave("results/composite_figures/s15_immune.png",
-       tag((pan(cit("results/plots/Immune_validation_scatter.png", 0.080)) |
-            pan(ci("results/plots/Immune_tumor_vs_normal_clean.png"))) /
-           (pan(cit("results/plots/Immune_by_subtype.png",          0.058)) |
-            pan(cit("results/plots/Immune_CD8_survival_KM.png",     0.050)))),
-       width = 9, height = 7.1, dpi = 300, bg = "white")
+       tag(pan(ci("results/plots/Immune_tumor_vs_normal_clean.png")) /
+           pan(cit("results/plots/Immune_CD8_survival_KM.png", 0.050)) +
+           plot_layout(heights = c(1, 1.15))),
+       width = 8.6, height = 9.2, dpi = 300, bg = "white")
 
-## ---- S9: three-panel nomogram / calibration / external DCA --------------
-## Layout note: a 3-across row gives each panel ~2.4 in at 180 mm, which shrank
-## the calibration and DCA tick text below the legibility screen's reference
-## value. The nomogram is wide and short, so it takes the full width and the two
-## square panels sit below at ~3.5 in each.
-## Row heights follow the content aspects, not patchwork's equal default: the
-## nomogram is 2400x1500 (h/w 0.62) so at 9 in wide it needs ~5.6 in, while the
-## lower row holds two ~0.8-aspect panels at 4.5 in wide each, needing ~3.6 in.
-## Equal rows stretched the nomogram's canvas and left a large empty band under it.
 ggsave("results/composite_figures/s17_nomogram.png",
        tag(pan(ci("results/nomogram_combined/combined_nomogram.png")) /
            (pan(cit("results/nomogram_combined/calibration_combined.png", 0.078)) |
