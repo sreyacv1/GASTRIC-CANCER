@@ -147,18 +147,27 @@ ggsave("results/composite_figures/s15_immune.png",
        width = 9, height = 7.1, dpi = 300, bg = "white")
 
 ## ---- S9: three-panel nomogram / calibration / external DCA --------------
+## Layout note: a 3-across row gives each panel ~2.4 in at 180 mm, which shrank
+## the calibration and DCA tick text below the legibility screen's reference
+## value. The nomogram is wide and short, so it takes the full width and the two
+## square panels sit below at ~3.5 in each.
 ggsave("results/composite_figures/s17_nomogram.png",
-       tag(pan(ci("results/nomogram_combined/combined_nomogram.png")) |
-           pan(cit("results/nomogram_combined/calibration_combined.png", 0.078)) |
-           pan(cit("results/external_utility_ACRG/DCA_external.png", 0.050))),
-       width = 12, height = 3.7, dpi = 300, bg = "white")
+       tag(pan(ci("results/nomogram_combined/combined_nomogram.png")) /
+           (pan(cit("results/nomogram_combined/calibration_combined.png", 0.078)) |
+            pan(cit("results/external_utility_ACRG/DCA_external.png", 0.050)))),
+       width = 9, height = 7.4, dpi = 300, bg = "white")
 
 ## ---- S10: all six MR leave-one-out panels -------------------------------
 loo <- sort(Sys.glob(file.path(ROOT, "results/mr_real/loo_*.png")))
 stopifnot(length(loo) == 6)
+## 2 columns, not 3: the source loo_*.png are 900x750 with text sized for a
+## standalone panel, so a 3-across row rendered their axis labels below the
+## legibility screen's reference value. They cannot be re-rendered at larger text
+## (the harmonised MR data was never persisted and needs a live OpenGWAS token),
+## so the layout carries the fix.
 ggsave("results/composite_figures/s19_mr_loo_all.png",
-       tag(wrap_plots(lapply(loo, function(f) pan(ci(sub("^\\./", "", f)))), ncol = 3)),
-       width = 10, height = 6, dpi = 300, bg = "white")
+       tag(wrap_plots(lapply(loo, function(f) pan(ci(sub("^\\./", "", f)))), ncol = 2)),
+       width = 9, height = 10.2, dpi = 300, bg = "white")
 
 ## ---- S11: RF importance (15 genera, contaminants red) + batch sanity ----
 imp <- rd("results/microbiome_biomarker/05_rf_importance.csv") %>%

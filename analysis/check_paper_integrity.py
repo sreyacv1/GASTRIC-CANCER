@@ -8,6 +8,7 @@ unnoticed. Run before committing PAPER.md.
 import re, os, sys
 T = open("PAPER.md").read()
 fail = []
+note = []
 n_sub = len(re.findall(r'^### 3\.\d+ ', T, re.M))
 if n_sub != 11: fail.append(f"Results subsections: {n_sub}, expected 11")
 n_main = len(re.findall(r'!\[Figure [1-8]\]', T))
@@ -37,19 +38,54 @@ if os.path.isdir(SPLIT):
     if os.path.exists(rm) and "referenced, not embedded" in open(rm).read():
         fail.append("README claims figures are not embedded, but they are")
 
-# NOT CHECKED HERE: interior panel legibility (text too small to read, a tick
-# label clipped mid-word inside the canvas). An earlier version of this script
-# claimed to test it but only compared min(width, height) against 700 px, which
-# no figure in this manuscript trips - it was dead code that reported a pass.
-# Raster glyph measurement was tried and abandoned: connected-component heights
-# on an antialiased plot bottom out at the filter floor for both a known-illegible
-# montage and its legible replacement (both 4 px), so no honest threshold exists
-# at this level. Legibility is enforced upstream instead - see the component
-# authoring notes in analysis/28_supp_orphan_panels.R - and confirmed by viewing
-# each figure at full size before release. Do not re-add an automated gate here
-# without first showing that it fires on git 4a2c90d's s15_immune.png and passes
-# the current one.
+# Interior legibility SCREEN (advisory, not a gate).
+# Edge-ink and aspect checks pass on a figure whose text is too small to read, so
+# this reports the median glyph height of each embedded figure converted to points
+# at 180 mm print width, and flags anything below a reference value for a human to
+# look at.
+# CALIBRATION AND ITS LIMIT. The metric orders a known real pair correctly: the
+# 7-facet s15_immune montage at git 4a2c90d scored 1.89 pt and was illegible, its
+# replacement 2.27 pt and reads cleanly. It also caught two genuine defects - S9
+# and S10 scored 1.53-1.56 pt from over-narrow 3-across layouts and were
+# relayouted. But it CANNOT separate bad from acceptable at the boundary: the
+# relayouted S9/S10 also score 1.89 pt and are legible by eye, the same value as
+# the known-illegible montage. So the threshold is set at 2.30 pt, which flags
+# everything at or below the legible-but-dense band and accepts nothing on trust.
+# Expect standing notes on figures whose small type is correct by convention
+# (Fig 5's WGCNA dendrogram leaf labels, Fig 6's heatmap gene rows) and on the
+# relayouted S9/S10. A note means LOOK AT IT, never a failure.
+LEGIBILITY_REF_PT = 2.30  # see calibration note above
+try:
+    import numpy as np
+    from PIL import Image
+    from scipy import ndimage
+    PRINT_IN = 7.09  # 180 mm double-column
+    low = []
+    for lab, p in re.findall(r'!\[((?:Supplementary )?Figure [^\]]+)\]\(([^)]+)\)', T):
+        if not os.path.exists(p):
+            continue
+        im = Image.open(p)
+        arr = np.array(Image.alpha_composite(
+            Image.new("RGBA", im.size, (255, 255, 255, 255)),
+            im.convert("RGBA")).convert("L"))
+        lb, _ = ndimage.label(arr < 128)
+        hs = [(s0.stop - s0.start) for s0, s1 in ndimage.find_objects(lb)
+              if 5 <= s0.stop - s0.start <= 60 and 3 <= s1.stop - s1.start <= 45
+              and 0.6 <= (s0.stop - s0.start) / max(s1.stop - s1.start, 1) <= 6]
+        if len(hs) < 40:
+            continue
+        pt = float(np.median(hs)) / (im.size[0] / PRINT_IN) * 72
+        if pt <= LEGIBILITY_REF_PT:
+            low.append((pt, lab, im.size))
+    for pt, lab, size in sorted(low):
+        note.append(f"legibility screen: {lab} median text {pt:.2f} pt at 180 mm "
+                    f"({size[0]}x{size[1]}) - at/below the {LEGIBILITY_REF_PT} pt "
+                    f"reference; view it and confirm the tick labels read")
+except ImportError:
+    pass
 
+for n in note:
+    print("NOTE:", n)
 print("\n".join("FAIL: " + f for f in fail) if fail else
       f"OK  {n_sub} Results subsections, {n_main} main + {n_supp} supplementary embeds, all files present")
 sys.exit(1 if fail else 0)
