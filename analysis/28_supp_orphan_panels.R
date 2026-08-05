@@ -34,8 +34,10 @@ tag <- function(p) p + plot_annotation(tag_levels = "a") &
 ## removed at source in analysis/08_immune_deconvolution.R and
 ## analysis/17_external_utility_ACRG.R for future runs, and cropped here so the
 ## current montages already follow the no-in-panel-title convention. The crop
-## fraction is measured per file: the title occupies a clean ink band ending
-## ~4-5% down the canvas, above a whitespace gap.
+## fraction is measured per file by locating the contiguous ink bands at the top
+## of each canvas: most have a single title band ending ~4-5% down, but the
+## validation scatter has title AND subtitle bands (ending 3.9% and 7.1%), so it
+## needs the deeper crop. Measure, do not guess, when swapping a component.
 crop_title <- function(img, frac) {
   inf <- image_info(img)
   off <- round(inf$height * frac)
@@ -81,7 +83,7 @@ ggsave("results/microbiome_biomarker/da_clr_barplot.png",
 ## ---- S8: four-panel immune montage --------------------------------------
 ## (a) validation scatter (b) tumour vs normal (c) by subtype (d) CD8 KM
 ggsave("results/composite_figures/s15_immune.png",
-       tag((pan(cit("results/plots/Immune_validation_scatter.png", 0.048)) |
+       tag((pan(cit("results/plots/Immune_validation_scatter.png", 0.080)) |
             pan(cit("results/plots/Immune_tumor_vs_normal.png",     0.050))) /
            (pan(cit("results/plots/Immune_by_subtype.png",          0.058)) |
             pan(cit("results/plots/Immune_CD8_survival_KM.png",     0.050)))),
@@ -90,7 +92,7 @@ ggsave("results/composite_figures/s15_immune.png",
 ## ---- S9: three-panel nomogram / calibration / external DCA --------------
 ggsave("results/composite_figures/s17_nomogram.png",
        tag(pan(ci("results/nomogram_combined/combined_nomogram.png")) |
-           pan(ci("results/nomogram_combined/calibration_combined.png")) |
+           pan(cit("results/nomogram_combined/calibration_combined.png", 0.078)) |
            pan(cit("results/external_utility_ACRG/DCA_external.png", 0.050))),
        width = 12, height = 3.7, dpi = 300, bg = "white")
 
