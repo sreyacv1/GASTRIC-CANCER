@@ -23,9 +23,12 @@ with identical content.
 - **Edit the `.docx` files** if you are working in Word; edit the `.md` files if you
   want the plain-text source. They are generated from the same content, so if you
   change one, the other will no longer match.
-- **Figures are referenced, not embedded, in the `.docx`.** Each legend names its
-  source file under `results/`. Submit the figures as separate files, which is what
-  most journals require anyway.
+- **Figures are embedded in the `.docx`.** `05_Results.docx` carries all eight main
+  figures and `10_Supplementary_Figures.docx` all eleven supplementary figures, so
+  each file reads as a self-contained document. Every legend also names its source
+  file under `results/`, because journals normally want the figures uploaded
+  separately at full resolution as well — the submission TIFFs are in
+  `submission_package/figures_tiff/` at 600 dpi.
 - **Placeholders.** `01_Title_Page` and `08_Declarations` contain fields marked
   `PLACEHOLDER` (author names and ORCIDs, corresponding author, funding, CRediT
   contributions, repository DOI). Fill these before submission.

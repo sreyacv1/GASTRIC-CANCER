@@ -1,0 +1,155 @@
+{
+ "claims": {
+  "GCST90006910": "anti-H.pylori IgG seropositivity (Butler-Laporte 2020, European)",
+  "GCST90017070": "genus Streptococcus (Kurilshikov 2021 MiBioGen, European)",
+  "GCST90032406": "Fusobacterium A abundance in stool (Qin 2022, European)",
+  "GCST90017045": "genus Prevotella 9 (Kurilshikov 2021 MiBioGen, European)",
+  "GCST90017088": "genus Veillonella (Kurilshikov 2021 MiBioGen, European)",
+  "GCST90017030": "genus Lactobacillus (Kurilshikov 2021 MiBioGen, European)",
+  "GCST90018849": "Gastric cancer, European (Sakaue 2021, 1029 cases)",
+  "GCST90018629": "Gastric cancer, East-Asian (7921 cases)"
+ },
+ "catalog": {
+  "GCST90006910": {
+   "found": true,
+   "disease_trait": "Anti-helicobacter pylori IgG seropositivity",
+   "efo_traits": [
+    {
+     "efo_id": "EFO_0009341",
+     "efo_trait": "Helicobacter pylori seropositivity"
+    }
+   ],
+   "pubmed_id": 33204752,
+   "initial_sample_size": "8,735 White British ancestry individuals",
+   "discovery_ancestry": [
+    "8735 European (U.K.)"
+   ]
+  },
+  "GCST90017070": {
+   "found": true,
+   "disease_trait": "Gut microbiota abundance (genus Streptococcus id.1853)",
+   "efo_traits": [
+    {
+     "efo_id": "EFO_0007874",
+     "efo_trait": "gut microbiome measurement"
+    }
+   ],
+   "pubmed_id": 33462485,
+   "initial_sample_size": "14,306 European ancestry individuals, 811 Korean ancestry individuals, 1,097 Hispanic individuals, 114 African American individuals, 481 Middle Eastern ancestry",
+   "discovery_ancestry": [
+    "811 East Asian (Republic of Korea)",
+    "1097 Hispanic or Latin American (U.S.)",
+    "1531 NR,Other admixed ancestry (Canada, Netherlands)",
+    "14306 European (Canada, Netherlands, Sweden, U.S., Belgium, Finland, Denmark, U.K., Germany)",
+    "481 Greater Middle Eastern (Middle Eastern, North African or Persian) (Israel)",
+    "114 African American or Afro-Caribbean (U.S.)"
+   ]
+  },
+  "GCST90032406": {
+   "found": true,
+   "disease_trait": "Fusobacterium A abundance in stool",
+   "efo_traits": [
+    {
+     "efo_id": "EFO_0007874",
+     "efo_trait": "gut microbiome measurement"
+    }
+   ],
+   "pubmed_id": 35115689,
+   "initial_sample_size": "5,959 Finnish ancestry individuals",
+   "discovery_ancestry": [
+    "5959 European (Finland)"
+   ]
+  },
+  "GCST90017045": {
+   "found": true,
+   "disease_trait": "Gut microbiota abundance (genus Prevotella9 id.11183)",
+   "efo_traits": [
+    {
+     "efo_id": "EFO_0007874",
+     "efo_trait": "gut microbiome measurement"
+    }
+   ],
+   "pubmed_id": 33462485,
+   "initial_sample_size": "14,306 European ancestry individuals, 811 Korean ancestry individuals, 1,097 Hispanic individuals, 114 African American individuals, 481 Middle Eastern ancestry",
+   "discovery_ancestry": [
+    "811 East Asian (Republic of Korea)",
+    "1097 Hispanic or Latin American (U.S.)",
+    "1531 NR,Other admixed ancestry (Canada, Netherlands)",
+    "14306 European (Canada, Netherlands, Sweden, U.S., Belgium, Finland, Denmark, U.K., Germany)",
+    "481 Greater Middle Eastern (Middle Eastern, North African or Persian) (Israel)",
+    "114 African American or Afro-Caribbean (U.S.)"
+   ]
+  },
+  "GCST90017088": {
+   "found": true,
+   "disease_trait": "Gut microbiota abundance (genus Veillonella id.2198)",
+   "efo_traits": [
+    {
+     "efo_id": "EFO_0007874",
+     "efo_trait": "gut microbiome measurement"
+    }
+   ],
+   "pubmed_id": 33462485,
+   "initial_sample_size": "14,306 European ancestry individuals, 811 Korean ancestry individuals, 1,097 Hispanic individuals, 114 African American individuals, 481 Middle Eastern ancestry",
+   "discovery_ancestry": [
+    "811 East Asian (Republic of Korea)",
+    "1097 Hispanic or Latin American (U.S.)",
+    "1531 NR,Other admixed ancestry (Canada, Netherlands)",
+    "14306 European (Canada, Netherlands, Sweden, U.S., Belgium, Finland, Denmark, U.K., Germany)",
+    "481 Greater Middle Eastern (Middle Eastern, North African or Persian) (Israel)",
+    "114 African American or Afro-Caribbean (U.S.)"
+   ]
+  },
+  "GCST90017030": {
+   "found": true,
+   "disease_trait": "Gut microbiota abundance (genus Lactobacillus id.1837)",
+   "efo_traits": [
+    {
+     "efo_id": "EFO_0007874",
+     "efo_trait": "gut microbiome measurement"
+    }
+   ],
+   "pubmed_id": 33462485,
+   "initial_sample_size": "14,306 European ancestry individuals, 811 Korean ancestry individuals, 1,097 Hispanic individuals, 114 African American individuals, 481 Middle Eastern ancestry",
+   "discovery_ancestry": [
+    "811 East Asian (Republic of Korea)",
+    "1097 Hispanic or Latin American (U.S.)",
+    "1531 NR,Other admixed ancestry (Canada, Netherlands)",
+    "14306 European (Canada, Netherlands, Sweden, U.S., Belgium, Finland, Denmark, U.K., Germany)",
+    "481 Greater Middle Eastern (Middle Eastern, North African or Persian) (Israel)",
+    "114 African American or Afro-Caribbean (U.S.)"
+   ]
+  },
+  "GCST90018849": {
+   "found": true,
+   "disease_trait": "Gastric cancer",
+   "efo_traits": [
+    {
+     "efo_id": "MONDO_0004950",
+     "efo_trait": "gastric carcinoma"
+    }
+   ],
+   "pubmed_id": 34594039,
+   "initial_sample_size": "1,029 European ancestry cases, 475,087 European ancestry controls, 7,921 East Asian ancestry cases, 159,201 East Asian ancestry controls",
+   "discovery_ancestry": [
+    "476116 European (Finland, U.K.)",
+    "167122 East Asian (Japan)"
+   ]
+  },
+  "GCST90018629": {
+   "found": true,
+   "disease_trait": "Gastric cancer",
+   "efo_traits": [
+    {
+     "efo_id": "MONDO_0004950",
+     "efo_trait": "gastric carcinoma"
+    }
+   ],
+   "pubmed_id": 34594039,
+   "initial_sample_size": "7,921 East Asian ancestry cases, 159,201 East Asian ancestry controls",
+   "discovery_ancestry": [
+    "167122 East Asian (Japan)"
+   ]
+  }
+ }
+}

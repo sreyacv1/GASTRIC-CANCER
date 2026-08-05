@@ -80,11 +80,55 @@ ggsave("results/microbiome_biomarker/da_clr_barplot.png",
          plot_layout(guides = "collect") & theme(legend.position = "bottom"),
        width = 12, height = 6.8, dpi = 300, bg = "white")
 
+## ---- S8 panel (b): rebuilt from the committed score table ---------------
+## The original results/plots/Immune_tumor_vs_normal.png packed 7 facets into a
+## 1800x900 canvas; at montage scale its strip/tick text became illegible and the
+## Macrophages facet's x-tick was clipped to "Norma". Rebuilt here from
+## results/immune/deconvolution_scores.csv (long form) with a 2-row layout,
+## readable text and no clipped labels. Wilcoxon adjusted p values are read from
+## results/immune/tumor_vs_normal_stats.csv, never recomputed.
+sc <- rd("results/immune/deconvolution_scores.csv")
+st <- rd("results/immune/tumor_vs_normal_stats.csv")
+rownames(sc) <- sc$feature; sc$feature <- NULL
+## TCGA barcode position 14-15: "01"-"09" tumour, "10"-"19" normal.
+tcode <- substr(sub("^([^-]+-[^-]+-[^-]+)-.*$", "\\4", colnames(sc)), 1, 2)
+tcode <- substr(sapply(strsplit(colnames(sc), "-"), `[`, 4), 1, 2)
+grp <- ifelse(as.integer(tcode) <= 9, "Tumour", "Normal")
+stopifnot(sum(grp == "Tumour") > 300, sum(grp == "Normal") > 20)
+cat(sprintf("S8b: %d tumour / %d normal samples\n",
+            sum(grp == "Tumour"), sum(grp == "Normal")))
+## Map the seven populations in the stats table to their score rows.
+pop_map <- c("CD8 T cells (MCP)"          = "MCP_CD8 T cells",
+             "T cells (MCP)"              = "MCP_T cells",
+             "Cytotoxic lymphocytes (MCP)" = "MCP_Cytotoxic lymphocytes",
+             "Monocytic lineage (MCP)"    = "MCP_Monocytic lineage",
+             "CD8+ T-cells (xCell)"       = "xCell_CD8+ T-cells",
+             "Macrophages (xCell)"        = "xCell_Macrophages",
+             "Monocytes (xCell)"          = "xCell_Monocytes")
+stopifnot(all(pop_map %in% rownames(sc)), all(names(pop_map) %in% st$population))
+long <- do.call(rbind, lapply(names(pop_map), function(pp) {
+  data.frame(population = pp, group = grp,
+             score = as.numeric(sc[pop_map[[pp]], ]), row.names = NULL)
+}))
+lab <- setNames(sprintf("%s\np_adj = %.2g", st$population, st$p_adj_BH), st$population)
+long$facet <- factor(lab[long$population], levels = lab[names(pop_map)])
+p8b <- ggplot(long, aes(group, score, fill = group)) +
+  geom_boxplot(outlier.size = 0.35, linewidth = 0.3) +
+  facet_wrap(~ facet, nrow = 2, scales = "free_y") +
+  scale_fill_manual(values = c(Normal = "#4C72B0", Tumour = "#C44E52")) +
+  labs(x = NULL, y = "Deconvolution score") +
+  theme_bw(base_size = 9) +
+  theme(legend.position = "none",
+        strip.text = element_text(size = 7.2, lineheight = 1.05),
+        axis.text.x = element_text(size = 7.5))
+ggsave("results/plots/Immune_tumor_vs_normal_clean.png", p8b,
+       width = 8.2, height = 4.2, dpi = 300, bg = "white")
+
 ## ---- S8: four-panel immune montage --------------------------------------
 ## (a) validation scatter (b) tumour vs normal (c) by subtype (d) CD8 KM
 ggsave("results/composite_figures/s15_immune.png",
        tag((pan(cit("results/plots/Immune_validation_scatter.png", 0.080)) |
-            pan(cit("results/plots/Immune_tumor_vs_normal.png",     0.050))) /
+            pan(ci("results/plots/Immune_tumor_vs_normal_clean.png"))) /
            (pan(cit("results/plots/Immune_by_subtype.png",          0.058)) |
             pan(cit("results/plots/Immune_CD8_survival_KM.png",     0.050)))),
        width = 9, height = 7.1, dpi = 300, bg = "white")

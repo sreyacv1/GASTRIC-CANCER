@@ -60,7 +60,7 @@ Files: `results/microbiome_biomarker/04a_DA_control_vs_GCN.csv`, `04b_DA_GCN_vs_
 
 Supplementary Figure S8. Immune infiltration with deconvolution validated against pathology.
 
-(a) Scatter plot of the deconvolution-derived T-cell score against the measured histological leukocyte fraction scored by a pathologist (Spearman rho = 0.67, P = 3.6 x 10-36), establishing that the expression-based estimates track true tissue composition.
+(a) Scatter plot of the deconvolution-derived CD8 T-cell score (MCP-counter) against the measured histological leukocyte percentage scored by a pathologist (Spearman rho = 0.47, P = 3.1 x 10-16, n = 272), establishing that the expression-based estimates track true tissue composition. The overall T-cell and ImmuneScore estimates correlate more strongly with the same measurement (rho = 0.67 and 0.65 respectively; Results section 3.3), consistent with the deconvolution capturing total immune burden better than a single lymphocyte subset.
 
 (b) Comparison of immune compartments between tumour and normal tissue. Enrichment is dominated by the macrophage and monocyte lineage, with no net gain in CD8-positive T cells.
 
