@@ -40,36 +40,89 @@ res$lab <- factor(res$sig, levels = c("Up","Down","NS"),
                              "Not significant"))
 top <- res %>% filter(sig != "NS", !is.na(hgnc_symbol), hgnc_symbol != "") %>%
   group_by(sig) %>% slice_min(padj, n = 10) %>% ungroup()
+## Labels are placed on a deterministic grid in the empty band above the data
+## rather than by ggrepel: the solver repels labels from points and from other
+## labels, but not from other labels' leader SEGMENTS, so a segment could be
+## routed through a neighbouring label's glyphs. Laying the labels out on a
+## fixed grid -- ordered by each gene's own x position, so leaders stay short
+## and near-parallel -- makes overlap impossible by construction.
+lab_grid <- function(d, x_lo, x_hi, y_rows) {
+  ## Pack labels into rows by their RENDERED WIDTH, not by equal column slots:
+  ## gene symbols differ ~4x in length (DPT vs MIR4435-2HG), so equal slots let
+  ## long names overrun their neighbours. Width is estimated from the character
+  ## count at the plotting size and converted to data units.
+  d <- d[order(d$log2FoldChange), , drop = FALSE]
+  span <- x_hi - x_lo
+  ## 2.5 mm-per-character at size 2.5 italic, expressed as a fraction of the
+  ## 3.74 in panel, then scaled into the x range of this half.
+  wch <- 0.062 * span
+  wid <- nchar(d$hgnc_symbol) * wch
+  gap <- 0.10 * span
+  ## Greedy first-fit into the available rows. A row is only chosen if the label
+  ## still FITS inside the band; otherwise the least-full row is used and the
+  ## row is compressed below. Without the fit test a long row overruns x_hi and
+  ## ggplot silently drops the outermost label.
+  row <- integer(nrow(d)); used <- rep(0, length(y_rows))
+  for (i in seq_len(nrow(d))) {
+    need <- wid[i] + gap
+    fits <- which(used + need <= span)
+    r <- if (length(fits)) fits[which.min(used[fits])] else which.min(used)
+    row[i] <- r
+    used[r] <- used[r] + need
+  }
+  d$lab_y <- y_rows[row]
+  ## left-align each row's run, then convert to text centres
+  d$lab_x <- NA_real_
+  for (r in seq_along(y_rows)) {
+    idx <- which(row == r)
+    if (!length(idx)) next
+    w <- wid[idx]
+    g <- gap
+    tot <- sum(w) + g * (length(idx) - 1)
+    ## if the row still exceeds the band, shrink the inter-label gap (never the
+    ## text) until it fits, so no label can be pushed outside the axis range
+    if (tot > span && length(idx) > 1) {
+      g <- max(0, (span - sum(w)) / (length(idx) - 1))
+      tot <- sum(w) + g * (length(idx) - 1)
+    }
+    start <- x_lo + max(0, (span - tot)) / 2
+    pos <- start + cumsum(c(0, head(w + g, -1))) + w / 2
+    d$lab_x[idx] <- pos
+  }
+  d
+}
+## three rows in the band; the down set spans the left half, the up set the right
+y_rows <- c(72, 81, 90, 99)
+gd <- lab_grid(dplyr::filter(top, sig == "Down"), -9.0, -1.4, y_rows)
+gu <- lab_grid(dplyr::filter(top, sig == "Up"),    1.4,  9.0, y_rows)
+gg <- rbind(gd, gu)
+pv_labels <- list(
+  geom_segment(data = gg,
+               aes(x = log2FoldChange, y = -log10(padj), xend = lab_x, yend = lab_y - 2.4,
+                   colour = lab),
+               linewidth = 0.2, alpha = 0.55, show.legend = FALSE),
+  geom_text(data = gg, aes(x = lab_x, y = lab_y, label = hgnc_symbol, colour = lab),
+            size = 2.5, fontface = "italic", show.legend = FALSE)
+)
+
 pv <- ggplot(res, aes(log2FoldChange, -log10(padj), colour = lab)) +
   geom_point(size = 0.35, alpha = 0.45, stroke = 0) +
   geom_vline(xintercept = c(-1, 1), linetype = 2, colour = "grey45", linewidth = 0.3) +
   geom_hline(yintercept = -log10(0.05), linetype = 2, colour = "grey45", linewidth = 0.3) +
-  ## Labels. Two calls (one per direction) keep a label on the same side of the
-  ## plot as its point, so no leader line has to cross the figure -- the defect
-  ## in the previous version. The y axis is extended above the data (below) to
-  ## create an empty band, and each call is left free in x and y within its own
-  ## half so ggrepel can resolve all ten labels without overlap.
-  ggrepel::geom_text_repel(data = dplyr::filter(top, sig == "Down"),
-                           aes(label = hgnc_symbol), size = 2.5, fontface = "italic",
-                           max.overlaps = Inf, box.padding = 0.5, point.padding = 0.2,
-                           segment.size = 0.22, segment.alpha = 0.6,
-                           min.segment.length = 0, force = 20, force_pull = 0.05,
-                           max.iter = 100000, max.time = 5,
-                           xlim = c(NA, -1.15), seed = 1105, show.legend = FALSE) +
-  ggrepel::geom_text_repel(data = dplyr::filter(top, sig == "Up"),
-                           aes(label = hgnc_symbol), size = 2.5, fontface = "italic",
-                           max.overlaps = Inf, box.padding = 0.5, point.padding = 0.2,
-                           segment.size = 0.22, segment.alpha = 0.6,
-                           min.segment.length = 0, force = 20, force_pull = 0.05,
-                           max.iter = 100000, max.time = 5,
-                           xlim = c(1.15, NA), seed = 1105, show.legend = FALSE) +
+  pv_labels +
   scale_colour_manual(values = setNames(c("#c0392b","#2471a3","grey78"), levels(res$lab))) +
   guides(colour = guide_legend(nrow = 2, byrow = TRUE,
                                override.aes = list(size = 1.6, alpha = 1))) +
-  scale_y_continuous(limits = c(0, 92), breaks = seq(0, 60, 20), expand = c(0, 0)) +
+  scale_x_continuous(limits = c(-10.4, 10.4), breaks = seq(-5, 5, 5), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 105), breaks = seq(0, 60, 20), expand = c(0, 0)) +
   labs(x = expression(log[2]~"fold change (tumor/normal)"),
        y = expression(-log[10]~"(adjusted"~italic(P)*")")) + th
-ggsave(file.path(OUT, "fig6a_volcano_clean.png"), pv, width = 3.740, height = 3.220,
+## Guard: every selected gene must have a label position inside the axis range;
+## ggplot silently DROPS text that falls outside scale limits.
+stopifnot(nrow(gg) == 20,
+          all(abs(gg$lab_x) < 10.4), all(gg$lab_y < 105),
+          !any(is.na(gg$lab_x)))
+ggsave(file.path(OUT, "fig6a_volcano_clean.png"), pv, width = 3.740, height = 3.700,
        dpi = 600, bg = "white")
 
 ## ---- (Fig7a) LASSO-Cox coefficients, no title ----------------------------
