@@ -225,7 +225,7 @@ a **null result, not evidence of absence**.
 
 ## What makes this project publishable
 
-1. **The honest-evaluation result.** Nested CV C = 0.611 versus apparent 0.72, with a published competitor scoring 0.481 (R 4.3.3/`rms` 6.8-1, archived as `sessionInfo_rms6.8-1_R4.3.3.txt`; re-running under `rms` 8.1-1 gives 0.52 — both chance-level, apparent C 0.54 unchanged) — below chance — on identical data.
+1. **The honest-evaluation result.** Nested CV C = 0.611 versus apparent 0.72, with a published competitor scoring 0.481 (R 4.3.3/`rms` 6.8-1, archived as `sessionInfo_rms6.8-1_R4.3.3.txt`; re-running under `rms` 8.1-1 gives 0.52 — both chance-level, apparent C 0.54 unchanged) — chance-level — on identical data.
 2. **The stromal module.** Externally validated across three cohorts, prognostic where the sparse signature failed.
 3. **A properly diagnosed batch artefact.** Most papers would have published R² = 0.065 as a microbiome finding. We traced it to flowcell structure and reagent contaminants.
 4. **Every negative reported.** Null MR, non-significant pooled HR, failed GSE84437 validation, unstable gene selection, deconvolution that fails on lymphocyte subsets.
