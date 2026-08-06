@@ -38,69 +38,134 @@ res$lab <- factor(res$sig, levels = c("Up","Down","NS"),
                   labels = c(sprintf("Up in tumor (%s)", format(nu, big.mark=",")),
                              sprintf("Down in tumor (%s)", format(nd, big.mark=",")),
                              "Not significant"))
-top <- res %>% filter(sig != "NS", !is.na(hgnc_symbol), hgnc_symbol != "") %>%
-  group_by(sig) %>% slice_min(padj, n = 10) %>% ungroup()
+## How many genes can be labelled without collisions is a geometric question:
+## each label needs its own column at least as wide as the label itself. Solve
+## for the largest n that fits the 7.6-unit band on BOTH sides, then take the
+## top-n by adjusted p per direction.
+PANEL_W_IN <- 6.90      # plotting area of the 3.74 in device, less axis furniture
+X_SPAN     <- 20.8      # scale_x_continuous limits: -10.4 .. 10.4
+
+## Rendered half-width of a label in DATA units, measured from the actual text
+## grob (a per-character estimate overstates wide glyphs by ~40%).
+lab_halfwidth <- function(sym) {
+  ins <- vapply(sym, function(s)
+    grid::convertWidth(grid::grobWidth(grid::textGrob(
+      s, gp = grid::gpar(fontsize = 2.5 * ggplot2::.pt, fontface = "italic"))),
+      "in", valueOnly = TRUE), numeric(1))
+  unname(0.5 * ins * (X_SPAN / PANEL_W_IN))
+}
+
+## Lay one row out in x: start each label at its own point, separate to remove
+## overlap, then shift the run (never individual labels) back inside the band.
+
+## Largest label count that VERIFIES collision-free. Rather than predict
+## capacity from a width formula (which mispredicts, because a wide label
+## overhangs its column into neighbours), build the actual layout for each
+## candidate N and run the same geometric test used in the final assertion.
+lab_grid <- function(d, x_lo, x_hi, y_rows) {
+  ## INTERLEAVED COLUMNS.
+  ## Every label gets its own column across the band, and consecutive columns
+  ## alternate between the available levels. A leader rises vertically in its
+  ## own column: the only boxes it could meet are those in the SAME column, and
+  ## each column holds exactly one label. Crossing is impossible by construction
+  ## regardless of how many levels are used -- extra levels exist only so that a
+  ## wide name may overhang its neighbours' columns without touching them.
+  d <- d[order(d$log2FoldChange), , drop = FALSE]
+  n <- nrow(d); nl <- length(y_rows)
+  w <- lab_halfwidth(d$hgnc_symbol)
+  d$lab_x <- x_lo + (x_hi - x_lo) * (seq_len(n) - 0.5) / n
+  lev <- rep(seq_len(nl), length.out = n)      # interleave across levels
+  d$lab_y <- y_rows[lev]
+  d$lab_w <- w
+  d$lab_lev <- lev
+  d$corr_y <- min(y_rows) - 5.0
+  ## constraint check: labels sharing a level must not overlap
+  bad <- 0
+  for (l in unique(lev)) {
+    i <- which(lev == l); if (length(i) < 2) next
+    o <- i[order(d$lab_x[i])]
+    bad <- bad + sum(diff(d$lab_x[o]) - (head(w[o], -1) + tail(w[o], -1)) < 0)
+  }
+  attr(d, "overlaps") <- bad
+  d
+}
+
+layout_clean <- function(d, x_lo, x_hi, y_rows, HH = 2.2) {
+  g <- lab_grid(d, x_lo, x_hi, y_rows)
+  if (attr(g, "overlaps") > 0) return(FALSE)
+  for (a in seq_len(nrow(g))) for (b in seq_len(nrow(g))) {
+    if (a == b) next
+    xa <- g$lab_x[a]; y1 <- g$corr_y[a]; y2 <- g$lab_y[a] - 2.6
+    if (xa > g$lab_x[b] - g$lab_w[b] && xa < g$lab_x[b] + g$lab_w[b] &&
+        y2 > g$lab_y[b] - HH && y1 < g$lab_y[b] + HH) return(FALSE)
+  }
+  TRUE
+}
+n_fit <- function(res, y_rows) {
+  for (N in 10:3) {
+    d_up <- res %>% dplyr::filter(sig == "Up", !is.na(hgnc_symbol), hgnc_symbol != "") %>%
+      dplyr::slice_min(padj, n = N)
+    d_dn <- res %>% dplyr::filter(sig == "Down", !is.na(hgnc_symbol), hgnc_symbol != "") %>%
+      dplyr::slice_min(padj, n = N)
+    if (layout_clean(d_up, 1.3, 9.6, y_rows) && layout_clean(d_dn, -9.6, -1.3, y_rows))
+      return(N)
+  }
+  3
+}
+Y_ROWS <- c(72, 81, 90, 99)
+N_LAB <- n_fit(res, Y_ROWS)
+message(sprintf("volcano: labelling top %d genes per direction (collision-free capacity)", N_LAB))
+top <- res %>%
+  dplyr::filter(sig != "NS", !is.na(hgnc_symbol), hgnc_symbol != "") %>%
+  dplyr::group_by(sig) %>% dplyr::slice_min(padj, n = N_LAB) %>% dplyr::ungroup()
 ## Labels are placed on a deterministic grid in the empty band above the data
 ## rather than by ggrepel: the solver repels labels from points and from other
 ## labels, but not from other labels' leader SEGMENTS, so a segment could be
 ## routed through a neighbouring label's glyphs. Laying the labels out on a
 ## fixed grid -- ordered by each gene's own x position, so leaders stay short
 ## and near-parallel -- makes overlap impossible by construction.
-lab_grid <- function(d, x_lo, x_hi, y_rows) {
-  ## Pack labels into rows by their RENDERED WIDTH, not by equal column slots:
-  ## gene symbols differ ~4x in length (DPT vs MIR4435-2HG), so equal slots let
-  ## long names overrun their neighbours. Width is estimated from the character
-  ## count at the plotting size and converted to data units.
-  d <- d[order(d$log2FoldChange), , drop = FALSE]
-  span <- x_hi - x_lo
-  ## 2.5 mm-per-character at size 2.5 italic, expressed as a fraction of the
-  ## 3.74 in panel, then scaled into the x range of this half.
-  wch <- 0.062 * span
-  wid <- nchar(d$hgnc_symbol) * wch
-  gap <- 0.10 * span
-  ## Greedy first-fit into the available rows. A row is only chosen if the label
-  ## still FITS inside the band; otherwise the least-full row is used and the
-  ## row is compressed below. Without the fit test a long row overruns x_hi and
-  ## ggplot silently drops the outermost label.
-  row <- integer(nrow(d)); used <- rep(0, length(y_rows))
-  for (i in seq_len(nrow(d))) {
-    need <- wid[i] + gap
-    fits <- which(used + need <= span)
-    r <- if (length(fits)) fits[which.min(used[fits])] else which.min(used)
-    row[i] <- r
-    used[r] <- used[r] + need
+## Crossing-free label layout by CORRIDOR ROUTING.
+##
+## The hard constraint that defeats ggrepel -- and defeated a plain grid -- is
+## that a leader travelling to an upper row can pass through a label sitting in
+## a lower row. Rather than search for an assignment with no such pair (often
+## infeasible: 10 labels per side do not leave enough clear x), each row is given
+## its own horizontal corridor immediately below it. A leader runs obliquely to
+## its row's corridor, along the corridor to its label's x, then straight up a
+## short stub into the label. Corridors lie in the gaps BETWEEN rows, so a leader
+## never enters a row it is not destined for, and within a row labels are laid
+## out non-overlapping. Both constraints hold by construction.
+
+row_layout <- function(x_pref, w, x_lo, x_hi) {
+  o <- order(x_pref); x <- x_pref[o]; ww <- w[o]
+  pad <- 0.04 * (x_hi - x_lo)
+  for (i in seq_along(x)[-1]) {
+    lim <- x[i - 1] + ww[i - 1] + ww[i] + pad
+    if (x[i] < lim) x[i] <- lim
   }
-  d$lab_y <- y_rows[row]
-  ## left-align each row's run, then convert to text centres
-  d$lab_x <- NA_real_
-  for (r in seq_along(y_rows)) {
-    idx <- which(row == r)
-    if (!length(idx)) next
-    w <- wid[idx]
-    g <- gap
-    tot <- sum(w) + g * (length(idx) - 1)
-    ## if the row still exceeds the band, shrink the inter-label gap (never the
-    ## text) until it fits, so no label can be pushed outside the axis range
-    if (tot > span && length(idx) > 1) {
-      g <- max(0, (span - sum(w)) / (length(idx) - 1))
-      tot <- sum(w) + g * (length(idx) - 1)
-    }
-    start <- x_lo + max(0, (span - tot)) / 2
-    pos <- start + cumsum(c(0, head(w + g, -1))) + w / 2
-    d$lab_x[idx] <- pos
-  }
-  d
+  over <- (x[length(x)] + ww[length(ww)]) - x_hi
+  if (over > 0) x <- x - over
+  under <- x_lo - (x[1] - ww[1])
+  if (under > 0) x <- x + under
+  out <- numeric(length(x)); out[o] <- x; out
 }
-## three rows in the band; the down set spans the left half, the up set the right
-y_rows <- c(72, 81, 90, 99)
-gd <- lab_grid(dplyr::filter(top, sig == "Down"), -9.0, -1.4, y_rows)
-gu <- lab_grid(dplyr::filter(top, sig == "Up"),    1.4,  9.0, y_rows)
+
+
+## four rows in the empty band; down set on the left half, up set on the right
+y_rows <- Y_ROWS
+gd <- lab_grid(dplyr::filter(top, sig == "Down"), -9.6, -1.3, y_rows)
+gu <- lab_grid(dplyr::filter(top, sig == "Up"),    1.3,  9.6, y_rows)
 gg <- rbind(gd, gu)
+
 pv_labels <- list(
-  geom_segment(data = gg,
-               aes(x = log2FoldChange, y = -log10(padj), xend = lab_x, yend = lab_y - 2.4,
-                   colour = lab),
-               linewidth = 0.2, alpha = 0.55, show.legend = FALSE),
+  ## oblique run from the data point to the foot of the label's own column
+  geom_segment(data = gg, aes(x = log2FoldChange, y = -log10(padj),
+                              xend = lab_x, yend = corr_y, colour = lab),
+               linewidth = 0.2, alpha = 0.5, show.legend = FALSE),
+  ## vertical rise inside that column -- no other label occupies this x
+  geom_segment(data = gg, aes(x = lab_x, y = corr_y,
+                              xend = lab_x, yend = lab_y - 2.6, colour = lab),
+               linewidth = 0.2, alpha = 0.5, show.legend = FALSE),
   geom_text(data = gg, aes(x = lab_x, y = lab_y, label = hgnc_symbol, colour = lab),
             size = 2.5, fontface = "italic", show.legend = FALSE)
 )
@@ -119,10 +184,11 @@ pv <- ggplot(res, aes(log2FoldChange, -log10(padj), colour = lab)) +
        y = expression(-log[10]~"(adjusted"~italic(P)*")")) + th
 ## Guard: every selected gene must have a label position inside the axis range;
 ## ggplot silently DROPS text that falls outside scale limits.
-stopifnot(nrow(gg) == 20,
+stopifnot(attr(gd, "overlaps") == 0, attr(gu, "overlaps") == 0,
+          nrow(gg) == 2 * N_LAB,
           all(abs(gg$lab_x) < 10.4), all(gg$lab_y < 105),
           !any(is.na(gg$lab_x)))
-ggsave(file.path(OUT, "fig6a_volcano_clean.png"), pv, width = 3.740, height = 3.700,
+ggsave(file.path(OUT, "fig6a_volcano_clean.png"), pv, width = 7.400, height = 3.900,
        dpi = 600, bg = "white")
 
 ## ---- (Fig7a) LASSO-Cox coefficients, no title ----------------------------

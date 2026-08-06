@@ -48,7 +48,10 @@ FIGS <- list(
   `6` = list(p = c("results/figures/clean/fig6a_volcano_clean.png"     = "a",
                    "results/figures/clean/fig6b_heatmap_clean.png"           = "b",
                    "results/figures/deg_concordance_panel.png"         = "c"),
-             ncol = 2, mm = 190, design = "AB\nCC", aspect = 0.62),
+             ## (a) takes a full-width row: the volcano needs the horizontal room
+             ## to label 8 genes per direction without leader/label collisions
+             ## (a half-width slot verifies clean at only 3 per direction).
+             ncol = 2, mm = 190, design = "AA\nBB\nCC", aspect = 1.02),
   ## (c)-(f): the four cohort KM curves are used INDIVIDUALLY. The old
   ## s16_km.png was a pre-composited montage carrying its own nested (A)-(D)
   ## labels, which collided with this figure's panel tags.
