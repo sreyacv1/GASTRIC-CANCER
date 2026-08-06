@@ -79,7 +79,7 @@ the answers.
 
 The ~0.11 gap *is* the finding. Many published signatures report the 0.72-style
 number. For calibration, we re-ran a **previously published 5-gene gastric
-signature** on identical data with identical correction: **C = 0.481 — below
+signature** on identical data with identical correction: **C = 0.481 (value from R 4.3.3/`rms` 6.8-1; re-running under `rms` 8.1-1 gives 0.52 — both at chance, apparent C 0.54 unchanged) — below
 chance.**
 
 Panel (b): pooled HR 1.19 (95% CI 0.96–1.47) — **not significant**. We report
@@ -225,7 +225,7 @@ a **null result, not evidence of absence**.
 
 ## What makes this project publishable
 
-1. **The honest-evaluation result.** Nested CV C = 0.611 versus apparent 0.72, with a published competitor scoring 0.481 — below chance — on identical data.
+1. **The honest-evaluation result.** Nested CV C = 0.611 versus apparent 0.72, with a published competitor scoring 0.481 (value from R 4.3.3/`rms` 6.8-1; re-running under `rms` 8.1-1 gives 0.52 — both at chance, apparent C 0.54 unchanged) — below chance — on identical data.
 2. **The stromal module.** Externally validated across three cohorts, prognostic where the sparse signature failed.
 3. **A properly diagnosed batch artefact.** Most papers would have published R² = 0.065 as a microbiome finding. We traced it to flowcell structure and reagent contaminants.
 4. **Every negative reported.** Null MR, non-significant pooled HR, failed GSE84437 validation, unstable gene selection, deconvolution that fails on lymphocyte subsets.

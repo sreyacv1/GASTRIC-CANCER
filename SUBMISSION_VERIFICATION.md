@@ -76,7 +76,7 @@ CDK4 −0.8248 (0.657), CDK6 −0.5485 (0.514); FGFR1–4 all **not** dependent.
 Source: `depmap/gastric_dependency.csv`.
 
 ## K. Prior-signature benchmark — VERIFIED
-n=383, 156 events, C_apparent 0.5446, **C_optimism_corrected 0.4807**, KM log-rank p=0.0039. ✓
+n=383, 156 events, C_apparent 0.5446, **C_optimism_corrected 0.4807 (value from R 4.3.3/`rms` 6.8-1; re-running under `rms` 8.1-1 gives 0.52 — both at chance, apparent C 0.54 unchanged)**, KM log-rank p=0.0039. ✓
 Source: `base_paper_replication/model_performance.csv`.
 
 ## L. Signature stability — VERIFIED

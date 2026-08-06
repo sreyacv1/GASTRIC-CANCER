@@ -5,6 +5,15 @@ Every result in `PAPER.md` maps to a script under `analysis/` and an output unde
 `package_versions.csv`). The Mendelian-randomisation stage needs an OpenGWAS token
 (`export OPENGWAS_JWT=<token>`).
 
+> **Reproducibility note — bundled R environment.** The bundled conda R (`r_env/`) was built at a fixed path, so its `bin/R` / `bin/Rscript` wrapper scripts break if the project directory is moved (symptom: `sed: not found` / `-e requires non-empty argument`). If `run_real_pipeline.sh` fails that way after a relocation, either (a) use a system R 4.3.x with the packages in `package_versions.csv`, or (b) call the R binary directly with `R_HOME` overridden:
+> ```bash
+> RENV="$(pwd)/r_env"
+> export R_HOME_DIR="$RENV/lib/R" R_HOME="$RENV/lib/R"
+> export PATH="$RENV/bin:/usr/bin:/bin:$PATH"
+> export LD_LIBRARY_PATH="$RENV/lib:$RENV/lib/R/lib:$LD_LIBRARY_PATH"
+> "$RENV/lib/R/bin/exec/R" --vanilla --no-echo -f analysis/<script>.R
+> ```
+
 ## Stages
 
 | # | Script | Produces | Key inputs |
