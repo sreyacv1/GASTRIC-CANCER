@@ -69,39 +69,11 @@ All analyses ran in R 4.3.3 (a full `sessionInfo()` dump is provided with the co
 ### 3.1 A reproducible tumor-versus-normal transcriptional program
 The integrated TCGA+GTEx tumor-versus-normal analysis (412 tumor vs 443 normal) revealed a coherent proliferation-dominated program. Ranked by tumor-vs-normal moderated t, the top up-regulated genes were mitotic/cell-cycle regulators (KIF14, ECT2, CENPF, TPX2, ASPM, HELLS, CST1, ESM1) together with stromal/EMT markers (COL10A1, WNT2, INHBA), while the top down-regulated genes were differentiated gastric and metabolic genes (parietal-cell ATP4A/ATP4B, GPX3, AQP4, ADH7). GSEA on the integrated ranking showed strong up-regulation of **E2F targets (NES 3.75), G2M checkpoint (NES 3.64) and MYC targets**, with coordinated loss of **oxidative phosphorylation (NES −2.54)** and fatty-acid/bile-acid metabolism (Figure 2A); KEGG/GO over-representation highlighted cell cycle, DNA replication/repair and ribosome biogenesis (up) versus gastric acid secretion and fatty-acid degradation (down). At adjusted p<0.05 a large fraction of genes reached significance (3,722 up / 4,025 down of 12,899); on the scale-standardized harmonized matrix this gate is permissive, so the moderated-t ranking and the enrichment above — not the raw count — are the interpretable outputs. The TCGA-only volcano and the top-gene expression heatmap are shown in Figure 1, and the GO:BP/KEGG over-representation dot plots in Supplementary Figure S4.
 
-![Figure 1](results/figures/Fig6.png)
-
-Figure 1. Differential expression between gastric tumors and normal mucosa and its reproducibility.
-
-(a) Volcano plot showing differentially expressed genes in TCGA-STAD. The x-axis represents log2 fold change (log2FC) and the y-axis represents −log10(adjusted P value). Red points indicate significantly upregulated genes, blue points indicate significantly downregulated genes, and grey points represent genes not meeting the significance thresholds of |log2FC| > 1 and adjusted P < 0.05 (2,134 upregulated and 2,362 downregulated of 21,446 tested features).
-
-(b) Heatmap of the 30 most significantly differentially expressed genes, comprising the 15 most upregulated and 15 most downregulated (ranked by adjusted p value, ties broken by absolute log2 fold change then gene symbol). Rows represent genes and columns represent samples. Values are z-scores of expression, so the color scale ranges from low relative expression (blue) to high relative expression (red).
-
-(c) Scatter plots comparing the integrated tumor-versus-normal ranking with three reference rankings. Each point represents one of 12,899 shared genes and the black line denotes a linear fit. The left panel compares against TCGA alone and therefore re-uses the discovery tumors, so it assesses internal consistency rather than replication (r = 0.73); the middle and right panels compare against the independent cohorts GSE27342 (r = 0.62) and GSE63089 (r = 0.58).
-
 ### 3.2 The diffuse subtype is an EMT-driven histotype
 Lauren diffuse-vs-intestinal analysis recovered a textbook axis: **EMT was the top Hallmark set in diffuse tumors (NES 3.17, padj 1.6×10⁻⁴⁰)** with TGF-β signaling and stromal/inflammatory programs, whereas intestinal tumors were dominated by proliferative E2F/MYC/G2M programs (Figure 2B). Loss of *CDH1* (E-cadherin) accompanied the diffuse desmoplastic signature.
 
-![Figure 2](results/figures/Fig1.png)
-
-Figure 2. Transcriptional programs distinguishing gastric tumors from normal mucosa and diffuse-type from intestinal-type tumors.
-
-(a) Bar plot showing Hallmark gene-set enrichment analysis (GSEA) results for the tumor-versus-normal comparison. The x-axis represents the normalized enrichment score (NES), which is the enrichment score scaled for gene-set size so that sets of different sizes are directly comparable; a positive NES indicates enrichment in tumors and a negative NES indicates enrichment in normal tissue. Bars are colored by the −log10 adjusted P value, and only gene sets reaching a false-discovery-rate-adjusted P value below 0.05 are shown. Cell-cycle programs (E2F targets, NES 3.75; G2M checkpoint, NES 3.64) and MYC targets (NES 2.67) are enriched in tumors, whereas oxidative phosphorylation (NES −2.54) and fatty-acid metabolism (NES −2.58) are depleted.
-
-(b) Bar plot showing Hallmark GSEA results for the comparison of diffuse-type with intestinal-type tumors as defined by the Lauren classification, a histological scheme that separates gastric cancers into cohesive gland-forming (intestinal) and poorly cohesive infiltrative (diffuse) types. A positive NES indicates enrichment in diffuse tumors. Epithelial–mesenchymal transition (EMT) is the most strongly enriched program (NES 3.17, adjusted P = 1.6 × 10⁻⁴⁰), accompanied by inflammatory, interleukin-6–JAK–STAT3 and tumor-necrosis-factor-α–NF-κB signaling.
-
 ### 3.3 A macrophage-enriched immune microenvironment, deconvolution validated against pathology
 Immune deconvolution was validated against the **measured** leukocyte fraction (T-cell score vs leukocyte %: Spearman ρ=0.67, p=3.6×10⁻³⁶; ImmuneScore ρ=0.65; Figure 3A,B). Validation was measure-specific: the CD8 estimate tracked measured leukocyte percentage (ρ=0.47) but showed no correlation with measured lymphocyte-infiltration percentage (ρ=0.02, p=0.74; `results/immune/validation_vs_measured.csv`), so the deconvolution should be read as capturing overall immune burden rather than lymphocyte subset composition. Relative to normal, tumors were significantly enriched for the **macrophage/monocyte compartment** (MCP monocytic lineage p=2.5×10⁻⁴; xCell macrophages p=1.9×10⁻⁴) with no net CD8⁺ gain (Supplementary Figure S6A). Immune scores differed significantly across the four TCGA molecular subtypes (Kruskal–Wallis p_adj < 10⁻⁶ on all three measures) (6,7). EBV-positive tumors carried the highest score on every measure and chromosomal-instability (CIN) tumors the lowest, with microsatellite-instable (MSI) and genomically-stable (GS) tumors intermediate; GS ranked above MSI on two of the three scores. This is consistent with the established immune-hot biology of EBV-positive gastric cancer (Derks et al., 2016; TCGA, 2014). Diffuse tumors showed higher total immune/deconvolution signal than intestinal (CD8 score p=0.0035); this **contrasts with reports that diffuse tumors are the least infiltrated by effector T cells** (Lin et al., 2019) and, given the strong stromal/EMT and M2-macrophage character of diffuse tumors (§3.2, §3.6), likely reflects a stroma- and macrophage-rich compartment rather than genuine cytotoxic-T infiltration — a known confounder of expression-based deconvolution in stroma-rich tumors. CD8⁺ score was not independently prognostic in this cohort (Cox HR 1.04, p=0.41; Supplementary Figure S6B) — reported as observed.
-
-![Figure 3](results/figures/Fig4.png)
-
-Figure 3. Immune-cell deconvolution and tissue-microbiome comparison.
-
-(a) Lollipop plot showing the Spearman correlation between each computationally deconvolved immune-cell score and the corresponding pathologist-measured value in TCGA-STAD tumors. Points represent correlation coefficients and horizontal segments connect each point to the null value of zero. Filled points denote correlations significant at P < 0.05.
-
-(b) Bar plots showing mean immune-cell scores across the four molecular subtypes defined by The Cancer Genome Atlas: Epstein-Barr virus-positive (EBV), microsatellite-instable (MSI), genomically stable (GS) and chromosomal-instability (CIN). Each facet corresponds to one deconvolution score (CD8 T cells and T cells from MCP-counter; ImmuneScore from xCell) and bars are colored by subtype. EBV-positive tumors carry the highest score on all three measures and chromosomal-instability tumors the lowest, with microsatellite-instable and genomically-stable tumors intermediate and their relative order varying by score. All Kruskal-Wallis tests across subtypes remain significant after Benjamini-Hochberg correction (adjusted P < 1 x 10-6). The Lauren histological classification is not the stratifying variable in this panel.
-
-(c) Bar plot summarizing tumor-versus-control separation of the tissue microbiome in three cohorts. In the Japanese discovery cohort the apparent separation collapses after adjustment for sequencing flowcell (Bray–Curtis R² 0.065 before adjustment, 0.011 after), in the Italian cohort no separation is detected (R² = 0.018, P = 0.80), and in the Portuguese cohort reduced diversity replicates (Shannon P = 0.004; Bray–Curtis R² = 0.145, P = 0.001). These analyses are presented as a cautionary assessment because batch structure and disease status are partially confounded in the discovery cohort.
 
 ### 3.4 An externally validated 25-gene prognostic signature
 A 25-gene LASSO-Cox signature stratified overall survival in TCGA (apparent C-index 0.72 on the full signature cohort, n=383/156 events; log-rank p=2.0×10⁻¹²). This apparent figure is **optimistic**: because gene screening and LASSO were performed once on the whole cohort, it overstates generalisable discrimination. In a **leakage-free nested cross-validation** (20×5-fold, with train-only standardization, univariable screening and LASSO tuning rebuilt inside every fold and performance taken from untouched out-of-fold predictions), the honest discrimination was **Harrell C = 0.611 (95% CI 0.562–0.659)** (Uno C 0.573; time-AUC 0.60/0.61/0.63 at 1/3/5 yr; `results/nested_cv/`) — ~0.11 below the apparent value. The signature is therefore a **modest** predictor whose apparent C-index was inflated by selection optimism, and we take **nested C≈0.61 as the honest estimate** (Figure 5A–C). For calibration against the prior literature, we re-implemented a previously-published gastric-cancer prognostic gene signature on the identical TCGA data and evaluation pipeline: its optimism-corrected discrimination was **C = 0.48** (apparent 0.54; `results/base_paper_replication/`) — at or below chance — underscoring that apparent-performance figures reported without leakage control routinely fail to generalise, and framing our own honest 0.61 as a meaningful improvement over that benchmark. It nonetheless validated in **two of three** independent cohorts:
@@ -115,67 +87,11 @@ A 25-gene LASSO-Cox signature stratified overall survival in TCGA (apparent C-in
 
 In ACRG multivariable analysis the signature was prognostic after adjusting for stage and age (HR 1.76, p=7.4×10⁻⁴), but this effect is **non-proportional and time-limited**: the proportional-hazards assumption was violated (cox.zph p=0.003), and a time-varying model showed the signature is prognostic **early** (HR/SD 1.49 at 12 months, 95% CI 1.23–1.80) and **attenuates to null thereafter** (1.03 at 36 months; 0.87 at 60 months; `results/timevarying_ACRG/`; Figure 5D) — i.e. associated with earlier mortality rather than a durable prognostic gradient. Across all three external cohorts, a rigorous continuous-effect meta-analysis (per-1-SD, age/stage-adjusted; REML with Hartung–Knapp) gave a **pooled HR of 1.19 (95% CI 0.96–1.47, p=0.073) — not statistically significant** (`results/meta_HK/`); the cross-cohort signature effect is therefore directionally consistent but modest and does not clear significance under a conservative random-effects model. GSE84437 was a genuine negative; the cross-platform C-index attenuation (0.72→0.53–0.61) reflects the expected generalisation cost, reported without adjustment. Its non-validation is plausibly explained by cohort composition: GSE84437 is overwhelmingly deeply-invasive disease (67% pT4, 89% pT3–T4), whereas both validating cohorts span the full stage range (31–42% stage I–II). Because a stromal/CAF signature discriminates prognosis by capturing *variation* in desmoplastic content — which increases with invasion depth — an almost uniformly T4 cohort suffers range restriction that collapses the signature's discriminating variance, consistent with its flat HR (1.11, p=0.46). We tested the range-restriction account directly by stratifying GSE84437 on pT stage (Supplementary Table S6): the signature failed to recover discrimination in **any** stratum — early (pT1–T3) C=0.44, HR/SD 1.21 (0.96–1.54), p=0.11; pT4 C=0.48, HR/SD 1.09 (0.93–1.27), p=0.29; pT2–T3 C=0.44, p=0.10 — with the C-index below 0.5 throughout. This is a genuine, tested negative: within-cohort stage stratification does not rescue the signal, so while the near-uniform pT4 composition is consistent with range restriction, we do not claim stratification recovers discrimination — it does not. A platform difference (Illumina vs Affymetrix) and GSE84437's absent Lauren/molecular-subtype metadata are additional plausible contributors, and the non-validation is best read as a real limit on cross-platform generalisation rather than an explained-away artefact. Two signature genes carry established prognostic direction consistent with their weights (SERPINE1 and POSTN: high expression → worse survival) (9,10); the collagen/CAF markers COL1A2 and FAP (11) are hub genes of the prognostic WGCNA module (§3.6), not members of the 25-gene signature. We caution that the coefficients are **multivariable penalized-regression weights, not univariate prognostic directions**: for example GPC3 (8) carries a positive (higher-risk) weight here, whereas in gastric cancer GPC3 is generally reported as a metastasis suppressor with low expression marking worse outcome (Kim et al., 2016) — a sign discordance attributable to correlated-predictor structure in LASSO, and not to be interpreted as a univariate claim. Several members have no established gastric-cancer role and are best regarded as empirical predictors — for example HBB (haemoglobin subunit β) most likely reflects residual blood/erythrocyte content rather than tumor biology. The signature is therefore a statistical aggregate whose biological interpretation rests on the subset overlapping the stromal module (SERPINE1, POSTN, MATN3; §3.6), not on every constituent gene. The standardized LASSO–Cox coefficients (A), the per-cohort external-validation forest plot (B), and Kaplan–Meier stratification across all four cohorts (C) are shown in Figure 4.
 
-![Figure 4](results/figures/Fig7.png)
-
-Figure 4. Prognostic signature coefficients and external validation.
-
-(a) Bar plot showing the LASSO–Cox regression coefficients of the 25 retained genes. A positive coefficient indicates that higher expression is associated with shorter survival and a negative coefficient indicates the opposite.
-
-(b) Forest plot showing hazard ratios for high- versus low-risk groups (median split of the signature score) across validation cohorts, with squares denoting point estimates and horizontal lines denoting 95% confidence intervals: ACRG/GSE62254 1.90 (1.37-2.62), GSE15459 1.68 (1.11-2.54), GSE84437 1.11 (0.84-1.46). Values are from `results/validation_multi/cindex_HR_summary.csv`; the corresponding Kaplan-Meier curves are panels (c)-(f).
-
-(c) Kaplan-Meier curves for high-risk and low-risk groups in the TCGA-STAD training cohort, defined by a median split of the signature score, with the P value from the log-rank test.
-
-(d) Kaplan-Meier curves for the same median-split groups in the Asian Cancer Research Group cohort (GSE62254, n = 300).
-
-(e) Kaplan-Meier curves for the same median-split groups in GSE15459 (n = 191).
-
-(f) Kaplan-Meier curves for the same median-split groups in GSE84437 (n = 431), in which the signature did not separate the two risk groups. This negative result is reported as observed.
-
-**Benchmarking against a published signature.** As a discipline check, we re-tested a previously published 5-gene gastric-cancer signature (NTN5, SIGLEC5, MPV17L, MPLKIP, SPAG16) on the same TCGA data under identical, leakage-controlled conditions. Its optimism-corrected discrimination was **C = 0.48 — no better than chance** — and the risk direction inverted (HR high-vs-low 0.63; apparent C 0.54; `results/base_paper_replication/`). That a prior signature fails to replicate under honest evaluation, while ours reaches a modest but real C = 0.61, underscores that the difference between the two is methodological rigor, not cohort luck.
-
-**The signature is also predictive, not merely prognostic.** In ACRG the signature's hazard was significantly modified by stage (risk×stage interaction LRT p=0.044) and concentrated in the biologically expected compartments: it was strongest in the mesenchymal **MSS/EMT** subtype (HR/SD 1.87, 95% CI 1.06–3.32, p=0.031) and in stage III–IV disease (HR/SD 1.47, 95% CI 1.18–1.84, p=5.9×10⁻⁴), and null in stage I–II (HR/SD 1.01) — a subtype/stage dependence consistent with a stromal/CAF program that matters most in advanced, mesenchymal tumors (`results/predictive/`). The risk×subtype interaction itself was not significant (p=0.094), so this is a coherent pattern rather than a formally subtype-specific effect.
-
-![Figure 5](results/figures/Fig2.png)
-
-Figure 5. Development and honest evaluation of the 25-gene LASSO–Cox prognostic signature.
-
-(a) Kaplan–Meier survival curves for patients in The Cancer Genome Atlas stomach adenocarcinoma (TCGA-STAD) cohort stratified into high-risk and low-risk groups at the median signature score (n = 383, 156 deaths). The x-axis represents follow-up time in months and the y-axis represents overall survival probability. Shaded bands denote 95% confidence intervals and the P value is from the log-rank test.
-
-(b) Forest plot showing the hazard ratio per one standard deviation increase in signature score in each external validation cohort, adjusted for age and stage, together with the Hartung–Knapp random-effects pooled estimate. Squares represent point estimates, horizontal lines represent 95% confidence intervals, and the diamond represents the pooled estimate (hazard ratio 1.19, 95% confidence interval 0.96–1.47; prediction interval 0.90–1.57). The pooled effect does not reach statistical significance.
-
-(c) Point-and-interval (forest) plot comparing discrimination measured with and without information leakage. The leakage-free estimate is obtained from 20 repeats of 5-fold nested cross-validation, in which gene selection and model fitting occur only inside the training folds (Harrell C = 0.611, 95% confidence interval 0.562–0.659; Uno C = 0.573), whereas the apparent estimate re-uses the same samples for selection and evaluation (C = 0.72). The difference of approximately 0.11 quantifies optimism.
-
-(d) Line plot showing the time-varying hazard ratio for the signature in the Asian Cancer Research Group (ACRG) cohort. The x-axis represents time since surgery in months and the y-axis represents the hazard ratio. The signature is prognostic early (hazard ratio 1.49 at 12 months, 95% confidence interval 1.23–1.80) and attenuates towards the null by 36–60 months, indicating that the proportional-hazards assumption does not hold across the full follow-up period.
-
 ### 3.5 A clinical prognostic nomogram (honest complete-case model)
 On complete cases (N=199 of 412 tumors, ~48%, no imputation; the restriction is driven mainly by TMB availability and may bias toward better-annotated cases — a selection-bias caveat), backward-AIC selected **Age, AJCC Stage, Grade and TMB**. The full candidate model spans 8 degrees of freedom (Age 1, Stage 3, Grade 2, TMB 1, HAT1 1), giving a modest events-per-variable of ≈8. When the backward-AIC selection was repeated **inside every bootstrap replicate** (B=500, the statistically honest procedure that also penalizes selection instability), the optimism-corrected C-index was **0.636 (95% CI 0.563–0.704)** — slightly below the 0.647 obtained with fixed selection, as expected. Across replicates only Stage was a stable predictor (selected in 93%), with Age 76%, Grade 59%, TMB 53% and HAT1 32%. Discrimination is therefore modest and the model should be read as illustrative; calibration curves approximated the identity line at 1/3/5 years.
 
 ### 3.6 Co-expression modules identify a prognostic stromal/EMT program
 WGCNA on the 5,000 most variable genes (signed-hybrid, bicor) was performed at a soft power of **3** (scale-free R²=0.88). Scale-free fit was near-flat across powers 3–12 (R²=0.865–0.886) with no clear elbow; we retain power 3 on the plateau/connectivity criterion and confirm below (§3.6, power-robustness analysis) that the prognostic module is invariant to the power choice, so the finding does not depend on it. Ten modules were detected (gene dendrogram and module assignment in Figure 6A; module–trait correlation heatmap in Figure 6B). The **turquoise** module was most strongly associated with tumor status (r=−0.34, p=1.8×10⁻¹³; down-regulated in tumor, i.e. a differentiated-tissue program). Testing each module eigengene against overall survival (Cox per 1-SD, tumors), the **red** module was the most prognostic on **univariable** Cox (**HR 1.31 per SD, 95% CI 1.12–1.53, p=9.3×10⁻⁴**); the turquoise (tumor-status) module was also significantly survival-associated (HR 1.29, p=1.3×10⁻³), consistent with both a differentiated-tissue-loss and a stromal-gain axis of prognosis. The red-module association is, importantly, **not independent of stage**: in a multivariable Cox adjusting for stage, age, leukocyte fraction and Lauren subtype (complete-case n=183, 57 events), the red-module eigengene attenuated to HR 1.35 per SD (95% CI 0.95–1.90, **p=0.090**) and was no longer significant, while stage remained the dominant predictor (HR 1.82, p=5×10⁻⁴; `results/wgcna_real/ME_survival_cox_adjusted.csv`). This attenuation is partly driven by the reduced complete-case sample (383→183, owing to leukocyte/Lauren missingness), but the point estimate and loss of independent significance are consistent with the stromal/CAF program **tracking tumor stage and stromal admixture rather than adding stage-independent prognostic information** — a caveat we carry into the Discussion. Hub genes (defined as the top genes by module membership within the 263-gene red module) are canonical **cancer-associated-fibroblast / stromal-EMT markers** — CDH11, COL8A1, COL1A2, FNDC1, SPARC, LUM, BGN, FAP, POSTN — each independently prognostic on univariable Cox (e.g. CDH11 HR 1.23, p=0.0023). (Throughout, "hub genes" denotes this membership-ranked set; the representative 9–12 named here are used for the robustness and single-cell checks below, all drawn from the same module.) Critically, **three of the 25 signature genes (SERPINE1, POSTN, MATN3) reside in this prognostic red module**, providing a coherent multi-omics link between the survival signature and a stromal/EMT co-expression program; module preservation and external eigengene prognosis are shown in Figure 7A,B. A power-robustness analysis confirmed this is not an artefact of the soft-power choice: across powers 3, 6, 9 and 12 the 12 CAF hub genes remained co-clustered in a single module (11–12/12 at every power) that stayed significantly survival-associated (HR/SD 1.28–1.31, all p<0.0025, overlapping CIs) — only the color label shifts (red→green→yellow) as the total module count shrinks at higher powers (Figure 6C).
-
-![Figure 6](results/figures/Fig5.png)
-
-Figure 6. Construction and quality assessment of the gene co-expression network.
-
-(a) Cluster dendrogram showing hierarchical clustering of genes by topological overlap, with the resulting module assignments displayed as colored bars beneath the tree.
-
-(b) Heatmap of correlations between module eigengenes and clinical traits. Rows represent modules and columns represent traits; the color scale ranges from negative (blue) to positive (red) correlation.
-
-(c) Sensitivity of the prognostic module to the soft-thresholding power, shown as three line plots over the candidate powers 3, 6, 9 and 12. The soft-thresholding power raises correlations to a power so that strong correlations are emphasized and weak ones suppressed, approximating the scale-free topology observed in biological networks; because this choice is made by the analyst, its influence on the result is reported here. The left panel plots the hazard ratio per standard deviation of the module eigengene, with vertical bars denoting 95% confidence intervals and the dashed line marking a hazard ratio of one. The middle panel plots the negative base-ten logarithm of the Cox P value, with the dashed line marking P = 0.05. The right panel plots the fraction of the eight module hub genes that remain co-clustered. Across all four powers the hazard ratio stays between 1.28 and 1.31, the Cox P value stays below 0.05 (maximum 0.0024) and hub co-membership stays at or above 0.875, so the prognostic result does not depend on the particular power chosen. Values are given in Supplementary Table S8.
-
-To test directly whether this stromal signal is a tumor-purity artefact, we correlated both the 25-gene risk score and an independent CAF score against orthogonal purity/stroma estimates (`results/purity/correlations.csv`). The risk score rose with **xCell stromal content** (Spearman ρ=+0.39, p=1.7×10⁻¹⁶) and fell with **ABSOLUTE tumor purity** (ρ=−0.20, p=8.9×10⁻⁴), and the CAF score tracked stroma even more strongly (ρ=+0.66, p=4.9×10⁻⁵³); both scores were highest in the diffuse Lauren subtype (Kruskal–Wallis p=1.5×10⁻⁵ and p=1.9×10⁻⁸). This confirms the program indexes stromal admixture — but it is **not merely** a purity readout: the risk score's prognostic effect **survived adjustment for ABSOLUTE purity** (HR 2.97 per SD, 95% CI 2.28–3.86, p=7.6×10⁻¹⁶ with purity in the model; purity itself non-significant, p=0.35; `results/purity/purity_adjusted_cox.csv`). The stromal program therefore carries prognostic information that co-localizes with, but is not reducible to, low tumor purity — while remaining, as above, entangled with stage.
-
-Most importantly, the CAF module is **not confined to TCGA**. Applying WGCNA module-preservation statistics (`modulePreservation`, 200 permutations) to three independent gastric-cancer cohorts, the red module was **strongly preserved** in every one — Zsummary.pres = **15.9** (ACRG/GSE62254), **16.8** (GSE15459) and **17.1** (GSE84437), all well above the Z>10 "strong preservation" threshold (`results/module_preservation/`), and its eigengene (first principal component of the red-module genes, aligned so that higher scores denote greater stromal activation) was **independently prognostic for overall survival in all three cohorts** — HR per SD 1.27 (95% CI 1.09–1.49, p=2.2×10⁻³) in ACRG, 1.55 (1.25–1.92, p=6.8×10⁻⁵) in GSE15459 and 1.24 (1.08–1.42, p=2.1×10⁻³) in GSE84437 — always in the TCGA-concordant direction (higher stromal activation → worse survival; `results/module_preservation/module_eigengene_cox_external.csv`). This converts the co-expression finding from a TCGA-internal observation into an **externally-replicated stromal/CAF prognostic program** — the study's most robust result. (The within-TCGA stage-adjustment caveat above still applies: the program tracks, and is not cleanly separable from, tumor stage; but its structural preservation and prognostic association reproduce across four independent cohorts.)
-
-![Figure 7](results/figures/Fig3.png)
-
-Figure 7. External preservation of the stromal co-expression module, its prognostic value, and its cellular localization.
-
-(a) Bar plot showing preservation of the survival-associated (red) module in three external cohorts, quantified by the WGCNA Zsummary statistic. Zsummary is a permutation-based composite of density and connectivity preservation; the dashed line marks Z = 10, the conventional threshold for strong preservation. All three cohorts exceed it (ACRG/GSE62254 Z = 15.9, GSE15459 Z = 16.8, GSE84437 Z = 17.1), indicating that the module is a reproducible feature of gastric tumor transcriptomes rather than a property of the discovery cohort.
-
-(b) Forest plot showing Cox proportional-hazards results for the module eigengene, defined as the first principal component of the module's expression matrix and therefore a single summary value per patient. Points represent the hazard ratio per one standard deviation of eigengene and horizontal bars represent 95% confidence intervals, plotted on a logarithmic scale. The module is prognostic in all three cohorts (ACRG hazard ratio 1.27, 95% confidence interval 1.09-1.49, P = 0.0022; GSE15459 1.55, 1.25-1.92, P = 6.8 x 10-5; GSE84437 1.24, 1.08-1.42, P = 0.0021), including GSE84437, the cohort in which the 25-gene signature did not validate.
-
-(c) Bar plot showing the single-cell localization of the stromal-module hub genes. For each gene, the bar represents the fraction of its total expression contributed by the cell type in which it is most highly expressed, computed from a public gastric single-cell RNA-sequencing dataset. Bars are colored by that dominant cell type. Twenty-eight of the twenty-nine hub genes are fibroblast-dominant (median fraction 0.97), placing the prognostic program in the fibroblast compartment; FAP is the single exception and is endothelial-dominant in this dataset.
 
 ### 3.7 The signature is prognostic but adds little decision-analytic value beyond staging
 **In-sample (TCGA training cohort, n=301, 106 deaths; optimism-corrected C-index)**, combining the signature with clinical variables appeared to improve prognostication substantially: clinical model (Age+Stage+Grade) **0.659** (95% CI 0.604–0.713) → signature alone **0.742** → **combined 0.773** (0.726–0.820), with a large added value (ΔC +0.114; nested LRT χ²=80.5, p=3.0×10⁻¹⁹; IDI@3yr 0.217; NRI@3yr 0.387; combined time-AUC 0.79/0.83/0.81) and TCGA-internal decision-curve analysis favoring the combined model. **These statistics are in-sample estimates computed on the signature's training cohort and are inflated by that circularity.**
@@ -204,30 +120,6 @@ Two-sample MR detected **no significant causal effect** of any exposure on gastr
 | *Lactobacillus* | protective-cand. | 10 | 0.96 (0.85–1.09) | 0.51 |
 
 Sensitivity diagnostics were quantitative: MR-Egger intercepts showed no evidence of directional pleiotropy for five of the six exposures (intercept p>0.09), while *Fusobacterium* carried a **nominal Egger-intercept signal** (intercept 0.038, p=0.040) indicating possible directional pleiotropy; its IVW estimate is null regardless, and the pleiotropy-robust MR-Egger and weighted-median estimates for *Fusobacterium* were likewise non-significant, so the null conclusion is unaffected by this caveat. Cochran's Q indicated no significant heterogeneity except for *H. pylori* (Q p=0.035; all others Q p>0.10). **MR-PRESSO global tests** (Supplementary Table S2) were non-significant for five of the six exposures (global p 0.16–0.68), with **anti-*H. pylori* seropositivity borderline (RSSobs 32.6, global p=0.052)** — the only exposure near the 0.05 line, converging with its already-significant Cochran's Q; no single outlier SNP was flagged for removal in any exposure. The *H. pylori* null should therefore be read with marginally more caution than the other five, though its IVW, weighted-median and MR-Egger estimates all agree on the null. Steiger filtering confirmed the exposure→outcome direction throughout; we note that with only ~1,029 outcome cases the SNP–outcome r² is very small, so the directionality test passes near-mechanically and its extreme p-values should not be over-read as independent validation. Per-exposure Q, Egger-intercept, Steiger and MR-PRESSO statistics are provided in the result tables (`results/mr_real/`); the full six-exposure SNP-effect scatter panel is shown in Figure 8 and the corresponding leave-one-out analyses for all six exposures in Supplementary Figure S8.
-
-![Figure 8](results/figures/Fig8.png)
-
-Figure 8. Two-sample Mendelian randomization of microbial exposures on gastric-cancer risk.
-
-Each panel shows the association between single-nucleotide-polymorphism effects on one microbial exposure (x-axis) and the corresponding effects on gastric-cancer risk (y-axis) in a European-ancestry outcome dataset. Each point represents one genetic instrument, with horizontal and vertical bars denoting standard errors. Fitted lines represent the inverse-variance-weighted, MR-Egger, weighted-median, simple-mode and weighted-mode estimators.
-
-(a) Anti-Helicobacter pylori immunoglobulin G seropositivity (17 instruments).
-
-(b) Streptococcus, genus level (15 instruments).
-
-(c) Fusobacterium (23 instruments).
-
-(d) Prevotella (15 instruments).
-
-(e) Veillonella (8 instruments).
-
-(f) Lactobacillus (10 instruments).
-
-No exposure shows evidence of a causal effect, with the smallest inverse-variance-weighted P value being 0.35. These results should be interpreted as exploratory because the number of genetic instruments per exposure is limited (8 to 23), which reduces statistical power and destabilises the MR-Egger estimate.
-
-These nulls must be read carefully. Recent MR studies **do** report small significant effects — e.g. anti-*H. pylori* seropositivity on GC (OR≈1.12) (16) and individual gut genera (17) — and our confidence intervals (e.g. *H. pylori* 0.71–1.30) **span** such small effects. The honest interpretation is therefore that our analysis is **underpowered to confirm or exclude** effects of this magnitude, not that no causal effect exists. Two design factors compound this — one of validity, one of power: the European gut (faecal) microbiome instruments (MiBioGen) are an imperfect and arguably invalid proxy for the gastric-mucosal niche assayed by the tissue 16S data (a genuine instrument-relevance limitation, not merely reduced power), and the largest ancestry-matched (European) GC outcome has only ~1,000 cases. On present evidence, then, the microbiome–GC associations reported here are best regarded as **observational**, with causality neither established nor refuted — a limitation we state plainly rather than reframing as a positive causal narrative.
-
-**Microbe-response pathway context (exploratory).** No cohort in this study provides genuinely paired per-patient tissue-microbiome and host-transcriptome measurements (the 16S and the transcriptome come from different, unpaired cohorts). A per-genus host-gene association (MaAsLin2) was run in an earlier, superseded pipeline, but on a bridged sample set whose per-patient genus values are not part of the verified reprocessed data; its outputs are not reproducible from the retained files, so we exclude it and make **no host-gene–genus association claim**. Instead, as hypothesis-generating context, we asked whether the host pathways that gastric dysbiosis and *Helicobacter pylori* are known to trigger are enriched in the TCGA tumor-vs-normal transcriptome (pre-ranked GSEA on the tumor-vs-normal Wald statistic; `analysis/31_microbe_response_enrichment.R`, `results/integration/microbe_response_{KEGG,GO}.csv`). Pro-inflammatory microbe-response programs were enriched among tumor-up genes — cytokine–cytokine-receptor interaction (NES 1.40, p_adj 6.5×10⁻³), IL-17 signaling (NES 1.64, p_adj 6.5×10⁻³) and NF-κB-inducing-kinase activation (GO, NES 1.71, p_adj 0.050) — while metabolic sets (adipocytokine signaling NES −2.14; *Salmonella*-infection NES −1.91) were enriched among tumor-down genes. Because this is a pathway-level signal in bulk tumor tissue and not a test of any microbe–gene relationship, and because the tissue-microbiome arm is itself batch-confounded (§3.8), we report it strictly as hypothesis-generating context, not as evidence of a causal or correlative host–microbiome axis.
 
 ### 3.10 The prognostic module localizes to the fibroblast/stromal compartment (single-cell)
 To resolve the cellular origin of the prognostic red module, we analyzed a public gastric single-cell RNA-seq dataset (18) spanning the premalignant-to-early-cancer cascade (GSE134520; 43,992 cells after QC, 8 cell types). The module localized **unambiguously to fibroblasts**: 28 of 29 red-module hub genes had their dominant expression in the fibroblast compartment (POSTN 0.97, COL1A2 0.98, CDH11 0.96, LUM 0.97, COL1A1/COL3A1/BGN/DCN all >0.96 fraction-in-dominant-type), with essentially no tumor-epithelial signal. Among signature genes, stromal members likewise tracked fibroblasts (POSTN, APOD, MATN3), epithelial-program genes localized to epithelium (EGF, SP6, RNF43), and SERPINE1 to endothelium. The single exception was FAP, which was assigned to the endothelial rather than the fibroblast compartment (fraction-in-dominant 0.71); we report this honestly rather than explain it away — it may reflect the scarcity of activated (FAP⁺) cancer-associated fibroblasts in this premalignant/early-stage dataset, where fibroblasts are only ~4% of cells. Thus the survival-associated bulk module localizes, at single-cell resolution, to the **fibroblast/stromal compartment** rather than the tumor epithelium. We are careful not to overstate this, and disclose a specific circularity: the fibroblast cluster itself was annotated using a canonical marker panel (DCN, LUM, COL1A1, COL1A2, PDGFRB, FAP, COL3A1), six members of which are also among the 29 hub genes tested, so for that subset fibroblast-dominance is guaranteed by construction rather than independently demonstrated. We therefore re-ran the localization on the **23 hub genes not used for cluster annotation**: **all 23 remained fibroblast-dominant** (median fraction-in-dominant 0.96; Figure 7C; Supplementary Table S5, `results/scrna/gene_dominant_celltype_noncircular.csv`), and the single non-fibroblast gene in the full panel (FAP → endothelial) was itself one of the six annotation markers removed. The fibroblast localization is thus robust to the circularity, but — because the tested genes are canonical fibroblast/ECM markers — it confirms the **cell-type identity** of the program rather than constituting an independent test of its prognostic specificity. Two further limits bound the inference: the dataset is premalignant/early-stage (fibroblasts only ~4% of cells; no myCAF/iCAF sub-clustering was attempted, and FAP — the one activated-CAF marker — did not localize to fibroblasts), and enzymatic-dissociation scRNA-seq protocols systematically under-recover ECM-embedded fibroblasts relative to epithelial/immune cells, which could itself depress fibroblast yield and FAP capture independent of disease stage. For these reasons we describe this as a **fibroblast/stromal program** and reserve "activated CAF" language for where activation state is actually shown; the result establishes *where* the prognostic signal resides — the fibroblast/stromal compartment — but is confirmatory of marker identity rather than a novel demonstration of CAF-activation specificity, and should ultimately be corroborated in an advanced-stage, ideally spatial or single-nucleus, dataset.
@@ -258,7 +150,6 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 ## Declarations
 
 **Ethics approval and consent to participate.** This study used only publicly available, de-identified secondary data from established repositories (TCGA, GTEx, GEO, DDBJ/PRJDB20660, IEU OpenGWAS). No new human participants, human material, or animal work was involved; each source dataset was collected under its own ethics approval and consent. Institutional ethics approval was therefore not required for this secondary analysis of publicly available, de-identified data.
-
 
 **Data availability.** All primary data are public. Host transcriptome: TCGA-STAD (GDC / UCSC Xena) and GTEx v10 (gtexportal.org). Survival and DE cohorts: GEO GSE27342, GSE63089, GSE62254 (ACRG), GSE15459, GSE84437, and single-cell GSE134520 (ncbi.nlm.nih.gov/geo). Tissue 16S: DDBJ PRJDB20660 (Japan, discovery, raw FASTQ reprocessed), NCBI/ENA PRJNA641258 (Italy; Ravegnini et al., *Int J Mol Sci* 2020, PMC7766162; paired tumor/non-tumor, V3–V4) and PRJNA413125 (Portugal; Ferreira et al. 2018, ref 4; gastritis vs carcinoma, V5–V6) as independent validation cohorts. GWAS summary statistics: IEU OpenGWAS — exposures `ebi-a-GCST90006910`, `ebi-a-GCST90017070`, `ebi-a-GCST90032406`, `ebi-a-GCST90017045`, `ebi-a-GCST90017088`, `ebi-a-GCST90017030`; outcomes `ebi-a-GCST90018849` (European) and `ebi-a-GCST90018629` (East-Asian sensitivity). The harmonized MR instrument tables (per-SNP rsID, effect allele, per-SNP F) and the `gwasinfo()` accession-verification output are archived with the code (`results/mr_real/`) so the exact SNP sets are recoverable even if upstream OpenGWAS entries are later reprocessed.
 
@@ -317,187 +208,3 @@ The two secondary arms are, by design, cautionary rather than confirmatory. The 
 37. Stuart T, et al. Comprehensive integration of single-cell data (Seurat). *Cell* 2019;177:1888–1902. PMID 31178118.
 
 ---
-
-## Supplementary Figures
-
-![Supplementary Figure S1](results/scrna/UMAP_celltypes.png)
-
-Supplementary Figure S1. Single-cell reference atlas of the gastric premalignant-to-early-cancer cascade.
-
-Uniform manifold approximation and projection (UMAP) of 43,992 cells from the public dataset GSE134520, colored by the eight annotated major cell types. UMAP is a non-linear dimensionality-reduction method in which each point represents one cell and proximity reflects transcriptional similarity; the axes carry no independent units. Cell-type proportions are epithelial 68.6%, endothelial 7.6%, myeloid 6.4%, plasma 5.8%, T cell 5.8%, fibroblast 4.2%, mast 1.0% and B cell 0.6%. This atlas provides the cellular reference used for the module-localization analysis in Figure 7(c).
-
-File: `results/scrna/UMAP_celltypes.png`.
-
-![Supplementary Figure S2](results/scrna/DotPlot_stromal_module_hub.png)
-
-Supplementary Figure S2. Expression of stromal-module hub genes across cell types.
-
-Dot plot of the prognostic co-expression module hub genes across the eight annotated cell types. Dot size represents the fraction of cells in which the gene is detected and dot color represents scaled mean expression. Hub-gene expression is confined to the fibroblast compartment. Because the genes used to annotate the fibroblast cluster could bias this result, the analysis was repeated after removing them; all twenty-three remaining hub genes stayed fibroblast-dominant.
-
-File: `results/scrna/DotPlot_stromal_module_hub.png`.
-
-![Supplementary Figure S3](results/drug_repurposing_integrated/top_candidate_drugs.png)
-
-Supplementary Figure S3. Candidate compounds from in-silico drug repurposing.
-
-Bar plot of the eight highest-ranked compounds whose transcriptional perturbation signature reverses the tumor program, from Enrichr queried against the LINCS L1000 and Gene Expression Omnibus drug-perturbation libraries. Bar length is −log10 of the best Benjamini–Hochberg-adjusted enrichment p value across contributing signatures, which is also the ordering criterion. Every compound shown reverses the program on both arms — repressing tumor-up genes and inducing tumor-down genes — so no arm legend is displayed. Four of the eight are targeted kinase inhibitors concordant with a proliferation-dominated program: the fibroblast growth factor receptor (FGFR) inhibitor PD-173074, the cyclin-dependent kinase 4/6 (CDK4/6) inhibitor palbociclib, the FGFR/multikinase inhibitor dovitinib and the phosphoinositide 3-kinase (PI3K)/mechanistic target of rapamycin (mTOR) inhibitor NVP-BEZ235. The remaining four are not kinase inhibitors and include the highest-ranked hit, resveratrol, together with calcitriol, vemurafenib and mitoxantrone; broadly bioactive compounds of this kind recur across LINCS reversal analyses irrespective of tumor type and should be treated as non-specific. These predictions are computational and hypothesis-generating only; no compound was experimentally validated, and because the tumor-up program is proliferation-dominated the nominated agents are broadly anti-proliferative rather than specific to gastric cancer.
-
-File: `results/drug_repurposing_integrated/top_candidate_drugs.png`.
-
-![Supplementary Figure S4](results/enrichment/path_ORA_GO_KEGG.png)
-
-Supplementary Figure S4. Over-representation analysis of tumor-up-regulated genes.
-
-Dot plots of Gene Ontology biological-process and Kyoto Encyclopedia of Genes and Genomes (KEGG) over-representation analysis for the tumor-up gene set. Dot size represents the number of genes in each term and color represents the adjusted P value. Cell-cycle and nuclear-division terms, together with extracellular-matrix-receptor and cytokine terms, dominate. Over-representation analysis depends on an arbitrary significance threshold and is sensitive to gene-family size; the prominent olfactory and sensory-perception terms reflect the large olfactory-receptor gene family rather than tumor biology. The threshold-free gene-set enrichment analysis in Figure 2 is therefore the primary enrichment result, with this panel provided for completeness.
-
-Files: `results/enrichment/dotplot_GO_BP_UP.png`, `results/enrichment/dotplot_KEGG_UP.png`.
-
-![Supplementary Figure S5](results/microbiome_biomarker/da_clr_barplot.png)
-
-Supplementary Figure S5. Compositional differential abundance of tissue microbiota.
-
-Bar plots of centered-log-ratio effect sizes for the two discovery-cohort contrasts, tested by Wilcoxon rank-sum with Benjamini-Hochberg correction. The centered-log-ratio transform is used because sequencing yields relative rather than absolute abundances, so raw proportions are not independent. The left panel shows control versus cancer-adjacent mucosa (44 of 61 genera at q < 0.05) and the right panel the paired cancer-adjacent versus tumor contrast (18 of 61 genera at q < 0.05). Bars are colored by direction where q < 0.05, with red indicating enrichment and blue depletion, and the twelve most enriched and depleted genera are shown per panel. These genus-level shifts are reported for completeness only; as detailed in the Results, the tumor contrast is confounded with sequencing batch and does not replicate in an independent batch-clean cohort, so these taxa are not proposed as biomarkers.
-
-Files: `results/microbiome_biomarker/04a_DA_control_vs_GCN.csv`, `04b_DA_GCN_vs_GCT_paired.csv`.
-
-![Supplementary Figure S6](results/composite_figures/s15_immune.png)
-
-Supplementary Figure S6. Immune-compartment shifts and CD8 T-cell survival association.
-
-(a) Comparison of immune compartments between tumor and normal tissue. Enrichment is dominated by the macrophage and monocyte lineage, with no net gain in CD8-positive T cells.
-
-(b) Association between CD8-positive T-cell score and overall survival. The score is not prognostic in this cohort (Cox hazard ratio 1.04, P = 0.41); this null result is reported as observed.
-
-Files: `results/plots/Immune_*.png`.
-
-![Supplementary Figure S7](results/composite_figures/s17_nomogram.png)
-
-Supplementary Figure S7. Clinical nomogram, calibration, and external decision-curve analysis.
-
-(a) Nomogram combining clinical covariates with the signature score for prediction of 1-, 3- and 5-year overall survival. A nomogram converts each predictor into points on a common scale whose total maps to a predicted survival probability.
-
-(b) Calibration plots at 1, 3 and 5 years, computed in the development cohort. Calibration compares predicted against observed survival; the diagonal represents perfect agreement.
-
-(c) Decision-curve analysis performed out-of-sample in the Asian Cancer Research Group cohort. Decision-curve analysis plots net benefit against the threshold probability at which a clinician would act. Both the clinical model and the combined model carry net benefit relative to treat-all and treat-none strategies, but their curves are essentially superimposed across the 5-40% threshold range, indicating that adding the signature confers no incremental net benefit over standard staging. The nomogram is presented as an illustrative research tool, not as a validated decision instrument.
-
-Files: `results/nomogram_combined/`, `results/external_utility_ACRG/DCA_external.png`.
-
-![Supplementary Figure S8](results/composite_figures/s19_mr_loo_all.png)
-
-Supplementary Figure S8. Mendelian-randomization leave-one-out analysis for all six exposures.
-
-Leave-one-out inverse-variance-weighted estimates for each of the six microbial exposures. Removing any single instrument leaves every pooled estimate straddling the null, confirming that no individual instrument drives any result and that the overall null is not an outlier artefact.
-
-Files: `results/mr_real/loo_*.png`.
-
-![Supplementary Figure S9](results/microbiome_biomarker/rf_batch_classifier.png)
-
-Supplementary Figure S9. Evidence that the tumor-microbiome classifier reflects sequencing batch.
-
-(a) Bar plot of the fifteen genera ranked highest by mean decrease in Gini importance in the cancer-versus-control random-forest classifier. Genera shown in red italic type are recognized environmental or reagent contaminants (Dietzia, Serinicoccus, Methylobacterium-Methylorubrum, Microbacterium, Sphingomonas and Serratia) rather than gastric or oral commensals, and they dominate the classifier.
-
-(b) Comparison of the classifier's apparent discrimination with its ability to predict sequencing batch. The cancer-versus-control area under the receiver operating characteristic curve is 0.92 (95% confidence interval 0.90-0.94), but the same feature space predicts the sequencing flowcell among biologically similar samples at 78% accuracy against a 55% majority-class baseline (dotted line). The apparent tumor signal therefore tracks sequencing batch rather than tumor biology.
-
-Files: `results/microbiome_biomarker/05_rf_importance.csv`, `05_rf_metrics_and_batch_sanity.csv`.
-
-## Supplementary Materials
-
-- **Supplementary Table S1 — Per-exposure MR instruments.** Threshold, pre-clump and harmonized-used SNP counts, mean/min per-SNP F, IVW OR/CI/p, and MR-PRESSO global p for all six exposures. File: `results/mr_real/MR_per_exposure_instruments_REAL.csv`.
-- **Supplementary Table S2 — MR-PRESSO global tests.** RSSobs and global-test p per exposure. File: `results/mr_real/MR_PRESSO_global_REAL.csv`.
-- **Supplementary Table S3 — TRIPOD checklist.** Item-by-item reporting map for the prognostic model. File: `TRIPOD_checklist.md`.
-- **Supplementary Table S4 — Alpha-diversity effect sizes.** Median differences and Cliff's δ (Observed / Shannon / Simpson) across the non-confounded gastritis-to-cancer cascade. File: `results/microbiome_biomarker/02_alpha_effectsizes_cascade.csv`.
-- **Supplementary Table S5 — Non-circular single-cell localization.** Dominant cell type and fraction for the 23 hub genes not used to annotate the fibroblast cluster. File: `results/scrna/gene_dominant_celltype_noncircular.csv`.
-- **Supplementary Table S6 — GSE84437 pT-stage-stratified validation.** Harrell C-index and per-SD hazard ratios for the 25-gene signature within pT-stage strata (all / early pT1–T3 / pT4 / pT2–T3), showing discrimination is not recovered by stratification (C<0.5 throughout). File: `results/validation_multi/GSE84437_Tstage_stratified.csv`.
-- **Supplementary Table S7 — Data-acquisition & reproducibility checklist.** Every dataset used, its accession, access route, version/build, raw→processed entry point, and consuming pipeline script, ordered by pipeline stage; includes analyses explicitly not performed. File: `DATA_ACQUISITION_CHECKLIST.md`.
-- **Supplementary Table S8 — WGCNA soft-thresholding power sensitivity.** For each candidate soft-thresholding power (3, 6, 9, 12): scale-free topology fit, mean connectivity, number of modules recovered, the module carrying the fibroblast/CAF hub genes, its eigengene hazard ratio per standard deviation with 95% confidence interval and Cox P value, and the fraction of the eight hub genes remaining co-clustered. Supports Figure 6(c). File: `results/wgcna_real/power_robustness_summary.csv`.
-
-All other result tables and figures are provided in the project repository under `results/`, with each mapped to its generating script in `PIPELINE.md`.
-
-
----
-
-## Appendix: Data-Acquisition & Reproducibility Checklist
-
-*Gastric-cancer multi-omics study. Every dataset used, its accession, access route,
-version/build, the raw→processed entry point, and the pipeline script that consumes it.
-Datasets are listed in the order the pipeline uses them. This lets a reader reacquire
-every input from its primary repository and re-enter the pipeline at the correct stage.*
-
-## A. Host transcriptome (differential expression, WGCNA, signature, immune, drug-repurposing)
-
-- [ ] **TCGA-STAD** — primary tumor + solid-tissue normal RNA-seq.
-  - Accession/portal: GDC / UCSC Xena (project TCGA-STAD).
-  - Build: STAR gene counts, GENCODE v36; 448 samples (412 tumor, 36 normal).
-  - Clinical: Lauren class, AJCC stage, grade, TCGA molecular subtype, driver mutations,
-    TMB, measured leukocyte/lymphocyte %, overall survival.
-  - Raw→processed entry point: count matrix → `results/rdata/tcga_processed.RData`.
-  - Consuming scripts: DEG (`analysis/…DEG…`), WGCNA (`analysis/…wgcna…`),
-    immune deconvolution (`08_immune_deconvolution.R`), enrichment,
-    microbe-response GSEA (`31_microbe_response_enrichment.R`).
-- [ ] **GTEx v10** — normal stomach reference (DE denominator).
-  - Portal: gtexportal.org. Combined with TCGA normals for the integrated tumor-vs-normal contrast.
-
-## B. External survival / DE validation cohorts (transcriptome)
-
-- [ ] **GSE62254 (ACRG)** — 300 patients; Affymetrix. Primary external validation of the signature.
-  - Access: GEO. Local: `data/geo/GSE62254.rda`. Consumer: `12_multicohort_validation.R`, `32_nested_cv_signature.R`.
-- [ ] **GSE15459** — 191 patients. Access: GEO. Local: `data/geo/GSE15459_es.rds` + `GSE15459_outcome.xls`.
-- [ ] **GSE84437** — 431 patients. Access: GEO. Local: `data/geo/GSE84437_es.rds`. (Reported negative — retained transparently.)
-- [ ] **GSE27342, GSE63089** — independent DE-concordance cohorts. Access: GEO.
-  Consumer: DEG cross-cohort concordance (`results/tables/DEG_GEO_*.csv`).
-
-## C. Single-cell transcriptome (module localization)
-
-- [ ] **GSE134520** — premalignant-to-early gastric-cancer scRNA-seq.
-  - Access: GEO. Processing: Seurat v4 (QC 200–6,000 genes, MT<20% → 43,992 cells;
-    LogNormalize; 2,000 HVGs; PCA 30; SNN res 0.5; UMAP). 8 cell types by canonical markers.
-  - Consumer: scRNA localization → `results/scrna/`.
-
-## D. Tissue microbiome (16S)
-
-- [ ] **PRJDB20660 (Japan, discovery)** — 944 libraries, 16S V3–V4.
-  - Access: DDBJ, **raw FASTQ**. Processing: DADA2 from raw → ASV table
-    (897 samples × 314 genera after host/off-target removal).
-  - Read-tracking validation: per-sample counts vs published Supplementary Table 3, Pearson r=0.98
-    (`results/microbiome_biomarker/00_readtracking_concordance.csv`).
-  - Consumer: `23_dada2_16S.R` → `24_microbiome_real.R`; reference DB `silva_nr99_v138.1`.
-- [ ] **PRJNA641258 (Italy, validation)** — paired tumor/non-tumor, V3–V4. Access: NCBI/ENA. (Ravegnini 2020, PMC7766162.)
-- [ ] **PRJNA413125 (Portugal, validation)** — gastritis vs carcinoma, V5–V6. Access: NCBI/ENA. (Ferreira 2018.)
-  - **Batch caveat:** the discovery tumor/normal split is confounded with sequencing flowcell (§3.8);
-    validation cohorts are the batch-clean test.
-
-## E. GWAS summary statistics (Mendelian randomization)
-
-*All accessions independently verified against GWAS-Catalog records; raw `gwasinfo()`/lookup output
-archived at `results/mr_real/gwas_catalog_verification.json`.*
-
-- [ ] **Exposures (IEU OpenGWAS):**
-  - `ebi-a-GCST90006910` — anti-*H. pylori* IgG seropositivity (Butler-Laporte 2020; European, PMID 33204752).
-  - `ebi-a-GCST90017070` — genus *Streptococcus* (id.1853; MiBioGen/Kurilshikov 2021; European, PMID 33462485).
-  - `ebi-a-GCST90017045` — genus *Prevotella 9* (id.11183; MiBioGen; European, PMID 33462485).
-  - `ebi-a-GCST90017088` — genus *Veillonella* (id.2198; MiBioGen; European, PMID 33462485).
-  - `ebi-a-GCST90017030` — genus *Lactobacillus* (id.1837; MiBioGen; European, PMID 33462485).
-  - `ebi-a-GCST90032406` — *Fusobacterium* A abundance in stool (Qin 2022; European/Finland, PMID 35115689).
-- [ ] **Outcomes:**
-  - `ebi-a-GCST90018849` — gastric cancer, European, 1,029 cases (Sakaue 2021, PMID 34594039). **Primary.**
-  - `ebi-a-GCST90018629` — gastric cancer, East-Asian, 7,921 cases (Sakaue 2021). Cross-ancestry power sensitivity only.
-  - Access token: OpenGWAS JWT via `OPENGWAS_JWT` env var. Consumer: `11_real_mr.R`.
-  - Harmonized per-SNP instrument tables archived (`results/mr_real/`) so exact SNP sets survive upstream reprocessing.
-
-## F. Environment & reproducibility
-
-- [ ] R 4.3.3; pinned package versions in `package_versions.csv`; full `sessionInfo()` with the code.
-- [ ] Complete-case analysis throughout; no imputation.
-- [ ] Bundled `r_env/` has a build-time hardcoded path — after relocation use the `R_HOME`-override
-      invocation or a system R (documented in `PIPELINE.md`).
-- [ ] Every `results/` output maps to its generating script in `PIPELINE.md`;
-      figure→source mapping in `FIGURE_SOURCES.md`.
-
-## G. Analyses NOT performed (stated to prevent over-reading)
-
-- [ ] **No genuinely paired per-patient tissue-microbiome + host-transcriptome cohort exists** in this
-      study (16S and transcriptome are from different, unpaired cohorts). A per-genus host-gene MaAsLin2
-      association was run in a superseded pipeline on a bridged, non-verifiable sample set; its outputs are
-      not reproducible from retained files, so it is excluded and no host-gene↔genus claim is made. The
-      microbe-response result (§3.9) is a pathway-level GSEA on the TCGA tumor-vs-normal ranking only —
-      hypothesis-generating context, not a host–microbiome axis.
