@@ -507,8 +507,7 @@ say it plainly: *the difference between those two numbers is the difference betw
 honest paper and an over-claimed one.*
 
 Independent confirmation: you re-ran a **previously published 5-gene gastric signature**
-on your identical data and pipeline. Its optimism-corrected C was **0.4807 (R 4.3.3/`rms` 6.8-1, archived as `sessionInfo_rms6.8-1_R4.3.3.txt`; re-running under `rms` 8.1-1 gives 0.52 — both chance-level, apparent C 0.54 unchanged) — below
-chance** (apparent 0.5446). This is powerful evidence that leakage-uncontrolled
+on your identical data and pipeline. Its optimism-corrected C was **0.4807 (R 4.3.3/`rms` 6.8-1, archived as `sessionInfo_rms6.8-1_R4.3.3.txt`; re-running under `rms` 8.1-1 gives 0.52 — both chance-level, apparent C 0.54 unchanged) — chance-level** (apparent 0.5446). This is powerful evidence that leakage-uncontrolled
 signatures routinely fail to generalise, and it makes your modest 0.61 look genuinely
 better rather than merely smaller.
 
