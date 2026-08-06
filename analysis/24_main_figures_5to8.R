@@ -78,7 +78,32 @@ for (nm in names(FIGS)) {
   }
   tag_pt <- if (!is.null(f$tag_pt)) f$tag_pt else TAG_PT
   pl <- Map(function(p,t) panel_of(p,t,tag_pt), names(f$p), unname(f$p))
-  comb <- if (!is.null(f$design)) wrap_plots(pl, design = f$design)
+
+  ## Row-height calculation. `design` is a newline-separated character map
+  ## ("AB\nCC"): each line is a row and each distinct letter a panel. A panel
+  ## spanning k columns occupies width k/ncol of the figure, so its natural
+  ## height at that width is (k/ncol) * w_in * (src_h / src_w). A row must be as
+  ## tall as its tallest panel. Passing these heights to wrap_plots() stops
+  ## patchwork from equalising rows and shrinking panels (and their text).
+  w_in_tmp <- f$mm / 25.4
+  row_h <- NULL
+  if (!is.null(f$design)) {
+    rows <- strsplit(f$design, "\n")[[1]]
+    ncol_d <- max(nchar(rows))
+    letters_all <- LETTERS[seq_along(pl)]
+    row_h <- vapply(rows, function(rw) {
+      ch <- strsplit(rw, "")[[1]]
+      hs <- vapply(unique(ch), function(L) {
+        idx <- match(L, letters_all)
+        if (is.na(idx)) return(0)
+        span <- sum(ch == L)
+        d <- image_info(image_read(names(f$p)[idx]))
+        (span / ncol_d) * w_in_tmp * (d$height / d$width)
+      }, 1)
+      max(hs)
+    }, 1)
+  }
+  comb <- if (!is.null(f$design)) wrap_plots(pl, design = f$design, heights = row_h)
           else wrap_plots(pl, ncol = f$ncol)
   ## Fig8: the identical per-panel y-title was cropped off upstream (it was
   ## clipped by the source canvas); draw it once for the whole figure instead.
@@ -89,19 +114,34 @@ for (nm in names(FIGS)) {
             plot.tag.position = "left")
   }
   w_in <- f$mm / 25.4
-  if (!is.null(f$aspect)) {
+  if (!is.null(row_h)) {
+    h_in <- sum(row_h)
+  } else if (!is.null(f$aspect)) {
     h_in <- w_in * f$aspect
   } else {
     ars <- vapply(names(f$p), function(x) { d <- image_info(image_read(x)); d$height/d$width }, 1)
     nrow <- ceiling(length(pl) / f$ncol)
     h_in <- w_in * mean(ars) * nrow / f$ncol
   }
-  ## guard: journal figures should not exceed a full page (aspect <= 1.35)
-  if (h_in / w_in > 1.35) warning(sprintf("Fig%s aspect %.2f exceeds page proportion", nm, h_in/w_in))
+  ## Page guard. Natural row heights can exceed a printable page (Fig7's six
+  ## panels total aspect 1.38 > 1.35). Scale the whole figure down uniformly to
+  ## the limit rather than letting one row absorb the loss -- a uniform scale
+  ## shrinks every panel equally and keeps relative text sizes consistent.
+  if (h_in / w_in > 1.35) {
+    s <- 1.35 / (h_in / w_in)          # uniform scale factor, applied to BOTH axes
+    message(sprintf("Fig%s: aspect %.3f > 1.35, scaling uniformly (x%.3f) -> %.2f x %.2f in",
+                    nm, h_in / w_in, s, w_in * s, h_in * s))
+    w_in <- w_in * s
+    h_in <- h_in * s
+  }
   ggsave(file.path(TIFDIR, sprintf("Fig%s.tiff", nm)), comb, width = w_in, height = h_in,
          dpi = 600, bg = "white", compression = "lzw", limitsize = FALSE)
+  ## Per-figure PNG dpi: 600 everywhere except Fig8, whose source panels are
+  ## fixed-resolution PNGs (866 px) that cannot be re-plotted -- see header.
+  ## Upscaling them would add blur, so Fig8 is capped at native resolution.
+  png_dpi <- if (nm == "8") 345 else 600
   ggsave(sprintf("results/figures/Fig%s.png", nm), comb, width = w_in, height = h_in,
-         dpi = 300, bg = "white", limitsize = FALSE)
+         dpi = png_dpi, bg = "white", limitsize = FALSE)
   message("wrote Fig", nm, " (", f$mm, "mm, ", length(pl), " panels)")
 }
 

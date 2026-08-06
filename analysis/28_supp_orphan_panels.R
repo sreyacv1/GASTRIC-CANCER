@@ -49,7 +49,7 @@ cit <- function(p, frac, dens = 300) crop_title(ci(p, dens), frac)
 ggsave("results/enrichment/path_ORA_GO_KEGG.png",
        tag(pan(ci("results/enrichment/dotplot_GO_BP_UP.png")) |
            pan(ci("results/enrichment/dotplot_KEGG_UP.png"))),
-       width = 9, height = 4, dpi = 300, bg = "white")
+       width = 7.48, height = 4.10, dpi = 600, bg = "white")
 
 ## ---- S7: two-panel CLR differential abundance ----------------------------
 ## Caption: left = control vs cancer-adjacent (44/61 at q<0.05); right = paired
@@ -78,7 +78,7 @@ ggsave("results/microbiome_biomarker/da_clr_barplot.png",
        (da_panel(da_a, "effect_clr", "CLR effect: control vs cancer-adjacent") |
         da_panel(da_b, "effect_clr_paired", "CLR effect: cancer-adjacent vs tumor (paired)")) +
          plot_layout(guides = "collect") & theme(legend.position = "bottom"),
-       width = 12, height = 6.8, dpi = 300, bg = "white")
+       width = 7.48, height = 4.24, dpi = 600, bg = "white")
 
 ## LEGIBILITY, THE ONE RULE THAT MATTERS FOR MONTAGES
 ## A montage shrinks every component to its slot, so text that reads fine in the
@@ -135,7 +135,7 @@ p8b <- ggplot(long, aes(group, score, fill = group)) +
         strip.text = element_text(size = 7.2, lineheight = 1.05),
         axis.text.x = element_text(size = 7.5))
 ggsave("results/plots/Immune_tumor_vs_normal_clean.png", p8b,
-       width = 8.2, height = 4.2, dpi = 300, bg = "white")
+       width = 7.48, height = 3.83, dpi = 600, bg = "white")
 
 ## ---- S6: immune panels NOT shown in a main figure ----------------------
 ## Trimmed from four panels to two. The dropped panels duplicated Figure 4 from
@@ -149,14 +149,14 @@ ggsave("results/composite_figures/s15_immune.png",
        tag(pan(ci("results/plots/Immune_tumor_vs_normal_clean.png")) /
            pan(cit("results/plots/Immune_CD8_survival_KM.png", 0.050)) +
            plot_layout(heights = c(1, 1.15))),
-       width = 8.6, height = 9.2, dpi = 300, bg = "white")
+       width = 7.48, height = 8.00, dpi = 600, bg = "white")
 
 ggsave("results/composite_figures/s17_nomogram.png",
        tag(pan(ci("results/nomogram_combined/combined_nomogram.png")) /
            (pan(cit("results/nomogram_combined/calibration_combined.png", 0.078)) |
             pan(cit("results/external_utility_ACRG/DCA_external.png", 0.050))) +
            plot_layout(heights = c(0.62 * 9, 3.6))),
-       width = 9, height = 9.4, dpi = 300, bg = "white")
+       width = 7.48, height = 7.81, dpi = 600, bg = "white")
 
 ## ---- S10: all six MR leave-one-out panels -------------------------------
 loo <- sort(Sys.glob(file.path(ROOT, "results/mr_real/loo_*.png")))
@@ -168,7 +168,7 @@ stopifnot(length(loo) == 6)
 ## so the layout carries the fix.
 ggsave("results/composite_figures/s19_mr_loo_all.png",
        tag(wrap_plots(lapply(loo, function(f) pan(ci(sub("^\\./", "", f)))), ncol = 2)),
-       width = 9, height = 10.2, dpi = 300, bg = "white")
+       width = 7.48, height = 8.48, dpi = 600, bg = "white")
 
 ## ---- S11: RF importance (15 genera, contaminants red) + batch sanity ----
 imp <- rd("results/microbiome_biomarker/05_rf_importance.csv") %>%
@@ -211,6 +211,6 @@ p11b <- ggplot(bar, aes(what, v)) +
   scale_y_continuous(limits = c(0, 1.05), expand = c(0, 0)) +
   labs(x = NULL, y = "Performance") + theme_bw(base_size = 9)
 ggsave("results/microbiome_biomarker/rf_batch_classifier.png",
-       tag(p11a | p11b), width = 9.5, height = 4.3, dpi = 300, bg = "white")
+       tag(p11a | p11b), width = 7.48, height = 3.39, dpi = 600, bg = "white")
 
 cat("wrote S4, S7, S8, S9, S10, S11 from committed sources\n")

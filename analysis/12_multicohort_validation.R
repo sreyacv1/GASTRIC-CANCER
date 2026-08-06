@@ -75,7 +75,7 @@ validate_cohort <- function(name, expr, time, event, time_unit,
                    xlab = sprintf("OS time (%s)", time_unit),
                    title = NULL, conf.int = FALSE)
   ggsave(file.path(outdir, sprintf("KM_%s.png", name)), plot = pl$plot,
-         width = 6, height = 5, dpi = 150)
+         width = 3.740, height = 3.117, dpi = 600)
 
   # multivariable if covariates supplied
   if (!is.null(covars)) {
@@ -206,7 +206,7 @@ if (nrow(fp) > 0) {
   fp$label <- sprintf("%s (n=%d)", fp$cohort, fp$n)
   fp <- fp[order(fp$HR), ]
   fp$y <- seq_len(nrow(fp))
-  png(file.path(outdir, "forest_HR.png"), width = 1400, height = 700, res = 150)
+  png(file.path(outdir, "forest_HR.png"), width = 2244, height = 1122, res = 600)
   op <- par(mar = c(5, 12, 3, 2))
   xr <- range(c(fp$HR_low, fp$HR_high, 1), na.rm = TRUE)
   plot(fp$HR, fp$y, xlim = xr, ylim = c(0.5, nrow(fp) + 0.5), pch = 15,

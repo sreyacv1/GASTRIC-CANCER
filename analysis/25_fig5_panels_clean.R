@@ -15,7 +15,7 @@ OUT <- "results/wgcna_real/clean"; dir.create(OUT, showWarnings = FALSE, recursi
 e <- new.env(); load("results/wgcna_real/wgcna_real.RData", envir = e)
 
 ## ---- (a) dendrogram, no main title ----
-png(file.path(OUT, "dendrogram_clean.png"), width = 2000, height = 1150, res = 200)
+png(file.path(OUT, "dendrogram_clean.png"), width = 2244, height = 1290, res = 600)
 par(mar = c(1.2, 4.2, 0.6, 0.6))
 plotDendroAndColors(e$net$dendrograms[[1]],
   e$moduleColors[e$net$blockGenes[[1]]],
@@ -24,7 +24,7 @@ plotDendroAndColors(e$net$dendrograms[[1]],
 dev.off()
 
 ## ---- (b) module-trait heatmap, no main title ----
-png(file.path(OUT, "module_trait_clean.png"), width = 2000, height = 1500, res = 200)
+png(file.path(OUT, "module_trait_clean.png"), width = 2244, height = 1683, res = 600)
 par(mar = c(8.5, 8.5, 0.8, 1.2))
 txt <- paste0(signif(e$mtCor, 2), "\n(", signif(e$mtP, 1), ")")
 dim(txt) <- dim(e$mtCor)
@@ -57,5 +57,5 @@ p3 <- ggplot(pr, aes(power, hub8_comembership)) +
   scale_y_continuous(limits = c(0, 1.02)) +
   labs(x = "Soft-thresholding power", y = "Hub co-membership fraction") + th
 ggsave(file.path(OUT, "power_clean.png"), p1 | p2 | p3,
-       width = 10, height = 3.0, dpi = 200, bg = "white")
+       width = 7.480, height = 2.244, dpi = 600, bg = "white")
 message("wrote 3 clean Fig5 panels -> ", OUT)

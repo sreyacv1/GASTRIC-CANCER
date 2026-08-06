@@ -25,7 +25,9 @@ OUT <- "results/figures/clean"; dir.create(OUT, showWarnings = FALSE, recursive 
 th <- theme_bw(base_size = 9) +
   theme(panel.grid.minor = element_blank(),
         plot.title = element_blank(), plot.subtitle = element_blank(),
-        legend.position = "top", legend.title = element_blank())
+        legend.position = "top", legend.title = element_blank(),
+        legend.text = element_text(size = 7.5), legend.margin = margin(0, 0, 0, 0),
+        legend.box.spacing = unit(2, "pt"), legend.key.size = unit(0.30, "cm"))
 
 ## ---- (Fig6a) volcano, no title -------------------------------------------
 res <- read.csv("results/tables/TCGA_DEG_results.csv")
@@ -42,14 +44,33 @@ pv <- ggplot(res, aes(log2FoldChange, -log10(padj), colour = lab)) +
   geom_point(size = 0.35, alpha = 0.45, stroke = 0) +
   geom_vline(xintercept = c(-1, 1), linetype = 2, colour = "grey45", linewidth = 0.3) +
   geom_hline(yintercept = -log10(0.05), linetype = 2, colour = "grey45", linewidth = 0.3) +
-  ggrepel::geom_text_repel(data = top, aes(label = hgnc_symbol), size = 2.5,
-                           fontface = "italic", max.overlaps = Inf, box.padding = 0.32,
-                           segment.size = 0.25, show.legend = FALSE) +
+  ## Labels. Two calls (one per direction) keep a label on the same side of the
+  ## plot as its point, so no leader line has to cross the figure -- the defect
+  ## in the previous version. The y axis is extended above the data (below) to
+  ## create an empty band, and each call is left free in x and y within its own
+  ## half so ggrepel can resolve all ten labels without overlap.
+  ggrepel::geom_text_repel(data = dplyr::filter(top, sig == "Down"),
+                           aes(label = hgnc_symbol), size = 2.5, fontface = "italic",
+                           max.overlaps = Inf, box.padding = 0.5, point.padding = 0.2,
+                           segment.size = 0.22, segment.alpha = 0.6,
+                           min.segment.length = 0, force = 20, force_pull = 0.05,
+                           max.iter = 100000, max.time = 5,
+                           xlim = c(NA, -1.15), seed = 1105, show.legend = FALSE) +
+  ggrepel::geom_text_repel(data = dplyr::filter(top, sig == "Up"),
+                           aes(label = hgnc_symbol), size = 2.5, fontface = "italic",
+                           max.overlaps = Inf, box.padding = 0.5, point.padding = 0.2,
+                           segment.size = 0.22, segment.alpha = 0.6,
+                           min.segment.length = 0, force = 20, force_pull = 0.05,
+                           max.iter = 100000, max.time = 5,
+                           xlim = c(1.15, NA), seed = 1105, show.legend = FALSE) +
   scale_colour_manual(values = setNames(c("#c0392b","#2471a3","grey78"), levels(res$lab))) +
+  guides(colour = guide_legend(nrow = 2, byrow = TRUE,
+                               override.aes = list(size = 1.6, alpha = 1))) +
+  scale_y_continuous(limits = c(0, 92), breaks = seq(0, 60, 20), expand = c(0, 0)) +
   labs(x = expression(log[2]~"fold change (tumor/normal)"),
        y = expression(-log[10]~"(adjusted"~italic(P)*")")) + th
-ggsave(file.path(OUT, "fig6a_volcano_clean.png"), pv, width = 6.2, height = 5.0,
-       dpi = 300, bg = "white")
+ggsave(file.path(OUT, "fig6a_volcano_clean.png"), pv, width = 3.740, height = 3.220,
+       dpi = 600, bg = "white")
 
 ## ---- (Fig7a) LASSO-Cox coefficients, no title ----------------------------
 co <- read.csv("results/validation/signature_coefficients.csv")
@@ -64,8 +85,8 @@ pc <- ggplot(co, aes(coefficient, gene, colour = dir)) +
   scale_colour_manual(values = c("Higher risk" = "#c0392b", "Protective" = "#2471a3")) +
   labs(x = "LASSO-Cox coefficient (log-hazard per SD)", y = NULL) +
   th + theme(axis.text.y = element_text(face = "italic", size = 7))
-ggsave(file.path(OUT, "fig7a_coefficients_clean.png"), pc, width = 4.6, height = 5.0,
-       dpi = 300, bg = "white")
+ggsave(file.path(OUT, "fig7a_coefficients_clean.png"), pc, width = 3.740, height = 4.065,
+       dpi = 600, bg = "white")
 
 ## ---- (Fig6b) top-30 DEG heatmap, no title --------------------------------
 e <- new.env(); load("results/rdata/tcga_processed.RData", envir = e)
@@ -88,7 +109,7 @@ z   <- t(scale(t(mat)))
 z[z >  2] <-  2; z[z < -2] <- -2
 ## Width raised from 2100: at 2100 the "z-scored expression" legend title was
 ## clipped to "expressior" at the right canvas edge.
-png(file.path(OUT, "fig6b_heatmap_clean.png"), width = 2320, height = 1750, res = 260)
+png(file.path(OUT, "fig6b_heatmap_clean.png"), width = 2244, height = 1693, res = 600)
 ht <- Heatmap(z, name = "z-scored\nexpression",
   col = colorRamp2(c(-2,0,2), c("#2166AC","white","#B2182B")),
   column_split = grp, cluster_column_slices = FALSE,

@@ -85,5 +85,5 @@ fig <- (panel(p1, "Internal consistency (same TCGA tumors)") |
     theme = theme(plot.title = element_text(face = "bold", size = 11),
                   plot.subtitle = element_text(size = 8.2, colour = "grey30", lineheight = 1.2),
                   legend.position = "bottom"))
-ggsave("results/figures/deg_concordance_panel.png", fig, width = 10.6, height = 4.8, dpi = 300, bg = "white")
+ggsave("results/figures/deg_concordance_panel.png", fig, width = 7.48, height = 3.39, dpi = 600, bg = "white")
 cat("wrote results/figures/deg_concordance_panel.png\n")

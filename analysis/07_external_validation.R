@@ -110,7 +110,7 @@ p1 <- ggsurvplot(km_tcga, data = df_tcga, pval = TRUE, risk.table = TRUE,
                  xlab = "OS time (days)", title = NULL,
                  conf.int = FALSE)
 ggsave(file.path(outdir, "KM_TCGA.png"), plot = p1$plot,
-       width = 6, height = 5, dpi = 150)
+       width = 3.740, height = 3.117, dpi = 600)
 
 ## ---------------------------------------------------------------------------
 ## 4. EXTERNAL VALIDATION on ACRG / GSE62254
@@ -146,7 +146,7 @@ p2 <- ggsurvplot(km_acrg, data = df_acrg, pval = TRUE, risk.table = TRUE,
                  xlab = "OS time (months)", title = NULL,
                  conf.int = FALSE)
 ggsave(file.path(outdir, "KM_ACRG.png"), plot = p2$plot,
-       width = 6, height = 5, dpi = 150)
+       width = 3.740, height = 3.117, dpi = 600)
 
 ## ---------------------------------------------------------------------------
 ## 5. Multivariable Cox in ACRG: risk group + Stage + age
