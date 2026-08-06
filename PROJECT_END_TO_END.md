@@ -712,7 +712,7 @@ fibroblasts. That convergence is what makes the finding credible.
    This converts speculation into experimentally-anchored targets — and the FGFR negative
    shows the result was reported, not the hoped-for answer.
 3. **Benchmark (`30_`)** — a previously published 5-gene gastric signature, same data,
-   same pipeline: C_apparent 0.5446, **C_optimism_corrected 0.4807 (value from R 4.3.3/`rms` 6.8-1; re-running under `rms` 8.1-1 gives 0.52 — both at chance, apparent C 0.54 unchanged) (below chance)**.
+   same pipeline: C_apparent 0.5446, **C_optimism_corrected 0.4807 (R 4.3.3/`rms` 6.8-1, archived as `sessionInfo_rms6.8-1_R4.3.3.txt`; re-running under `rms` 8.1-1 gives 0.52 — both chance-level, apparent C 0.54 unchanged) (below chance)**.
    Context that makes your 0.61 meaningful.
 
 ## Stage 10 — Reporting and verification
