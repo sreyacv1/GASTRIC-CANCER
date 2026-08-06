@@ -228,7 +228,10 @@ z   <- t(scale(t(mat)))
 z[z >  2] <-  2; z[z < -2] <- -2
 ## Width raised from 2100: at 2100 the "z-scored expression" legend title was
 ## clipped to "expressior" at the right canvas edge.
-png(file.path(OUT, "fig6b_heatmap_clean.png"), width = 2244, height = 1693, res = 600)
+## (b) shares the lower row with (c), so it is authored at half the figure
+## width and taller: at the old 2244 x 1693 the 30 gene labels ran into the
+## panel edge once the montage scaled it into the narrower slot.
+png(file.path(OUT, "fig6b_heatmap_clean.png"), width = 2100, height = 2280, res = 600)
 ht <- Heatmap(z, name = "z-scored\nexpression",
   col = colorRamp2(c(-2,0,2), c("#2166AC","white","#B2182B")),
   column_split = grp, cluster_column_slices = FALSE,

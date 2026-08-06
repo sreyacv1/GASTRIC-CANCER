@@ -51,7 +51,11 @@ FIGS <- list(
              ## (a) takes a full-width row: the volcano needs the horizontal room
              ## to label 8 genes per direction without leader/label collisions
              ## (a half-width slot verifies clean at only 3 per direction).
-             ncol = 2, mm = 190, design = "AA\nBB\nCC", aspect = 1.02),
+             ## (a) full-width (the volcano needs the horizontal room to label
+             ## 8 genes per direction collision-free), (b) and (c) share the row
+             ## below. A 3-row stack pushes the aspect to 1.74, well outside the
+             ## reference range and shrinking (a) again.
+             ncol = 2, mm = 190, design = "AA\nBC", aspect = 0.78),
   ## (c)-(f): the four cohort KM curves are used INDIVIDUALLY. The old
   ## s16_km.png was a pre-composited montage carrying its own nested (A)-(D)
   ## labels, which collided with this figure's panel tags.
