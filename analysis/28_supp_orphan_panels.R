@@ -76,9 +76,9 @@ da_panel <- function(d, eff, ttl) {
 }
 ggsave("results/microbiome_biomarker/da_clr_barplot.png",
        (da_panel(da_a, "effect_clr", "CLR effect: control vs cancer-adjacent") |
-        da_panel(da_b, "effect_clr_paired", "CLR effect: cancer-adjacent vs tumor (paired)")) +
+        da_panel(da_b, "effect_clr_paired", "CLR effect: cancer-adjacent vs tumor, paired")) +
          plot_layout(guides = "collect") & theme(legend.position = "bottom"),
-       width = 7.48, height = 4.24, dpi = 600, bg = "white")
+       width = 8.18, height = 4.24, dpi = 600, bg = "white")
 
 ## LEGIBILITY, THE ONE RULE THAT MATTERS FOR MONTAGES
 ## A montage shrinks every component to its slot, so text that reads fine in the
