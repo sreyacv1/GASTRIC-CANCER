@@ -24,7 +24,7 @@ is C = 0.611 (95% CI 0.562-0.659). HR is high-versus-low risk at the median spli
 | *Fusobacterium* A | oral-origin | 23 | 1.04 (0.79–1.36) | 0.79 |
 | *Prevotella 9* | oral-origin | 15 | 0.98 (0.84–1.14) | 0.76 |
 | *Veillonella* | oral-origin | 8 | 1.04 (0.84–1.29) | 0.69 |
-| *Lactobacillus* | protective-cand. | 10 | 0.96 (0.85–1.09) | 0.51 |
+| *Lactobacillus* | protective-cand. | 10 | 0.96 (0.84–1.09) | 0.51 |
 
 Inverse-variance-weighted (IVW) odds ratios per unit exposure, ancestry-matched
 European outcome (ebi-a-GCST90018849; 1,029 cases). nSNP is the number of instruments retained after harmonization and clumping.
