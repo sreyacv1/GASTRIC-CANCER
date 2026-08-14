@@ -1,6 +1,6 @@
-# Supplementary Tables
+# Tables and Supplementary Tables
 
-*Gastric-cancer multi-omics study. Every table below reproduces the full contents of its source file; the source path is given so each value can be traced to the script that produced it.*
+*Gastric-cancer multi-omics study. Main Tables 1-2 summarize results reported in the manuscript text. Each supplementary table below reproduces the full contents of its source file, with the source path given so every value can be traced to the script that produced it.*
 
 ## Table 1 — External validation of the 25-gene signature across four cohorts
 
@@ -27,8 +27,12 @@ is C = 0.611 (95% CI 0.562-0.659). HR is high-versus-low risk at the median spli
 | *Lactobacillus* | protective-cand. | 10 | 0.96 (0.85–1.09) | 0.51 |
 
 Inverse-variance-weighted (IVW) odds ratios per unit exposure, ancestry-matched
-European outcome (ebi-a-GCST90018849; 1,029 cases). nSNP is the number of
-genome-wide-significant instruments retained after harmonization and clumping.
+European outcome (ebi-a-GCST90018849; 1,029 cases). nSNP is the number of instruments retained after harmonization and clumping.
+No exposure yielded three or more genome-wide-significant SNPs, so all six use a
+locus-wide-suggestive threshold of p<1x10-5 (recorded per exposure in
+Supplementary Table S1); this can bias toward the null through weak-instrument
+effects, though the per-SNP F-statistics (min F 19.3) indicate the retained
+instruments are not weak.
 No exposure reaches significance; per-exposure instrument strength and
 MR-PRESSO global tests are in Supplementary Tables S1 and S2.
 
