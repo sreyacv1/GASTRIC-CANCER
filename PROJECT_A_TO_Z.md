@@ -5,12 +5,15 @@ stromal/fibroblast prognostic program, with cautionary tumor-microbiome and
 Mendelian-randomization assessments**
 
 This is the master reference: what the project asks, what it did, what it found,
-what it does *not* claim, and where every number lives. Every quantitative claim in
-this document has been machine-checked against its source file under `results/` (or,
-for cohort composition, the raw GEO series matrix) — the check script compares the
-value as written here against the value parsed from source and reports any mismatch.
-Where a number is quoted, the file it came from is named so you can confirm it
-yourself.
+what it does *not* claim, and where every number lives.
+
+**How to trust the numbers here.** Every quantitative claim below is checked by
+`analysis/verify_a_to_z.py`, which re-parses the value from its source file under
+`results/` (or, for cohort composition, the raw GEO series matrix) and confirms the
+value as written appears in this document — in the Markdown, Word and PDF renderings
+simultaneously. The script prints the number of checks and exits non-zero on any
+mismatch, so you can re-run it yourself rather than take this paragraph on trust. Where
+a number is quoted, the file it came from is named.
 
 Four companion documents go deeper on specific angles and are not repeated here:
 
@@ -353,9 +356,16 @@ Stating this precisely is what makes the rest credible.
 
 # PART 8 — REPRODUCIBILITY
 
-- **45 analysis scripts** in `analysis/`, every reported number mapping to a named
-  script and output file (`PIPELINE.md`).
-- **103 commits**; every result table and figure committed alongside its code.
+- Every reported number maps to a named script in `analysis/` and an output file under
+  `results/` (see `PIPELINE.md` for the full mapping). Script and commit counts are
+  deliberately not quoted here — they change with every commit, so any number written
+  into this document would be stale by the time you read it. Run `git rev-list --count
+  HEAD` and `ls analysis/ | wc -l` for the current values.
+- Every result table and figure is committed alongside the code that produced it.
+- **Claim verification is executable.** `analysis/verify_a_to_z.py` re-parses each
+  quantitative claim in this document from its source file and confirms the value
+  appears in the Markdown, Word and PDF renderings simultaneously. Run it from the
+  repository root; it exits non-zero on any mismatch.
 - **17 figures** (8 main + 9 supplementary), each verified for edge clipping, aspect
   ratio and text legibility at print size.
 - Pinned package versions and `sessionInfo()` dumps archived, including both R/`rms`
