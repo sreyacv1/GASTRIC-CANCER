@@ -102,6 +102,20 @@ for coh, want in [("ACRG_GSE62254", "15.9"), ("GSE15459", "16.8"), ("GSE84437", 
     red = [x for x in rd(p) if x["module"] == "red"]
     add(f"Zsummary {coh}", want, red and abs(float(red[0]["Zsummary.pres"]) - float(want)) < 0.05)
 
+# Module size vs per-cohort overlap: the preservation files' moduleSize column is the
+# number of module genes measurable on THAT cohort's platform, not the module size.
+mods = rd("results/wgcna_real/hub_genes_prognostic_module.csv")
+add("red module size", "263 genes", len(mods) == 263)
+ov = {}
+for f in glob.glob("results/module_preservation/preservation_stats_*.csv"):
+    red = [x for x in rd(f) if x["module"] == "red"]
+    if red:
+        ov[os.path.basename(f)] = red[0]["moduleSize"]
+add("ACRG platform overlap", "77 of 263",
+    any(v == "77" for k, v in ov.items() if "ACRG" in k))
+add("other-cohort overlap", "233 on the other two",
+    sum(1 for k, v in ov.items() if v == "233") == 2)
+
 eig = rd("results/module_preservation/module_eigengene_cox_external.csv")
 for row, want in zip(eig, ["1.274", "1.548", "1.237"]):
     add(f"eigengene HR {row['cohort']}", want, row["HR_perSD"] == want)
@@ -301,7 +315,9 @@ add("figures embedded", f"{nfig} figures", True)
 
 # ---- run ---------------------------------------------------------------------
 doc = open(DOC).read()
-targets = {"md": doc}
+# Compare against emphasis-stripped Markdown so a claim wrapped in ** matches the
+# same claim in the rendered .docx/.pdf, where the markers are gone.
+targets = {"md": doc.replace("**", "")}
 try:
     from docx import Document
     if os.path.exists("PROJECT_A_TO_Z.docx"):

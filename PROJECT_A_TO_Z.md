@@ -112,13 +112,23 @@ changes correlate at r = 0.974. The result does not depend on the batch model.
 ## 3.2 The stromal co-expression module (the central finding)
 
 WGCNA on the 5,000 most variable genes at soft power 3 (scale-free R² = 0.88) detected
-ten modules. The **red** module is a cancer-associated-fibroblast / extracellular-matrix
-program, and it is the project's most robust result for one reason: **it replicates
-externally**.
+ten modules. The **red** module — **263 genes**
+(`results/wgcna_real/hub_genes_prognostic_module.csv`) — is a
+cancer-associated-fibroblast / extracellular-matrix program, and it is the project's
+most robust result for one reason: **it replicates externally**.
 
 Module preservation (`modulePreservation`, 200 permutations) gives
 Zsummary = **15.9** (ACRG), **16.8** (GSE15459), **17.1** (GSE84437) — all far above the
-Z > 10 "strong preservation" threshold. Its eigengene is prognostic in all three
+Z > 10 "strong preservation" threshold.
+
+**Three different gene counts appear around this module; keep them distinct.** The
+module itself is 263 genes. Preservation is computed only on the module genes that the
+external platform actually measures, which is **77** of 263 on the ACRG array and
+**233** on the other two (the `moduleSize` column of
+`results/module_preservation/preservation_stats_*.csv` is this per-cohort overlap, not
+the module size). The single-cell localization test in §3.3 uses a further subset — the
+23 non-circular hub genes. That the structure still scores Zsummary 15.9 in ACRG on
+fewer than a third of its genes is evidence of robustness, not of a smaller module. Its eigengene is prognostic in all three
 independent cohorts, always in the same direction (more stromal activation → worse
 survival):
 
