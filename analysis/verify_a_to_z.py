@@ -105,7 +105,10 @@ for coh, want in [("ACRG_GSE62254", "15.9"), ("GSE15459", "16.8"), ("GSE84437", 
 # Module size vs per-cohort overlap: the preservation files' moduleSize column is the
 # number of module genes measurable on THAT cohort's platform, not the module size.
 mods = rd("results/wgcna_real/hub_genes_prognostic_module.csv")
-add("red module size", "263 genes", len(mods) == 263)
+# Anchor on the unique headline phrase: "263 genes" alone also occurs in the
+# disambiguation paragraph, so a corrupted headline would still have matched.
+add("red module size", "red module — 263 genes", len(mods) == 263)
+add("module size (disambiguation)", "module itself is 263 genes", len(mods) == 263)
 ov = {}
 for f in glob.glob("results/module_preservation/preservation_stats_*.csv"):
     red = [x for x in rd(f) if x["module"] == "red"]
@@ -334,9 +337,17 @@ try:
 except ImportError:
     pass
 
+def _norm(s):
+    """Collapse whitespace: PDF and DOCX text extraction wraps lines, which would
+    otherwise split a multi-word claim and report a false mismatch."""
+    return re.sub(r"\s+", " ", s)
+
+
+targets = {k: _norm(v) for k, v in targets.items()}
+
 fails = []
 for label, shown, src_ok in checks:
-    where = {k: (shown in v) for k, v in targets.items()}
+    where = {k: (_norm(shown) in v) for k, v in targets.items()}
     if not src_ok or not all(where.values()):
         fails.append((label, shown, src_ok, where))
 
