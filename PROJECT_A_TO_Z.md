@@ -128,9 +128,10 @@ external platform actually measures, which is **77** of 263 on the ACRG array an
 `results/module_preservation/preservation_stats_*.csv` is this per-cohort overlap, not
 the module size). The single-cell localization test in §3.3 uses a further subset — the
 23 non-circular hub genes. That the structure still scores Zsummary 15.9 in ACRG on
-fewer than a third of its genes is evidence of robustness, not of a smaller module. Its eigengene is prognostic in all three
-independent cohorts, always in the same direction (more stromal activation → worse
-survival):
+fewer than a third of its genes is evidence of robustness, not of a smaller module.
+
+The red module's eigengene is prognostic in all three independent cohorts, always in
+the same direction (more stromal activation → worse survival):
 
 | Cohort | n (events) | HR per SD | 95% CI | p |
 |---|---|---|---|---|
