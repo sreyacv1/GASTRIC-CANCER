@@ -1,0 +1,34 @@
+/* Times New Roman is not installed on this host; Tinos (Apache-2.0) is
+   metric-compatible with it, so the embedded face matches Times metrics. */
+@font-face {
+  font-family: "Tinos";
+  src: url("assets/fonts/Tinos-Regular.ttf");
+  font-weight: normal; font-style: normal;
+}
+@font-face {
+  font-family: "Tinos";
+  src: url("assets/fonts/Tinos-Bold.ttf");
+  font-weight: bold; font-style: normal;
+}
+@font-face {
+  font-family: "Tinos";
+  src: url("assets/fonts/Tinos-Italic.ttf");
+  font-weight: normal; font-style: italic;
+}
+@font-face {
+  font-family: "Tinos";
+  src: url("assets/fonts/Tinos-BoldItalic.ttf");
+  font-weight: bold; font-style: italic;
+}
+
+@page { size: A4; margin: 2cm; }
+
+html, body { font-family: "Tinos", serif; font-size: 12pt; line-height: 1.45; }
+h1, h2, h3, h4 { font-family: "Tinos", serif; }
+h1 { font-size: 16pt; margin-top: 1.2em; }
+h2 { font-size: 13.5pt; }
+h3 { font-size: 12pt; }
+code, pre { font-family: "DejaVu Sans Mono", monospace; font-size: 10pt; }
+table { border-collapse: collapse; width: 100%; font-size: 10.5pt; }
+th, td { border: 1px solid #999; padding: 3pt 5pt; text-align: left; }
+th { background: #eee; }

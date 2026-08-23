@@ -5,9 +5,12 @@ stromal/fibroblast prognostic program, with cautionary tumor-microbiome and
 Mendelian-randomization assessments**
 
 This is the master reference: what the project asks, what it did, what it found,
-what it does *not* claim, and where every number lives. Each figure quoted here was
-re-read from its source file in `results/` while this document was written — none is
-recalled from memory.
+what it does *not* claim, and where every number lives. Every quantitative claim in
+this document has been machine-checked against its source file under `results/` (or,
+for cohort composition, the raw GEO series matrix) — the check script compares the
+value as written here against the value parsed from source and reports any mismatch.
+Where a number is quoted, the file it came from is named so you can confirm it
+yourself.
 
 Four companion documents go deeper on specific angles and are not repeated here:
 
@@ -66,6 +69,10 @@ for microbial exposure. The design is what licenses causal language, and the res
 | Tissue microbiome | DDBJ PRJDB20660 | 944 samples | 16S discovery, raw FASTQ reprocessed |
 | Microbiome validation | PRJNA641258, PRJNA413125 | — | Independent 16S cohorts (Italy, Portugal) |
 | GWAS (MR) | IEU OpenGWAS | 6 exposures, 1,029 cases | Causal inference on microbial exposures |
+
+Survival-cohort sample sizes and event counts above are those used in the analyses and
+match `results/module_preservation/module_eigengene_cox_external.csv` and
+`results/meta_HK/meta_inputs.csv`.
 
 **One design fact worth stating plainly.** The transcriptome cohort and the microbiome
 cohort share **zero patients** — 415 TCGA patients and 944 microbiome samples with no
@@ -134,7 +141,7 @@ powers 3, 6, 9 and 12 keeps the module survival-associated throughout
 ## 3.3 Which cell expresses it
 
 Single-cell data answers the "which cell" question that bulk expression cannot. Across
-43,992 cells in eight annotated types, **all 23 of 23** hub genes in the non-circular
+43,992 cells in eight annotated types (`results/scrna/celltype_composition.csv`), **all 23 of 23** hub genes in the non-circular
 test are fibroblast-dominant, with the dominant-type fraction ranging 0.527–0.998
 (median 0.96; `results/scrna/gene_dominant_celltype_noncircular.csv`).
 
@@ -184,7 +191,8 @@ Sources: `results/validation/cindex_comparison.csv`,
 `results/validation_multi/cindex_HR_summary.csv`.
 
 **GSE84437 is a genuine negative, and the project treats it as one.** The proposed
-explanation is range restriction: GSE84437 is 89% pT3–T4 disease, and a stromal
+explanation is range restriction: GSE84437 is 88.7% pT3–T4 disease (384 of 433 staged
+samples: T1 11, T2 38, T3 92, T4 292; `data/geo/GSE84437_series_matrix.txt.gz`), and a stromal
 signature discriminates by capturing *variation* in desmoplastic content, which
 increases with invasion depth. That hypothesis was then **tested directly** by
 stratifying on pT stage — and it failed: C-index stayed below 0.5 in every stratum.
@@ -223,7 +231,8 @@ correction is implementation-sensitive: the same script and seed give 0.4807 und
 R 4.3.3 with `rms` 6.8-1, and 0.5193 under R 4.5.3 with `rms` 8.1-1. Both are at chance
 (0.50 is the no-information value) and the apparent C is identical in both, so the
 conclusion is unchanged — but both environments are archived
-(`results/base_paper_replication/sessionInfo_rms6.8-1_R4.3.3.txt`) so the discrepancy is
+(`results/base_paper_replication/sessionInfo.txt` for R 4.5.3 / `rms` 8.1-1 and
+`sessionInfo_rms6.8-1_R4.3.3.txt` for R 4.3.3 / `rms` 6.8-1) so the discrepancy is
 inspectable rather than mysterious.
 
 ---
@@ -322,7 +331,7 @@ observed rather than dropped for being null.
 Signature-reversal enrichment against LINCS/CMap and DSigDB nominates CDK4/6, PI3K/mTOR
 and FGFR inhibitors — palbociclib, NVP-BEZ235, dovitinib, PD-173074 — with orthogonal
 support from DepMap dependency scores (PIK3CA −0.742, MTOR −1.184, CDK4 −0.825,
-CDK6 −0.548). This arm is explicitly hypothesis-generating: no compound was tested in a
+CDK6 −0.548; `results/depmap/gastric_dependency.csv`, 35 gastric lines). This arm is explicitly hypothesis-generating: no compound was tested in a
 cell line or animal in this project, and the paper claims nothing beyond a ranked
 candidate list.
 
@@ -363,8 +372,10 @@ Stating this precisely is what makes the rest credible.
 1. Author names, ORCIDs, corresponding author and CRediT contributions — marked
    placeholders in the manuscript.
 2. Repository URL and a minted DOI (Zenodo or equivalent) at submission.
-3. Optional: five figures sit above the reference aspect range (Figure 4 at 1.38;
-   Supplementary S2, S6, S7, S8 at 1.04–1.14) and would need re-layout to match.
+3. Optional: five of the 17 embedded figures sit above the reference paper's aspect
+   range (height/width > 1.00) and would need re-layout to match — Figure 4 (`Fig7.png`)
+   at 1.38, Supplementary S2 at 1.14, S8 at 1.13, S6 at 1.07 and S7 at 1.04; measured
+   directly from the embedded PNGs.
 
 ---
 
