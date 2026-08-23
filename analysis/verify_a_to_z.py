@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Verify every quantitative claim in PROJECT_A_TO_Z.md against its source file.
 
-Run from the repository root:
+Run from anywhere; the script locates the repository root itself:
 
     python3 analysis/verify_a_to_z.py
 
@@ -17,7 +17,30 @@ import re
 import subprocess
 import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def _find_root(start):
+    """Walk up from this file until the repository markers appear.
+
+    Keeps the script runnable whether it sits at the repo root or in analysis/.
+    """
+    d = os.path.dirname(os.path.abspath(start))
+    for _ in range(4):
+        if os.path.isdir(os.path.join(d, "results")) and \
+           os.path.isfile(os.path.join(d, "PAPER.md")):
+            return d
+        d = os.path.dirname(d)
+    # A copy of this script may live outside the repo (e.g. saved as a standalone
+    # artifact). Fall back to an explicit repo path, then to $GASTRIC_REPO.
+    for cand in (os.environ.get("GASTRIC_REPO"),
+                 "/nfsshare/users/P126156127/workspace/bioinf/gastric_cancer"):
+        if cand and os.path.isdir(os.path.join(cand, "results")) and \
+           os.path.isfile(os.path.join(cand, "PAPER.md")):
+            return cand
+    raise SystemExit(
+        "cannot locate repository root: run this from inside the repo, or set "
+        "GASTRIC_REPO to the checkout path")
+
+
+ROOT = _find_root(__file__)
 os.chdir(ROOT)
 
 DOC = "PROJECT_A_TO_Z.md"
